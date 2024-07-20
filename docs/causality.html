@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nathan Favero">
-<meta name="dcterms.date" content="2024-07-18">
 
-<title>Statistics Minus The Math</title>
+<title>Statistics Minus The Math - 10&nbsp; Causality</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./graphing.html" rel="next">
+<link href="./models.html" rel="next">
+<link href="./comparing-groups.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -111,7 +81,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./causality.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -138,7 +108,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -198,7 +168,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+  <a href="./causality.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
   </div>
 </li>
@@ -230,10 +200,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#causationchapter10-1" id="toc-causationchapter10-1" class="nav-link active" data-scroll-target="#causationchapter10-1"><span class="header-section-number">10.1</span> Causation</a>
   <ul class="collapse">
-  <li><a href="#whats-unique-about-this-text" id="toc-whats-unique-about-this-text" class="nav-link" data-scroll-target="#whats-unique-about-this-text">What’s Unique About This Text?</a></li>
-  <li><a href="#past-versions" id="toc-past-versions" class="nav-link" data-scroll-target="#past-versions">Past Versions</a></li>
+  <li><a href="#establishing-causation-in-experiments" id="toc-establishing-causation-in-experiments" class="nav-link" data-scroll-target="#establishing-causation-in-experiments"><span class="header-section-number">10.1.1</span> Establishing Causation in Experiments</a></li>
+  <li><a href="#causation-in-non-experimental-designs" id="toc-causation-in-non-experimental-designs" class="nav-link" data-scroll-target="#causation-in-non-experimental-designs"><span class="header-section-number">10.1.2</span> Causation in Non-Experimental Designs</a></li>
+  </ul></li>
+  <li><a href="#experimental-designschapter10-6" id="toc-experimental-designschapter10-6" class="nav-link" data-scroll-target="#experimental-designschapter10-6"><span class="header-section-number">10.2</span> Experimental Designs</a>
+  <ul class="collapse">
+  <li><a href="#between-subjects-designs" id="toc-between-subjects-designs" class="nav-link" data-scroll-target="#between-subjects-designs"><span class="header-section-number">10.2.1</span> Between-Subjects Designs</a></li>
+  <li><a href="#multi-factor-between-subject-designs" id="toc-multi-factor-between-subject-designs" class="nav-link" data-scroll-target="#multi-factor-between-subject-designs"><span class="header-section-number">10.2.2</span> Multi-Factor Between-Subject Designs</a></li>
+  <li><a href="#within-subjects-designs" id="toc-within-subjects-designs" class="nav-link" data-scroll-target="#within-subjects-designs"><span class="header-section-number">10.2.3</span> Within-Subjects Designs</a></li>
+  <li><a href="#advantage-of-within-subjects-designs" id="toc-advantage-of-within-subjects-designs" class="nav-link" data-scroll-target="#advantage-of-within-subjects-designs"><span class="header-section-number">10.2.4</span> Advantage of Within-Subjects Designs</a></li>
+  <li><a href="#complex-designs" id="toc-complex-designs" class="nav-link" data-scroll-target="#complex-designs"><span class="header-section-number">10.2.5</span> Complex Designs</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -243,27 +221,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics Minus The Math</h1>
-<p class="subtitle lead">An Introduction for the Social Sciences</p>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nathan Favero </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 18, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -273,31 +238,69 @@ window.Quarto = {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This book was largely adapted from the public domain resource <em>Online Statistics Education: A Multimedia Course of Study</em> (<a href="http://onlinestatbook.com/" class="uri">http://onlinestatbook.com/</a> Project Leader: David M. Lane, Rice University). A huge thanks to David Lane and his colleagues at Rice University for their creation of this wonderful resource. I use footnotes throughout to indicate precisely where the various sections of each chapter came from. Chapters 11-13 (and section 4.4) were written by me (Nathan).</p>
-<p>This book is meant to be a free resource and is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a>. You’re welcome to share or adapt it, so long as you provide attribution to any work of mine that you use.</p>
-<p>There are still formatting inconsistencies, and this is ever a work in progress. If you find errors, feel free to reach out (find updated contact info here: <a href="https://nathanfavero.com" class="uri">https://nathanfavero.com</a>) so I can correct them for the next version I publish.</p>
-<section id="whats-unique-about-this-text" class="level2">
-<h2 class="anchored" data-anchor-id="whats-unique-about-this-text">What’s Unique About This Text?</h2>
-<ol type="1">
-<li><p>It is a true introduction, not assuming any prior training in statistics.</p></li>
-<li><p>I try to minimize use of math (beyond the very elementary), instead focusing on conceptual description and interpretation.</p></li>
-<li><p>I introduce regression very early on (Ch. 3) so that students (especially PhD students) can quickly get started on their term papers and better understand any quantitative articles they’re reading. The treatment of regression is further built out in the final chapters (11-13). Regression is, after all, the workhorse of applied statistics for the social sciences.</p></li>
-<li><p>I skip a traditional treatment of probability theory because I don’t find traditional treatments to be very useful for students interested in applied statistics. Instead, I’ve written a chapter (11) on the logic and practice of building models that account for uncertainty.</p></li>
-<li><p>There is a bit of Stata code in the final chapter, but otherwise all examples are presented apart from any statistical software package.</p></li>
+<section id="causationchapter10-1" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="causationchapter10-1"><span class="header-section-number">10.1</span> Causation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>The concept of causation is a complex one in the philosophy of science.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Since a full coverage of this topic is well beyond the scope of this text, we focus on two specific topics: (1) the establishment of causation in experiments and (2) the establishment of causation in non-experimental designs.</p>
+<section id="establishing-causation-in-experiments" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="establishing-causation-in-experiments"><span class="header-section-number">10.1.1</span> Establishing Causation in Experiments</h3>
+<p>Consider a simple experiment in which subjects are sampled randomly from a population and then assigned randomly to either the experimental group or the control group. Assume the condition means on the dependent variable differed. Does this mean the treatment caused the difference?</p>
+<p>To make this discussion more concrete, assume that the experimental group received a drug for insomnia, the control group received a placebo, and the dependent variable was the number of minutes the subject slept that night. An obvious obstacle to inferring causality is that there are many unmeasured variables that affect how many hours someone sleeps. Among them are how much stress the person is under, physiological and genetic factors, how much caffeine they consumed, how much sleep they got the night before, etc. Perhaps differences between the groups on these factors are responsible for the difference in the number of minutes slept.</p>
+<p>At first blush it might seem that the random assignment eliminates differences in unmeasured variables. However, this is not the case. Random assignment ensures that differences on unmeasured variables are chance differences. It does not ensure that there are no differences. Perhaps, by chance, many subjects in the control group were under high stress and this stress made it more difficult to fall asleep. The fact that the greater stress in the control group was due to chance does not mean it could not be responsible for the difference between the control and the experimental groups. In other words, the observed difference in “minutes slept” could have been due to a chance difference between the control group and the experimental group rather than due to the drug’s effect.</p>
+<p>This problem seems intractable since, by definition, it is impossible to measure an “unmeasured variable” just as it is impossible to measure and control all variables that affect the dependent variable. However, although it is impossible to assess the effect of any single unmeasured variable, it is possible to assess the combined effects of all unmeasured variables. Since everyone in a given condition is treated the same in the experiment, differences in their scores on the dependent variable must be due to the unmeasured variables. Therefore, a measure of the differences among the subjects within a condition is a measure of the sum total of the effects of the unmeasured variables. The most common measure of differences is the variance. By using the within-condition variance to assess the effects of unmeasured variables, statistical methods determine the probability that these unmeasured variables could produce a difference between conditions as large or larger than the differenc<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>e obtained in the experiment. If that probability is low, then it is inferred (that’s why they call it inferential statistics) that the treatment had an effect and that the differences are not entirely due to chance. Of course, there is always some nonzero probability that the difference occurred by chance so total certainty is not a possibility.</p>
+</section>
+<section id="causation-in-non-experimental-designs" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="causation-in-non-experimental-designs"><span class="header-section-number">10.1.2</span> Causation in Non-Experimental Designs</h3>
+<p>It is almost a cliché that correlation does not mean causation. The main fallacy in inferring causation from correlation is called the third variable problem and means that a third variable is responsible for the correlation between two other variables. An excellent example used by Li (1975) to illustrate this point is the positive correlation in Taiwan in the 1970’s between the use of contraception and the number of electric appliances in one’s house. Of course, using contraception does not induce you to buy electrical appliances or vice versa. Instead, the third variable of education level affects both.</p>
+<p>Does the possibility of a third-variable problem make it impossible to draw causal inferences without doing an experiment? One approach is to simply assume that you do not have a third-variable problem. This approach, although common, is not very satisfactory. However, be aware that the assumption of no third-variable problem may be hidden behind a complex causal model that contains sophisticated and elegant mathematics.</p>
+<p>A better though, admittedly more difficult approach, is to find converging evidence. This was the approach taken to conclude that smoking causes cancer. The analysis included converging evidence from retrospective studies, prospective studies, lab studies with animals, and theoretical understandings of cancer causes.</p>
+<p>A second problem is determining the direction of causality. A correlation between two variables does not indicate which variable is causing which. For example, Reinhart and Rogoff (2010)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> found a strong correlation between public debt and GDP growth. Although some have argued that public debt slows growth, most evidence supports the alternative that slow growth increases public debt.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+</section>
+<section id="experimental-designschapter10-6" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="experimental-designschapter10-6"><span class="header-section-number">10.2</span> Experimental Designs<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></h2>
+<p>There are many ways an experiment can be designed. For example, subjects can all be tested under each of the treatment conditions or a different group of subjects can be used for each treatment. An experiment might have just one independent variable or it might have several. This section describes basic experimental designs and their advantages and disadvantages.</p>
+<section id="between-subjects-designs" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="between-subjects-designs"><span class="header-section-number">10.2.1</span> Between-Subjects Designs</h3>
+<p>In a <strong>between-subjects</strong> design, the various experimental treatments are given to different groups of subjects. For example, in the “Teacher Ratings”<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> case study, subjects were randomly divided into two groups. Subjects were all told they were going to see a video of an instructor’s lecture after which they would rate the quality of the lecture. The groups differed in that the subjects in one group were told that prior teaching evaluations indicated that the instructor was charismatic whereas subjects in the other group were told that the evaluations indicated the instructor was punitive. In this experiment, the independent variable is “Condition” and has two levels (charismatic teacher and punitive teacher). It is a between-subjects variable because different subjects were used for the two levels of the independent variable: subjects were in either the “charismatic teacher” or the “punitive teacher” condition. Thus the comparison of the charismatic-teacher condition with the punitive-teacher condition is a comparison between the subjects in one condition with the subjects in the other condition.</p>
+<p>The two conditions were treated exactly the same except for the instructions they received. Therefore, it would appear that any difference between conditions should be attributed to the treatments themselves. However, this ignores the possibility of chance differences between the groups. That is, by chance, the raters in one condition might have, on average, been more lenient than the raters in the other condition. Randomly assigning subjects to treatments ensures that all differences between conditions are chance differences; it does not ensure there will be no differences. The key question, then, is how to distinguish real differences from chance differences. The field of inferential statistics answers just this question. Analyzing the data from this experiment reveals that the ratings in the charismatic-teacher condition were higher than those in the punitive-teacher condition. Using inferential statistics, it can be calculated that the probability of finding a difference as large or larger than the one obtained if the treatment had no effect is only 0.018. Therefore it seems likely that the treatment had an effect and it is not the case that all differences were chance differences.</p>
+<p>Independent variables often have several levels. For example, in the “Smiles and Leniency” case study the independent variable is “type of smile” and there are four levels of this independent variable: (1) false smile, (2) felt smile, (3) miserable smile, and (4) a neutral control. Keep in mind that although there are four levels, there is only one independent variable. Designs with more than one independent variable are considered next.</p>
+</section>
+<section id="multi-factor-between-subject-designs" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="multi-factor-between-subject-designs"><span class="header-section-number">10.2.2</span> Multi-Factor Between-Subject Designs</h3>
+<p>In the “Bias Against Associates of the Obese”<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> experiment, the qualifications of potential job applicants were judged. Each applicant was accompanied by an associate. The experiment had two independent variables: the weight of the associate (obese or average) and the applicant’s relationship to the associate (girl friend or acquaintance). This design can be described as an Associate’s Weight (2) x Associate’s Relationship (2) factorial design. The numbers in parentheses represent the number of levels of the independent variable. The design was a factorial design because all four combinations of associate’s weight and associate’s relationship were included. The dependent variable was a rating of the applicant’s qualifications (on a 9-point scale).</p>
+<p>If two separate experiments had been conducted, one to test the effect of Associate’s Weight and one to test the effect of Associate’s Relationship then there would be no way to assess whether the effect of Associate’s Weight depended on the Associate’s Relationship. One might imagine that the Associate’s Weight would have a larger effect if the associate were a girl friend rather than merely an acquaintance. A factorial design allows this question to be addressed. When the effect of one variable does differ depending on the level of the other variable then it is said that there is an interaction between the variables.</p>
+<p>Factorial designs can have three or more independent variables. In order to be a between-subjects design there must be a separate group of subjects for each combination of the levels of the independent variables.</p>
+</section>
+<section id="within-subjects-designs" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="within-subjects-designs"><span class="header-section-number">10.2.3</span> Within-Subjects Designs</h3>
+<p>A <strong>within-subjects</strong> design differs from a between-subjects design in that the same subjects perform at all levels of the independent variable. For example consider the “ADHD Treatment”<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> case study. In this experiment, subjects diagnosed as having attention deficit disorder were each tested on a delay of gratification task after receiving methylphenidate (MPH). All subjects were tested four times, once after receiving one of the four doses. Since each subject was tested under <em>each</em> of the four levels of the independent variable “dose,” the design is a within-subjects design and dose is a within-subjects variable. Within-subjects designs are sometimes called repeated-measures designs.</p>
+</section>
+<section id="advantage-of-within-subjects-designs" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="advantage-of-within-subjects-designs"><span class="header-section-number">10.2.4</span> Advantage of Within-Subjects Designs</h3>
+<p>An advantage of within-subjects designs is that individual differences in subjects’ overall levels of performance are controlled. This is important because subjects invariably will differ greatly from one another. In an experiment on problem solving, some subjects will be better than others regardless of the condition they are in. Similarly, in a study of blood pressure some subjects will have higher blood pressure than others regardless of the condition. Within-subjects designs control these individual differences by comparing the scores of a subject in one condition to the scores of the same subject in other conditions. In this sense each subject serves as his or her own control. This typically gives within-subjects designs considerably more power (ability to find precise estimates) than between-subjects designs. That is, this makes within-subjects designs more able to detect an effect of the independent variable than are between-subjects designs.</p>
+<p>Within-subjects designs are often called “repeated-measures” designs since repeated measurements are taken for each subject. Similarly, a within-subject variable can be called a repeated-measures factor.</p>
+</section>
+<section id="complex-designs" class="level3" data-number="10.2.5">
+<h3 data-number="10.2.5" class="anchored" data-anchor-id="complex-designs"><span class="header-section-number">10.2.5</span> Complex Designs</h3>
+<p>Designs can contain combinations of between-subject and within-subject variables. For example, the “Weapons and Aggression”<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> case study has one between-subject variable (gender) and two within-subject variables (the type of priming word and the type of word to be responded to).</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This section is adapted from David M. Lane. “Causation.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/research_design/causation.html" class="uri">http://onlinestatbook.com/2/research_design/causation.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See <a href="http://plato.stanford.edu/search/searcher.py?query=causation" class="uri">http://plato.stanford.edu/search/searcher.py?query=causation</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Li, C. (1975) <em>Path analysis: A primer</em>. Boxwood Press, Pacific Grove, CA.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Reinhart, C. M. and Rogoff, K. S. (2010). Growth in a Time of Debt. Working Paper 15639, National Bureau of Economic Research, <a href="http://www.nber.org/papers/w15639" class="uri">http://www.nber.org/papers/w15639</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>For a video on causality featuring evidence that smoking causes cancer, see <a href="http://www.learner.org/resources/series65.html" class="uri">http://www.learner.org/resources/series65.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>This section is adapted from David M. Lane. “Experimental Designs.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/research_design/designs.html" class="uri">http://onlinestatbook.com/2/research_design/designs.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="http://onlinestatbook.com/2/case_studies/ratings.html" class="uri">http://onlinestatbook.com/2/case_studies/ratings.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="http://onlinestatbook.com/2/case_studies/obesity_relation.html" class="uri">http://onlinestatbook.com/2/case_studies/obesity_relation.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="http://onlinestatbook.com/2/case_studies/adhd.html" class="uri">http://onlinestatbook.com/2/case_studies/adhd.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><a href="http://onlinestatbook.com/2/case_studies/guns.html" class="uri">http://onlinestatbook.com/2/case_studies/guns.html</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section>
-<section id="past-versions" class="level2">
-<h2 class="anchored" data-anchor-id="past-versions">Past Versions</h2>
-<p>This version (1.3) was updated July 18, 2024. PDFs of past versions are available at <a href="https://minusthemath.com" class="uri">https://minusthemath.com</a>.</p>
-<ul>
-<li><p>Version 1.3 updates: Added appendix (Ch. 3) on multiple regression and new section (4.4) on interpreting confidence intervals. Various formatting updates. Notation is updated in line with conventions: regression parameters are redone, and <span class="math inline">\(\bar{X}\)</span> is now used for sample mean and <span class="math inline">\(n\)</span> for sample size.</p></li>
-<li><p>Version 1.2 updates: The discussion of transforming variables now appears in Ch. 2 (rather than Ch. 3).</p></li>
-</ul>
-
-
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -712,10 +715,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./comparing-groups.html" class="pagination-link" aria-label="Comparing Groups (How Two Qualitative Variables Relate to One Another)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./graphing.html" class="pagination-link" aria-label="Graphical Tools for Describing Variables">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./models.html" class="pagination-link" aria-label="Models and Uncertainty">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

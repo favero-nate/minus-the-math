@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistics Minus The Math - 6&nbsp; Sampling Distributions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./h-tests.html" rel="next">
+<link href="./distributions.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sampling-distributions.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus The Math</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-sampling-distributions1" id="toc-introduction-to-sampling-distributions1" class="nav-link active" data-scroll-target="#introduction-to-sampling-distributions1"><span class="header-section-number">6.1</span> Introduction to Sampling Distributions[1]</a>
+  <ul class="collapse">
+  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link" data-scroll-target="#discrete-distributions"><span class="header-section-number">6.1.1</span> Discrete Distributions</a></li>
+  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions"><span class="header-section-number">6.1.2</span> Continuous Distributions</a></li>
+  <li><a href="#sampling-distributions-and-inferential-statistics" id="toc-sampling-distributions-and-inferential-statistics" class="nav-link" data-scroll-target="#sampling-distributions-and-inferential-statistics"><span class="header-section-number">6.1.3</span> Sampling Distributions and Inferential Statistics</a></li>
+  </ul></li>
+  <li><a href="#sampling-distribution-of-the-mean2" id="toc-sampling-distribution-of-the-mean2" class="nav-link" data-scroll-target="#sampling-distribution-of-the-mean2"><span class="header-section-number">6.2</span> Sampling Distribution of the Mean[2]</a>
+  <ul class="collapse">
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean"><span class="header-section-number">6.2.1</span> Mean</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">6.2.2</span> Variance</a></li>
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem"><span class="header-section-number">6.2.3</span> Central Limit Theorem</a></li>
+  </ul></li>
+  <li><a href="#confidence-interval-on-the-mean4" id="toc-confidence-interval-on-the-mean4" class="nav-link" data-scroll-target="#confidence-interval-on-the-mean4"><span class="header-section-number">6.3</span> Confidence Interval on the Mean[4]</a></li>
+  <li><a href="#the-t-distribution8" id="toc-the-t-distribution8" class="nav-link" data-scroll-target="#the-t-distribution8"><span class="header-section-number">6.4</span> The T Distribution[8]</a></li>
+  <li><a href="#degrees-of-freedom11" id="toc-degrees-of-freedom11" class="nav-link" data-scroll-target="#degrees-of-freedom11"><span class="header-section-number">6.5</span> Degrees of Freedom[11]</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-to-sampling-distributions1" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction-to-sampling-distributions1"><span class="header-section-number">6.1</span> Introduction to Sampling Distributions<a href="#_ftn1">[1]</a></h2>
+<p>Suppose you randomly sampled 10 people from the population of women in Houston, Texas, between the ages of 21 and 35 years and computed the mean height of your sample. You would not expect your sample mean to be equal to the mean of all women in Houston. It might be somewhat lower or it might be somewhat higher, but it would not equal the population mean exactly. Similarly, if you took a second sample of 10 people from the same population, you would not expect the mean of this second sample to equal the mean of the first sample.</p>
+<p>Recall that inferential statistics concern generalizing from a sample to a population. A critical part of inferential statistics involves determining how far sample statistics are likely to vary from each other and from the population <strong>parameter</strong>. (In this example, the sample statistics are the sample means and the population parameter is the population mean.) As the later portions of this chapter show, these determinations are based on sampling distributions.</p>
+<section id="discrete-distributions" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">6.1.1</span> Discrete Distributions</h3>
+<p>We will illustrate the concept of sampling distributions with a simple example. <a href="#fig-poolballs" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows three pool balls, each with a number on it. Two of the balls are selected randomly (with replacement) and the average of their numbers is computed.</p>
+<div id="fig-poolballs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poolballs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/poolballs.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poolballs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: The pool balls.
+</figcaption>
+</figure>
+</div>
+<p>All possible outcomes are shown below in <a href="#tbl-twoballsoutcomes" class="quarto-xref">Table&nbsp;<span>6.1</span></a>.</p>
+<div id="tbl-twoballsoutcomes" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-twoballsoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: All possible outcomes when two balls are sampled with replacement.
+</figcaption>
+<div aria-describedby="tbl-twoballsoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 18%">
+<col style="width: 6%">
+<col style="width: 16%">
+<col style="width: 6%">
+<col style="width: 16%">
+<col style="width: 6%">
+<col style="width: 13%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Outcome</strong></td>
+<td></td>
+<td><strong>Ball 1</strong></td>
+<td></td>
+<td><strong>Ball 2</strong></td>
+<td></td>
+<td><strong>Mean</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1.0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>1.5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2.0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1.5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2.0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2.5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2.0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2.5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>9</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>3.0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Notice that all the means are either 1.0, 1.5, 2.0, 2.5, or 3.0. The frequencies of these means are shown in Table 6-2. The relative frequencies are equal to the frequencies divided by nine because there are nine possible outcomes.</p>
+<div id="tbl-meansfreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meansfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: Frequencies of means for N = 2.
+</figcaption>
+<div aria-describedby="tbl-meansfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 21%">
+<col style="width: 7%">
+<col style="width: 34%">
+<col style="width: 7%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Mean</strong></td>
+<td></td>
+<td><strong>Frequency</strong></td>
+<td></td>
+<td><strong>Relative Frequency</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1.0</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>0.111</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>1.5</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>0.222</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2.0</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>0.333</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2.5</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>0.222</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3.0</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>0.111</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><a href="#fig-meansdist" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> shows a relative frequency distribution of the means based on <a href="#tbl-meansfreqs" class="quarto-xref">Table&nbsp;<span>6.2</span></a>. This distribution is also a probability distribution since the Y-axis is the probability of obtaining a given mean from a sample of two balls in addition to being the relative frequency.</p>
+<div id="fig-meansdist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-meansdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/meansdist.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-meansdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Distribution of means for N = 2.
+</figcaption>
+</figure>
+</div>
+<p>The distribution shown in <a href="#fig-meansdist" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> is called the sampling distribution of the mean. Specifically, it is the sampling distribution of the mean for a sample size of 2 (N = 2). For this simple example, the distribution of pool balls and the sampling distribution are both discrete distributions. The pool balls have only the values 1, 2, and 3, and a sample mean can have one of only five values shown in <a href="#tbl-meansfreqs" class="quarto-xref">Table&nbsp;<span>6.2</span></a>.</p>
+<p>There is an alternative way of conceptualizing a sampling distribution that will be useful for more complex distributions. Imagine that two balls are sampled (with replacement) and the mean of the two balls is computed and recorded. Then this process is repeated for a second sample, a third sample, and eventually thousands of samples. After thousands of samples are taken and the mean computed for each, a relative frequency distribution is drawn. The more samples, the closer the relative frequency distribution will come to the sampling distribution shown in <a href="#fig-meansdist" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>. As the number of samples approaches infinity, the relative frequency distribution will approach the sampling distribution. This means that you can conceive of a sampling distribution as being a relative frequency distribution based on a very large number of samples. To be strictly correct, the relative frequency distribution approaches the sampling distribution as the number of samples approaches infinity.</p>
+<p>It is important to keep in mind that every statistic, not just the mean, has a sampling distribution. For example, <a href="#tbl-alloutcomestwoballs" class="quarto-xref">Table&nbsp;<span>6.3</span></a> shows all possible outcomes for the range of two numbers (larger number minus the smaller number). <a href="#tbl-rangesfreqs" class="quarto-xref">Table&nbsp;<span>6.4</span></a> shows the frequencies for each of the possible ranges and <a href="#fig-rangesdistn2" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> shows the sampling distribution of the range.</p>
+<div id="tbl-alloutcomestwoballs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-alloutcomestwoballs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.3: All possible outcomes when two balls are sampled with replacement.
+</figcaption>
+<div aria-describedby="tbl-alloutcomestwoballs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 17%">
+<col style="width: 6%">
+<col style="width: 16%">
+<col style="width: 6%">
+<col style="width: 16%">
+<col style="width: 6%">
+<col style="width: 15%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Outcome</strong></td>
+<td></td>
+<td><strong>Ball 1</strong></td>
+<td></td>
+<td><strong>Ball 2</strong></td>
+<td></td>
+<td><strong>Range</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>9</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-rangesfreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rangesfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.4: Distribution of ranges for N = 2.
+</figcaption>
+<div aria-describedby="tbl-rangesfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 21%">
+<col style="width: 7%">
+<col style="width: 34%">
+<col style="width: 7%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Range</strong></td>
+<td></td>
+<td><strong>Frequency</strong></td>
+<td></td>
+<td><strong>Relative Frequency</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>0</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>0.333</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>1</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>0.444</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>0.222</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="fig-rangesdistn2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rangesdistn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/rangesdistn2.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rangesdistn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: Distribution of ranges for N = 2.
+</figcaption>
+</figure>
+</div>
+<p>It is also important to keep in mind that there is a sampling distribution for various sample sizes. For simplicity, we have been using N = 2. The sampling distribution of the range for N = 3 is shown in <a href="#fig-rangesdistn3" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>.</p>
+<div id="fig-rangesdistn3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rangesdistn3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/rangesdistn3.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rangesdistn3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.4: Distribution of ranges for N = 3.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="continuous-distributions" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">6.1.2</span> Continuous Distributions</h3>
+<p>In the previous section, the population consisted of three pool balls. Now we will consider sampling distributions when the population distribution is continuous. What if we had a thousand pool balls with numbers ranging from 0.001 to 1.000 in equal steps? (Although this distribution is not really continuous, it is close enough to be considered continuous for practical purposes.) As before, we are interested in the distribution of means we would get if we sampled two balls and computed the mean of these two balls. In the previous example, we started by computing the mean for each of the nine possible outcomes. This would get a bit tedious for this example since there are 1,000,000 possible outcomes (1,000 for the first ball x 1,000 for the second). Therefore, it is more convenient to use our second conceptualization of sampling distributions which conceives of sampling distributions in terms of relative frequency distributions. Specifically, the relative frequency distribution that would occur if samples of two balls were repeatedly taken and the mean of each sample computed.</p>
+<p>When we have a truly continuous distribution, it is not only impractical but actually impossible to enumerate all possible outcomes. Moreover, in continuous distributions, the probability of obtaining any single value is zero. Therefore, these values are called probability densities rather than probabilities.</p>
+</section>
+<section id="sampling-distributions-and-inferential-statistics" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="sampling-distributions-and-inferential-statistics"><span class="header-section-number">6.1.3</span> Sampling Distributions and Inferential Statistics</h3>
+<p>As we stated in the beginning of this chapter, <strong>sampling distributions</strong> are important for inferential statistics. In the examples given so far, a population was specified and the sampling distribution of the mean and the range were determined. In practice, the process proceeds the other way: you collect sample data and from these data you estimate parameters of the sampling distribution. This knowledge of the sampling distribution can be very useful. For example, knowing the degree to which means from different samples would differ from each other and from the population mean would give you a sense of how close your particular sample mean is likely to be to the population mean. Fortunately, this information is directly available from a sampling distribution. The most common measure of how much sample means differ from each other is the standard deviation of the sampling distribution of the mean. This standard deviation is called the standard error of the mean. If all the sample means were very close to the population mean, then the standard error of the mean would be small. On the other hand, if the sample means varied considerably, then the standard error of the mean would be large.</p>
+<p>To be specific, assume your sample mean were 125 and you estimated that the standard error of the mean were 5 (using a method shown in a later section). If you had a normal distribution, then it would be likely that your sample mean would be within 10 units of the population mean since most of a normal distribution is within two standard deviations of the mean.</p>
+<p>Keep in mind that all statistics have sampling distributions, not just the mean. In later sections we will be discussing the sampling distribution of the variance, the sampling distribution of the difference between means, and the sampling distribution of Pearson’s correlation, among others.</p>
+</section>
+</section>
+<section id="sampling-distribution-of-the-mean2" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sampling-distribution-of-the-mean2"><span class="header-section-number">6.2</span> Sampling Distribution of the Mean<a href="#_ftn2">[2]</a></h2>
+<p>The sampling distribution of the mean was defined in the section introducing sampling distributions. This section reviews some important properties of the sampling distribution of the mean introduced in the demonstrations in this chapter.</p>
+<section id="mean" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">6.2.1</span> Mean</h3>
+<p>The mean of the sampling distribution of the mean is the mean of the population from which the scores were sampled. Therefore, if a population has a mean μ, then the mean of the sampling distribution of the mean is also μ. The symbol μ<sub>M</sub> is used to refer to the mean of the sampling distribution of the mean. Therefore, the formula for the mean of the sampling distribution of the mean can be written as:</p>
+<p><span class="math display">\[
+μ~M~ = μ
+\]</span></p>
+</section>
+<section id="variance" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">6.2.2</span> Variance</h3>
+<p>The variance of the sampling distribution of the mean is computed as follows:</p>
+<p><span class="math display">\[
+σ^2_M = \frac{σ^2}{N}
+\]</span></p>
+<p>That is, the variance of the sampling distribution of the mean is the population variance divided by N, the sample size (the number of scores used to compute a mean).<a href="#_ftn3">[3]</a> Thus, the larger the sample size, the smaller the variance of the sampling distribution of the mean.</p>
+<p>The <strong>standard error</strong> of the mean is the standard deviation of the sampling distribution of the mean. It is therefore the square root of the variance of the sampling distribution of the mean and can be written as:</p>
+<p>The standard error is represented by a σ because it is a standard deviation. The subscript (M) indicates that the standard error in question is the standard error of the mean.</p>
+</section>
+<section id="central-limit-theorem" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="central-limit-theorem"><span class="header-section-number">6.2.3</span> Central Limit Theorem</h3>
+<p>The central limit theorem states that:</p>
+<blockquote class="blockquote">
+<p>Given a population with a finite mean <span class="math inline">\(μ\)</span> and a finite non-zero variance <span class="math inline">\(σ^2\)</span>, the sampling distribution of the mean approaches a normal distribution with a mean of <span class="math inline">\(μ\)</span> and a variance of <span class="math inline">\(σ^2/N\)</span> as <span class="math inline">\(N\)</span>, the sample size, increases.</p>
+</blockquote>
+<p>The expressions for the mean and variance of the sampling distribution of the mean are not new or remarkable. What is remarkable is that regardless of the shape of the parent population, the sampling distribution of the mean approaches a normal distribution as N increases. <a href="#fig-uniformsamplingdist" class="quarto-xref">Figure&nbsp;<span>6.5</span></a> shows the results of the simulation for N = 2 and N = 10. The parent population was a uniform distribution. You can see that the distribution for N = 2 is far from a normal distribution. Nonetheless, it does show that the scores are denser in the middle than in the tails. For N = 10 the distribution is quite close to a normal distribution. Notice that the means of the two distributions are the same, but that the spread of the distribution for N = 10 is smaller.</p>
+<div id="fig-uniformsamplingdist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniformsamplingdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/uniformsamplingdist.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniformsamplingdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.5: A simulation of a sampling distribution. The parent population is uniform. The blue line under “16” indicates that 16 is the mean. The red line extends from the mean plus and minus one standard deviation.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-nonunifirmsamplingdistsim" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> shows how closely the sampling distribution of the mean approximates a normal distribution even when the parent population is very non-normal. If you look closely you can see that the sampling distributions do have a slight positive skew. The larger the sample size, the closer the sampling distribution of the mean would be to a normal distribution.</p>
+<div id="fig-nonunifirmsamplingdistsim" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nonunifirmsamplingdistsim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/nonunifirmsamplingdistsim.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nonunifirmsamplingdistsim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.6: A simulation of a sampling distribution. The parent population is very non-normal.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="confidence-interval-on-the-mean4" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="confidence-interval-on-the-mean4"><span class="header-section-number">6.3</span> Confidence Interval on the Mean<a href="#_ftn4">[4]</a></h2>
+<p>When you compute a confidence interval on the mean, you compute the mean of a sample in order to estimate the mean of the population. Clearly, if you already knew the population mean, there would be no need for a confidence interval. However, to explain how confidence intervals are constructed, we are going to work backwards and begin by assuming characteristics of the population. Then we will show how sample data can be used to construct a confidence interval.</p>
+<p>Assume that the weights of 10-year-old children are normally distributed with a mean of 90 and a standard deviation of 36. What is the sampling distribution of the mean for a sample size of 9? Recall from the section on the sampling distribution of the mean that the mean of the sampling distribution is μ and the standard error of the mean is</p>
+<p><span class="math display">\[
+σ_M = \frac{σ}{\sqrt{N}}
+\]</span></p>
+<p>For the present example, the sampling distribution of the mean has a mean of 90 and a standard deviation of 36/3 = 12. Note that the standard deviation of a sampling distribution is its standard error. <span class="citation" data-cites="ig-samplingdistn9">@ig-samplingdistn9</span> shows this distribution. The shaded area represents the middle 95% of the distribution and stretches from 66.48 to 113.52. These limits were computed by adding and subtracting 1.96 standard deviations to/from the mean of 90 as follows:</p>
+<p><span class="math display">\[
+90 - (1.96)(12) = 66.48
+\]</span></p>
+<p><span class="math display">\[
+90 + (1.96)(12) = 113.52
+\]</span></p>
+<p>The value of 1.96 is based on the fact that 95% of the area of a normal distribution is within 1.96 standard deviations of the mean; 12 is the standard error of the mean.</p>
+<div id="fig-samplingdistn9" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-samplingdistn9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/samplingdistn9.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-samplingdistn9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.7: The sampling distribution of the mean for N=9. The middle 95% of the distribution is shaded.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-samplingdistn9" class="quarto-xref">Figure&nbsp;<span>6.7</span></a> shows that 95% of the means are no more than 23.52 units (1.96 standard deviations) from the mean of 90. Now consider the probability that a sample mean computed in a random sample is within 23.52 units of the population mean of 90. Since 95% of the distribution is within 23.52 of 90, the probability that the mean from any given sample will be within 23.52 of 90 is 0.95. This means that if we repeatedly compute the mean (M) from a sample, and create an interval ranging from M - 23.52 to M + 23.52, this interval will contain the population mean 95% of the time. In general, you compute the 95% confidence interval for the mean with the following formula:</p>
+<p><span class="math display">\[
+\text{Lower limit} = M - Z~.95~σ~M~
+\]</span></p>
+<p><span class="math display">\[
+\text{Upper limit} = M + Z~.95~σ~M~
+\]</span></p>
+<p>where Z<sub>.95</sub> is the number of standard deviations extending from the mean of a normal distribution required to contain 0.95 of the area and σ<sub>M</sub> is the standard error of the mean.</p>
+<p>If you look closely at this formula for a confidence interval, you will notice that you need to know the standard deviation (σ) in order to estimate the mean. This may sound unrealistic, and it is. However, computing a confidence interval when σ is known is easier than when σ has to be estimated, and serves a pedagogical purpose. Later in this section we will show how to compute a confidence interval for the mean when σ has to be estimated.</p>
+<p>Suppose the following five numbers were sampled from a normal distribution with a standard deviation of 2.5: 2, 3, 5, 6, and 9. To compute the 95% confidence interval, start by computing the mean and standard error:</p>
+<p><span class="math display">\[
+M = (2 + 3 + 5 + 6 + 9)/5 = 5.
+\]</span></p>
+<p><span class="math display">\[
+σ_M~=\frac{2.5}{\sqrt5}=1.118.
+\]</span></p>
+<p>Z<sub>.95</sub> can be found using the normal distribution calculator<a href="#_ftn5">[5]</a> and specifying that the shaded area is 0.95 and indicating that you want the area to be between the cutoff points. As shown in <a href="#fig-normaldistcalc" class="quarto-xref">Figure&nbsp;<span>6.8</span></a>, the value is 1.96. If you had wanted to compute the 99% confidence interval, you would have set the shaded area to 0.99 and the result would have been 2.58.</p>
+<div id="fig-normaldistcalc" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normaldistcalc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/normaldistcalc.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldistcalc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.8: 95% of the area is between -1.96 and 1.96.
+</figcaption>
+</figure>
+</div>
+<p>The confidence interval can then be computed as follows:</p>
+<p><span class="math display">\[
+\text{Lower limit} = 5 - (1.96)(1.118)= 2.81
+\]</span></p>
+<p><span class="math display">\[
+\text{Upper limit} = 5 + (1.96)(1.118)= 7.19
+\]</span></p>
+<p>You should use the t distribution rather than the normal distribution when the variance is not known and has to be estimated from sample data. You will learn more about the t distribution in the next section. When the sample size is large, say 100 or above, the t distribution is very similar to the standard normal distribution. However, with smaller sample sizes, the t distribution has relatively more scores in its tails than does the normal distribution. As a result, you have to extend farther from the mean to contain a given proportion of the area. Recall that with a normal distribution, 95% of the distribution is within 1.96 standard deviations of the mean. Using the t distribution, if you have a sample size of only 5, 95% of the area is within 2.78 standard deviations of the mean. Therefore, the standard error of the mean would be multiplied by 2.78 rather than 1.96.</p>
+<p>The values of t to be used in a confidence interval can be looked up in a table of the t distribution. A small version of such a table is shown in <a href="#tbl-abbrevttable1" class="quarto-xref">Table&nbsp;<span>6.5</span></a>. The first column, df, stands for degrees of freedom, and for confidence intervals on the mean, df is equal to N - 1, where N is the sample size.</p>
+<div id="tbl-abbrevttable1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-abbrevttable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.5: Abbreviated t table.
+</figcaption>
+<div aria-describedby="tbl-abbrevttable1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>df</strong></td>
+<td></td>
+<td><strong>0.95</strong></td>
+<td></td>
+<td><strong>0.99</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td></td>
+<td>4.303</td>
+<td></td>
+<td>9.925</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3</td>
+<td></td>
+<td>3.182</td>
+<td></td>
+<td>5.841</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2.776</td>
+<td></td>
+<td>4.604</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5</td>
+<td></td>
+<td>2.571</td>
+<td></td>
+<td>4.032</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>2.306</td>
+<td></td>
+<td>3.355</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>10</td>
+<td></td>
+<td>2.228</td>
+<td></td>
+<td>3.169</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20</td>
+<td></td>
+<td>2.086</td>
+<td></td>
+<td>2.845</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>50</td>
+<td></td>
+<td>2.009</td>
+<td></td>
+<td>2.678</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>100</td>
+<td></td>
+<td>1.984</td>
+<td></td>
+<td>2.626</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>You can also use an “inverse t distribution” calculator<a href="#_ftn6">[6]</a> to find the t values to use in confidence intervals.</p>
+<p>Assume that the following five numbers are sampled from a normal distribution: 2, 3, 5, 6, and 9 and that the standard deviation is not known. The first steps are to compute the sample mean and variance:</p>
+<p><span class="math display">\[
+M = 5
+\]</span></p>
+<p><span class="math display">\[
+s2 = 7.5
+\]</span></p>
+<p>The next step is to estimate the standard error of the mean. If we knew the population variance, we could use the following formula:</p>
+<p><span class="math display">\[
+σ_M = \frac{σ}{\sqrt{N}}
+\]</span></p>
+<p>Instead we compute an estimate of the standard error (s<sub>M</sub>):</p>
+<p><span class="math display">\[
+s_M = \frac{s}{\sqrt{N}}=1.225
+\]</span></p>
+<p>The next step is to find the value of t. As you can see from <a href="#tbl-abbrevttable1" class="quarto-xref">Table&nbsp;<span>6.5</span></a>, the value for the 95% interval for df = N - 1 = 4 is 2.776. The confidence interval is then computed just as it is when σ<sub>M</sub>. The only differences are that s<sub>M</sub> and t rather than σ<sub>M</sub> and Z are used.</p>
+<p><span class="math display">\[
+\text{Lower limit} = 5 - (2.776)(1.225) = 1.60
+\]</span></p>
+<p><span class="math display">\[
+\text{Upper limit} = 5 + (2.776)(1.225) = 8.40
+\]</span></p>
+<p>More generally, the formula for the 95% confidence interval on the mean is:</p>
+<p><span class="math display">\[
+\text{Lower limit} = M - (t_{CL})(s_M)
+\]</span></p>
+<p><span class="math display">\[
+\text{Upper limit} = M + (t_{CL})(s_M)
+\]</span></p>
+<p>where <span class="math inline">\(M\)</span> is the sample mean, <span class="math inline">\(t_{CL}\)</span> is the t for the confidence level desired (0.95 in the above example), and <span class="math inline">\(s_M\)</span> is the estimated standard error of the mean.</p>
+<p>We will finish with an analysis of the Stroop Data.<a href="#_ftn7">[7]</a> Specifically, we will compute a confidence interval on the mean difference score. Recall that 47 subjects named the color of ink that words were written in. The names conflicted so that, for example, they would name the ink color of the word “blue” written in red ink. The correct response is to say “red” and ignore the fact that the word is “blue.” In a second condition, subjects named the ink color of colored rectangles.</p>
+<div id="tbl-responsetime" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-responsetime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.6: Response times in seconds for 10 subjects.
+</figcaption>
+<div aria-describedby="tbl-responsetime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Naming Colored Rectangle</strong></td>
+<td></td>
+<td><strong>Interference</strong></td>
+<td></td>
+<td><strong>Difference</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>17</td>
+<td></td>
+<td>38</td>
+<td></td>
+<td>21</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>15</td>
+<td></td>
+<td>58</td>
+<td></td>
+<td>43</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>18</td>
+<td></td>
+<td>35</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>20</td>
+<td></td>
+<td>39</td>
+<td></td>
+<td>19</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>18</td>
+<td></td>
+<td>33</td>
+<td></td>
+<td>15</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>20</td>
+<td></td>
+<td>32</td>
+<td></td>
+<td>12</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20</td>
+<td></td>
+<td>45</td>
+<td></td>
+<td>25</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>19</td>
+<td></td>
+<td>52</td>
+<td></td>
+<td>33</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>17</td>
+<td></td>
+<td>31</td>
+<td></td>
+<td>14</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>21</td>
+<td></td>
+<td>29</td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-responsetime" class="quarto-xref">Table&nbsp;<span>6.6</span></a> shows the time difference between the interference and color-naming conditions for 10 of the 47 subjects. The mean time difference for all 47 subjects is 16.362 seconds and the standard deviation is 7.470 seconds. The standard error of the mean is 1.090. A t table shows the critical value of t for 47 - 1 = 46 degrees of freedom is 2.013 (for a 95% confidence interval). Therefore the confidence interval is computed as follows:</p>
+<p><span class="math display">\[
+\text{Lower limit} = 16.362 - (2.013)(1.090) = 14.17
+\]</span></p>
+<p><span class="math display">\[
+\text{Upper limit} = 16.362 + (2.013)(1.090) = 18.56
+\]</span></p>
+<p>Therefore, the interference effect (difference) for the whole population is likely to be between 14.17 and 18.56 seconds.</p>
+</section>
+<section id="the-t-distribution8" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="the-t-distribution8"><span class="header-section-number">6.4</span> The T Distribution<a href="#_ftn8">[8]</a></h2>
+<p>In the introduction to normal distributions it was shown that 95% of the area of a normal distribution is within 1.96 standard deviations of the mean. Therefore, if you randomly sampled a value from a normal distribution with a mean of 100, the probability it would be within 1.96σ of 100 is 0.95. Similarly, if you sample N values from the population, the probability that the sample mean (M) will be within 1.96 σ<sub>M</sub> of 100 is 0.95.</p>
+<p>Now consider the case in which you have a normal distribution but you do not know the standard deviation. You sample N values and compute the sample mean (M) and estimate the standard error of the mean (σ<sub>M</sub>) with s<sub>M</sub>. What is the probability that M will be within 1.96 s<sub>M</sub> of the population mean (μ)? This is a difficult problem because there are two ways in which M could be more than 1.96 s<sub>M</sub> from μ: (1) M could, by chance, be either very high or very low and (2) s<sub>M</sub> could, by chance, be very low. Intuitively, it makes sense that the probability of being within 1.96 standard errors of the mean should be smaller than in the case when the standard deviation is known (and cannot be underestimated). But exactly how much smaller? Fortunately, the way to work out this type of problem was solved in the early 20th century by W. S. Gosset who determined the distribution of a mean divided by an estimate of its standard error. This distribution is called the <em>Student’s t distribution</em> or sometimes just the t distribution. Gosset worked out the t distribution and associated statistical tests while working for a brewery in Ireland. Because of a contractual agreement with the brewery, he published the article under the pseudonym “Student.” That is why the t test is called the “Student’s t test.”</p>
+<p>The <strong>t distribution</strong> is very similar to the normal distribution when the estimate of variance is based on a large sample, but the t distribution has relatively more scores in its tails when there is a small sample. When working with the t distribution, sample size is expressed in what are called degrees of freedom. Degrees of freedom will be discussed in more detail at the end of this chapter, but if we are estimating the standard error for a sample mean estimate, the degrees of freedom is simply equal to the sample size minus one (N-1).</p>
+<p><a href="#fig-tdiststandardsd" class="quarto-xref">Figure&nbsp;<span>6.9</span></a> shows t distributions with 2, 4, and 10 degrees of freedom and the standard normal distribution. Notice that the normal distribution has relatively more scores in the center of the distribution and the t distribution has relatively more in the tails. The t distribution approaches the normal distribution as the degrees of freedom increase.</p>
+<div id="fig-tdiststandardsd" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tdiststandardsd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/tdiststandardsd.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdiststandardsd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.9: A comparison of t distributions with 2, 4, and 10 df and the standard normal distribution. The distribution with the lowest peak is the 2 df distribution, the next lowest is 4 df, the lowest after that is 10 df, and the highest is the standard normal distribution.
+</figcaption>
+</figure>
+</div>
+<p>Since the t distribution has more area in the tails, the percentage of the distribution within 1.96 standard deviations of the mean is less than the 95% for the normal distribution. <a href="#tbl-abbrevttable2" class="quarto-xref">Table&nbsp;<span>6.7</span></a> shows the number of standard deviations from the mean required to contain 95% and 99% of the area of the t distribution for various degrees of freedom. These are the values of t that you use in a confidence interval. The corresponding values for the normal distribution are 1.96 and 2.58 respectively. Notice that with few degrees of freedom, the values of t are much higher than the corresponding values for a normal distribution and that the difference decreases as the degrees of freedom increase. The values shown in Table 6-7 can be obtained from statistical software or an online calculator.<a href="#_ftn9">[9]</a></p>
+<div id="tbl-abbrevttable2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-abbrevttable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.7: Abbreviated t table.
+</figcaption>
+<div aria-describedby="tbl-abbrevttable2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>df</strong></td>
+<td></td>
+<td><strong>0.95</strong></td>
+<td></td>
+<td><strong>0.99</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td></td>
+<td>4.303</td>
+<td></td>
+<td>9.925</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3</td>
+<td></td>
+<td>3.182</td>
+<td></td>
+<td>5.841</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2.776</td>
+<td></td>
+<td>4.604</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5</td>
+<td></td>
+<td>2.571</td>
+<td></td>
+<td>4.032</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>2.306</td>
+<td></td>
+<td>3.355</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>10</td>
+<td></td>
+<td>2.228</td>
+<td></td>
+<td>3.169</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20</td>
+<td></td>
+<td>2.086</td>
+<td></td>
+<td>2.845</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>50</td>
+<td></td>
+<td>2.009</td>
+<td></td>
+<td>2.678</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>100</td>
+<td></td>
+<td>1.984</td>
+<td></td>
+<td>2.626</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Returning to the problem posed at the beginning of this section, suppose you sampled 9 values from a normal population and estimated the standard error of the mean (σ<sub>M</sub>) with s<sub>M</sub>. What is the probability that M would be within 1.96s<sub>M</sub> of μ? Since the sample size is 9, there are N - 1 = 8 df. From <a href="#tbl-abbrevttable2" class="quarto-xref">Table&nbsp;<span>6.7</span></a>, you can see that with 8 df the probability is 0.95 that the mean will be within 2.306 s<sub>M</sub> of μ. The probability that it will be within 1.96 s<sub>M</sub> of μ is therefore lower than 0.95.</p>
+<p>As shown in <a href="#fig-tdist8df" class="quarto-xref">Figure&nbsp;<span>6.10</span></a>, a t distribution calculator<a href="#_ftn10">[10]</a> can be used to find that 0.086 of the area of a t distribution is more than 1.96 standard deviations from the mean, so the probability that M would be less than 1.96sM from μ is 1 - 0.086 = 0.914.</p>
+<div id="fig-tdist8df" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tdist8df-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch6/tdist8df.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdist8df-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.10: Area more than 1.96 standard deviations from the mean in a t distribution with 8 df. Note that the two-tailed button is selected so that the area in both tails will be included.
+</figcaption>
+</figure>
+</div>
+<p>As expected, this probability is less than 0.95 that would have been obtained if σM had been known instead of estimated.</p>
+</section>
+<section id="degrees-of-freedom11" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="degrees-of-freedom11"><span class="header-section-number">6.5</span> Degrees of Freedom<a href="#_ftn11">[11]</a></h2>
+<p>Some estimates are based on more information than others. For example, an estimate of the variance based on a sample size of 100 is based on more information than an estimate of the variance based on a sample size of 5. The <strong>degrees of freedom (df)</strong> of an estimate is the number of independent pieces of information on which the estimate is based.</p>
+<p>As an example, let’s say that we know that the mean height of Martians is 6 and wish to estimate the variance of their heights. We randomly sample one Martian and find that its height is 8. Recall that the variance is defined as the mean squared deviation of the values from their population mean. We can compute the squared deviation of our value of 8 from the population mean of 6 to find a single squared deviation from the mean. This single squared deviation from the mean, (8-6)<sup>2</sup> = 4, is an estimate of the mean squared deviation for all Martians. Therefore, based on this sample of one, we would estimate that the population variance is 4. This estimate is based on a single piece of information and therefore has 1 df. If we sampled another Martian and obtained a height of 5, then we could compute a second estimate of the variance, (5-6)<sup>2</sup> = 1. We could then average our two estimates (4 and 1) to obtain an estimate of 2.5. Since this estimate is based on two independent pieces of information, it has two degrees of freedom. The two estimates are independent because they are based on two independently and randomly selected Martians. The estimates would not be independent if after sampling one Martian, we decided to choose its brother as our second Martian.</p>
+<p>As you are probably thinking, it is pretty rare that we know the population mean when we are estimating the variance. Instead, we have to first estimate the population mean (μ) with the sample mean (M). The process of estimating the mean affects our degrees of freedom as shown below.</p>
+<p>Returning to our problem of estimating the variance in Martian heights, let’s assume we do not know the population mean and therefore we have to estimate it from the sample. We have sampled two Martians and found that their heights are 8 and 5. Therefore M, our estimate of the population mean, is</p>
+<p><span class="math display">\[
+M = (8+5)/2 = 6.5.
+\]</span></p>
+<p>We can now compute two estimates of variance:</p>
+<p><span class="math display">\[
+\text{Estimate 1} = (8-6.5)^2 = 2.25
+\]</span></p>
+<p><span class="math display">\[
+\text{Estimate 2} = (5-6.5)^2 = 2.25
+\]</span></p>
+<p>Now for the key question: Are these two estimates independent? The answer is no because each height contributed to the calculation of M. Since the first Martian’s height of 8 influenced M, it also influenced Estimate 2. If the first height had been, for example, 10, then M would have been 7.5 and Estimate 2 would have been (5-7.5)<sup>2</sup> = 6.25 instead of 2.25. The important point is that the two estimates are not independent and therefore we do not have two degrees of freedom. Another way to think about the non-independence is to consider that if you knew the mean and one of the scores, you would know the other score. For example, if one score is 5 and the mean is 6.5, you can compute that the total of the two scores is 13 and therefore that the other score must be 13-5 = 8.</p>
+<p>In general, the degrees of freedom for an estimate is equal to the number of values minus the number of parameters estimated en route to the estimate in question. In the Martians example, there are two values (8 and 5) and we had to estimate one parameter (μ) on the way to estimating the parameter of interest (σ<sup>2</sup>). Therefore, the estimate of variance has 2 - 1 = 1 degree of freedom. If we had sampled 12 Martians, then our estimate of variance would have had 11 degrees of freedom. Therefore, the degrees of freedom of an estimate of variance is equal to N - 1, where N is the number of observations.</p>
+<p>Recall from the section on variability that the formula for estimating the variance in a sample is:</p>
+<p><span class="math display">\[
+s^2=\frac{Σ(X-M)^2}{N-1}
+\]</span></p>
+<p>The denominator of this formula is the degrees of freedom.</p>
+<p>So far, we’ve only seen examples where the degrees of freedom is equal to N - 1. But in later chapters, we’ll see examples of statistical inference tools that require estimating more than one parameter en route to the estimate in question, and therefore we’ll need to subtract more than one from the number of observations to get the degrees of freedom. For example, the degrees of freedom might be calculated as N - 5 or N - 3, depending on what we are estimating.</p>
+<hr>
+<p><a href="#_ftnref1">[1]</a> This subsection is adapted from David M. Lane. “Introduction to Sampling Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/sampling_distributions/intro_samp_dist.html" class="uri">http://onlinestatbook.com/2/sampling_distributions/intro_samp_dist.html</a></p>
+<p><a href="#_ftnref2">[2]</a> This subsection is adapted from David M. Lane. “Sampling Distribution of the Mean.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/sampling_distributions/samp_dist_mean.html" class="uri">http://onlinestatbook.com/2/sampling_distributions/samp_dist_mean.html</a></p>
+<p><a href="#_ftnref3">[3]</a> This expression can be derived very easily from the variance sum law. Let’s begin by computing the variance of the sampling distribution of the sum of three numbers sampled from a population with variance σ<sup>2</sup>. The variance of the sum would be σ<sup>2</sup> + σ<sup>2</sup> + σ<sup>2</sup>. For N numbers, the variance would be Nσ<sup>2</sup>. Since the mean is 1/N times the sum, the variance of the sampling distribution of the mean would be 1/N<sup>2</sup> times the variance of the sum, which equals σ<sup>2</sup>/N.</p>
+<p><a href="#_ftnref4">[4]</a> This subsection is adapted from David M. Lane. “Confidence Interval on the Mean.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/estimation/mean.html" class="uri">http://onlinestatbook.com/2/estimation/mean.html</a></p>
+<p><a href="#_ftnref5">[5]</a> <a href="http://onlinestatbook.com/2/calculators/normal_dist.html" class="uri">http://onlinestatbook.com/2/calculators/normal_dist.html</a></p>
+<p><a href="#_ftnref6">[6]</a> <a href="http://onlinestatbook.com/2/calculators/inverse_t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/inverse_t_dist.html</a></p>
+<p><a href="#_ftnref7">[7]</a> <a href="http://onlinestatbook.com/2/case_studies/stroop.html" class="uri">http://onlinestatbook.com/2/case_studies/stroop.html</a></p>
+<p><a href="#_ftnref8">[8]</a> This section is adapted from David M. Lane. “t Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/estimation/t_distribution.html" class="uri">http://onlinestatbook.com/2/estimation/t_distribution.html</a></p>
+<p><a href="#_ftnref9">[9]</a> <a href="http://onlinestatbook.com/2/calculators/inverse_t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/inverse_t_dist.html</a></p>
+<p><a href="#_ftnref10">[10]</a> <a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a></p>
+<p><a href="#_ftnref11">[11]</a> This section is adapted from David M. Lane. “Degrees of Freedom.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/estimation/df.html" class="uri">http://onlinestatbook.com/2/estimation/df.html</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./distributions.html" class="pagination-link" aria-label="Probability Distributions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./h-tests.html" class="pagination-link" aria-label="Hypothesis Testing">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistics Minus The Math - 8&nbsp; Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./comparing-groups.html" rel="next">
+<link href="./h-tests.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./comparing-means.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus The Math</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-means.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#difference-between-two-means1" id="toc-difference-between-two-means1" class="nav-link active" data-scroll-target="#difference-between-two-means1"><span class="header-section-number">8.1</span> Difference between Two Means[1]</a>
+  <ul class="collapse">
+  <li><a href="#formatting-data-for-computer-analysis" id="toc-formatting-data-for-computer-analysis" class="nav-link" data-scroll-target="#formatting-data-for-computer-analysis"><span class="header-section-number">8.1.1</span> Formatting Data for Computer Analysis</a></li>
+  </ul></li>
+  <li><a href="#pairwise-comparisons-among-multiple-means4" id="toc-pairwise-comparisons-among-multiple-means4" class="nav-link" data-scroll-target="#pairwise-comparisons-among-multiple-means4"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means[4]</a>
+  <ul class="collapse">
+  <li><a href="#computer-analysis" id="toc-computer-analysis" class="nav-link" data-scroll-target="#computer-analysis"><span class="header-section-number">8.2.1</span> Computer Analysis</a></li>
+  <li><a href="#tukeys-test-need-not-be-a-follow-up-to-anova" id="toc-tukeys-test-need-not-be-a-follow-up-to-anova" class="nav-link" data-scroll-target="#tukeys-test-need-not-be-a-follow-up-to-anova"><span class="header-section-number">8.2.2</span> Tukey’s Test Need Not be a Follow-Up to ANOVA</a></li>
+  </ul></li>
+  <li><a href="#analysis-of-variance-anova7" id="toc-analysis-of-variance-anova7" class="nav-link" data-scroll-target="#analysis-of-variance-anova7"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)[7]</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="difference-between-two-means1" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="difference-between-two-means1"><span class="header-section-number">8.1</span> Difference between Two Means<a href="#_ftn1">[1]</a></h2>
+<p>It is much more common for a researcher to be interested in the difference between means than in the specific values of the means themselves. This section covers how to test for differences between means from two separate groups of subjects. Note that we already learned in the chapter on graphing how to visually depict a comparison of two means/medians using boxplots (<a href="graphing.html#sec-box-plots" class="quarto-xref"><span>Section 1.4.2</span></a>).</p>
+<p>We take as an example the data from the “Animal Research” case study, previously described when discussing confidence intervals (<a href="estimation.html#sec-using-confidence-intervals" class="quarto-xref"><span>Section 4.3</span></a>).<a href="#_ftn2">[2]</a> As a reminder, students rated (on a 7-point scale) whether they thought animal research is wrong. The sample sizes, means, and variances are shown separately for males and females in <a href="#tbl-meansvaranimalresearch" class="quarto-xref">Table&nbsp;<span>8.1</span></a>.</p>
+<div id="tbl-meansvaranimalresearch" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meansvaranimalresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.1: Means and Variances in Animal Research study.
+</figcaption>
+<div aria-describedby="tbl-meansvaranimalresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 16%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 20%">
+<col style="width: 7%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Group</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Mean</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Variance</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Females</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5.353</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.743</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Males</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3.882</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.985</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>As you can see, the females rated animal research as more wrong than did the males. This sample difference between the female mean of 5.35 and the male mean of 3.88 is 1.47. However, the gender difference in this particular sample is not very important. What is important is whether there is a difference in the <em>population</em> means.</p>
+<p>In order to test whether there is a difference between population means, we are going to make three assumptions:</p>
+<ol type="1">
+<li><p>The two populations have the same variance. This assumption is called the assumption of homogeneity of variance.</p></li>
+<li><p>The populations are normally distributed.</p></li>
+<li><p>Each value is sampled independently from each other value. This assumption requires that each subject provide only one value. If a subject provides two scores, then the scores are not independent.</p></li>
+</ol>
+<p>One could look at these assumptions in much more detail, but suffice it to say that small-to-moderate violations of assumptions 1 and 2 do not make much difference. It is important not to violate assumption 3.</p>
+<p>We saw the following general formula for significance testing in the section on testing a single mean:</p>
+<p><span class="math display">\[
+\text{t} = \frac{\text{statistic-hypothesized value}}{\text{estimated standard error of the statistic}}
+\]</span></p>
+<p>In this case, our statistic is the difference between sample means and our hypothesized value is 0. The hypothesized value is the null hypothesis that the difference between population means is 0.</p>
+<p>We continue to use the data from the “Animal Research” case study and will compute a significance test on the difference between the mean score of the females and the mean score of the males. For this calculation, we will make the three assumptions specified above.</p>
+<p>The first step is to compute the statistic, which is simply the difference between means.</p>
+<p><span class="math display">\[
+M_1 - M_2 = 5.3529 - 3.8824 = 1.4705
+\]</span></p>
+<p>Since the hypothesized value is 0, we do not need to subtract it from the statistic.</p>
+<p>The next step is to compute the estimate of the standard error of the statistic. In this case, the statistic is the difference between means, so the estimated standard error of the statistic is (<span class="math inline">\(S_{M1}-{_M}_2\)</span>). Recall from the <a href="http://onlinestatbook.com/2/sampling_distributions/samplingdist_diff_means.html">relevant section</a> in the chapter on sampling distributions that the formula for the standard error of the difference between means is:</p>
+<p><span class="math display">\[
+σ_{M1-M2} = \sqrt{\frac{σ^2_1}{n_1}+\frac{σ^2_2}{n_12}} = \sqrt{\frac{σ^2}{n}+\frac{σ^2}{n}} = \sqrt{\frac{2σ^2}{n}}
+\]</span></p>
+<p>In order to estimate this quantity, we estimate σ<sup>2</sup> and use that estimate in place of σ<sup>2</sup>. Since we are assuming the two population variances are the same, we estimate this variance by averaging our two sample variances. Thus, our estimate of variance is computed using the following formula:</p>
+<p><span class="math display">\[
+\text{MSE}= \frac{s^2_1+s^2_2}{2}
+\]</span></p>
+<p>where MSE is our estimate of <span class="math inline">\(σ^2\)</span>. In this example,</p>
+<p><span class="math display">\[
+\text{MSE} = (2.743 + 2.985)/2 = 2.864.
+\]</span></p>
+<p>Since n (the number of scores in each group) is 17,</p>
+<p><span class="math display">\[
+S_{M1-M2} = \sqrt{\frac{2MSE}{n}} = \sqrt{\frac{(2)(2.864)}{17}} = 0.5805
+\]</span></p>
+<p>The next step is to compute t by plugging these values into the formula:</p>
+<p><span class="math display">\[
+t = 1.4705/.5805 = 2.533.
+\]</span></p>
+<p>Finally, we compute the probability of getting a <span class="math inline">\(t\)</span> as large or larger than 2.533 or as small or smaller than -2.533. To do this, we need to know the degrees of freedom. The degrees of freedom is the number of independent estimates of variance on which <span class="math inline">\(MSE\)</span> is based. This is equal to (<span class="math inline">\(n_1\)</span> - 1) + (<span class="math inline">\(n_2\)</span> - 1), where <span class="math inline">\(n_1\)</span> is the sample size of the first group and <span class="math inline">\(n_2\)</span> is the sample size of the second group. For this example, <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span> = 17. When <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span>, it is conventional to use “<span class="math inline">\(n\)</span>” to refer to the sample size of each group. Therefore, the degrees of freedom is 16 + 16 = 32.</p>
+<p>Once we have the degrees of freedom, we can use a t distribution calculator<a href="#_ftn3">[3]</a> to find the probability. <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows that the probability value for a two-tailed test is 0.0164. The two-tailed test is used when the null hypothesis can be rejected regardless of the direction of the effect. As shown in <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, it is the probability of a t &lt; -2.533 or a t &gt; 2.533.</p>
+<div id="fig-2tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch8/2tailprob.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: The two-tailed probability.
+</figcaption>
+</figure>
+</div>
+<p>The results of a one-tailed test are shown in <a href="#fig-1tailprob" class="quarto-xref">Figure&nbsp;<span>8.2</span></a>. As you can see, the probability value of 0.0082 is half the value for the two-tailed test.</p>
+<div id="fig-1tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch8/1tailprob.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: The one-tailed probability.
+</figcaption>
+</figure>
+</div>
+<section id="formatting-data-for-computer-analysis" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="formatting-data-for-computer-analysis"><span class="header-section-number">8.1.1</span> Formatting Data for Computer Analysis</h3>
+<p>Most computer programs that compute t tests require your data to be in a specific form. Consider the data in <a href="#tbl-exampledata" class="quarto-xref">Table&nbsp;<span>8.2</span></a>.</p>
+<div id="tbl-exampledata" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exampledata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.2: Example data.
+</figcaption>
+<div aria-describedby="tbl-exampledata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Group 1</strong></td>
+<td></td>
+<td><strong>Group 2</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>4</td>
+<td></td>
+<td>6</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Here there are two groups, each with three observations. To format these data for a computer program, you normally have to use two variables: the first specifies the group the subject is in and the second is the score itself. The reformatted version of the data in <a href="#tbl-exampledata" class="quarto-xref">Table&nbsp;<span>8.2</span></a> is shown in <a href="#tbl-reformatdata" class="quarto-xref">Table&nbsp;<span>8.3</span></a>.</p>
+<div id="tbl-reformatdata" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reformatdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.3: Reformatted data.
+</figcaption>
+<div aria-describedby="tbl-reformatdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>G</strong></td>
+<td></td>
+<td><strong>Y</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>1</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1</td>
+<td></td>
+<td>5</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td></td>
+<td>6</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Using statistical software, we’d find that the t value is -0.718, the df = 4, and p = 0.512.</p>
+</section>
+</section>
+<section id="pairwise-comparisons-among-multiple-means4" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="pairwise-comparisons-among-multiple-means4"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means<a href="#_ftn4">[4]</a></h2>
+<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#_ftn5">[5]</a> In this study, the effect of different types of smiles on the leniency shown to a person was investigated. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>8.4</span></a>.</p>
+<div id="tbl-feltmisneutral" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.4: Six Comparisons among Means.
+</figcaption>
+<div aria-describedby="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">felt vs.&nbsp;miserable</td>
+<td style="text-align: center;"><img src="Images/Ch8/feltjpg.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/Ch8/miserable.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">felt vs.&nbsp;neutral</td>
+<td style="text-align: center;"><img src="Images/Ch8/feltjpg.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/Ch8/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">miserable vs.&nbsp;neutral</td>
+<td style="text-align: center;"><img src="Images/Ch8/miserable.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/Ch8/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The problem with this approach is that if you did this analysis, you would have six chances to make a Type I error. Therefore, if you were using the 0.05 significance level, the probability that you would make a Type I error on at least one of these comparisons is greater than 0.05. The more means that are compared, the more the Type I error rate is inflated. <a href="#fig-pairwisecompfmean" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of possible comparisons between pairs of means (pairwise comparisons) as a function of the number of means. If there are only two means, then only one comparison can be made. If there are 12 means, then there are 66 possible comparisons.</p>
+<div id="fig-pairwisecompfmean" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch8/pairwisecompfmean.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: Number of pairwise comparisons as a function of the number of means.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-type1error" class="quarto-xref">Figure&nbsp;<span>8.4</span></a> shows the probability of a Type I error as a function of the number of means. As you can see, if you have an experiment with 12 means, the probability is about 0.70 that at least one of the 66 comparisons among means would be significant even if all 12 population means were the same.</p>
+<div id="fig-type1error" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch8/type1error.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.4: Probability of a Type I error as a function of the number of means.
+</figcaption>
+</figure>
+</div>
+<p>The Type I error rate can be controlled using a test called the Tukey Honestly Significant Difference test or Tukey HSD for short. The Tukey HSD test is one example of a multiple comparison test, but several alternatives are frequently used, such as the Bonferroni correction. Regardless of the exact method used for a multiple comparison test, the interpretation of results is similar. The Tukey HSD is based on a variation of the t distribution that takes into account the number of means being compared. This distribution is called the studentized range distribution.</p>
+<p>Normally, statistical software will make all the necessary calculations for you in the background. But to illustrate what sorts of calculations the software is relying on, let’s return to the leniency study to see how to compute the Tukey HSD test. You will see that the computations are very similar to those of an independent-groups t test. The steps are outlined below:</p>
+<ol type="1">
+<li>Compute the means and variances of each group. They are shown below.</li>
+</ol>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Condition</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Mean</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Variance</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">False</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5.37</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3.34</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Felt</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.91</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Miserable</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.91</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.11</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Neutral</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.12</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.32</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>Compute MSE, which is simply the mean of the variances. It is equal to 2.65.</p></li>
+<li><p>Compute</p></li>
+</ol>
+<p><span class="math display">\[
+Q=\frac{M_i-M_j}{\sqrt{\frac{MSE}{n}}}
+\]</span></p>
+<p>for each pair of means, where <span class="math inline">\(M_i\)</span> is one mean, <span class="math inline">\(M_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279.</p>
+<ol start="4" type="1">
+<li>Compute p for each comparison using a Studentized Range Calculator.<a href="#_ftn6">[6]</a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</li>
+</ol>
+<p>The tests for these data are shown in <a href="#tbl-6pairwisecomp" class="quarto-xref">Table&nbsp;<span>8.5</span></a>.</p>
+<div id="tbl-6pairwisecomp" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.5: Six Pairwise Comparisons.
+</figcaption>
+<div aria-describedby="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 28%">
+<col style="width: 6%">
+<col style="width: 20%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Comparison</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>M<sub>i</sub>-M<sub>j</sub></strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Q</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>p</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">False - Felt</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.649</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">False - Miserable</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.65</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.649</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">False - Neutral</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.25</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.48</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.010</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Felt - Miserable</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1.000</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Felt - Neutral</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.79</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.193</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Miserable - Neutral</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.79</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.193</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The only significant comparison is between the false smile and the neutral smile.</p>
+<p>It is not unusual to obtain results that on the surface appear paradoxical. For example, these results appear to indicate that (a) the false smile is the same as the miserable smile, (b) the miserable smile is the same as the neutral control, and (c) the false smile is different from the neutral control. This apparent contradiction is avoided if you are careful not to accept the null hypothesis when you fail to reject it. The finding that the false smile is not significantly different from the miserable smile does not mean that they are really the same. Rather it means that there is not convincing evidence that they are different. Similarly, the non-significant difference between the miserable smile and the control does not mean that they are the same. The proper conclusion is that the false smile is higher than the control and that the miserable smile is either (a) equal to the false smile, (b) equal to the control, or (c) somewhere in-between.</p>
+<p>The assumptions of the Tukey test are essentially the same as for an independent-groups t test: normality, homogeneity of variance, and independent observations. The test is quite robust to violations of normality. Violating homogeneity of variance can be more problematical than in the two-sample case since the MSE is based on data from all groups. The assumption of independence of observations is important and should not be violated.</p>
+<section id="computer-analysis" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="computer-analysis"><span class="header-section-number">8.2.1</span> Computer Analysis</h3>
+<p>For most computer programs, you should format your data the same way you do for an independent-groups t test. The only difference is that if you have, say, four groups, you would code each group as 1, 2, 3, or 4 rather than just 1 or 2.</p>
+</section>
+<section id="tukeys-test-need-not-be-a-follow-up-to-anova" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="tukeys-test-need-not-be-a-follow-up-to-anova"><span class="header-section-number">8.2.2</span> Tukey’s Test Need Not be a Follow-Up to ANOVA</h3>
+<p>Some textbooks introduce the Tukey test only as a follow-up to an analysis of variance. There is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA (or even know what one is). If you or your instructor do not wish to take our word for this, see the excellent article on this and other issues in statistical analysis by Leland Wilkinson and the APA Board of Scientific Affairs’ Task Force on Statistical Inference, published in the <em>American Psychologist</em>, August 1999, Vol. <em>54</em>, No.&nbsp;8, 594–604.</p>
+</section>
+</section>
+<section id="analysis-of-variance-anova7" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="analysis-of-variance-anova7"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)<a href="#_ftn7">[7]</a></h2>
+<p><strong>Analysis of Variance (ANOVA)</strong> is a statistical method used to test differences between two or more means. It may seem odd that the technique is called “Analysis of Variance” rather than “Analysis of Means.” As you will see, the name is appropriate because inferences about means are made by analyzing variance.</p>
+<p>ANOVA is used to test general rather than specific differences among means. This can be seen best by example. In the case study “Smiles and Leniency,”<a href="#_ftn8">[8]</a> the effect of different types of smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, miserable) were investigated. In the prior section, we learned how to test differences among means. The results from the Tukey HSD test are shown in <a href="#tbl-6pairwisecomp2" class="quarto-xref">Table&nbsp;<span>8.6</span></a>.</p>
+<div id="tbl-6pairwisecomp2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.6: Six Pairwise Comparisons.
+</figcaption>
+<div aria-describedby="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 28%">
+<col style="width: 6%">
+<col style="width: 20%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Comparison</strong></td>
+<td></td>
+<td><strong>M<sub>i</sub>-M<sub>j</sub></strong></td>
+<td></td>
+<td><strong>Q</strong></td>
+<td></td>
+<td><strong>p</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>False - Felt</td>
+<td></td>
+<td>0.46</td>
+<td></td>
+<td>1.65</td>
+<td></td>
+<td>0.649</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>False - Miserable</td>
+<td></td>
+<td>0.46</td>
+<td></td>
+<td>1.65</td>
+<td></td>
+<td>0.649</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>False - Neutral</td>
+<td></td>
+<td>1.25</td>
+<td></td>
+<td>4.48</td>
+<td></td>
+<td>0.010</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Felt - Miserable</td>
+<td></td>
+<td>0.00</td>
+<td></td>
+<td>0.00</td>
+<td></td>
+<td>1.000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Felt - Neutral</td>
+<td></td>
+<td>0.79</td>
+<td></td>
+<td>2.83</td>
+<td></td>
+<td>0.193</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Miserable - Neutral</td>
+<td></td>
+<td>0.79</td>
+<td></td>
+<td>2.83</td>
+<td></td>
+<td>0.193</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Notice that the only significant difference is between the False and Neutral conditions.</p>
+<p>ANOVA tests the non-specific null hypothesis that all four population means are equal. That is,</p>
+<p><span class="math display">\[
+μ_{false} = μ_{felt}~ = μ_{miserable} = μ_{neutral}
+\]</span></p>
+<p>This non-specific null hypothesis is sometimes called the omnibus null hypothesis. When the omnibus null hypothesis is rejected, the conclusion is that at least one population mean is different from at least one other mean. However, since the ANOVA does not reveal which means are different from which, it offers less specific information than the Tukey HSD test. The Tukey HSD is therefore preferable to ANOVA in this situation. Some textbooks introduce the Tukey test only as a follow-up to an ANOVA. However, there is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA.</p>
+<p>You might be wondering why you should learn about ANOVA when the Tukey test is better. One reason is that there are complex types of analyses that can be done with ANOVA and not with the Tukey test. A second is that ANOVA is by far the most commonly-used technique for comparing means, and it is important to understand ANOVA in order to understand research reports.</p>
+<hr>
+<p><a href="#_ftnref1">[1]</a> This section is adapted from David M. Lane. “Difference between Two Means (Independent Groups).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/difference_means.html" class="uri">http://onlinestatbook.com/2/tests_of_means/difference_means.html</a></p>
+<p><a href="#_ftnref2">[2]</a> <a href="http://onlinestatbook.com/2/case_studies/animal_research.html" class="uri">http://onlinestatbook.com/2/case_studies/animal_research.html</a></p>
+<p><a href="#_ftnref3">[3]</a> <a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a></p>
+<p><a href="#_ftnref4">[4]</a> This section is adapted from David M. Lane. “All Pairwise Comparisons Among Means.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/pairwise.html" class="uri">http://onlinestatbook.com/2/tests_of_means/pairwise.html</a></p>
+<p><a href="#_ftnref5">[5]</a> <a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a></p>
+<p><a href="#_ftnref6">[6]</a> <a href="http://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">http://onlinestatbook.com/2/calculators/studentized_range_dist.html</a></p>
+<p><a href="#_ftnref7">[7]</a> This section is adapted from David M. Lane. “Introduction.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/analysis_of_variance/intro.html" class="uri">http://onlinestatbook.com/2/analysis_of_variance/intro.html</a></p>
+<p><a href="#_ftnref8">[8]</a> <a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./h-tests.html" class="pagination-link" aria-label="Hypothesis Testing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./comparing-groups.html" class="pagination-link" aria-label="Comparing Groups (How Two Qualitative Variables Relate to One Another)">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

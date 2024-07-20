@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Nathan Favero">
-<meta name="dcterms.date" content="2024-07-18">
 
-<title>Statistics Minus The Math</title>
+<title>Statistics Minus The Math - 9&nbsp; Comparing Groups (How Two Qualitative Variables Relate to One Another)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./graphing.html" rel="next">
+<link href="./causality.html" rel="next">
+<link href="./comparing-means.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./comparing-groups.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -138,7 +137,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -192,7 +191,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link">
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
   </div>
 </li>
@@ -230,11 +229,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul class="collapse">
-  <li><a href="#whats-unique-about-this-text" id="toc-whats-unique-about-this-text" class="nav-link" data-scroll-target="#whats-unique-about-this-text">What’s Unique About This Text?</a></li>
-  <li><a href="#past-versions" id="toc-past-versions" class="nav-link" data-scroll-target="#past-versions">Past Versions</a></li>
-  </ul></li>
+  <li><a href="#chi-square-distribution1" id="toc-chi-square-distribution1" class="nav-link active" data-scroll-target="#chi-square-distribution1"><span class="header-section-number">9.1</span> Chi Square Distribution[1]</a></li>
+  <li><a href="#one-way-tables2" id="toc-one-way-tables2" class="nav-link" data-scroll-target="#one-way-tables2"><span class="header-section-number">9.2</span> One-Way Tables[2]</a></li>
+  <li><a href="#contingency-tables4" id="toc-contingency-tables4" class="nav-link" data-scroll-target="#contingency-tables4"><span class="header-section-number">9.3</span> Contingency Tables[4]</a></li>
   </ul>
 </nav>
     </div>
@@ -243,27 +240,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics Minus The Math</h1>
-<p class="subtitle lead">An Introduction for the Social Sciences</p>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nathan Favero </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 18, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -273,31 +257,513 @@ window.Quarto = {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This book was largely adapted from the public domain resource <em>Online Statistics Education: A Multimedia Course of Study</em> (<a href="http://onlinestatbook.com/" class="uri">http://onlinestatbook.com/</a> Project Leader: David M. Lane, Rice University). A huge thanks to David Lane and his colleagues at Rice University for their creation of this wonderful resource. I use footnotes throughout to indicate precisely where the various sections of each chapter came from. Chapters 11-13 (and section 4.4) were written by me (Nathan).</p>
-<p>This book is meant to be a free resource and is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1">CC BY 4.0</a>. You’re welcome to share or adapt it, so long as you provide attribution to any work of mine that you use.</p>
-<p>There are still formatting inconsistencies, and this is ever a work in progress. If you find errors, feel free to reach out (find updated contact info here: <a href="https://nathanfavero.com" class="uri">https://nathanfavero.com</a>) so I can correct them for the next version I publish.</p>
-<section id="whats-unique-about-this-text" class="level2">
-<h2 class="anchored" data-anchor-id="whats-unique-about-this-text">What’s Unique About This Text?</h2>
-<ol type="1">
-<li><p>It is a true introduction, not assuming any prior training in statistics.</p></li>
-<li><p>I try to minimize use of math (beyond the very elementary), instead focusing on conceptual description and interpretation.</p></li>
-<li><p>I introduce regression very early on (Ch. 3) so that students (especially PhD students) can quickly get started on their term papers and better understand any quantitative articles they’re reading. The treatment of regression is further built out in the final chapters (11-13). Regression is, after all, the workhorse of applied statistics for the social sciences.</p></li>
-<li><p>I skip a traditional treatment of probability theory because I don’t find traditional treatments to be very useful for students interested in applied statistics. Instead, I’ve written a chapter (11) on the logic and practice of building models that account for uncertainty.</p></li>
-<li><p>There is a bit of Stata code in the final chapter, but otherwise all examples are presented apart from any statistical software package.</p></li>
-</ol>
+<p>We previously learned how to graphically depict the relationship between two qualitative variables (<a href="graphing.html#sec-comparing-distributions" class="quarto-xref"><span>Section 1.3.3.1</span></a>). To make a comparison that includes a significance test, we will need to use the chi square distribution, together with a contingency table.</p>
+<section id="chi-square-distribution1" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="chi-square-distribution1"><span class="header-section-number">9.1</span> Chi Square Distribution<a href="#_ftn1">[1]</a></h2>
+<p>A standard normal deviate is a random sample from the standard normal distribution. The Chi Square distribution is the distribution of the sum of squared standard normal deviates. The degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Therefore, Chi Square with one degree of freedom, written as χ<sup>2</sup>(1), is simply the distribution of a single normal deviate squared. The area of a Chi Square distribution below 4 is the same as the area of a standard normal distribution below 2, since 4 is 2<sup>2</sup>.</p>
+<p>Consider the following problem: you sample two scores from a standard normal distribution, square each score, and sum the squares. What is the probability that the sum of these two squares will be six or higher? Since two scores are sampled, the answer can be found using the Chi Square distribution with two degrees of freedom. A Chi Square calculator can be used to find that the probability of a Chi Square (with 2 df) being six or higher is 0.050.</p>
+<p>The mean of a Chi Square distribution is its degrees of freedom. Chi Square distributions are positively skewed, with the degree of skew decreasing with increasing degrees of freedom. As the degrees of freedom increases, the Chi Square distribution approaches a normal distribution. <a href="#fig-chisquare" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> shows density functions for three Chi Square distributions. Notice how the skew decreases as the degrees of freedom increases.</p>
+<div id="fig-chisquare" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch9/chisquare.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Chi Square distributions with 2, 4, and 6 degrees of freedom.
+</figcaption>
+</figure>
+</div>
+<p>The Chi Square distribution is very important because many test statistics are approximately distributed as Chi Square. Two of the more common tests using the Chi Square distribution are tests of deviations of differences between theoretically expected and observed frequencies (one-way tables) and the relationship between categorical variables (contingency tables). Numerous other tests beyond the scope of this work are based on the Chi Square distribution.</p>
 </section>
-<section id="past-versions" class="level2">
-<h2 class="anchored" data-anchor-id="past-versions">Past Versions</h2>
-<p>This version (1.3) was updated July 18, 2024. PDFs of past versions are available at <a href="https://minusthemath.com" class="uri">https://minusthemath.com</a>.</p>
-<ul>
-<li><p>Version 1.3 updates: Added appendix (Ch. 3) on multiple regression and new section (4.4) on interpreting confidence intervals. Various formatting updates. Notation is updated in line with conventions: regression parameters are redone, and <span class="math inline">\(\bar{X}\)</span> is now used for sample mean and <span class="math inline">\(n\)</span> for sample size.</p></li>
-<li><p>Version 1.2 updates: The discussion of transforming variables now appears in Ch. 2 (rather than Ch. 3).</p></li>
-</ul>
+<section id="one-way-tables2" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="one-way-tables2"><span class="header-section-number">9.2</span> One-Way Tables<a href="#_ftn2">[2]</a></h2>
+<p>The Chi Square distribution can be used to test whether observed data differ <em>significantly</em> from theoretical expectations. For example, for a fair six-sided die, the probability of any given outcome on a single roll would be 1/6. The data in <a href="#tbl-sixsidedie" class="quarto-xref">Table&nbsp;<span>9.1</span></a> were obtained by rolling a six-sided die 36 times. However, as can be seen in <a href="#tbl-sixsidedie" class="quarto-xref">Table&nbsp;<span>9.1</span></a>, some outcomes occurred more frequently than others. For example, a “3” came up nine times, whereas a “4” came up only two times. Are these data consistent with the hypothesis that the die is a fair die? Naturally, we do not expect the sample frequencies of the six possible outcomes to be the same since chance differences will occur. So, the finding that the frequencies differ does not mean that the die is not fair. One way to test whether the die is fair is to conduct a significance (hypothesis) test. The null hypothesis is that the die is fair. This hypothesis is tested by computing the probability of obtaining frequencies as discrepant or more discrepant from a uniform distribution of frequencies as obtained in the sample. If this probability is sufficiently low, then the null hypothesis that the die is fair can be rejected.</p>
+<div id="tbl-sixsidedie" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sixsidedie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: Outcome Frequencies from a Six-Sided Die.
+</figcaption>
+<div aria-describedby="tbl-sixsidedie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Outcome</strong></td>
+<td></td>
+<td><strong>Frequency</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>1</td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2</td>
+<td></td>
+<td>5</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3</td>
+<td></td>
+<td>9</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>7</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The first step in conducting the significance test is to compute the expected frequency for each outcome given that the null hypothesis is true. For example, the expected frequency of a “1” is 6 since the probability of a “1” coming up is 1/6 and there were a total of 36 rolls of the die.</p>
+<p>Expected frequency = (1/6)(36) = 6</p>
+<p>Note that the expected frequencies are expected only in a theoretical sense. We do not really “expect” the observed frequencies to match the “expected frequencies” exactly.</p>
+<p>The calculation continues as follows. Letting E be the expected frequency of an outcome and O be the observed frequency of that outcome, compute</p>
+<p><span class="math display">\[
+\frac{(E-O)^2}{E}
+\]</span></p>
+<p>for each outcome. <a href="#tbl-sixsidedieoutcomes" class="quarto-xref">Table&nbsp;<span>9.2</span></a> shows these calculations.</p>
+<div id="tbl-sixsidedieoutcomes" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sixsidedieoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.2: Outcome Frequencies from a Six-Sided Die.
+</figcaption>
+<div aria-describedby="tbl-sixsidedieoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 41%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Outcome</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>E</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>O</strong></td>
+<td style="text-align: center;"><img src="images/clipboard-2656411378.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">0.667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2.667</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Next we add up all the values in Column 4 of <a href="#tbl-sixsidedieoutcomes" class="quarto-xref">Table&nbsp;<span>9.2</span></a>.</p>
+<p><span class="math display">\[
+Σ\frac{(E-O)^2}{E}=5.333
+\]</span></p>
+<p>This sampling distribution of</p>
+<p><span class="math display">\[
+Σ\frac{(E-O)^2}{E}
+\]</span></p>
+<p>is approximately distributed as Chi Square with k-1 degrees of freedom, where k is the number of categories. Therefore, for this problem the test statistic is</p>
+<p><span class="math display">\[
+X^2_5=5.333
+\]</span></p>
+<p>which means the value of Chi Square with 5 degrees of freedom is 5.333.</p>
+<p>From a Chi Square calculator<a href="#_ftn3">[3]</a> it can be determined that the probability of a Chi Square of 5.333 or larger is 0.377. Therefore, the null hypothesis that the die is fair cannot be rejected.</p>
+<p>This Chi Square test can also be used to test other deviations between expected and observed frequencies. The following example shows a test of whether the variable “University GPA” in the SAT and College GPA case study is normally distributed.</p>
+<p>The first column in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a> shows the normal distribution divided into five ranges. The second column shows the proportions of a normal distribution falling in the ranges specified in the first column. The expected frequencies (E) are calculated by multiplying the number of scores (105) by the proportion. The final column shows the observed number of scores in each range. It is clear that the observed frequencies vary greatly from the expected frequencies. Note that if the distribution were normal, then there would have been only about 35 scores between 0 and 1, whereas 60 were observed.</p>
+<div id="tbl-universitygpascores" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.3: Expected and Observed Scores for 105 University GPA Scores.
+</figcaption>
+<div aria-describedby="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 19%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 7%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Range</strong></td>
+<td></td>
+<td><strong>Proportion</strong></td>
+<td></td>
+<td><strong>E</strong></td>
+<td></td>
+<td><strong>O</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Above 1</td>
+<td></td>
+<td>0.159</td>
+<td></td>
+<td>16.695</td>
+<td></td>
+<td>9</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>0 to 1</td>
+<td></td>
+<td>0.341</td>
+<td></td>
+<td>35.805</td>
+<td></td>
+<td>60</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-1 to 0</td>
+<td></td>
+<td>0.341</td>
+<td></td>
+<td>35.805</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Below -1</td>
+<td></td>
+<td>0.159</td>
+<td></td>
+<td>16.695</td>
+<td></td>
+<td>19</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The test of whether the observed scores deviate significantly from the expected scores is computed using the familiar calculation.</p>
+<p><span class="math display">\[
+X^2_3=Σ\frac{(E-O)^2}{E}=30.09
+\]</span></p>
+<p>The subscript “3” means there are three degrees of freedom. As before, the degrees of freedom is the number of outcomes minus 1, which is 4 - 1 = 3 in this example. A Chi Square distribution calculator shows that p &lt; 0.001 for this Chi Square. Therefore, the null hypothesis that the scores are normally distributed can be rejected.</p>
+</section>
+<section id="contingency-tables4" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="contingency-tables4"><span class="header-section-number">9.3</span> Contingency Tables<a href="#_ftn4">[4]</a></h2>
+<p>This section shows how to use Chi Square to test the relationship between nominal variables for significance. For example, <a href="#tbl-studyfreqs" class="quarto-xref">Table&nbsp;<span>9.4</span></a> shows the data from the Mediterranean Diet and Health case study.<a href="#_ftn5">[5]</a></p>
+<div id="tbl-studyfreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.4: Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>Outcome</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Diet</td>
+<td></td>
+<td>Cancers</td>
+<td></td>
+<td>Fatal Heart Disease</td>
+<td></td>
+<td>Non-Fatal Heart Disease</td>
+<td></td>
+<td>Healthy</td>
+<td></td>
+<td>Total</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>AHA</td>
+<td></td>
+<td>15</td>
+<td></td>
+<td>24</td>
+<td></td>
+<td>25</td>
+<td></td>
+<td>239</td>
+<td></td>
+<td>303</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Mediterranean</td>
+<td></td>
+<td>7</td>
+<td></td>
+<td>14</td>
+<td></td>
+<td>8</td>
+<td></td>
+<td>273</td>
+<td></td>
+<td>302</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Total</td>
+<td></td>
+<td>22</td>
+<td></td>
+<td>38</td>
+<td></td>
+<td>33</td>
+<td></td>
+<td>512</td>
+<td></td>
+<td>605</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The question is whether there is a <em>significant relationship</em> between diet and outcome. Again, software can calculate a p-value for us in order to test for significance. But if we are wondering what’s going on under the hood, the first step is to compute the expected frequency for each cell based on the assumption that there is no relationship. These expected frequencies are computed from the totals as follows. We begin by computing the expected frequency for the AHA Diet/Cancers combination. Note that 22/605 subjects developed cancer. The proportion who developed cancer is therefore 0.0364. If there were no relationship between diet and outcome, then we would expect 0.0364 of those on the AHA diet to develop cancer. Since 303 subjects were on the AHA diet, we would expect (0.0364)(303) = 11.02 cancers on the AHA diet. Similarly, we would expect (0.0364)(302) = 10.98 cancers on the Mediterranean diet. In general, the expected frequency for a cell in the ith row and the jth column is equal to</p>
+<p><span class="math display">\[
+E_{ij}=\frac{T_iT_j}{T}
+\]</span></p>
+<p>where <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell i,j, Ti is the total for the ith row, Tj is the total for the jth column, and T is the total number of observations. For the AHA Diet/Cancers cell, i = 1, j = 1, Ti = 303, Tj = 22, and T = 605. <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a> shows the expected frequencies (in parenthesis) for each cell in the experiment.</p>
+<div id="tbl-observedstudyfreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 10%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><strong>Outcome</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Diet</td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>AHA</td>
+<td>15<br>
+(11.02)</td>
+<td>24<br>
+(19.03)</td>
+<td>25<br>
+(16.53)</td>
+<td>239<br>
+(256.42)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Mediterranean</td>
+<td>7<br>
+(10.98)</td>
+<td>14<br>
+(18.97)</td>
+<td>8<br>
+(16.47)</td>
+<td>273<br>
+(255.58)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Total</td>
+<td>22</td>
+<td>38</td>
+<td>33</td>
+<td>512</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The significance test is conducted by computing Chi Square as follows.</p>
+<p><span class="math display">\[
+X^2_3=Σ\frac{(E-O)^2}{E}=-16.55
+\]</span></p>
+<p>The degrees of freedom is equal to (r-1)(c-1), where <span class="math inline">\(r\)</span> is the number of rows and c is the number of columns. For this example, the degrees of freedom is (2-1)(4-1) = 3. The Chi Square calculator<a href="#_ftn6">[6]</a> can be used to determine that the probability value for a Chi Square of 16.55 with three degrees of freedom is equal to 0.0009. Therefore, the null hypothesis of no relationship between diet and outcome can be rejected.</p>
+<p>A key assumption of this Chi Square test is that each subject contributes data to only one cell. Therefore, the sum of all cell frequencies in the table must be the same as the number of subjects in the experiment. Consider an experiment in which each of 16 subjects attempted two anagram problems. The data are shown in <a href="#tbl-anagramdata" class="quarto-xref">Table&nbsp;<span>9.6</span></a>.</p>
+<div id="tbl-anagramdata" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.6: Anagram Problem Data.
+</figcaption>
+<div aria-describedby="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><strong>Anagram 1</strong></td>
+<td><strong>Anagram 2</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Solved</td>
+<td>10</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Did not Solve</td>
+<td>6</td>
+<td>12</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>It would not be valid to use the Chi Square test on these data since each subject contributed data to two cells: one cell based on their performance on Anagram 1 and one cell based on their performance on Anagram 2. The total of the cell frequencies in the table is 32, but the total number of subjects is only 16.</p>
+<hr>
+<p><a href="#_ftnref1">[1]</a> This section is adapted from David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/distribution.html" class="uri">http://onlinestatbook.com/2/chi_square/distribution.html</a></p>
+<p><a href="#_ftnref2">[2]</a> This section is adapted from David M. Lane. “One-Way Tables (Testing Goodness of Fit).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/one-way.html" class="uri">http://onlinestatbook.com/2/chi_square/one-way.html</a></p>
+<p><a href="#_ftnref3">[3]</a> <a href="http://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">http://onlinestatbook.com/2/calculators/chi_square_prob.html</a></p>
+<p><a href="#_ftnref4">[4]</a> This section is adapted from David M. Lane. “Contingency Tables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/contingency.html" class="uri">http://onlinestatbook.com/2/chi_square/contingency.html</a></p>
+<p><a href="#_ftnref5">[5]</a> <a href="http://onlinestatbook.com/2/case_studies/diet.html" class="uri">http://onlinestatbook.com/2/case_studies/diet.html</a></p>
+<p><a href="#_ftnref6">[6]</a> <a href="http://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">http://onlinestatbook.com/2/calculators/chi_square_prob.html</a></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -712,10 +1178,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./comparing-means.html" class="pagination-link" aria-label="Comparing Means (How a Qualitative Variable Relates to a Quantitative One)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./graphing.html" class="pagination-link" aria-label="Graphical Tools for Describing Variables">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./causality.html" class="pagination-link" aria-label="Causality">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

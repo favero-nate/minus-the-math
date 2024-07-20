@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistics Minus The Math - 1&nbsp; Graphical Tools for Describing Variables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./describing-one-variable.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./graphing.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus The Math</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#variablesgraphing-1" id="toc-variablesgraphing-1" class="nav-link active" data-scroll-target="#variablesgraphing-1"><span class="header-section-number">1.1</span> Variables</a>
+  <ul class="collapse">
+  <li><a href="#qualitative-and-quantitative-variables" id="toc-qualitative-and-quantitative-variables" class="nav-link" data-scroll-target="#qualitative-and-quantitative-variables"><span class="header-section-number">1.1.1</span> Qualitative and Quantitative Variables</a></li>
+  <li><a href="#discrete-and-continuous-variables" id="toc-discrete-and-continuous-variables" class="nav-link" data-scroll-target="#discrete-and-continuous-variables"><span class="header-section-number">1.1.2</span> Discrete and Continuous Variables</a></li>
+  </ul></li>
+  <li><a href="#percentilesgraphing-2" id="toc-percentilesgraphing-2" class="nav-link" data-scroll-target="#percentilesgraphing-2"><span class="header-section-number">1.2</span> Percentiles</a>
+  <ul class="collapse">
+  <li><a href="#three-alternative-definitions-of-percentile" id="toc-three-alternative-definitions-of-percentile" class="nav-link" data-scroll-target="#three-alternative-definitions-of-percentile"><span class="header-section-number">1.2.1</span> Three Alternative Definitions of Percentile</a></li>
+  </ul></li>
+  <li><a href="#graphing-qualitative-variablesgraphing-3" id="toc-graphing-qualitative-variablesgraphing-3" class="nav-link" data-scroll-target="#graphing-qualitative-variablesgraphing-3"><span class="header-section-number">1.3</span> Graphing Qualitative Variables</a>
+  <ul class="collapse">
+  <li><a href="#frequency-tables" id="toc-frequency-tables" class="nav-link" data-scroll-target="#frequency-tables"><span class="header-section-number">1.3.1</span> Frequency Tables</a></li>
+  <li><a href="#pie-charts" id="toc-pie-charts" class="nav-link" data-scroll-target="#pie-charts"><span class="header-section-number">1.3.2</span> Pie Charts</a></li>
+  <li><a href="#bar-charts" id="toc-bar-charts" class="nav-link" data-scroll-target="#bar-charts"><span class="header-section-number">1.3.3</span> Bar Charts</a></li>
+  <li><a href="#some-graphical-mistakes-to-avoid" id="toc-some-graphical-mistakes-to-avoid" class="nav-link" data-scroll-target="#some-graphical-mistakes-to-avoid"><span class="header-section-number">1.3.4</span> Some graphical mistakes to avoid</a></li>
+  </ul></li>
+  <li><a href="#graphing-quantitative-variables" id="toc-graphing-quantitative-variables" class="nav-link" data-scroll-target="#graphing-quantitative-variables"><span class="header-section-number">1.4</span> Graphing Quantitative Variables</a>
+  <ul class="collapse">
+  <li><a href="#histogramsgraphing-4" id="toc-histogramsgraphing-4" class="nav-link" data-scroll-target="#histogramsgraphing-4"><span class="header-section-number">1.4.1</span> Histograms</a></li>
+  <li><a href="#sec-box-plots" id="toc-sec-box-plots" class="nav-link" data-scroll-target="#sec-box-plots"><span class="header-section-number">1.4.2</span> Box Plots</a></li>
+  <li><a href="#variations-on-box-plots" id="toc-variations-on-box-plots" class="nav-link" data-scroll-target="#variations-on-box-plots"><span class="header-section-number">1.4.3</span> Variations on box plots</a></li>
+  <li><a href="#sec-bar-charts-for-quantitative-variables7" id="toc-sec-bar-charts-for-quantitative-variables7" class="nav-link" data-scroll-target="#sec-bar-charts-for-quantitative-variables7"><span class="header-section-number">1.4.4</span> Bar Charts for Quantitative Variables</a></li>
+  </ul></li>
+  <li><a href="#sec-graphing-appendix-calculating-percentiles-under-the-third-definitiongraphing-8" id="toc-sec-graphing-appendix-calculating-percentiles-under-the-third-definitiongraphing-8" class="nav-link" data-scroll-target="#sec-graphing-appendix-calculating-percentiles-under-the-third-definitiongraphing-8"><span>Chapter 1</span> Appendix: Calculating Percentiles Under the Third Definition</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-graphing" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="variablesgraphing-1" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="variablesgraphing-1"><span class="header-section-number">1.1</span> Variables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p><strong>Variables</strong> are properties or characteristics of some event, object, or person that can take on different values or amounts (as opposed to constants such as <span class="math inline">\(\pi\)</span> that do not vary). When conducting research, experimenters often manipulate or measure variables. For example, an experimenter might compare the effectiveness of four types of antidepressants. In this case, the variable is “type of antidepressant.” This experimenter might also ask study participants to indicate their mood on a scale of 1 to 10. “Mood” would be a second variable.</p>
+<section id="qualitative-and-quantitative-variables" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="qualitative-and-quantitative-variables"><span class="header-section-number">1.1.1</span> Qualitative and Quantitative Variables</h3>
+<p>An important distinction between variables is between qualitative variables and quantitative variables. <strong>Qualitative variables</strong> are those that express a qualitative attribute such as hair color, eye color, religion, favorite movie, gender, and so on. The values of a qualitative variable do not imply a numerical ordering. Values of the variable “religion” differ qualitatively; no ordering of religions is implied. Qualitative variables are also sometimes referred to as categorical or nominal variables. <strong>Quantitative variables</strong> are those variables that are measured in terms of numbers. Some examples of quantitative variables are height, weight, and shoe size.</p>
+<blockquote class="blockquote">
+<p>Example: Can blueberries slow down aging? A study indicates that antioxidants found in blueberries may slow down the process of aging. In this study, 19-month-old rats (equivalent to 60-year-old humans) were fed either their standard diet or a diet supplemented by either blueberry, strawberry, or spinach powder. After eight weeks, the rats were given memory and motor skills tests. Although all supplemented rats showed improvement, those supplemented with blueberry powder showed the most notable improvement.</p>
+<p>More information: <a href="https://www.apa.org/monitor/dec01/blueberries.html" class="uri">https://www.apa.org/monitor/dec01/blueberries.html</a></p>
+</blockquote>
+<p>In the study on the effect of diet discussed above, the independent variable was type of supplement: none, strawberry, blueberry, and spinach. The variable “type of supplement” is a qualitative variable; there is nothing quantitative about it. In contrast, the dependent variable “memory test” is a quantitative variable since memory performance was measured on a quantitative scale (number correct).</p>
+</section>
+<section id="discrete-and-continuous-variables" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="discrete-and-continuous-variables"><span class="header-section-number">1.1.2</span> Discrete and Continuous Variables</h3>
+<p>Variables such as number of children in a household are called <strong>discrete variables</strong> since the possible scores are discrete points on the scale. For example, a household could have three children or six children, but not 4.53 children. Other variables such as “time to respond to a question” are <strong>continuous variables</strong> since the scale is continuous and not made up of discrete steps. The response time could be 1.64 seconds, or it could be 1.64237123922121 seconds. Of course, the practicalities of measurement preclude most measured variables from being truly continuous.</p>
+</section>
+</section>
+<section id="percentilesgraphing-2" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="percentilesgraphing-2"><span class="header-section-number">1.2</span> Percentiles<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
+<p>Before turning our attention to some basic graphical tools we use to visualize qualitative and quantitative variables, it is helpful to also briefly go over <strong>percentiles</strong> since they will be used in some of these tools. Many of us have probably encountered percentiles before in the context of standardized exam testing. A test score in and of itself is usually difficult to interpret. For example, if you learned that your score on a measure of shyness was 35 out of a possible 50, you would have little idea how shy you are compared to other people. More relevant is the percentage of people with lower shyness scores than yours. This percentage is called a percentile. If 65% of the scores were below yours, then your score would be the 65th percentile.</p>
+<section id="three-alternative-definitions-of-percentile" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="three-alternative-definitions-of-percentile"><span class="header-section-number">1.2.1</span> Three Alternative Definitions of Percentile</h3>
+<p>There is no universally accepted definition of a percentile. Using the 65th percentile as an example, the 65th percentile can be defined as the lowest score that is greater than 65% of the scores. This is the way we defined it above and we will call this “Definition 1.” The 65th percentile can also be defined as the smallest score that is greater than <em>or equal to</em> 65% of the scores. This we will call “Definition 2.” Though these two definitions appear very similar, they can sometimes lead to dramatically different results, especially when there is relatively little data. Moreover, neither of these definitions is explicit about how to handle rounding. For instance, what rank is required to be higher than 65% of the scores when the total number of scores is 50? This is tricky because 65% of 50 is 32.5. How do we find the lowest number that is higher than 32.5 of the scores?</p>
+<p>A third way to compute percentiles is a weighted average of the percentiles computed according to the first two definitions. The details of computing percentiles under this third definition are a bit complicated, but fortunately, statistical software can easily do the calculations for us. Since it is unlikely you will need to compute percentiles by hand, we leave the details of these computations to the appendix appearing at the end of this chapter. Despite its complexity, the third definition handles rounding more gracefully than the other two and has the advantage that it allows the median to be defined conveniently as the 50th percentile. Unless otherwise specified, when we refer to “percentile,” we will be referring to this third definition of percentiles.</p>
+</section>
+</section>
+<section id="graphing-qualitative-variablesgraphing-3" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="graphing-qualitative-variablesgraphing-3"><span class="header-section-number">1.3</span> Graphing Qualitative Variables<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h2>
+<p>When Apple Computer introduced the iMac computer in August 1998, the company wanted to learn whether the iMac was expanding Apple’s market share. Was the iMac just attracting previous Macintosh owners? Or was it purchased by newcomers to the computer market and by previous Windows users who were switching over? To find out, 500 iMac customers were interviewed. Each customer was categorized as a previous Macintosh owner, a previous Windows owner, or a new computer purchaser.</p>
+<p>This section examines graphical methods for displaying the results of the interviews. We’ll learn some general lessons about how to graph data that fall into a small number of categories. A later section will consider how to graph numerical data in which each observation is represented by a number in some range. The key point about the qualitative data that occupy us in the present section is that they do not come with a pre-established ordering (the way numbers are ordered). For example, there is no natural sense in which the category of previous Windows users comes before or after the category of previous Macintosh users. This situation may be contrasted with quantitative data, such as a person’s weight. People of one weight are naturally ordered with respect to people of a different weight.</p>
+<section id="frequency-tables" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="frequency-tables"><span class="header-section-number">1.3.1</span> Frequency Tables</h3>
+<p>All of the graphical methods shown in this section are derived from frequency tables. <a href="#tbl-imacfreqs" class="quarto-xref">Table&nbsp;<span>1.1</span></a> shows a frequency table for the results of the iMac study; it shows the frequencies of the various response categories. It also shows the relative frequencies, which are the proportion of responses in each category. For example, the relative frequency for “none” is 85/500 = 0.17.</p>
+<div id="tbl-imacfreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-imacfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Frequency Table for the iMac Data.
+</figcaption>
+<div aria-describedby="tbl-imacfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Previous Ownership</th>
+<th>Frequency</th>
+<th>Relative Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>None</td>
+<td>85</td>
+<td>0.17</td>
+</tr>
+<tr class="even">
+<td>Windows</td>
+<td>60</td>
+<td>0.12</td>
+</tr>
+<tr class="odd">
+<td>Macintosh</td>
+<td>355</td>
+<td>0.71</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>500</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="pie-charts" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="pie-charts"><span class="header-section-number">1.3.2</span> Pie Charts</h3>
+<p>The pie chart in <a href="#fig-imacpiechart" class="quarto-xref">Figure&nbsp;<span>1.1</span></a> shows the results of the iMac study. In a pie chart, each category is represented by a slice of the pie. The area of the slice is proportional to the percentage of responses in the category. This is simply the relative frequency multiplied by 100. Although most iMac purchasers were Macintosh owners, Apple was encouraged by the 12% of purchasers who were former Windows users, and by the 17% of purchasers who were buying a computer for the first time.</p>
+<div id="fig-imacpiechart" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imacpiechart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/imacpiechart.jpeg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imacpiechart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Pie chart of iMac purchases illustrating frequencies of previous computer ownership.
+</figcaption>
+</figure>
+</div>
+<p>Pie charts are effective for displaying the relative frequencies of a small number of categories. They are not recommended, however, when you have a large number of categories. Pie charts can also be confusing when they are used to compare the outcomes of two different surveys or experiments. In an influential book on the use of graphs, Edward Tufte asserted, “The only worse design than a pie chart is several of them.”</p>
+<p>Here is another important point about pie charts. If they are based on a small number of observations, it can be misleading to label the pie slices with percentages. For example, if just 5 people had been interviewed by Apple Computers, and 3 were former Windows users, it would be misleading to display a pie chart with the Windows slice showing 60%. With so few people interviewed, such a large percentage of Windows users might easily have occurred since chance can cause large errors with small samples. In this case, it is better to alert the user of the pie chart to the actual numbers involved. The slices should therefore be labeled with the actual frequencies observed (e.g., 3) instead of with percentages.</p>
+</section>
+<section id="bar-charts" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="bar-charts"><span class="header-section-number">1.3.3</span> Bar Charts</h3>
+<p>Bar charts can also be used to represent frequencies of different categories. A bar chart of the iMac purchases is shown in <a href="#fig-imacbarchart" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>. Frequencies are shown on the Y-axis and the type of computer previously owned is shown on the X-axis. Typically, the Y-axis shows the number of observations in each category rather than the percentage of observations as is typical in pie charts.</p>
+<div id="fig-imacbarchart" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imacbarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/imacbarchart.jpg" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imacbarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Bar chart of iMac purchases as a function of previous computer ownership.
+</figcaption>
+</figure>
+</div>
+<section id="sec-comparing-distributions" class="level4" data-number="1.3.3.1">
+<h4 data-number="1.3.3.1" class="anchored" data-anchor-id="sec-comparing-distributions"><span class="header-section-number">1.3.3.1</span> Comparing Distributions</h4>
+<p>Often we need to compare the results of different surveys, or of different conditions within the same overall survey. In this case, we are comparing the “distributions” of responses between the surveys or conditions. Bar charts are often excellent for illustrating differences between two distributions. <a href="#fig-cardgamebarchart" class="quarto-xref">Figure&nbsp;<span>1.3</span></a> shows the number of people playing card games at the Yahoo website on a Sunday and on a Wednesday in the Spring of 2001. We see that there were more players overall on Wednesday compared to Sunday. The number of people playing Pinochle was nonetheless the same on these two days. In contrast, there were about twice as many people playing hearts on Wednesday as on Sunday. Facts like these emerge clearly from a well-designed bar chart.</p>
+<div id="fig-cardgamebarchart" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cardgamebarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/cardgamebarchart.jpg" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cardgamebarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: A bar chart of the number of people playing different card games on Sunday and Wednesday.
+</figcaption>
+</figure>
+</div>
+<p>The bars in <a href="#fig-cardgamebarchart" class="quarto-xref">Figure&nbsp;<span>1.3</span></a> are oriented horizontally rather than vertically. The horizontal format is useful when you have many categories because there is more room for the category labels. We’ll have more to say about bar charts when we consider numerical quantities later in the section <a href="#sec-bar-charts-for-quantitative-variables7" class="quarto-xref"><span>Section 1.4.4</span></a>.</p>
+</section>
+</section>
+<section id="some-graphical-mistakes-to-avoid" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="some-graphical-mistakes-to-avoid"><span class="header-section-number">1.3.4</span> Some graphical mistakes to avoid</h3>
+<p>Don’t get fancy! People sometimes add features to graphs that don’t help to convey their information. For example, 3-dimensional bar charts such as the one shown in <a href="#fig-fancyimacbarchart" class="quarto-xref">Figure&nbsp;<span>1.4</span></a> are usually not as effective as their two-dimensional counterparts.</p>
+<div id="fig-fancyimacbarchart" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fancyimacbarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/fancyimacbarchart.jpg" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fancyimacbarchart-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: A three-dimensional version of <a href="#fig-imacbarchart" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>.
+</figcaption>
+</figure>
+</div>
+<p>Here is another way that fanciness can lead to trouble. Instead of plain bars, it is tempting to substitute meaningful images. For example, <a href="#fig-imacbarchartlies" class="quarto-xref">Figure&nbsp;<span>1.5</span></a> presents the iMac data using pictures of computers. The heights of the pictures accurately represent the number of buyers, yet <a href="#fig-imacbarchartlies" class="quarto-xref">Figure&nbsp;<span>1.5</span></a> is misleading because the viewer’s attention will be captured by areas. The areas can exaggerate the size differences between the groups. In terms of percentages, the ratio of previous Macintosh owners to previous Windows owners is about 6 to 1. But the ratio of the two areas in <a href="#fig-imacbarchartlies" class="quarto-xref">Figure&nbsp;<span>1.5</span></a> is about 35 to 1. A biased person wishing to hide the fact that many Windows owners purchased iMacs would be tempted to use <a href="#fig-imacbarchartlies" class="quarto-xref">Figure&nbsp;<span>1.5</span></a> instead of <a href="#fig-imacbarchart" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>! Edward Tufte coined the term “lie factor” to refer to the ratio of the size of the effect shown in a graph to the size of the effect shown in the data. He suggests that lie factors greater than 1.05 or less than 0.95 produce unacceptable distortion.</p>
+<div id="fig-imacbarchartlies" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imacbarchartlies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/imacbarchartlies.jpg" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imacbarchartlies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.5: A redrawing of <a href="#fig-imacbarchart" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> with a lie factor greater than 8.
+</figcaption>
+</figure>
+</div>
+<p>Another distortion in bar charts results from setting the baseline to a value other than zero. The baseline is the bottom of the Y-axis, representing the least number of cases that could have occurred in a category. Normally, but not always, this number should be zero. <a href="#fig-imacbartchartbaseline" class="quarto-xref">Figure&nbsp;<span>1.6</span></a> shows the iMac data with a baseline of 50. Once again, the differences in areas suggest a different story than the true differences in percentages. The percentage of Windows-switchers seems minuscule compared to its true value of 12%.</p>
+<div id="fig-imacbartchartbaseline" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-imacbartchartbaseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/imacbartchartbaseline.jpg" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-imacbartchartbaseline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.6: A redrawing of <a href="#fig-imacbarchart" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> with a baseline of 50.
+</figcaption>
+</figure>
+</div>
+<p>Finally, we note that it is a serious mistake to use a line graph when the X-axis contains merely qualitative variables. A line graph is essentially a bar graph with the tops of the bars represented by points joined by lines (the rest of the bar is suppressed). <a href="#fig-linegraph" class="quarto-xref">Figure&nbsp;<span>1.7</span></a> inappropriately shows a line graph of the card game data from Yahoo. The drawback to <a href="#fig-linegraph" class="quarto-xref">Figure&nbsp;<span>1.7</span></a> is that it gives the false impression that the games are naturally ordered in a numerical way when, in fact, they are ordered alphabetically.</p>
+<div id="fig-linegraph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linegraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/linegraph.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linegraph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: A line graph used inappropriately to depict the number of people playing different card games on Sunday and Wednesday.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="graphing-quantitative-variables" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="graphing-quantitative-variables"><span class="header-section-number">1.4</span> Graphing Quantitative Variables</h2>
+<p>Having considered qualitative variables, we now turn our attention to some of the common types of graphs that are used to depict quantitative variables, beginning with histograms.</p>
+<section id="histogramsgraphing-4" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="histogramsgraphing-4"><span class="header-section-number">1.4.1</span> Histograms<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h3>
+<p>A histogram is a graphical method for displaying the shape of a distribution. It is particularly useful when there are a large number of observations. We begin with an example consisting of the scores of 642 students on a psychology test. The test consists of 197 items, each graded as “correct” or “incorrect.” The students’ scores ranged from 46 to 167.</p>
+<p>The first step is to create a frequency table. Unfortunately, a simple frequency table would be too big, containing over 100 rows. To simplify the table, we group scores together as shown in <a href="#tbl-testscorefreqs" class="quarto-xref">Table&nbsp;<span>1.2</span></a>.</p>
+<div id="tbl-testscorefreqs" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-testscorefreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.2: Grouped Frequency Distribution of Psychology Test Scores
+</figcaption>
+<div aria-describedby="tbl-testscorefreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 35%">
+<col style="width: 27%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Interval’s Lower Limit</strong></td>
+<td><strong>Interval’s Upper Limit</strong></td>
+<td><strong>Class Frequency</strong></td>
+</tr>
+<tr class="even">
+<td>39.5</td>
+<td>49.5</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>49.5</td>
+<td>59.5</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>59.5</td>
+<td>69.5</td>
+<td>53</td>
+</tr>
+<tr class="odd">
+<td>69.5</td>
+<td>79.5</td>
+<td>107</td>
+</tr>
+<tr class="even">
+<td>79.5</td>
+<td>89.5</td>
+<td>147</td>
+</tr>
+<tr class="odd">
+<td>89.5</td>
+<td>99.5</td>
+<td>130</td>
+</tr>
+<tr class="even">
+<td>99.5</td>
+<td>109.5</td>
+<td>78</td>
+</tr>
+<tr class="odd">
+<td>109.5</td>
+<td>119.5</td>
+<td>59</td>
+</tr>
+<tr class="even">
+<td>119.5</td>
+<td>129.5</td>
+<td>36</td>
+</tr>
+<tr class="odd">
+<td>129.5</td>
+<td>139.5</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>139.5</td>
+<td>149.5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>149.5</td>
+<td>159.5</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>159.5</td>
+<td>169.5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>To create this table, the range of scores was broken into intervals, called class intervals or simply “bins.” The first interval is from 39.5 to 49.5, the second from 49.5 to 59.5, etc. Next, the number of scores falling into each interval was counted to obtain the class frequencies. There are three scores in the first interval, 10 in the second, etc.</p>
+<p>Class intervals of width 10 provide enough detail about the distribution to be revealing without making the graph too “choppy.” More information on choosing the widths of class intervals is presented later in this section. Placing the limits of the class intervals midway between two numbers (e.g., 49.5) ensures that every score will fall in an interval rather than on the boundary between intervals.</p>
+<p>In a histogram, the class frequencies are represented by bars. The height of each bar corresponds to its class frequency. A histogram of these data is shown in <a href="#fig-classfreqs" class="quarto-xref">Figure&nbsp;<span>1.8</span></a>.</p>
+<div id="fig-classfreqs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-classfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/classfreqs.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-classfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.8: Histogram of scores on a psychology test.
+</figcaption>
+</figure>
+</div>
+<p>The histogram makes it plain that most of the scores are in the middle of the distribution, with fewer scores in the extremes. You can also see that the distribution is not <strong>symmetric</strong>: the scores extend to the right farther than they do to the left. The distribution is therefore said to be <strong>skewed</strong>.</p>
+<p>In our example, the observations are whole numbers. Histograms can also be used when the scores are measured on a more continuous scale such as the length of time (in milliseconds) required to perform a task. In this case, there is no need to worry about fence-sitters since they are improbable. (It would be quite a coincidence for a task to require exactly 7 seconds, measured to the nearest thousandth of a second.) We are therefore free to choose whole numbers as boundaries for our class intervals, for example, 4000, 5000, etc. The class frequency is then the number of observations that are greater than or equal to the lower bound, and strictly less than the upper bound. For example, one interval might hold times from 4000 to 4999 milliseconds. Using whole numbers as boundaries avoids a cluttered appearance, and is the practice of many computer programs that create histograms. Note also that some computer programs label the middle of each interval rather than the end points.</p>
+<p>Histograms can be based on relative frequencies instead of actual frequencies. Histograms based on relative frequencies show the proportion of scores in each interval rather than the number of scores. In this case, the Y-axis runs from 0 to 1 (or somewhere in between if there are no extreme proportions). You can change a histogram based on frequencies to one based on relative frequencies by (a) dividing each class frequency by the total number of observations, and then (b) plotting the quotients on the Y-axis (labeled as proportion).</p>
+<p>There is more to be said about the widths of the class intervals, sometimes called <em>bin widths</em>. Your choice of bin width determines the number of class intervals. This decision, along with the choice of starting point for the first interval, affects the shape of the histogram. There are some “rules of thumb” that can help you choose an appropriate width. (But keep in mind that none of the rules is perfect.) We prefer the Rice rule, which is to set the number of intervals to twice the cube root of the number of observations. In the case of 1000 observations, the Rice rule yields 20 intervals. For the psychology test example used above, the Rice rule recommends 17. <strong><em>The best advice is to experiment with different choices of width, and to choose a histogram according to how well it communicates the shape of the distribution.</em></strong></p>
+</section>
+<section id="sec-box-plots" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-box-plots"><span class="header-section-number">1.4.2</span> Box Plots<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h3>
+<p>Box plots are useful for making comparisons and identifying <strong>outliers</strong>, meaning unusually large or small values for a variable. We will explain box plots with the help of data from an in-class experiment. As part of the “Stroop Interference Case Study,”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> students in introductory statistics were presented with a page containing 30 colored rectangles. Their task was to name the colors as quickly as possible. Their times (in seconds) were recorded. We’ll compare the scores for the 16 men and 31 women who participated in the experiment by making separate box plots for each gender. Such a display is said to involve <em>parallel box plots</em>.</p>
+<p>There are several steps in constructing a box plot. The first relies on the 25<sup>th</sup>, 50<sup>th</sup>, and 75<sup>th</sup> percentiles in the distribution of scores. <a href="#fig-boxplot1" class="quarto-xref">Figure&nbsp;<span>1.9</span></a> shows how these three statistics are used. For each gender, we draw a box extending from the 25<sup>th</sup> percentile to the 75<sup>th</sup> percentile. The 50<sup>th</sup> percentile is drawn inside the box. Therefore, the bottom of each box is the 25th percentile, the top is the 75th percentile, and the line in the middle is the 50th percentile. The data for the women in our sample are shown in <a href="#tbl-womenstimes" class="quarto-xref">Table&nbsp;<span>1.3</span></a>.</p>
+<div id="tbl-womenstimes" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-womenstimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.3: Women’s times.
+</figcaption>
+<div aria-describedby="tbl-womenstimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>14<br>
+15<br>
+16<br>
+16<br>
+17</td>
+<td>17<br>
+17<br>
+17<br>
+17<br>
+18</td>
+<td>18<br>
+18<br>
+18<br>
+18<br>
+18</td>
+<td>19<br>
+19<br>
+19<br>
+20<br>
+20</td>
+<td>20<br>
+20<br>
+20<br>
+20<br>
+21</td>
+<td>21<br>
+22<br>
+23<br>
+24<br>
+24</td>
+<td>29</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>For these data, the 25th percentile is 17, the 50th percentile is 19, and the 75th percentile is 20. For the men (whose data are not shown), the 25th percentile is 19, the 50th percentile is 22.5, and the 75th percentile is 25.5.</p>
+<div id="fig-boxplot1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplot1.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.9: The first step in creating box plots.
+</figcaption>
+</figure>
+</div>
+<p>Before proceeding, the terminology in <a href="#tbl-terminology" class="quarto-xref">Table&nbsp;<span>1.4</span></a> is helpful.</p>
+<div id="tbl-terminology" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-terminology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.4: Box plot terms and values for women’s times.
+</figcaption>
+<div aria-describedby="tbl-terminology-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 63%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Formula</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Upper Hinge</td>
+<td>75th Percentile</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Lower Hinge</td>
+<td>25th Percentile</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>H-Spread</td>
+<td>Upper Hinge - Lower Hinge</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Step</td>
+<td>1.5 x H-Spread</td>
+<td>4.5</td>
+</tr>
+<tr class="odd">
+<td>Upper Inner Fence</td>
+<td>Upper Hinge + 1 Step</td>
+<td>24.5</td>
+</tr>
+<tr class="even">
+<td>Lower Inner Fence</td>
+<td>Lower Hinge - 1 Step</td>
+<td>12.5</td>
+</tr>
+<tr class="odd">
+<td>Upper Outer Fence</td>
+<td>Upper Hinge + 2 Steps</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td>Lower Outer Fence</td>
+<td>Lower Hinge - 2 Steps</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>Upper Adjacent</td>
+<td>Largest value below Upper Inner Fence</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>Lower Adjacent</td>
+<td>Smallest value above Lower Inner Fence</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>Outside Value</td>
+<td>A value beyond an Inner Fence but not beyond an Outer Fence</td>
+<td>29</td>
+</tr>
+<tr class="even">
+<td>Far Out Value</td>
+<td>A value beyond an Outer Fence</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Continuing with the box plots, we put “whiskers” above and below each box to give additional information about the spread of the data. Whiskers are vertical lines that end in a horizontal stroke. Whiskers are drawn from the upper and lower hinges to the upper and lower adjacent values (24 and 14 for the women’s data).</p>
+<div id="fig-boxplotwhiskers" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotwhiskers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotwhiskers.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotwhiskers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.10: The box plots with the whiskers drawn.
+</figcaption>
+</figure>
+</div>
+<p>Although we don’t draw whiskers all the way to outside or far out values, we still wish to represent them in our box plots. This is achieved by adding additional marks beyond the whiskers. Specifically, outside values are indicated by small “o’s” and far out values are indicated by asterisks (*). In our data, there are no far out values and just one outside value. This outside value of 29 is for the women and is shown in <a href="#fig-boxplotoutsidevalue" class="quarto-xref">Figure&nbsp;<span>1.11</span></a>.</p>
+<div id="fig-boxplotoutsidevalue" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotoutsidevalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotoutsidevalue.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotoutsidevalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.11: The box plots with the outside value shown.
+</figcaption>
+</figure>
+</div>
+<p>There is one more mark to include in box plots (although sometimes it is omitted). We indicate the mean score for a group by inserting a plus sign. <a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.12</span></a> shows the result of adding means to our box plots.</p>
+<div id="fig-completedboxplots" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-completedboxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/completedboxplots.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-completedboxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.12: The completed box plots.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.12</span></a> provides a revealing summary of the data. Since half the scores in a distribution are between the hinges (recall that the hinges are the 25<sup>th</sup> and 75<sup>th</sup> percentiles), we see that half the women’s times are between 17 and 20 seconds, whereas half the men’s times are between 19 and 25.5. We also see that women generally named the colors faster than the men did, although one woman was slower than almost all of the men. <a href="#fig-boxplotdetailedlabels" class="quarto-xref">Figure&nbsp;<span>1.13</span></a> shows the box plot for the women’s data with detailed labels.</p>
+<div id="fig-boxplotdetailedlabels" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotdetailedlabels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotdetailedlabels.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotdetailedlabels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.13: The box plot for the women’s data with detailed labels.
+</figcaption>
+</figure>
+</div>
+<p>Box plots provide basic information about a distribution. For example, a distribution with a positive skew would have a longer whisker in the positive direction than in the negative direction. A larger mean than median would also indicate a positive skew. Box plots are good at portraying extreme values and are especially good at showing differences between distributions. However, many of the details of a distribution are not revealed in a box plot, and to examine these details one should create a histogram.</p>
+</section>
+<section id="variations-on-box-plots" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="variations-on-box-plots"><span class="header-section-number">1.4.3</span> Variations on box plots</h3>
+<p>Statistical analysis programs may offer options on how box plots are created. For example, the box plots in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.14</span></a> are constructed from our data but differ from the previous box plots in several ways.</p>
+<ol type="1">
+<li><p>It does not mark outliers.</p></li>
+<li><p>The means are indicated by green lines rather than plus signs.</p></li>
+<li><p>The mean of all scores is indicated by a gray line.</p></li>
+<li><p>Individual scores are represented by dots. Since the scores have been rounded to the nearest second, any given dot might represent more than one score.</p></li>
+<li><p>The box for the women is wider than the box for the men because the widths of the boxes are proportional to the number of subjects of each gender (31 women and 16 men).</p></li>
+</ol>
+<div id="fig-boxplotindvscores" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotindvscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotindvscores.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotindvscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.14: Box plots showing the individual scores and the means.
+</figcaption>
+</figure>
+</div>
+<p>Each dot in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.14</span></a> represents a group of subjects with the same score (rounded to the nearest second). An alternative graphing technique is to “jitter” the points. This means spreading out different dots at the same horizontal position, one dot for each subject. The exact horizontal position of a dot is determined randomly (under the constraint that different dots don’t overlap exactly). Spreading out the dots helps you to see multiple occurrences of a given score. However, depending on the dot size and the screen resolution, some points may be obscured even if the points are jittererd. <a href="#fig-boxplotindvscoresjittered" class="quarto-xref">Figure&nbsp;<span>1.15</span></a> shows what jittering looks like.</p>
+<div id="fig-boxplotindvscoresjittered" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotindvscoresjittered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotindvscoresjittered.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotindvscoresjittered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.15: Box plots with the individual scores jittered.
+</figcaption>
+</figure>
+</div>
+<p>Different styles of box plots are best for different situations, and there are no firm rules for which to use. When exploring your data, you should try several ways of visualizing them. Which graphs you include in your report should depend on how well different graphs reveal the aspects of the data you consider most important.</p>
+</section>
+<section id="sec-bar-charts-for-quantitative-variables7" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="sec-bar-charts-for-quantitative-variables7"><span class="header-section-number">1.4.4</span> Bar Charts for Quantitative Variables<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></h3>
+<p>In the section on qualitative variables, we saw how bar charts could be used to illustrate the frequencies of different categories. For example, one bar chart showed how many purchasers of iMac computers were previous Macintosh users, previous Windows users, and new computer purchasers.</p>
+<p>In this section, we show how bar charts can be used to present other kinds of quantitative information, not just frequency counts. The bar chart in <a href="#fig-barchartpercentincrease" class="quarto-xref">Figure&nbsp;<span>1.16</span></a> shows the percent increases in the Dow Jones, Standard and Poor 500 (S &amp; P), and Nasdaq stock indexes from May 24<sup>th</sup> 2000 to May 24<sup>th</sup> 2001. Notice that both the S &amp; P and the Nasdaq had “negative increases” which means that they decreased in value. In this bar chart, the Y-axis is not frequency but rather the signed quantity percentage increase<em>.</em></p>
+<div id="fig-barchartpercentincrease" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barchartpercentincrease-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/barchartpercentincrease.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartpercentincrease-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.16: Percent increase in three stock indexes from May 24th 2000 to May 24th 2001.
+</figcaption>
+</figure>
+</div>
+<p>Bar charts are particularly effective for showing change over time. <a href="#fig-barchartpercentchangecpi" class="quarto-xref">Figure&nbsp;<span>1.17</span></a>, for example, shows the percent increase in the Consumer Price Index (CPI) over four three-month periods. The fluctuation in inflation is apparent in the graph.</p>
+<div id="fig-barchartpercentchangecpi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barchartpercentchangecpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/barchartpercentchangecpi.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartpercentchangecpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.17: Percent change in the CPI over time. Each bar represents percent increase for the three months ending at the date indicated.
+</figcaption>
+</figure>
+</div>
+<p>Bar charts are often used to compare the means of different experimental conditions. <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.18</span></a> shows the mean time it took one of us (DL) to move the mouse to either a small target or a large target. On average, more time was required for small targets than for large ones.</p>
+<div id="fig-barchartmeantime" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-barchartmeantime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/barchartmeantime.jpg" class="img-fluid figure-img" width="250">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartmeantime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.18: Bar chart showing the means for the two conditions.
+</figcaption>
+</figure>
+</div>
+<p>Although bar charts can display means, we do not recommend them for this purpose. Box plots should be used instead since they provide more information than bar charts without taking up more space. For example, a box plot of the mouse-movement data is shown in <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.19</span></a>. You can see that <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.19</span></a> reveals more about the distribution of movement times than does <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.18</span></a>.</p>
+<div id="fig-boxplotmousemovement" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotmousemovement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplotmousemovement.jpg" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotmousemovement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.19: Box plots of times to move the mouse to the small and large targets.
+</figcaption>
+</figure>
+</div>
+<p>The section on qualitative variables presented earlier in this chapter discussed the use of bar charts for comparing distributions. Some common graphical mistakes were also noted. The earlier discussion applies equally well to the use of bar charts to display quantitative variables.</p>
+</section>
+</section>
+<section id="sec-graphing-appendix-calculating-percentiles-under-the-third-definitiongraphing-8" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-graphing-appendix-calculating-percentiles-under-the-third-definitiongraphing-8"><a href="#sec-graphing" class="quarto-xref"><span>Chapter 1</span></a> Appendix: Calculating Percentiles Under the Third Definition<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></h2>
+<p>Let’s begin with an example. Consider the 25th percentile for the 8 numbers in <a href="#tbl-numberrankscores" class="quarto-xref">Table&nbsp;<span>1.5</span></a>. Notice the numbers are given ranks ranging from 1 for the lowest number to 8 for the highest number.</p>
+<div id="tbl-numberrankscores" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-numberrankscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.5: Test Scores.
+</figcaption>
+<div aria-describedby="tbl-numberrankscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 13%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Number</strong></td>
+<td></td>
+<td><strong>Rank</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3<br>
+5<br>
+7<br>
+8<br>
+9<br>
+11<br>
+13<br>
+15</td>
+<td></td>
+<td>1<br>
+2<br>
+3<br>
+4<br>
+5<br>
+6<br>
+7<br>
+8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The first step is to compute the rank (<span class="math inline">\(R\)</span>) of the 25th percentile. This is done using the following formula:</p>
+<p><span class="math display">\[
+R = P/100 \times (N + 1)
+\]</span></p>
+<p>where <span class="math inline">\(P\)</span> is the desired percentile (25 in this case) and <span class="math inline">\(N\)</span> is the number of numbers (8 in this case). Therefore,</p>
+<p><span class="math display">\[
+R = 25/100 \times (8 + 1) = 9/4 = 2.25.
+\]</span></p>
+<p>If <span class="math inline">\(R\)</span> is an integer, the <span class="math inline">\(Pth\)</span> percentile is the number with rank <span class="math inline">\(R\)</span>. When <span class="math inline">\(R\)</span> is not an integer, we compute the Pth percentile by interpolation as follows:</p>
+<ol type="1">
+<li><p>Define <span class="math inline">\(IR\)</span> as the integer portion of <span class="math inline">\(R\)</span> (the number to the left of the decimal point). For this example, <span class="math inline">\(IR\)</span> = 2.</p></li>
+<li><p>Define <span class="math inline">\(FR\)</span> as the fractional portion of R. For this example, <span class="math inline">\(FR\)</span> = 0.25.</p></li>
+<li><p>Find the scores with Rank <span class="math inline">\(IR\)</span> and with Rank <span class="math inline">\(IR\)</span> + 1. For this example, this means the score with Rank 2 and the score with Rank 3. The scores are 5 and 7.</p></li>
+<li><p>Interpolate by multiplying the difference between the scores by FR and add the result to the lower score. For these data, this is (0.25)(7 - 5) + 5 = 5.5.</p></li>
+</ol>
+<p>Therefore, the 25th percentile is 5.5. If we had used the first definition (the smallest score greater than 25% of the scores), the 25th percentile would have been 7. If we had used the second definition (the smallest score greater than or equal to 25% of the scores), the 25th percentile would have been 5.</p>
+<p>For a second example, consider the 20 quiz scores shown in <a href="#tbl-quizscores" class="quarto-xref">Table&nbsp;<span>1.6</span></a>.</p>
+<div id="tbl-quizscores" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-quizscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.6: 20 quiz scores.
+</figcaption>
+<div aria-describedby="tbl-quizscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 13%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Score</strong></td>
+<td></td>
+<td><strong>Rank</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>4<br>
+4<br>
+5<br>
+5<br>
+5<br>
+5<br>
+6<br>
+6<br>
+6<br>
+7<br>
+7<br>
+7<br>
+8<br>
+8<br>
+9<br>
+9<br>
+9<br>
+10<br>
+10<br>
+10</td>
+<td></td>
+<td>1<br>
+2<br>
+3<br>
+4<br>
+5<br>
+6<br>
+7<br>
+8<br>
+9<br>
+10<br>
+11<br>
+12<br>
+13<br>
+14<br>
+15<br>
+16<br>
+17<br>
+18<br>
+19<br>
+20</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>We will compute the 25th and the 85th percentiles. For the 25th,</p>
+<p><span class="math display">\[
+R = 25/100 \times (20 + 1) = 21/4 = 5.25.
+\]</span></p>
+<p><span class="math display">\[
+IR = 5 \text{ and } FR = 0.25.
+\]</span></p>
+<p>Since the score with a rank of <span class="math inline">\(IR\)</span> (which is 5) and the score with a rank of <span class="math inline">\(IR\)</span> + 1 (which is 6) are both equal to 5, the 25th percentile is 5. In terms of the formula:</p>
+<p><span class="math display">\[
+\text{ 25th percentile } = (.25) \times (5 - 5) + 5 = 5.
+\]</span></p>
+<p>For the 85th percentile,</p>
+<p><span class="math display">\[
+R = 85/100 \times (20 + 1) = 17.85.
+\]</span></p>
+<p><span class="math display">\[
+IR = 17 \text{ and } FR = 0.85
+\]</span></p>
+<blockquote class="blockquote">
+<p>Caution: FR does not generally equal the percentile to be computed as it does here.</p>
+</blockquote>
+<p>The score with a rank of 17 is 9 and the score with a rank of 18 is 10. Therefore, the 85th percentile is:</p>
+<p><span class="math display">\[
+(0.85)(10 - 9) + 9 = 9.85
+\]</span></p>
+<p>Consider the 50th percentile of the numbers 2, 3, 5, 9.</p>
+<p><span class="math display">\[
+R = 50/100 \times (4 + 1) = 2.5.
+\]</span></p>
+<p><span class="math display">\[
+IR = 2 \text{ and } FR = 0.5.
+\]</span></p>
+<p>The score with a rank of <span class="math inline">\(IR\)</span> is 3 and the score with a rank of <span class="math inline">\(IR\)</span> + 1 is 5. Therefore, the 50th percentile is:</p>
+<p><span class="math display">\[
+(0.5)(5 - 3) + 3 = 4.
+\]</span></p>
+<p>Finally, consider the 50th percentile of the numbers 2, 3, 5, 9, 11.</p>
+<p><span class="math display">\[
+R = 50/100 \times (5 + 1) = 3.
+\]</span></p>
+<p><span class="math display">\[
+IR = 3 \text{ and } FR = 0.
+\]</span></p>
+<p>Whenever <span class="math inline">\(FR\)</span> = 0, you simply find the number with rank <span class="math inline">\(IR\)</span>. In this case, the third number is equal to 5, so the 50th percentile is 5. You will also get the right answer if you apply the general formula:</p>
+<p><span class="math display">\[
+\text{ 50th percentile }= (0.00) (9 - 5) + 5 = 5.
+\]</span></p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This section is adapted from Heidi Ziemer. “Variables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/variables.html" class="uri">http://onlinestatbook.com/2/introduction/variables.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This section is adapted from David M. Lane. “Percentiles.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/percentiles.html" class="uri">http://onlinestatbook.com/2/introduction/percentiles.html</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This section is adapted from David M. Lane. “Graphing Qualitative Variables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/graphing_distributions/graphing_qualitative.html" class="uri">http://onlinestatbook.com/2/graphing_distributions/graphing_qualitative.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This section is adapted from David M. Lane. “Histograms.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/graphing_distributions/histograms.html" class="uri">http://onlinestatbook.com/2/graphing_distributions/histograms.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This section is adapted from David M. Lane. “Box Plots.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/graphing_distributions/boxplots.html" class="uri">http://onlinestatbook.com/2/graphing_distributions/boxplots.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="http://onlinestatbook.com/2/case_studies/stroop.html" class="uri">http://onlinestatbook.com/2/case_studies/stroop.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>This section is adapted from David M. Lane. “Bar Charts.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/graphing_distributions/bar_chart.html" class="uri">http://onlinestatbook.com/2/graphing_distributions/bar_chart.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This section is adapted from David M. Lane. “Percentiles.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/percentiles.html" class="uri">http://onlinestatbook.com/2/introduction/percentiles.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./describing-one-variable.html" class="pagination-link" aria-label="Statistics for Describing One Variable at a Time">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

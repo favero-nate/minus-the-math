@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics Minus The Math: An Introduction for the Social Sciences - 4&nbsp; Regression with Qualitative Independent Variables</title>
+<title>Statistics Minus The Math - 12&nbsp; Regression with Qualitative Independent Variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Chapter11.html" rel="prev">
+<link href="./regression-qual-outcome.html" rel="next">
+<link href="./models.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -46,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -55,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -64,6 +72,33 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating">
@@ -72,12 +107,12 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter12.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression-qual-predictors.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -87,10 +122,10 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Statistics Minus The Math: An Introduction for the Social Sciences</a> 
+      <a href="./">Statistics Minus The Math</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -103,45 +138,99 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapter1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing One Variable at a Time</span></span></a>
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapter2.html" class="sidebar-item-text sidebar-link">
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapter11.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Quantitative Variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapter12.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  <a href="./estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-predictors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#predicting-extraversion-using-gender" id="toc-predicting-extraversion-using-gender" class="nav-link active" data-scroll-target="#predicting-extraversion-using-gender"><span class="header-section-number">4.1</span> Predicting extraversion using gender</a></li>
-  <li><a href="#prediction-with-more-than-two-categories-for-gender" id="toc-prediction-with-more-than-two-categories-for-gender" class="nav-link" data-scroll-target="#prediction-with-more-than-two-categories-for-gender"><span class="header-section-number">4.2</span> Prediction with more than two categories for gender</a></li>
+  <li><a href="#predicting-extraversion-using-gender" id="toc-predicting-extraversion-using-gender" class="nav-link active" data-scroll-target="#predicting-extraversion-using-gender"><span class="header-section-number">12.1</span> Predicting extraversion using gender</a></li>
+  <li><a href="#prediction-with-more-than-two-categories-for-gender" id="toc-prediction-with-more-than-two-categories-for-gender" class="nav-link" data-scroll-target="#prediction-with-more-than-two-categories-for-gender"><span class="header-section-number">12.2</span> Prediction with more than two categories for gender</a></li>
   </ul>
 </nav>
     </div>
@@ -150,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></h1>
 </div>
 
 
@@ -163,86 +252,133 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>Let’s say I’m interested in studying how personality relates to gender. The most common personality measure in psychology is called the “Big Five” personality inventory. There is a standard set of 50 survey items that researchers can use to measure five aspects of personality. <span class="quarto-unresolved-ref">?fig-Big5</span> is an example of some of these questions and how they are formatted:</p>
-<p><img src="Images/Ch12/Ch12_1.png" id="fig-Big5" class="img-fluid"></p>
+
+<p>Let’s say I’m interested in studying how personality relates to gender. The most common personality measure in psychology is called the “Big Five” personality inventory. There is a standard set of 50 survey items that researchers can use to measure five aspects of personality. <a href="#fig-Big5" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> is an example of some of these questions and how they are formatted:</p>
+<div id="fig-Big5" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Big5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch12/Big5.jpg" id="fig-Big5" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Big5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1
+</figcaption>
+</figure>
+</div>
 <p>For now, I decide to focus on whether people are introverted or extroverted. Extroverts are outgoing and tend to enjoy interacting with others. Extroverts will tend to agree with the statement “I am the life of the party” while introverts will tend to agree with the item “I don’t talk a lot.”</p>
 <p>I find a dataset that contains lots of responses to the Big Five personality questions as well as information on the gender of each respondent.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> There are 10 different questions related to extroversion, and the dataset has one variable (column of data) for each of these 10 questions. The column labeled e1 shows responses to the item “I am the life of the party.” A value of 1 means the respondent disagrees with this statement, while a 3 indicates neutral, and a 5 means they disagree.</p>
-<p><img src="Images/Ch12/CH12_2.png" id="fig-" class="img-fluid"></p>
+<div id="fig-big5dataset" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-big5dataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch12/big5dataset.jpg" id="fig-big5dataset" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-big5dataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2
+</figcaption>
+</figure>
+</div>
 <p>For all of the odd-numbered extroversion questions (e1, e3, e5, etc.), agreement indicates extroversion. For the even-numbered items (e2, e4, e6, etc.), agreement indicates introversion. To create a single extroversion variable that combines responses from all 10 survey items, I create a tally, adding up all the values for odd-numbered questions and then subtracting the responses to the even-numbered questions. An extreme extrovert will have a 5 for all the odd-numbered questions and a 1 for all of the even-numbered ones, giving them a score of 20 (5x5-5x1=20). An extreme introvert will have a -20 since they will answer 1 to all the odd-numbered questions and 5 to all the even-numbered ones (5x1-5x5=-20).</p>
 <p>Most people lie somewhere in the middle between introversion and extroversion:</p>
-<p><img src="Images/Ch12/Ch12_3.png" id="fig-ExtHist" class="img-fluid"></p>
+<div id="fig-ExtHist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch12/ExtHist.jpg" id="fig-ExtHist" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3
+</figcaption>
+</figure>
+</div>
 <p>Our gender variable was measured by asking respondents “What is your gender?” and they could choose from male, female, or other. In a moment, we’ll consider those who responded “other,” but for now, let’s just look at those who chose either male or female.</p>
-<section id="predicting-extraversion-using-gender" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="predicting-extraversion-using-gender"><span class="header-section-number">4.1</span> Predicting extraversion using gender</h2>
+<section id="predicting-extraversion-using-gender" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="predicting-extraversion-using-gender"><span class="header-section-number">12.1</span> Predicting extraversion using gender</h2>
 <p>If I want to describe differences in extraversion by gender in this dataset, I can compute the mean value of extraversion for males and for females. It turns out that males have an average extraversion of -0.46 while females’ average level of extraversion is 0.53. Thus, the average female is about 1-point more extraverted than the average male. But of course, there is lots of variation in extraversion among both groups:</p>
-<p><img src="Images/Ch12/Ch12_4.png" id="fig-GenderExtHist" class="img-fluid"></p>
+<div id="fig-GenderExtHist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-GenderExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch12/GenderExtHist.jpg" id="fig-GenderExtHist" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-GenderExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4
+</figcaption>
+</figure>
+</div>
 <p>There are plenty of females who are introverts and plenty of males who are extroverts.</p>
 <p>If you asked me to guess the extroversion level of someone and the only thing you told me about them was their gender, my best bet would probably be to guess the average extroversion level for someone of that gender. So for a female I knew nothing else about, I would guess their extroversion to be 0.53, while for a male I’d guess -0.46.</p>
 <p>Social scientists use the <strong>dependent variable</strong> to describe the variable they’re making a prediction about and <strong>independent variable</strong> to describe the variables that help them make that prediction. So in this example, extraversion is my dependent variable and gender is my independent variable.</p>
 <p>When we’re working with data, sometimes it’s helpful to express how I would make a guess about a dependent variable (extraversion) based on other factors (gender) using a mathematical formula. In fact, this is exactly what we do when we run a regression. There are many ways I could write this formula, but I’ll show just two for now. First, I could write:</p>
 <p><span id="eq-ExtReg"><span class="math display">\[
-\widehat{Extraversion}=0.53×Female-0.46×Male
-\tag{4.1}\]</span></span></p>
+\widehat{Extraversion}=0.53 \times Female-0.46 \times Male
+\tag{12.1}\]</span></span></p>
 <p>Notice I’ve added a “hat” above the name of the variable <em>Extraversion</em>; this hat means that I’m making a guess about the value of that variable (I’m guessing the level of extraversion based on gender). The equation has two other variables <em>Female</em> and <em>Male</em>, and these two variables will take on a value of 1 if the person’s gender is equal to the name of the variable and will otherwise take on a value of 0. For a female, <em>Female</em> will equal 1 and <em>Male</em> will equal 0, giving us:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53×(1)-0.46×(0)=0.53
+\widehat{Extraversion}=0.53 \times (1)-0.46 \times (0)=0.53
 \]</span></p>
 <p>So our guess for the level of extroversion (<span class="math inline">\(\widehat{Extraversion}\)</span>) of a female we know nothing about is 0.53.</p>
 <p>For a male, our guess is:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53×(0)-0.46×(1)=-0.46
+\widehat{Extraversion}=0.53 \times (0)-0.46 \times (1)=-0.46
 \]</span></p>
 <p>There’s a second way I can write my formula, which will turn out to be more useful in the future when we come to consider multiple factors at the same time that might help us predict the value of a dependent variable. Rather than having two variables to represent gender in my equation, I can just use one:</p>
 <p><span id="eq-ExtRegFem"><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×Male
-\tag{4.2}\]</span></span></p>
-<p>In <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a>, we start from female as our baseline. Notice that the first number we see (0.53) is our guess for the value of extraversion for a female. When we’re considering a female, Male=0, so:</p>
+\widehat{Extraversion}=0.53-0.99 \times Male
+\tag{12.2}\]</span></span></p>
+<p>In <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a>, we start from female as our baseline. Notice that the first number we see (0.53) is our guess for the value of extraversion for a female. When we’re considering a female, Male=0, so:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×0=0.53
+\widehat{Extraversion}=0.53-0.99 \times 0=0.53
 \]</span></p>
 <p>Thus, we get the right prediction for females from this equation, even though we didn’t include a variable specifically for females. If we have a male, Male=1, so we get:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×1=-0.46
+\widehat{Extraversion}=0.53-0.99 \times 1=-0.46
 \]</span></p>
 <p>This is the same prediction we got before. Remember, I decided to initially just analyze respondents who selected either male or female. Since we are only considering two categories (male or female), and each respondent is either a male or a female, saying <em>Male</em> = 1 lets me know that <em>Female</em> = 0. It’s actually repetitive in this context to both say that <em>Male</em> = 1 and <em>Female</em> = 0. Similarly, saying <em>Male</em> = 0 implies that <em>Female</em> = 1. So I can simplify my equation by just including one variable to indicate binary gender.</p>
-<p>Notice that in <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a>, the number next to <em>Male</em> is equal to the difference between the average level of extraversion for females and the average level for males (0.53-(-0.46)=0.99). This is because <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a> starts with females as the baseline, so to get our prediction for males, we have to adjust our baseline prediction by the average difference for males.</p>
-<p><a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a> is also typically how we will arrange our equation when we’re running a regression.</p>
+<p>Notice that in <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a>, the number next to <em>Male</em> is equal to the difference between the average level of extraversion for females and the average level for males (0.53-(-0.46)=0.99). This is because <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> starts with females as the baseline, so to get our prediction for males, we have to adjust our baseline prediction by the average difference for males.</p>
+<p><a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> is also typically how we will arrange our equation when we’re running a regression.</p>
 </section>
-<section id="prediction-with-more-than-two-categories-for-gender" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="prediction-with-more-than-two-categories-for-gender"><span class="header-section-number">4.2</span> Prediction with more than two categories for gender</h2>
+<section id="prediction-with-more-than-two-categories-for-gender" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="prediction-with-more-than-two-categories-for-gender"><span class="header-section-number">12.2</span> Prediction with more than two categories for gender</h2>
 <p>I now move beyond the gender binary and consider the “other” category in survey responses. I’ll refer to this other category as “non-binary” gender. The average level of extraversion among those with non-binary gender is -5.66. So non-binary people tend to be quite a bit more introverted than those who identify as male or female. As with males and females, there is considerable variation among non-binary people:</p>
-<p><img src="Images/Ch12/Ch12_5.png" class="img-fluid"></p>
+<div id="fig-NonBExtHist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-NonBExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch12/NonBExtHist.jpg" id="fig-NonBExtHist" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-NonBExtHist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.5
+</figcaption>
+</figure>
+</div>
 <p>The number of non-binary respondents is relatively small (102), so it’s not terrible surprising that this histogram looks a bit choppier than the ones we saw before.</p>
-<p>Again, if we had to make a guess about the level of extraversion of someone, and all we knew about that person was that their gender was non-binary, we would probably want to guess the mean value among non-binary respondents (-5.66). Modifying <a href="#eq-ExtReg">Equation&nbsp;<span>4.1</span></a> to incorporate a third category is relatively straightforward:</p>
+<p>Again, if we had to make a guess about the level of extraversion of someone, and all we knew about that person was that their gender was non-binary, we would probably want to guess the mean value among non-binary respondents (-5.66). Modifying <a href="#eq-ExtReg" class="quarto-xref">Equation&nbsp;<span>12.1</span></a> to incorporate a third category is relatively straightforward:</p>
 <p><span id="eq-ExtRegNonBin"><span class="math display">\[
-\widehat{Extraversion}=0.53×Female-0.46×Male-5.69×Other
-\tag{4.3}\]</span></span></p>
+\widehat{Extraversion}=0.53 \times Female-0.46 \times Male-5.69 \times Other
+\tag{12.3}\]</span></span></p>
 <p>For someone who identifies as female, we would plug in <em>Female</em> = 1, <em>Male</em> = 0, and <em>Other</em> = 0:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53×(1)-0.46×(0)-5.66×(0)=0.53
+\widehat{Extraversion}=0.53 \times (1)-0.46 \times (0)-5.66 \times (0)=0.53
 \]</span></p>
 <p>If someone identifies as non-binary, we would use <em>Female</em> = 0, <em>Male</em> = 0, and <em>Other</em> = 1:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53×(0)-0.46×(0)-5.66×(1)=-5.66
+\widehat{Extraversion}=0.53 \times (0)-0.46 \times (0)-5.66 \times (1)=-5.66
 \]</span></p>
-<p>We can also return to the format of <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a> but modify it to include the other category. This is how we will typically write our equation if we are doing a regression:</p>
+<p>We can also return to the format of <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> but modify it to include the other category. This is how we will typically write our equation if we are doing a regression:</p>
 <p><span id="eq-ExtRegFemNonBin"><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×Male-6.19×Other
-\tag{4.4}\]</span></span></p>
+\widehat{Extraversion}=0.53-0.99 \times Male-6.19 \times Other
+\tag{12.4}\]</span></span></p>
 <p>Now that there are three possible values for gender (female, male, and other), knowing the value of <em>Male</em> doesn’t necessarily allow us to conclude what the vale of female is. If , the individual could identify as either female or non-binary. So we have to include a second variable. In this case, we chose to include the variable <em>Other</em>. If we know the values of <em>Male</em> and <em>Other</em>, we can always figure out the value of <em>Female</em> by process of elimination.</p>
 <p>For a non-binary person, we plug in <em>Male</em> = 0, and <em>Other</em> = 1:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×(0)-6.19×(1)=-5.66
+\widehat{Extraversion}=0.53-0.99 \times (0)-6.19 \times (1)=-5.66
 \]</span></p>
 <p>When considering a female, we use <em>Male</em> = 0, and <em>Other</em> = 0:</p>
 <p><span class="math display">\[
-\widehat{Extraversion}=0.53-0.99×(0)-6.19×(0)=0.53
+\widehat{Extraversion}=0.53-0.99 \times (0)-6.19 \times (0)=0.53
 \]</span></p>
-<p><a href="#eq-ExtRegNonBin">Equation&nbsp;<span>4.3</span></a> and <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a> communicate an equivalent method of making a prediction about extraversion based on gender; they just offer this information in two different formats. <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a> might be a bit trickier to understand for now, but it will become very useful in the future.</p>
+<p><a href="#eq-ExtRegNonBin" class="quarto-xref">Equation&nbsp;<span>12.3</span></a> and <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a> communicate an equivalent method of making a prediction about extraversion based on gender; they just offer this information in two different formats. <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a> might be a bit trickier to understand for now, but it will become very useful in the future.</p>
 <p>Notice that we can talk about gender either as one qualitative variable with three possible values (female, male, or other), or we can talk about it as a series of three dummy variables (<em>Female</em>, <em>Male</em>, and <em>Other</em>) that can take each on a value of either 0 or 1. This can make things a bit confusing, but the important thing to remember is that when we have a qualitative variable with more than two categories, we’ll need to break out the categories into a set of dummy variables for purposes of representing the qualitative variable in an equation.</p>
-<p>However, as <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a> and <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a> illustrate, we don’t necessarily need a dummy variable for every single category. Specifically, whenever we want to create an equation with a qualitative independent variable in a format like <a href="#eq-ExtRegFem">Equation&nbsp;<span>4.2</span></a> or <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a>, the number of dummy variables should be equal to the number of categories minus one. Since our gender variable can take on three possible values in this example, we included two independent variables in <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a>. No dummy variable is included for female, so we call female the <strong>omitted category</strong> or the <strong>baseline category</strong>. Remember, the first number in <a href="#eq-ExtRegFemNonBin">Equation&nbsp;<span>4.4</span></a> is 0.53, which represents our guess for females—the baseline category. If we instead had a qualitative variable with five categories, we would include four dummy variables in our equation.</p>
+<p>However, as <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> and <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a> illustrate, we don’t necessarily need a dummy variable for every single category. Specifically, whenever we want to create an equation with a qualitative independent variable in a format like <a href="#eq-ExtRegFem" class="quarto-xref">Equation&nbsp;<span>12.2</span></a> or <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a>, the number of dummy variables should be equal to the number of categories minus one. Since our gender variable can take on three possible values in this example, we included two independent variables in <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a>. No dummy variable is included for female, so we call female the <strong>omitted category</strong> or the <strong>baseline category</strong>. Remember, the first number in <a href="#eq-ExtRegFemNonBin" class="quarto-xref">Equation&nbsp;<span>12.4</span></a> is 0.53, which represents our guess for females—the baseline category. If we instead had a qualitative variable with five categories, we would include four dummy variables in our equation.</p>
 
 
 </section>
@@ -333,10 +469,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -346,8 +499,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -359,7 +521,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -403,6 +688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -428,6 +714,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -489,14 +801,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Chapter11.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span>
+      <a href="./models.html" class="pagination-link" aria-label="Models and Uncertainty">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./regression-qual-outcome.html" class="pagination-link" aria-label="Regression with Qualitative Dependent Variables">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
