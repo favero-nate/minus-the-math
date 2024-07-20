@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistics Minus The Math - 2&nbsp; Statistics for Describing One Variable at a Time</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Chapter3.html" rel="next">
+<link href="./graphing.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus The Math</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative Variable)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#measures-of-central-tendency1" id="toc-measures-of-central-tendency1" class="nav-link active" data-scroll-target="#measures-of-central-tendency1"><span class="header-section-number">2.1</span> Measures of Central Tendency[1]</a>
+  <ul class="collapse">
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean"><span class="header-section-number">2.1.1</span> Mean</a></li>
+  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median"><span class="header-section-number">2.1.2</span> Median</a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode"><span class="header-section-number">2.1.3</span> Mode</a></li>
+  </ul></li>
+  <li><a href="#comparing-measures-of-central-tendency3" id="toc-comparing-measures-of-central-tendency3" class="nav-link" data-scroll-target="#comparing-measures-of-central-tendency3"><span class="header-section-number">2.2</span> Comparing Measures of Central Tendency[3]</a></li>
+  <li><a href="#measures-of-spread4" id="toc-measures-of-spread4" class="nav-link" data-scroll-target="#measures-of-spread4"><span class="header-section-number">2.3</span> Measures of Spread[4]</a>
+  <ul class="collapse">
+  <li><a href="#what-is-variability" id="toc-what-is-variability" class="nav-link" data-scroll-target="#what-is-variability"><span class="header-section-number">2.3.1</span> What is Variability?</a></li>
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><span class="header-section-number">2.3.2</span> Range</a></li>
+  <li><a href="#interquartile-range" id="toc-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range"><span class="header-section-number">2.3.3</span> Interquartile Range</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">2.3.4</span> Variance</a></li>
+  <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation"><span class="header-section-number">2.3.5</span> Standard Deviation</a></li>
+  </ul></li>
+  <li><a href="#transforming-variables5" id="toc-transforming-variables5" class="nav-link" data-scroll-target="#transforming-variables5"><span class="header-section-number">2.4</span> Transforming Variables[5]</a>
+  <ul class="collapse">
+  <li><a href="#log-transformations6" id="toc-log-transformations6" class="nav-link" data-scroll-target="#log-transformations6"><span class="header-section-number">2.4.1</span> Log Transformations[6]</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="measures-of-central-tendency1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="measures-of-central-tendency1"><span class="header-section-number">2.1</span> Measures of Central Tendency<a href="#_ftn1">[1]</a></h2>
+<section id="mean" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">2.1.1</span> Mean</h3>
+<p>The <strong>mean</strong><a href="#_ftn2">[2]</a> is the most common measure of central tendency. It is simply the sum of the numbers divided by the number of numbers. When using symbols and formulas to represent different statistics, we often distinguish between whether we are looking at a “sample” or a “population.” We’ll cover this distinction in more detail in our chapter about estimation. For now, think of a pollster who has conducted a survey with a sample of 1000 people. Even though only 1000 people responded to the survey, the pollster is actually interested in estimating the attitudes of a larger population—the entire public.</p>
+<p>The symbol <span class="math inline">\(μ\)</span> is used for the mean of a population. The symbol <span class="math inline">\(M\)</span> is used for the mean of a sample. The formula for <span class="math inline">\(μ\)</span> is shown below:</p>
+<p><span class="math display">\[
+μ = ΣX/N
+\]</span></p>
+<p>where <span class="math inline">\(ΣX\)</span> is the sum of all the numbers in the population and <span class="math inline">\(N\)</span> is the number of numbers in the population.</p>
+<p>The formula for <span class="math inline">\(M\)</span> is essentially identical:</p>
+<p><span class="math display">\[
+M = ΣX/N
+\]</span></p>
+<p>where <span class="math inline">\(ΣX\)</span> is the sum of all the numbers in the sample and <span class="math inline">\(N\)</span> is the number of numbers in the sample.</p>
+<p>As an example, the mean of the numbers 1, 2, 3, 6, 8 is 20/5 = 4 regardless of whether the numbers constitute the entire population or just a sample from the population.</p>
+<p><a href="#tbl-tdownpasses" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-tdownpasses</span></a> shows the number of touchdown (TD) passes thrown by each of the 31 teams in the National Football League in the 2000 season. The mean number of touchdown passes thrown is 20.4516 as shown below.</p>
+<p><span class="math display">\[
+\begin{split}
+μ = ΣX/N\
+\\
+= 634/31\
+\\
+= 20.4516
+\end{split}
+\]</span></p>
+<div id="tbl-tdownpasses" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tdownpasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Number of touchdown passes.
+</figcaption>
+<div aria-describedby="tbl-tdownpasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 83%">
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>37 33 33 32 29 28 28 23 22 22 22 21 21 21 20 20 19 19 18 18 18 18 16 15 14 14 14 12 12 9 6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="median" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="median"><span class="header-section-number">2.1.2</span> Median</h3>
+<p>The <strong>median</strong> is also a frequently used measure of central tendency. The median is the midpoint of a distribution: the same number of scores is above the median as below it. For the data in <a href="#tbl-tdownpasses" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-tdownpasses</span></a>, there are 31 scores. The 16th highest score (which equals 20) is the median because there are 15 scores below the 16th score and 15 scores above the 16th score. The median can also be thought of as the 50th percentile.</p>
+<section id="computation-of-the-median" class="level4" data-number="2.1.2.1">
+<h4 data-number="2.1.2.1" class="anchored" data-anchor-id="computation-of-the-median"><span class="header-section-number">2.1.2.1</span> Computation of the Median</h4>
+<p>When there is an odd number of numbers, the median is simply the middle number. For example, the median of 2, 4, and 7 is 4. When there is an even number of numbers, the median is the mean of the two middle numbers. Thus, the median of the numbers 2, 4, 7, 12 is (4+7)/2 = 5.5.</p>
+</section>
+</section>
+<section id="mode" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="mode"><span class="header-section-number">2.1.3</span> Mode</h3>
+<p>The <strong>mode</strong> is the most frequently occurring value. For the data in <a href="#tbl-tdownpasses" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-tdownpasses</span></a>, the mode is 18 since more teams (4) had 18 touchdown passes than any other number of touchdown passes. With continuous data such as response time measured to many decimals, the frequency of each value is one since no two scores will be exactly the same (see discussion of continuous variables). Therefore the mode of continuous data is normally computed from a grouped frequency distribution. <a href="#tbl-groupfreqdist1" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-groupfreqdist1</span></a> shows a grouped frequency distribution for the target response time data. Since the interval with the highest frequency is 600-700, the mode is the middle of that interval (650).</p>
+<div id="tbl-groupfreqdist1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-groupfreqdist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: Grouped frequency distribution.
+</figcaption>
+<div aria-describedby="tbl-groupfreqdist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Range</strong></td>
+<td><strong>Frequency</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>500-600<br>
+600-700<br>
+700-800<br>
+800-900<br>
+900-1000<br>
+1000-1100</td>
+<td>3<br>
+6<br>
+5<br>
+5<br>
+0<br>
+1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="comparing-measures-of-central-tendency3" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="comparing-measures-of-central-tendency3"><span class="header-section-number">2.2</span> Comparing Measures of Central Tendency<a href="#_ftn3">[3]</a></h2>
+<p>How do the various measures of central tendency compare with each other? For symmetric distributions, the mean and median are equal, as is the mode except in bimodal distributions. Differences among the measures occur with skewed distributions. <a href="#fig-disposskew" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-disposskew</span></a> shows the distribution of 642 scores on an introductory psychology test. Notice this distribution has a slight positive skew.</p>
+<div id="fig-disposskew" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-disposskew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch2/disposskew.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-disposskew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: A distribution with a positive skew.
+</figcaption>
+</figure>
+</div>
+<p>Measures of central tendency are shown in <a href="#tbl-testscoremeasures" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-testscoremeasures</span></a>. Notice they do not differ greatly, with the exception that the mode is considerably lower than the other measures. When distributions have a positive skew, the mean is typically higher than the median, although it may not be in bimodal distributions. For these data, the mean of 91.58 is higher than the median of 90.</p>
+<div id="tbl-testscoremeasures" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-testscoremeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.3: Measures of central tendency for the test scores.
+</figcaption>
+<div aria-describedby="tbl-testscoremeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 16%">
+<col style="width: 15%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Measure</strong></td>
+<td><strong>Value</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Mode<br>
+Median<br>
+Mean</td>
+<td>84.00<br>
+90.00<br>
+91.58</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The distribution of baseball salaries (in 1994) shown in <a href="#fig-bballsalarydist" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-bballsalarydist</span></a> has a much more pronounced skew than the distribution in <a href="#fig-disposskew" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-disposskew</span></a>.</p>
+<div id="fig-bballsalarydist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bballsalarydist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch2/bballsalarydist.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bballsalarydist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: A distribution with a very large positive skew. This histogram shows the salaries of major league baseball players (in thousands of dollars: 25 equals 250,000).
+</figcaption>
+</figure>
+</div>
+<p><a href="#tbl-bballmeasures" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-bballmeasures</span></a> shows the measures of central tendency for these data. The large skew results in very different values for these measures. No single measure of central tendency is sufficient for data such as these. If you were asked the very general question: “So, what do baseball players make?” and answered with the mean of $1,183,000, you would not have told the whole story since only about one third of baseball players make that much. If you answered with the mode of $250,000 or the median of $500,000, you would not be giving any indication that some players make many millions of dollars. Fortunately, there is no need to summarize a distribution with a single number. When the various measures differ, our opinion is that you should report the mean and the median. Sometimes it is worth reporting the mode as well. In the media, the median is usually reported to summarize the center of skewed distributions. You will hear about median salaries and median prices of houses sold, etc. This is better than reporting only the mean, but it would be informative to hear more statistics.</p>
+<div id="tbl-bballmeasures" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bballmeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.4: Measures of central tendency for baseball salaries (in thousands of dollars).
+</figcaption>
+<div aria-describedby="tbl-bballmeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 15%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Measure</strong></td>
+<td></td>
+<td><strong>Value</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Mode<br>
+Median<br>
+Mean</td>
+<td></td>
+<td>250<br>
+500<br>
+1,183</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="measures-of-spread4" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="measures-of-spread4"><span class="header-section-number">2.3</span> Measures of Spread<a href="#_ftn4">[4]</a></h2>
+<section id="what-is-variability" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="what-is-variability"><span class="header-section-number">2.3.1</span> What is Variability?</h3>
+<p>Variability refers to how “spread out” a group of scores is. To see what we mean by spread out, consider graphs in <a href="#fig-quizzes" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-quizzes</span></a>. These graphs represent the scores on two quizzes. The mean score for each quiz is 7.0. Despite the equality of means, you can see that the distributions are quite different. Specifically, the scores on Quiz 1 are more densely packed and those on Quiz 2 are more spread out. The differences among students were much greater on Quiz 2 than on Quiz 1.</p>
+<p><img src="Images/Ch2/Quiz1.jpg" class="img-fluid"></p>
+<div id="fig-quizzes" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quizzes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch2/Quiz2.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quizzes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Bar charts of two quizzes.
+</figcaption>
+</figure>
+</div>
+<p>The terms variability, spread, and dispersion are synonyms, and refer to how spread out a distribution is. Just as in the section on central tendency where we discussed measures of the center of a distribution of scores, in this chapter we will discuss measures of the variability of a distribution. There are four frequently used measures of variability: the range, interquartile range, variance, and standard deviation. In the next few paragraphs, we will look at each of these four measures of variability in more detail.</p>
+</section>
+<section id="range" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="range"><span class="header-section-number">2.3.2</span> Range</h3>
+<p>The <strong>range</strong> is the simplest measure of variability to calculate, and one you have probably encountered many times in your life. The range is simply the highest score minus the lowest score. Let’s take a few examples. What is the range of the following group of numbers: 10, 2, 5, 6, 7, 3, 4? Well, the highest number is 10, and the lowest number is 2, so 10 - 2 = 8. The range is 8. Let’s take another example. Here’s a dataset with 10 numbers: 99, 45, 23, 67, 45, 91, 82, 78, 62, 51. What is the range? The highest number is 99 and the lowest number is 23, so 99 - 23 equals 76; the range is 76. Now consider the two quizzes shown in <a href="#fig-quizzes" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-quizzes</span></a>. On Quiz 1, the lowest score is 5 and the highest score is 9. Therefore, the range is 4. The range on Quiz 2 was larger: the lowest score was 4 and the highest score was 10. Therefore the range is 6.</p>
+</section>
+<section id="interquartile-range" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="interquartile-range"><span class="header-section-number">2.3.3</span> Interquartile Range</h3>
+<p>The <strong>interquartile range</strong> (IQR) is the range of the middle 50% of the scores in a distribution. It is computed as follows:</p>
+<p><span class="math display">\[
+IQR = \text{ 75th percentile } - \text{ 25th percentile }
+\]</span></p>
+<p>For Quiz 1, the 75th percentile is 8 and the 25th percentile is 6. The interquartile range is therefore 2. For Quiz 2, which has greater spread, the 75th percentile is 9, the 25th percentile is 5, and the interquartile range is 4. Recall that in the discussion of box plots, the 75th percentile was called the upper hinge and the 25th percentile was called the lower hinge. Using this terminology, the interquartile range is referred to as the H-spread.</p>
+<p>A related measure of variability is called the semi-interquartile range. The semi-interquartile range is defined simply as the interquartile range divided by 2. If a distribution is symmetric, the median plus or minus the semi-interquartile range contains half the scores in the distribution.</p>
+</section>
+<section id="variance" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="variance"><span class="header-section-number">2.3.4</span> Variance</h3>
+<p>Variability can also be defined in terms of how close the scores in the distribution are to the middle of the distribution. Using the mean as the measure of the middle of the distribution, the <strong>variance</strong> is defined as the average squared difference of the scores from the mean. The data from Quiz 1 are shown in <a href="#tbl-quiz1var" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-quiz1var</span></a>. The mean score is 7.0. Therefore, the column “Deviation from Mean” contains the score minus 7. The column “Squared Deviation” is simply the previous column squared.</p>
+<div id="tbl-quiz1var" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-quiz1var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
+</figcaption>
+<div aria-describedby="tbl-quiz1var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 25%">
+<col style="width: 8%">
+<col style="width: 23%">
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Scores</strong></td>
+<td></td>
+<td><strong>Deviation from Mean</strong></td>
+<td></td>
+<td><strong>Squared Deviation</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>9</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>9</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>9</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>-2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5</td>
+<td></td>
+<td>-2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td><strong>Means</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>1.5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>One thing that is important to notice is that the mean deviation from the mean is 0. This will always be the case. The mean of the squared deviations is 1.5. Therefore, the variance is 1.5. Analogous calculations with Quiz 2 show that its variance is 6.7. The formula for the variance is:</p>
+<p><span class="math display">\[
+σ^2=\frac{Σ(X-µ)^2}{N}
+\]</span></p>
+<p>where <span class="math inline">\(σ2\)</span> is the variance, <span class="math inline">\(μ\)</span> is the mean, and <span class="math inline">\(N\)</span> is the number of numbers. For Quiz 1, <span class="math inline">\(μ\)</span> = 7 and <span class="math inline">\(N\)</span> = 20.</p>
+<p>If the variance in a sample is used to estimate the variance in a population, then the previous formula underestimates the variance and the following formula should be used:</p>
+<p><span class="math display">\[
+s^2=\frac{Σ(X-M)^2}{N-1}
+\]</span></p>
+<p>where <span class="math inline">\(s^2\)</span> is the estimate of the variance and <span class="math inline">\(M\)</span> is the sample mean.</p>
+<p>Note that <span class="math inline">\(M\)</span> is the mean of a sample taken from a population with a mean of <span class="math inline">\(μ\)</span>. Since, in practice, the variance is usually computed in a sample, this formula is most often used. The simulation “estimating variance” illustrates the bias in the formula with <span class="math inline">\(N\)</span> in the denominator.</p>
+<p>Let’s take a concrete example. Assume the scores 1, 2, 4, and 5 were sampled from a larger population. To estimate the variance in the population you would compute <span class="math inline">\(s^2\)</span> as follows:</p>
+<p><span class="math display">\[
+M = (1 + 2 + 4 + 5)/4 = 12/4 = 3
+\]</span></p>
+<p><span class="math display">\[
+s^2 = [(1-3)^2 + (2-3)^2 + (4-3)^2 + (5-3)^2]/(4-1)
+\\
+= (4 + 1 + 1 + 4)/3 = 10/3 = 3.333
+\]</span></p>
+</section>
+<section id="standard-deviation" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="standard-deviation"><span class="header-section-number">2.3.5</span> Standard Deviation</h3>
+<p>The <strong>standard deviation</strong> is simply the square root of the variance. This makes the standard deviations of the two quiz distributions 1.225 and 2.588. We can interpret the standard deviation of X as approximating the typical distance between a given value of X and the mean of X. For example, suppose I tell you about a prison where the prisoners have a mean age of 42 years with a standard deviation of 8 years. If I randomly select one prisoner and ask you to guess their age, you should probably guess 42 since I’ve told you that is the mean. But even though 42 is your best guess, you can expect your guess to be off by about 8 years since the standard deviation is 8 (meaning the typical distance between a random prisoner’s age and the mean age is approximately 8).</p>
+</section>
+</section>
+<section id="transforming-variables5" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="transforming-variables5"><span class="header-section-number">2.4</span> Transforming Variables<a href="#_ftn5">[5]</a></h2>
+<p>Often it is necessary to transform data from one measurement scale to another. For example, you might want to convert height measured in feet to height measured in inches. <a href="#tbl-heightconversion" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-heightconversion</span></a> shows the heights of four people measured in both feet and inches. To transform feet to inches, you simply multiply by 12. Similarly, to transform inches to feet, you divide by 12.</p>
+<div id="tbl-heightconversion" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-heightconversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.6: Converting between feet and inches.
+</figcaption>
+<div aria-describedby="tbl-heightconversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 13%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>Feet</strong></td>
+<td></td>
+<td><strong>Inches</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>5.00<br>
+6.25<br>
+5.50<br>
+5.75</td>
+<td></td>
+<td>60<br>
+75<br>
+66<br>
+69</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Some conversions require that you multiply by a number and then add a second number. A good example of this is the transformation between degrees Centigrade and degrees Fahrenheit. <a href="#tbl-temp5cities" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-temp5cities</span></a> shows the temperatures of 5 US cities in the early afternoon of November 16, 2002.</p>
+<div id="tbl-temp5cities" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-temp5cities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.7: Temperatures in 5 cities on 11/16/2002.
+</figcaption>
+<div aria-describedby="tbl-temp5cities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 23%">
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><strong>City</strong></td>
+<td></td>
+<td><strong>Degrees Fahrenheit</strong></td>
+<td></td>
+<td><strong>Degrees Centigrade</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Houston<br>
+Chicago<br>
+Minneapolis<br>
+Miami<br>
+Phoenix</td>
+<td></td>
+<td>54<br>
+37<br>
+31<br>
+78<br>
+70</td>
+<td></td>
+<td>12.22<br>
+2.78<br>
+-0.56<br>
+25.56<br>
+21.11</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The formula to transform Centigrade to Fahrenheit is:</p>
+<p><span class="math display">\[
+F = 1.8C + 32
+\]</span></p>
+<p>The formula for converting from Fahrenheit to Centigrade is</p>
+<p><span class="math display">\[
+C = 0.5556F - 17.778
+\]</span></p>
+<p>The transformation consists of multiplying by a constant and then adding a second constant. For the conversion from Centigrade to Fahrenheit, the first constant is 1.8 and the second is 32.</p>
+<p><a href="#fig-cfunctionf" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-cfunctionf</span></a> shows a plot of degrees Centigrade as a function of degrees Fahrenheit. Notice that the points form a straight line. This will always be the case if the transformation from one scale to another consists of multiplying by one constant and then adding a second constant. Such transformations are therefore called <strong>linear transformations</strong>.</p>
+<div id="fig-cfunctionf" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cfunctionf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch2/cfunctionf.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cfunctionf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Degrees Centigrade as a function of degrees Fahrenheit.
+</figcaption>
+</figure>
+</div>
+<p>So far, we’ve discussed transformations that are probably familiar to you. A type of transformation that may be new to you is <strong>standardization</strong> or creating <span class="math inline">\(Z\)</span> scores. A value from any distribution can be transformed into a <span class="math inline">\(Z\)</span> score using the following formula:</p>
+<p><span class="math display">\[
+Z = \frac{(X - μ)}{σ}
+\]</span></p>
+<p>where <span class="math inline">\(Z\)</span> is the new value, <span class="math inline">\(X\)</span> is the value on the original distribution, <span class="math inline">\(μ\)</span> is the mean of the original distribution, and <span class="math inline">\(σ\)</span> is the standard deviation of the original distribution.</p>
+<p>As a simple application, suppose you want the <span class="math inline">\(Z\)</span> score for a value of 26 taken from a distribution with a mean of 50 and a standard deviation of 10. Applying the formula, we obtain:</p>
+<p><span class="math display">\[
+Z = (26 - 50)/10 = -2.4
+\]</span></p>
+<p>If all the values in a distribution are transformed to <span class="math inline">\(Z\)</span> scores, then the new distribution will have a mean of 0 and a standard deviation of 1. This process of transforming a distribution to one with a mean of 0 and a standard deviation of 1 is called standardizing the distribution. Sometimes it will be easier to work with a standardized version of a variable.</p>
+<section id="log-transformations6" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="log-transformations6"><span class="header-section-number">2.4.1</span> Log Transformations<a href="#_ftn6">[6]</a></h3>
+<p>Sometimes it is also useful to use transformations that are not linear. For example, the log transformation can be used to make highly skewed distributions less skewed. This can be valuable both for making patterns in the data more interpretable and for helping to meet the assumptions of inferential statistics.</p>
+<p><a href="#fig-scatterplotbrainweight" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-scatterplotbrainweight</span></a> shows an example of how a log transformation can make patterns more visible. Both graphs plot the brain weight of animals as a function of their body weight. The raw weights are shown in the upper panel; the log-transformed weights are plotted in the lower panel.</p>
+<div id="fig-scatterplotbrainweight" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scatterplotbrainweight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/Ch2/scatterplotbrainweight.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterplotbrainweight-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Scatter plots of brain weight as a function of body weight in terms of both raw data (upper panel) and log-transformed data (lower panel).
+</figcaption>
+</figure>
+</div>
+<p>It is hard to discern a pattern in the upper panel whereas the strong relationship is shown clearly in the lower panel.</p>
+<hr>
+<p><a href="#_ftnref1">[1]</a> This section is adapted from David M. Lane. “Measures of Central Tendency.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/summarizing_distributions/measures.html" class="uri">http://onlinestatbook.com/2/summarizing_distributions/measures.html</a></p>
+<p><a href="#_ftnref2">[2]</a> More specifically, the arithmetic mean is the most common measure of central tendency. Although the arithmetic mean is not the only “mean” (there is also a geometric mean), it is by far the most commonly used. Therefore, if the term “mean” is used without specifying whether it is the arithmetic mean, the geometric mean, or some other mean, it is assumed to refer to the arithmetic mean.</p>
+<p><a href="#_ftnref3">[3]</a> This section is adapted from David M. Lane. “Comparing Measures of Central Tendency.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/summarizing_distributions/comparing_measures.html" class="uri">http://onlinestatbook.com/2/summarizing_distributions/comparing_measures.html</a></p>
+<p><a href="#_ftnref4">[4]</a> This section is adapted from David M. Lane. “Measures of Variability.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/summarizing_distributions/variability.html" class="uri">http://onlinestatbook.com/2/summarizing_distributions/variability.html</a></p>
+<p><a href="#_ftnref5">[5]</a> The initial part of this section is adapted from David M. Lane. “Linear Transformations.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/linear_transforms.html" class="uri">http://onlinestatbook.com/2/introduction/linear_transforms.html</a>. There is also material adapted from David M. Lane. “Standard Normal Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/standard_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/standard_normal.html</a>.</p>
+<p><a href="#_ftnref6">[6]</a> This subsection is adapted from David M. Lane. “Log Transformations.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/transformations/log.html" class="uri">http://onlinestatbook.com/2/transformations/log.html</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./graphing.html" class="pagination-link" aria-label="Graphical Tools for Describing One Variable at a Time">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing One Variable at a Time</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Chapter3.html" class="pagination-link" aria-label="Tools for Describing the Relationship Between Two Variables">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,45 @@
+project:
+  type: book
+
+book:
+  title: "Statistics Minus The Math"
+  subtitle: "An Introduction for the Social Sciences"
+  author: "Nathan Favero"
+  date: "7/18/2024"
+  license: "CC BY"
+  chapters:
+    - index.qmd
+    - graphing.qmd
+    - describing-one-variable.qmd
+    - correlation.qmd
+    - estimation.qmd
+    - distributions.qmd
+    - sampling-distributions.qmd
+    - h-tests.qmd
+    - comparing-means.qmd
+    - comparing-groups.qmd
+    - causality.qmd
+    - models.qmd
+    - regression-qual-predictors.qmd
+    - regression-qual-outcome.qmd
+    # - references.qmd
+  
+# bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+    header-includes: |
+      \publishers{Get the latest version of this text at: \url{https://minusthemath.com} \bigskip \bigskip \bigskip \bigskip \\
+      \href{https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1}{\includegraphics{Images/by.png}}}
+    # usepackage: amsmath
+
+# editor: visual
+# 
+# output:
+#   pdf_document:
+#     extra_dependencies: "subfig"
+# 
+

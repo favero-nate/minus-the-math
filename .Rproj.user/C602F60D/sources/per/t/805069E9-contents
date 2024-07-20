@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: "Statistics Minus The Math: An Introduction for the Social Sciences"
+  author: "Nathan Favero"
+  date: "2/11/2024"
+  chapters:
+    - index.qmd
+    - Chapter1.qmd
+    - Chapter2.qmd
+    - Chapter3.qmd
+    - Chapter4.qmd
+    - Chapter5.qmd
+    - Chapter6.qmd
+    - Chapter7.qmd
+    - Chapter8.qmd
+    - Chapter9.qmd
+    - Chapter10.qmd
+    - Chapter11.qmd
+    - Chapter12.qmd
+    - Chapter13.qmd
+    - summary.qmd
+    - references.qmd
+  
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    
+  pdf:
+    documentclass: article
+    usepackage: amsmath
+
+editor: visual
+
+output:
+  pdf_document:
+    extra_dependencies: "subfig"
+
+

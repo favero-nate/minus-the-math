@@ -1,0 +1,31 @@
+{
+    "id": "0CAAA798",
+    "path": "~/Desktop/AU/Nathan/Quarto/StatisticsMinusTheMath/Chapter11.qmd",
+    "project_path": "Chapter11.qmd",
+    "type": "quarto_markdown",
+    "hash": "2799667718",
+    "contents": "",
+    "dirty": false,
+    "created": 1708116026711.0,
+    "source_on_save": false,
+    "relative_order": 13,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "cursorPosition": "60,409",
+        "scrollLine": "59",
+        "rmdVisualModeLocation": "2:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1709048143,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1709048143800,
+    "read_only": false,
+    "read_only_alternatives": []
+}
