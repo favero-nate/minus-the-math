@@ -167,7 +167,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -257,7 +257,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></h1>
+<h1 class="title"><span id="sec-describing-one-variable" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></h1>
 </div>
 
 
@@ -343,19 +343,21 @@ Table&nbsp;2.2: Grouped frequency distribution.
 <div aria-describedby="tbl-groupfreqdist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 16%">
+<col style="width: 13%">
 <col style="width: 16%">
 <col style="width: 22%">
-<col style="width: 16%">
+<col style="width: 13%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Range</strong></th>
+<th><strong>Frequency</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Range</strong></td>
-<td><strong>Frequency</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>500-600<br>
 600-700<br>
@@ -380,7 +382,7 @@ Table&nbsp;2.2: Grouped frequency distribution.
 </section>
 <section id="comparing-measures-of-central-tendencydescribing-one-variable-3" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="comparing-measures-of-central-tendencydescribing-one-variable-3"><span class="header-section-number">2.2</span> Comparing Measures of Central Tendency<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h2>
-<p>How do the various measures of central tendency compare with each other? For symmetric distributions, the mean and median are equal, as is the mode except in bimodal distributions. Differences among the measures occur with skewed distributions. <a href="#fig-disposskew" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> shows the distribution of 642 scores on an introductory psychology test. The skew of this distribution can be described as slightly positive, meaning that there are more outliers on the positive (right) side of the distribution (see <a href="distributions.html#sec-shapes-of-distributions" class="quarto-xref"><span>Section 5.1.4</span></a>).</p>
+<p>How do the various measures of central tendency compare with each other? For symmetric distributions, the mean and median are equal, as is the mode except in bimodal distributions. Differences among the measures occur with skewed distributions. <a href="#fig-disposskew" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> shows the distribution of 642 scores on an introductory psychology test. The skew of this distribution can be described as slightly positive, meaning that there are more outliers on the positive (right) side of the distribution (see <a href="prob-distributions.html#sec-shapes-of-distributions" class="quarto-xref"><span>Section 5.1.4</span></a>).</p>
 <div id="fig-disposskew" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-disposskew-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -400,19 +402,21 @@ Table&nbsp;2.3: Measures of central tendency for the test scores.
 <div aria-describedby="tbl-testscoremeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 16%">
+<col style="width: 13%">
 <col style="width: 19%">
 <col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 13%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Measure</strong></th>
+<th><strong>Value</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Measure</strong></td>
-<td><strong>Value</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>Mode<br>
 Median<br>
@@ -431,7 +435,7 @@ Mean</td>
 <div id="fig-bballsalarydist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bballsalarydist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/describing-one-variable/bballsalarydist.jpg" class="img-fluid figure-img">
+<img src="Images/describing-one-variable/bballsalarydist.jpg" class="img-fluid figure-img" width="400">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bballsalarydist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.2: A distribution with a very large positive skew. This histogram shows the salaries of major league baseball players (in thousands of dollars: 25 equals 250,000).
@@ -447,21 +451,23 @@ Table&nbsp;2.4: Measures of central tendency for baseball salaries (in thousands
 <div aria-describedby="tbl-bballmeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 15%">
+<col style="width: 12%">
 <col style="width: 19%">
-<col style="width: 15%">
+<col style="width: 12%">
 <col style="width: 16%">
-<col style="width: 15%">
+<col style="width: 12%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Measure</strong></th>
+<th></th>
+<th><strong>Value</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Measure</strong></td>
-<td></td>
-<td><strong>Value</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>Mode<br>
 Median<br>
@@ -488,13 +494,13 @@ Mean</td>
 <div aria-describedby="fig-quizzes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Images/describing-one-variable/Quiz1.jpg" class="img-fluid figure-img"></p>
+<p><img src="Images/describing-one-variable/Quiz1.jpg" class="img-fluid figure-img" width="425"></p>
 <figcaption>Quiz 1</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Images/describing-one-variable/Quiz2.jpg" class="img-fluid figure-img"></p>
+<p><img src="Images/describing-one-variable/Quiz2.jpg" class="img-fluid figure-img" width="425"></p>
 <figcaption>Quiz 2</figcaption>
 </figure>
 </div>
@@ -537,27 +543,20 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 <col style="width: 23%">
 <col style="width: 8%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Scores</strong></th>
+<th></th>
+<th><strong>Deviation from Mean</strong></th>
+<th></th>
+<th><strong>Squared Deviation</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td></td>
-<td><strong>Scores</strong></td>
-<td></td>
-<td><strong>Deviation from Mean</strong></td>
-<td></td>
-<td><strong>Squared Deviation</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>9</td>
-<td></td>
-<td>2</td>
-<td></td>
-<td>4</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
 <td>9</td>
 <td></td>
 <td>2</td>
@@ -576,146 +575,146 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 </tr>
 <tr class="odd">
 <td></td>
-<td>8</td>
+<td>9</td>
 <td></td>
-<td>1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>8</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>8</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>8</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>7</td>
-<td></td>
-<td>0</td>
-<td></td>
-<td>0</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>7</td>
-<td></td>
-<td>0</td>
-<td></td>
-<td>0</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>7</td>
-<td></td>
-<td>0</td>
-<td></td>
-<td>0</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>7</td>
-<td></td>
-<td>0</td>
-<td></td>
-<td>0</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>7</td>
-<td></td>
-<td>0</td>
-<td></td>
-<td>0</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>6</td>
-<td></td>
-<td>-1</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>5</td>
-<td></td>
-<td>-2</td>
+<td>2</td>
 <td></td>
 <td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>8</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>7</td>
+<td></td>
+<td>0</td>
+<td></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>-1</td>
+<td></td>
+<td>1</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -728,6 +727,15 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 <td></td>
 </tr>
 <tr class="even">
+<td></td>
+<td>5</td>
+<td></td>
+<td>-2</td>
+<td></td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="odd">
 <td></td>
 <td></td>
 <td></td>
@@ -736,7 +744,7 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>7</td>
 <td></td>
@@ -787,21 +795,23 @@ Table&nbsp;2.6: Converting between feet and inches.
 <div aria-describedby="tbl-heightconversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
+<col style="width: 11%">
 <col style="width: 15%">
-<col style="width: 13%">
+<col style="width: 11%">
 <col style="width: 18%">
-<col style="width: 13%">
+<col style="width: 11%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Feet</strong></th>
+<th></th>
+<th><strong>Inches</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Feet</strong></td>
-<td></td>
-<td><strong>Inches</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>5.00<br>
 6.25<br>
@@ -836,17 +846,19 @@ Table&nbsp;2.7: Temperatures in 5 cities on 11/16/2002.
 <col style="width: 23%">
 <col style="width: 8%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>City</strong></th>
+<th></th>
+<th><strong>Degrees Fahrenheit</strong></th>
+<th></th>
+<th><strong>Degrees Centigrade</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>City</strong></td>
-<td></td>
-<td><strong>Degrees Fahrenheit</strong></td>
-<td></td>
-<td><strong>Degrees Centigrade</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>Houston<br>
 Chicago<br>
@@ -885,7 +897,7 @@ C = 0.5556F - 17.778
 <div id="fig-cfunctionf" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cfunctionf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/describing-one-variable/cfunctionf.png" class="img-fluid figure-img">
+<img src="Images/describing-one-variable/cfunctionf.png" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cfunctionf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.4: Degrees Centigrade as a function of degrees Fahrenheit.

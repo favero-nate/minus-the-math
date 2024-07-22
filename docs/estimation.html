@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./distributions.html" rel="next">
+<link href="./prob-distributions.html" rel="next">
 <link href="./correlation.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -167,7 +167,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -229,7 +229,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#populations-and-sampleschapter4-1" id="toc-populations-and-sampleschapter4-1" class="nav-link active" data-scroll-target="#populations-and-sampleschapter4-1"><span class="header-section-number">4.1</span> Populations and Samples</a>
+  <li><a href="#populations-and-samplesestimation-1" id="toc-populations-and-samplesestimation-1" class="nav-link active" data-scroll-target="#populations-and-samplesestimation-1"><span class="header-section-number">4.1</span> Populations and Samples</a>
   <ul class="collapse">
   <li><a href="#simple-random-sampling" id="toc-simple-random-sampling" class="nav-link" data-scroll-target="#simple-random-sampling"><span class="header-section-number">4.1.1</span> Simple Random Sampling</a></li>
   <li><a href="#sample-size-matters" id="toc-sample-size-matters" class="nav-link" data-scroll-target="#sample-size-matters"><span class="header-section-number">4.1.2</span> Sample size matters</a></li>
@@ -237,9 +237,9 @@ window.Quarto = {
   <li><a href="#random-assignment" id="toc-random-assignment" class="nav-link" data-scroll-target="#random-assignment"><span class="header-section-number">4.1.4</span> Random Assignment</a></li>
   <li><a href="#stratified-sampling" id="toc-stratified-sampling" class="nav-link" data-scroll-target="#stratified-sampling"><span class="header-section-number">4.1.5</span> Stratified Sampling</a></li>
   </ul></li>
-  <li><a href="#confidence-intervalschapter4-2" id="toc-confidence-intervalschapter4-2" class="nav-link" data-scroll-target="#confidence-intervalschapter4-2"><span class="header-section-number">4.2</span> Confidence Intervals</a></li>
+  <li><a href="#confidence-intervalsestimation-2" id="toc-confidence-intervalsestimation-2" class="nav-link" data-scroll-target="#confidence-intervalsestimation-2"><span class="header-section-number">4.2</span> Confidence Intervals</a></li>
   <li><a href="#sec-using-confidence-intervals" id="toc-sec-using-confidence-intervals" class="nav-link" data-scroll-target="#sec-using-confidence-intervals"><span class="header-section-number">4.3</span> Using Confidence Intervals</a></li>
-  <li><a href="#interpreting-confidence-intervals-correctlychapter4-6" id="toc-interpreting-confidence-intervals-correctlychapter4-6" class="nav-link" data-scroll-target="#interpreting-confidence-intervals-correctlychapter4-6"><span class="header-section-number">4.4</span> Interpreting Confidence Intervals Correctly</a></li>
+  <li><a href="#sec-interpreting-confidence-intervals-correctly" id="toc-sec-interpreting-confidence-intervals-correctly" class="nav-link" data-scroll-target="#sec-interpreting-confidence-intervals-correctly"><span class="header-section-number">4.4</span> Interpreting Confidence Intervals Correctly</a></li>
   </ul>
 </nav>
     </div>
@@ -265,8 +265,8 @@ window.Quarto = {
 </header>
 
 
-<section id="populations-and-sampleschapter4-1" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="populations-and-sampleschapter4-1"><span class="header-section-number">4.1</span> Populations and Samples<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="populations-and-samplesestimation-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="populations-and-samplesestimation-1"><span class="header-section-number">4.1</span> Populations and Samples<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
 <p>In statistics, we often rely on a <strong>sample</strong> — that is, a small subset of a larger set of data — to draw inferences about the larger set. The larger set is known as the <strong>population</strong> from which the sample is drawn.</p>
 <blockquote class="blockquote">
 <p>Example #1: You have been hired by the National Election Commission to examine how the American people feel about the fairness of the voting procedures in the U.S. Whom will you ask?</p>
@@ -311,8 +311,8 @@ window.Quarto = {
 <p>Let’s take an example: Suppose you were interested in views of capital punishment at an urban university. You have the time and resources to interview 200 students. The student body is diverse with respect to age; many older people work during the day and enroll in night courses (average age is 39), while younger students generally enroll in day classes (average age of 19). It is possible that night students have different views about capital punishment than day students. If 70% of the students were day students, it makes sense to ensure that 70% of the sample consisted of day students. Thus, your sample of 200 students would consist of 140 day students and 60 night students. The proportion of day students in the sample and in the population (the entire university) would be the same. Inferences to the entire population of students at the university would therefore be more secure.</p>
 </section>
 </section>
-<section id="confidence-intervalschapter4-2" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="confidence-intervalschapter4-2"><span class="header-section-number">4.2</span> Confidence Intervals<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
+<section id="confidence-intervalsestimation-2" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="confidence-intervalsestimation-2"><span class="header-section-number">4.2</span> Confidence Intervals<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
 <p>Say you were interested in the mean weight of 10-year-old girls living in the United States. Since it would have been impractical to weigh all the 10-year-old girls in the United States, you took a sample of 16 and found that the mean weight was 90 pounds. This sample mean of 90 is a <strong>point estimate</strong> of the population mean. A point estimate by itself is of limited usefulness because it does not reveal the uncertainty associated with the estimate; you do not have a good sense of how far this sample mean may be from the population mean. For example, can you be confident that the population mean is within 5 pounds of 90? You simply do not know.</p>
 <p>Confidence intervals provide more information than point estimates. Confidence intervals for means are intervals constructed using a procedure that will contain the population mean a specified proportion of the time, typically either 95% or 99% of the time. These intervals are referred to as 95% and 99% confidence intervals respectively. An example of a 95% confidence interval is shown below:</p>
 <p><span class="math display">\[
@@ -320,12 +320,12 @@ window.Quarto = {
 \]</span></p>
 <p>There is good reason to believe that the population mean lies between these two bounds of 72.85 and 107.15 since 95% of the time confidence intervals contain the true mean.</p>
 <p>If repeated samples were taken and the 95% confidence interval computed for each sample, 95% of the intervals would contain the population mean. Naturally, 5% of the intervals would not contain the population mean.</p>
-<p>It is natural to interpret a 95% confidence interval as an interval with a 0.95 probability of containing the population mean. However, the proper interpretation is not that simple (see [Interpreting Confidence Intervals Correctly]). One problem is that the computation of a confidence interval does not take into account any other information you might have about the value of the population mean. For example, if numerous prior studies had all found sample means above 110, it would not make sense to conclude that there is a 0.95 probability that the population mean is between 72.85 and 107.15.</p>
+<p>It is natural to interpret a 95% confidence interval as an interval with a 0.95 probability of containing the population mean. However, the proper interpretation is not that simple (as will be explained more fully in <a href="#sec-interpreting-confidence-intervals-correctly" class="quarto-xref"><span>Section 4.4</span></a>). One problem is that the computation of a confidence interval does not take into account any other information you might have about the value of the population mean. For example, if numerous prior studies had all found sample means above 110, it would not make sense to conclude that there is a 0.95 probability that the population mean is between 72.85 and 107.15.</p>
 <p>Confidence intervals can be computed for various <strong>parameters</strong>,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> not just the mean. For example, it is common to compute a confidence interval for <span class="math inline">\(\rho\)</span>, the population value of Pearson’s r, based on sample data.</p>
 </section>
 <section id="sec-using-confidence-intervals" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-using-confidence-intervals"><span class="header-section-number">4.3</span> Using Confidence Intervals<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
-<p>It is much more common for a researcher to be interested in the difference between means than in the specific values of the means themselves. Using statistical jargon we just learned, we could therefore say that the <em>parameter of interest</em> is often the difference in population means. We take as an example the data from the “Animal Research”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> case study. In this experiment, students rated (on a 7-point scale) whether they thought animal research is wrong. The sample sizes, means, and variances are shown separately for males and females in <a href="#tbl-animalresearchmeanvar" class="quarto-xref">Table&nbsp;<span>4.1</span></a>.</p>
+<p>It is much more common for a researcher to be interested in the difference between means than in the specific values of the means themselves. Using statistical jargon introduced in the prior section, we could therefore say that the <em>parameter of interest</em> is often the difference in population means. We take as an example the data from the “Animal Research”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> case study. In this experiment, students rated (on a 7-point scale) whether they thought animal research is wrong. The sample sizes, means, and variances are shown separately for males and females in <a href="#tbl-animalresearchmeanvar" class="quarto-xref">Table&nbsp;<span>4.1</span></a>.</p>
 <div id="tbl-animalresearchmeanvar" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-animalresearchmeanvar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -371,8 +371,8 @@ Table&nbsp;4.1: Means and Variances in Animal Research study.
 <p>where <span class="math inline">\(μ_f\)</span> is the population mean for females and <span class="math inline">\(μ_m\)</span> is the population mean for males. Since the difference in these population means is the main parameter we wish to estimate, we could say the confidence interval for the parameter of interest is [0.29, 2.65]. Because all values within this range are positive, this analysis provides evidence that the mean for females is higher than the mean for males. More specifically, the difference between means in the population is likely to be between 0.29 and 2.65. Note that since 0 does not fall within the range of the confidence interval, this suggests that there <em>is</em> a difference between males and females, so we can also say that the results are <strong>statistically significant</strong>.</p>
 <p>If, instead, we had found a confidence interval of [-1.03, 2.65], we could not rule out the possibility of no difference between males and females, since 0 falls between -1.03 and 2.65.</p>
 </section>
-<section id="interpreting-confidence-intervals-correctlychapter4-6" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="interpreting-confidence-intervals-correctlychapter4-6"><span class="header-section-number">4.4</span> Interpreting Confidence Intervals Correctly<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></h2>
+<section id="sec-interpreting-confidence-intervals-correctly" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-interpreting-confidence-intervals-correctly"><span class="header-section-number">4.4</span> Interpreting Confidence Intervals Correctly<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></h2>
 <p>While confidence intervals are very useful, it is difficult to provide a technically-accurate interpretation of one.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> That is because the “% confidence” in a “95% confidence interval for the mean” refers to the accuracy of the <em>process</em> of creating a confidence interval—not the probability that a specific confidence interval we encounter will contain the true value of the population mean. If this distinction seems confusing, it is!</p>
 <p>Fortunately, even if you miss the precise details, you will still probably get something useful out of confidence intervals.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Nonetheless, let’s try to set the record straight.</p>
 <p>An analogy may help. Suppose you are interacting with a chatbot that is truthful 95% of the time and lies the other 5%.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> For each statement, will you always conclude it has a 95% chance of being true? Not necessarily. If the chatbot discusses a topic you already know a lot about, you will probably be able to pick out the lies from the true statements with fairly high confidence. Some things the bot says will be things you know to be true, so you can be nearly 100% sure they are true. Other statements will be things you’re quite sure are wrong, so you will conclude that the probability they are true is close to 0%. If you wanted to be very systematic, you could even use the mathematical formula known as Bayes’ theorem<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> to combine your prior knowledge of a statement’s probability of being true with the fact that a 95%-accurate bot claimed the statement was true, allowing you to precisely quantify how confident you should be about the statement’s truth in the end.&nbsp;</p>
@@ -826,7 +826,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./distributions.html" class="pagination-link" aria-label="Probability Distributions">
+      <a href="./prob-distributions.html" class="pagination-link" aria-label="Probability Distributions">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

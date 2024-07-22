@@ -167,7 +167,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -229,16 +229,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#difference-between-two-means1" id="toc-difference-between-two-means1" class="nav-link active" data-scroll-target="#difference-between-two-means1"><span class="header-section-number">8.1</span> Difference between Two Means[1]</a>
+  <li><a href="#difference-between-two-meanscomparing-means-1" id="toc-difference-between-two-meanscomparing-means-1" class="nav-link active" data-scroll-target="#difference-between-two-meanscomparing-means-1"><span class="header-section-number">8.1</span> Difference between Two Means</a>
   <ul class="collapse">
   <li><a href="#formatting-data-for-computer-analysis" id="toc-formatting-data-for-computer-analysis" class="nav-link" data-scroll-target="#formatting-data-for-computer-analysis"><span class="header-section-number">8.1.1</span> Formatting Data for Computer Analysis</a></li>
   </ul></li>
-  <li><a href="#pairwise-comparisons-among-multiple-means4" id="toc-pairwise-comparisons-among-multiple-means4" class="nav-link" data-scroll-target="#pairwise-comparisons-among-multiple-means4"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means[4]</a>
+  <li><a href="#pairwise-comparisons-among-multiple-meanscomparing-means-5" id="toc-pairwise-comparisons-among-multiple-meanscomparing-means-5" class="nav-link" data-scroll-target="#pairwise-comparisons-among-multiple-meanscomparing-means-5"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means</a>
   <ul class="collapse">
   <li><a href="#computer-analysis" id="toc-computer-analysis" class="nav-link" data-scroll-target="#computer-analysis"><span class="header-section-number">8.2.1</span> Computer Analysis</a></li>
   <li><a href="#tukeys-test-need-not-be-a-follow-up-to-anova" id="toc-tukeys-test-need-not-be-a-follow-up-to-anova" class="nav-link" data-scroll-target="#tukeys-test-need-not-be-a-follow-up-to-anova"><span class="header-section-number">8.2.2</span> Tukey’s Test Need Not be a Follow-Up to ANOVA</a></li>
   </ul></li>
-  <li><a href="#analysis-of-variance-anova7" id="toc-analysis-of-variance-anova7" class="nav-link" data-scroll-target="#analysis-of-variance-anova7"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)[7]</a></li>
+  <li><a href="#analysis-of-variance-anovacomparing-means-8" id="toc-analysis-of-variance-anovacomparing-means-8" class="nav-link" data-scroll-target="#analysis-of-variance-anovacomparing-means-8"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +247,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></h1>
+<h1 class="title"><span id="sec-comparing-means" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></h1>
 </div>
 
 
@@ -264,10 +264,10 @@ window.Quarto = {
 </header>
 
 
-<section id="difference-between-two-means1" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="difference-between-two-means1"><span class="header-section-number">8.1</span> Difference between Two Means<a href="#_ftn1">[1]</a></h2>
+<section id="difference-between-two-meanscomparing-means-1" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="difference-between-two-meanscomparing-means-1"><span class="header-section-number">8.1</span> Difference between Two Means<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
 <p>It is much more common for a researcher to be interested in the difference between means than in the specific values of the means themselves. This section covers how to test for differences between means from two separate groups of subjects. Note that we already learned in the chapter on graphing how to visually depict a comparison of two means/medians using boxplots (<a href="graphing.html#sec-box-plots" class="quarto-xref"><span>Section 1.4.2</span></a>).</p>
-<p>We take as an example the data from the “Animal Research” case study, previously described when discussing confidence intervals (<a href="estimation.html#sec-using-confidence-intervals" class="quarto-xref"><span>Section 4.3</span></a>).<a href="#_ftn2">[2]</a> As a reminder, students rated (on a 7-point scale) whether they thought animal research is wrong. The sample sizes, means, and variances are shown separately for males and females in <a href="#tbl-meansvaranimalresearch" class="quarto-xref">Table&nbsp;<span>8.1</span></a>.</p>
+<p>We take as an example the data from the “Animal Research” case study, previously described when discussing confidence intervals (<a href="estimation.html#sec-using-confidence-intervals" class="quarto-xref"><span>Section 4.3</span></a>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> As a reminder, students rated (on a 7-point scale) whether they thought animal research is wrong.</p>
 <div id="tbl-meansvaranimalresearch" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meansvaranimalresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -286,19 +286,21 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <col style="width: 20%">
 <col style="width: 7%">
 </colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Group</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>n</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Mean</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Variance</strong></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Group</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>n</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Mean</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Variance</strong></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Females</td>
 <td style="text-align: center;"></td>
@@ -309,7 +311,7 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <td style="text-align: center;">2.743</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Males</td>
 <td style="text-align: center;"></td>
@@ -325,8 +327,8 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 </div>
 </figure>
 </div>
-<p>As you can see, the females rated animal research as more wrong than did the males. This sample difference between the female mean of 5.35 and the male mean of 3.88 is 1.47. However, the gender difference in this particular sample is not very important. What is important is whether there is a difference in the <em>population</em> means.</p>
-<p>In order to test whether there is a difference between population means, we are going to make three assumptions:</p>
+<p>As we noted previously, the female mean is 1.47 units higher than the male mean (<a href="#tbl-meansvaranimalresearch" class="quarto-xref">Table&nbsp;<span>8.1</span></a>). This is just the difference in our sample, however, and we wish to draw an inference about the difference in the <em>population</em> means.</p>
+<p>In order to test whether there is a difference between population means, we are going to make three assumptions (just as we did when constructing a confidence interval):</p>
 <ol type="1">
 <li><p>The two populations have the same variance. This assumption is called the assumption of homogeneity of variance.</p></li>
 <li><p>The populations are normally distributed.</p></li>
@@ -341,35 +343,35 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <p>We continue to use the data from the “Animal Research” case study and will compute a significance test on the difference between the mean score of the females and the mean score of the males. For this calculation, we will make the three assumptions specified above.</p>
 <p>The first step is to compute the statistic, which is simply the difference between means.</p>
 <p><span class="math display">\[
-M_1 - M_2 = 5.3529 - 3.8824 = 1.4705
+\bar{X}_1 - \bar{X}_2 = 5.3529 - 3.8824 = 1.4705
 \]</span></p>
 <p>Since the hypothesized value is 0, we do not need to subtract it from the statistic.</p>
-<p>The next step is to compute the estimate of the standard error of the statistic. In this case, the statistic is the difference between means, so the estimated standard error of the statistic is (<span class="math inline">\(S_{M1}-{_M}_2\)</span>). Recall from the <a href="http://onlinestatbook.com/2/sampling_distributions/samplingdist_diff_means.html">relevant section</a> in the chapter on sampling distributions that the formula for the standard error of the difference between means is:</p>
+<p>The next step is to compute the estimate of the standard error of the statistic. In this case, the statistic is the difference between means, so the estimated standard error of the statistic is (<span class="math inline">\(s_{\bar{X}_1 - \bar{X}_2}\)</span>, or more simply <span class="math inline">\(s_{\text{diff}}\)</span>). The formula for the standard error of the difference between means is:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p><span class="math display">\[
-σ_{M1-M2} = \sqrt{\frac{σ^2_1}{n_1}+\frac{σ^2_2}{n_12}} = \sqrt{\frac{σ^2}{n}+\frac{σ^2}{n}} = \sqrt{\frac{2σ^2}{n}}
+\sigma_{\text{diff}} = \sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}} = \sqrt{\frac{\sigma^2}{n}+\frac{\sigma^2}{n}} = \sqrt{\frac{2\sigma^2}{n}}
 \]</span></p>
-<p>In order to estimate this quantity, we estimate σ<sup>2</sup> and use that estimate in place of σ<sup>2</sup>. Since we are assuming the two population variances are the same, we estimate this variance by averaging our two sample variances. Thus, our estimate of variance is computed using the following formula:</p>
+<p>In order to estimate this quantity, we estimate <span class="math inline">\(\sigma^2\)</span> and use that estimate in place of <span class="math inline">\(\sigma^2\)</span>. Since we are assuming the two population variances are the same, we estimate this variance by averaging our two sample variances. Thus, our estimate of variance is computed using the following formula:</p>
 <p><span class="math display">\[
 \text{MSE}= \frac{s^2_1+s^2_2}{2}
 \]</span></p>
-<p>where MSE is our estimate of <span class="math inline">\(σ^2\)</span>. In this example,</p>
+<p>where MSE is our estimate of <span class="math inline">\(\sigma^2\)</span>. In this example,</p>
 <p><span class="math display">\[
 \text{MSE} = (2.743 + 2.985)/2 = 2.864.
 \]</span></p>
 <p>Since n (the number of scores in each group) is 17,</p>
 <p><span class="math display">\[
-S_{M1-M2} = \sqrt{\frac{2MSE}{n}} = \sqrt{\frac{(2)(2.864)}{17}} = 0.5805
+S_{\text{diff}} = \sqrt{\frac{2MSE}{n}} = \sqrt{\frac{(2)(2.864)}{17}} = 0.5805
 \]</span></p>
 <p>The next step is to compute t by plugging these values into the formula:</p>
 <p><span class="math display">\[
 t = 1.4705/.5805 = 2.533.
 \]</span></p>
 <p>Finally, we compute the probability of getting a <span class="math inline">\(t\)</span> as large or larger than 2.533 or as small or smaller than -2.533. To do this, we need to know the degrees of freedom. The degrees of freedom is the number of independent estimates of variance on which <span class="math inline">\(MSE\)</span> is based. This is equal to (<span class="math inline">\(n_1\)</span> - 1) + (<span class="math inline">\(n_2\)</span> - 1), where <span class="math inline">\(n_1\)</span> is the sample size of the first group and <span class="math inline">\(n_2\)</span> is the sample size of the second group. For this example, <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span> = 17. When <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span>, it is conventional to use “<span class="math inline">\(n\)</span>” to refer to the sample size of each group. Therefore, the degrees of freedom is 16 + 16 = 32.</p>
-<p>Once we have the degrees of freedom, we can use a t distribution calculator<a href="#_ftn3">[3]</a> to find the probability. <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows that the probability value for a two-tailed test is 0.0164. The two-tailed test is used when the null hypothesis can be rejected regardless of the direction of the effect. As shown in <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, it is the probability of a t &lt; -2.533 or a t &gt; 2.533.</p>
+<p>Once we have the degrees of freedom, we can use a t distribution calculator<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to find the probability. <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows that the probability value for a two-tailed test is 0.0164. The two-tailed test is used when the null hypothesis can be rejected regardless of the direction of the effect. As shown in <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, it is the probability of a t &lt; -2.533 or a t &gt; 2.533.</p>
 <div id="fig-2tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch8/2tailprob.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/2tailprob.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.1: The two-tailed probability.
@@ -380,7 +382,7 @@ Figure&nbsp;8.1: The two-tailed probability.
 <div id="fig-1tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch8/1tailprob.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/1tailprob.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.2: The one-tailed probability.
@@ -497,9 +499,9 @@ Table&nbsp;8.3: Reformatted data.
 <p>Using statistical software, we’d find that the t value is -0.718, the df = 4, and p = 0.512.</p>
 </section>
 </section>
-<section id="pairwise-comparisons-among-multiple-means4" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="pairwise-comparisons-among-multiple-means4"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means<a href="#_ftn4">[4]</a></h2>
-<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#_ftn5">[5]</a> In this study, the effect of different types of smiles on the leniency shown to a person was investigated. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>8.4</span></a>.</p>
+<section id="pairwise-comparisons-among-multiple-meanscomparing-means-5" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="pairwise-comparisons-among-multiple-meanscomparing-means-5"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h2>
+<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In this study, the effect of different types of smiles on the leniency shown to a person was investigated. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>8.4</span></a>.</p>
 <div id="tbl-feltmisneutral" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -515,18 +517,18 @@ Table&nbsp;8.4: Six Comparisons among Means.
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">felt vs.&nbsp;miserable</td>
-<td style="text-align: center;"><img src="Images/Ch8/feltjpg.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/Ch8/miserable.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/feltjpg.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">felt vs.&nbsp;neutral</td>
-<td style="text-align: center;"><img src="Images/Ch8/feltjpg.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/Ch8/neutral.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/feltjpg.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">miserable vs.&nbsp;neutral</td>
-<td style="text-align: center;"><img src="Images/Ch8/miserable.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/Ch8/neutral.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
+<td style="text-align: center;"><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
 </tr>
 </tbody>
 </table>
@@ -537,7 +539,7 @@ Table&nbsp;8.4: Six Comparisons among Means.
 <div id="fig-pairwisecompfmean" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch8/pairwisecompfmean.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/pairwisecompfmean.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.3: Number of pairwise comparisons as a function of the number of means.
@@ -548,7 +550,7 @@ Figure&nbsp;8.3: Number of pairwise comparisons as a function of the number of m
 <div id="fig-type1error" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch8/type1error.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/type1error.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.4: Probability of a Type I error as a function of the number of means.
@@ -614,11 +616,11 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 <li><p>Compute</p></li>
 </ol>
 <p><span class="math display">\[
-Q=\frac{M_i-M_j}{\sqrt{\frac{MSE}{n}}}
+Q=\frac{\bar{X}_i-\bar{X}_j}{\sqrt{\frac{MSE}{n}}}
 \]</span></p>
-<p>for each pair of means, where <span class="math inline">\(M_i\)</span> is one mean, <span class="math inline">\(M_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279.</p>
+<p>for each pair of means, where <span class="math inline">\(\bar{X}_i\)</span> is one mean, <span class="math inline">\(\bar{X}_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279.</p>
 <ol start="4" type="1">
-<li>Compute p for each comparison using a Studentized Range Calculator.<a href="#_ftn6">[6]</a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</li>
+<li>Compute p for each comparison using a Studentized Range Calculator.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</li>
 </ol>
 <p>The tests for these data are shown in <a href="#tbl-6pairwisecomp" class="quarto-xref">Table&nbsp;<span>8.5</span></a>.</p>
 <div id="tbl-6pairwisecomp" class="quarto-float anchored">
@@ -629,29 +631,31 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <div aria-describedby="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 28%">
-<col style="width: 6%">
-<col style="width: 20%">
-<col style="width: 6%">
-<col style="width: 9%">
-<col style="width: 6%">
-<col style="width: 9%">
-<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
 </colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Comparison</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(\bar{X}_i - \bar{X}_j\)</span></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Comparison</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>M<sub>i</sub>-M<sub>j</sub></strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Q</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>p</strong></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">False - Felt</td>
 <td style="text-align: center;"></td>
@@ -662,7 +666,7 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <td style="text-align: center;">0.649</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">False - Miserable</td>
 <td style="text-align: center;"></td>
@@ -673,7 +677,7 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <td style="text-align: center;">0.649</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">False - Neutral</td>
 <td style="text-align: center;"></td>
@@ -684,7 +688,7 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <td style="text-align: center;">0.010</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Felt - Miserable</td>
 <td style="text-align: center;"></td>
@@ -695,7 +699,7 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <td style="text-align: center;">1.000</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Felt - Neutral</td>
 <td style="text-align: center;"></td>
@@ -706,7 +710,7 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <td style="text-align: center;">0.193</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Miserable - Neutral</td>
 <td style="text-align: center;"></td>
@@ -734,10 +738,10 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 <p>Some textbooks introduce the Tukey test only as a follow-up to an analysis of variance. There is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA (or even know what one is). If you or your instructor do not wish to take our word for this, see the excellent article on this and other issues in statistical analysis by Leland Wilkinson and the APA Board of Scientific Affairs’ Task Force on Statistical Inference, published in the <em>American Psychologist</em>, August 1999, Vol. <em>54</em>, No.&nbsp;8, 594–604.</p>
 </section>
 </section>
-<section id="analysis-of-variance-anova7" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="analysis-of-variance-anova7"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)<a href="#_ftn7">[7]</a></h2>
+<section id="analysis-of-variance-anovacomparing-means-8" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="analysis-of-variance-anovacomparing-means-8"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></h2>
 <p><strong>Analysis of Variance (ANOVA)</strong> is a statistical method used to test differences between two or more means. It may seem odd that the technique is called “Analysis of Variance” rather than “Analysis of Means.” As you will see, the name is appropriate because inferences about means are made by analyzing variance.</p>
-<p>ANOVA is used to test general rather than specific differences among means. This can be seen best by example. In the case study “Smiles and Leniency,”<a href="#_ftn8">[8]</a> the effect of different types of smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, miserable) were investigated. In the prior section, we learned how to test differences among means. The results from the Tukey HSD test are shown in <a href="#tbl-6pairwisecomp2" class="quarto-xref">Table&nbsp;<span>8.6</span></a>.</p>
+<p>ANOVA is used to test general rather than specific differences among means. This can be seen best by example. In the case study “Smiles and Leniency,”<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> the effect of different types of smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, miserable) were investigated. In the prior section, we learned how to test differences among means. The results from the Tukey HSD test are shown in <a href="#tbl-6pairwisecomp2" class="quarto-xref">Table&nbsp;<span>8.6</span></a>.</p>
 <div id="tbl-6pairwisecomp2" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -746,29 +750,31 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <div aria-describedby="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 28%">
-<col style="width: 6%">
-<col style="width: 20%">
-<col style="width: 6%">
-<col style="width: 9%">
-<col style="width: 6%">
-<col style="width: 9%">
-<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Comparison</th>
+<th></th>
+<th><span class="math inline">\(\bar{X}_i-\bar{X}_j\)</span></th>
+<th></th>
+<th><span class="math inline">\(Q\)</span></th>
+<th></th>
+<th><span class="math inline">\(p\)</span></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Comparison</strong></td>
-<td></td>
-<td><strong>M<sub>i</sub>-M<sub>j</sub></strong></td>
-<td></td>
-<td><strong>Q</strong></td>
-<td></td>
-<td><strong>p</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>False - Felt</td>
 <td></td>
@@ -779,7 +785,7 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <td>0.649</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>False - Miserable</td>
 <td></td>
@@ -790,7 +796,7 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <td>0.649</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>False - Neutral</td>
 <td></td>
@@ -801,7 +807,7 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <td>0.010</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>Felt - Miserable</td>
 <td></td>
@@ -812,7 +818,7 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <td>1.000</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>Felt - Neutral</td>
 <td></td>
@@ -823,7 +829,7 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <td>0.193</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>Miserable - Neutral</td>
 <td></td>
@@ -847,16 +853,30 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <p>This non-specific null hypothesis is sometimes called the omnibus null hypothesis. When the omnibus null hypothesis is rejected, the conclusion is that at least one population mean is different from at least one other mean. However, since the ANOVA does not reveal which means are different from which, it offers less specific information than the Tukey HSD test. The Tukey HSD is therefore preferable to ANOVA in this situation. Some textbooks introduce the Tukey test only as a follow-up to an ANOVA. However, there is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA.</p>
 <p>You might be wondering why you should learn about ANOVA when the Tukey test is better. One reason is that there are complex types of analyses that can be done with ANOVA and not with the Tukey test. A second is that ANOVA is by far the most commonly-used technique for comparing means, and it is important to understand ANOVA in order to understand research reports.</p>
 <hr>
-<p><a href="#_ftnref1">[1]</a> This section is adapted from David M. Lane. “Difference between Two Means (Independent Groups).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/difference_means.html" class="uri">http://onlinestatbook.com/2/tests_of_means/difference_means.html</a></p>
-<p><a href="#_ftnref2">[2]</a> <a href="http://onlinestatbook.com/2/case_studies/animal_research.html" class="uri">http://onlinestatbook.com/2/case_studies/animal_research.html</a></p>
-<p><a href="#_ftnref3">[3]</a> <a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a></p>
-<p><a href="#_ftnref4">[4]</a> This section is adapted from David M. Lane. “All Pairwise Comparisons Among Means.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/pairwise.html" class="uri">http://onlinestatbook.com/2/tests_of_means/pairwise.html</a></p>
-<p><a href="#_ftnref5">[5]</a> <a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a></p>
-<p><a href="#_ftnref6">[6]</a> <a href="http://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">http://onlinestatbook.com/2/calculators/studentized_range_dist.html</a></p>
-<p><a href="#_ftnref7">[7]</a> This section is adapted from David M. Lane. “Introduction.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/analysis_of_variance/intro.html" class="uri">http://onlinestatbook.com/2/analysis_of_variance/intro.html</a></p>
-<p><a href="#_ftnref8">[8]</a> <a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a></p>
+<p><a href="#_ftnref1">[1]</a></p>
+<p><a href="#_ftnref2">[2]</a></p>
+<p><a href="#_ftnref3">[3]</a></p>
+<p><a href="#_ftnref4">[4]</a></p>
+<p><a href="#_ftnref5">[5]</a></p>
+<p><a href="#_ftnref6">[6]</a></p>
+<p><a href="#_ftnref7">[7]</a></p>
+<p><a href="#_ftnref8">[8]</a></p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This section is adapted from David M. Lane. “Difference between Two Means (Independent Groups).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/difference_means.html" class="uri">http://onlinestatbook.com/2/tests_of_means/difference_means.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://onlinestatbook.com/2/case_studies/animal_research.html" class="uri">http://onlinestatbook.com/2/case_studies/animal_research.html</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For a more detailed discussion, see <a href="http://onlinestatbook.com/2/sampling_distributions/samplingdist_diff_means.html" class="uri">http://onlinestatbook.com/2/sampling_distributions/samplingdist_diff_means.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This section is adapted from David M. Lane. “All Pairwise Comparisons Among Means.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/pairwise.html" class="uri">http://onlinestatbook.com/2/tests_of_means/pairwise.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="http://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">http://onlinestatbook.com/2/calculators/studentized_range_dist.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This section is adapted from David M. Lane. “Introduction.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/analysis_of_variance/intro.html" class="uri">http://onlinestatbook.com/2/analysis_of_variance/intro.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

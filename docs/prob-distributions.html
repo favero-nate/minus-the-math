@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./distributions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-distributions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -138,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link active">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -200,18 +229,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#various-types-of-distributions1" id="toc-various-types-of-distributions1" class="nav-link active" data-scroll-target="#various-types-of-distributions1"><span class="header-section-number">5.1</span> Various Types of Distributions[1]</a>
+  <li><a href="#various-types-of-distributionsprob-distributions-1" id="toc-various-types-of-distributionsprob-distributions-1" class="nav-link active" data-scroll-target="#various-types-of-distributionsprob-distributions-1"><span class="header-section-number">5.1</span> Various Types of Distributions</a>
   <ul class="collapse">
-  <li><a href="#distributions-of-discrete-variables" id="toc-distributions-of-discrete-variables" class="nav-link" data-scroll-target="#distributions-of-discrete-variables"><span class="header-section-number">5.1.1</span> Distributions of Discrete Variables</a></li>
+  <li><a href="#distributions-of-qualitative-or-discrete-variables" id="toc-distributions-of-qualitative-or-discrete-variables" class="nav-link" data-scroll-target="#distributions-of-qualitative-or-discrete-variables"><span class="header-section-number">5.1.1</span> Distributions of Qualitative or Discrete Variables</a></li>
   <li><a href="#continuous-variables" id="toc-continuous-variables" class="nav-link" data-scroll-target="#continuous-variables"><span class="header-section-number">5.1.2</span> Continuous Variables</a></li>
   <li><a href="#probability-densities" id="toc-probability-densities" class="nav-link" data-scroll-target="#probability-densities"><span class="header-section-number">5.1.3</span> Probability Densities</a></li>
   <li><a href="#sec-shapes-of-distributions" id="toc-sec-shapes-of-distributions" class="nav-link" data-scroll-target="#sec-shapes-of-distributions"><span class="header-section-number">5.1.4</span> Shapes of Distributions</a></li>
   </ul></li>
-  <li><a href="#normal-distributions2" id="toc-normal-distributions2" class="nav-link" data-scroll-target="#normal-distributions2"><span class="header-section-number">5.2</span> Normal Distributions[2]</a>
+  <li><a href="#normal-distributionsprob-distributions-2" id="toc-normal-distributionsprob-distributions-2" class="nav-link" data-scroll-target="#normal-distributionsprob-distributions-2"><span class="header-section-number">5.2</span> Normal Distributions</a>
   <ul class="collapse">
-  <li><a href="#importance-of-normal-distributions3" id="toc-importance-of-normal-distributions3" class="nav-link" data-scroll-target="#importance-of-normal-distributions3"><span class="header-section-number">5.2.1</span> Importance of Normal Distributions[3]</a></li>
-  <li><a href="#areas-under-normal-distributions4" id="toc-areas-under-normal-distributions4" class="nav-link" data-scroll-target="#areas-under-normal-distributions4"><span class="header-section-number">5.2.2</span> Areas Under Normal Distributions[4]</a></li>
-  <li><a href="#the-standard-normal-distribution5" id="toc-the-standard-normal-distribution5" class="nav-link" data-scroll-target="#the-standard-normal-distribution5"><span class="header-section-number">5.2.3</span> The Standard Normal Distribution[5]</a></li>
+  <li><a href="#importance-of-normal-distributionsprob-distributions-3" id="toc-importance-of-normal-distributionsprob-distributions-3" class="nav-link" data-scroll-target="#importance-of-normal-distributionsprob-distributions-3"><span class="header-section-number">5.2.1</span> Importance of Normal Distributions</a></li>
+  <li><a href="#areas-under-normal-distributionsprob-distributions-4" id="toc-areas-under-normal-distributionsprob-distributions-4" class="nav-link" data-scroll-target="#areas-under-normal-distributionsprob-distributions-4"><span class="header-section-number">5.2.2</span> Areas Under Normal Distributions</a></li>
+  <li><a href="#sec-the-standard-normal-distribution" id="toc-sec-the-standard-normal-distribution" class="nav-link" data-scroll-target="#sec-the-standard-normal-distribution"><span class="header-section-number">5.2.3</span> The Standard Normal Distribution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -238,10 +267,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="various-types-of-distributions1" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="various-types-of-distributions1"><span class="header-section-number">5.1</span> Various Types of Distributions<a href="#_ftn1">[1]</a></h2>
-<section id="distributions-of-discrete-variables" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="distributions-of-discrete-variables"><span class="header-section-number">5.1.1</span> Distributions of Discrete Variables</h3>
+<section id="various-types-of-distributionsprob-distributions-1" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="various-types-of-distributionsprob-distributions-1"><span class="header-section-number">5.1</span> Various Types of Distributions<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="distributions-of-qualitative-or-discrete-variables" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="distributions-of-qualitative-or-discrete-variables"><span class="header-section-number">5.1.1</span> Distributions of Qualitative or Discrete Variables</h3>
 <p>I recently purchased a bag of Plain M&amp;M’s. The M&amp;M’s were in six different colors. A quick count showed that there were 55 M&amp;M’s: 17 brown, 18 red, 7 yellow, 7 green, 2 blue, and 4 orange. These counts are shown below in <a href="#tbl-mmfreqs" class="quarto-xref">Table&nbsp;<span>5.1</span></a>.</p>
 <div id="tbl-mmfreqs" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -257,15 +286,17 @@ Table&nbsp;5.1: Frequencies in the Bag of M&amp;M’s
 <col style="width: 22%">
 <col style="width: 16%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Color</strong></th>
+<th></th>
+<th><strong>Frequency</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Color</strong></td>
-<td></td>
-<td><strong>Frequency</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>Brown<br>
 Red<br>
@@ -291,7 +322,7 @@ Orange</td>
 <div id="fig-55mmdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-55mmdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/55mmdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/55mmdist.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-55mmdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.1: Distribution of 55 M&amp;M’s.
@@ -302,7 +333,7 @@ Figure&nbsp;5.1: Distribution of 55 M&amp;M’s.
 <div id="fig-allmmdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-allmmdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/allmmdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/allmmdist.jpg" width="350" height="217" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-allmmdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.2: Distribution of all M&amp;M’s.
@@ -313,7 +344,7 @@ Figure&nbsp;5.2: Distribution of all M&amp;M’s.
 </section>
 <section id="continuous-variables" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="continuous-variables"><span class="header-section-number">5.1.2</span> Continuous Variables</h3>
-<p>The variable “color of M&amp;M” used in this example is a discrete variable, and its distribution is also called discrete. Let us now extend the concept of a distribution to continuous variables.</p>
+<p>The variable “color of M&amp;M” is a qualitative variable, and its distribution is called discrete because there are a finite number of values the variable can take on. Let us now extend the concept of a distribution to continuous variables.</p>
 <p>The data shown in <a href="#tbl-responsetimes" class="quarto-xref">Table&nbsp;<span>5.2</span></a> are the times it took David Lane (the author of much of the material appearing in this book) to move the cursor over a small target in a series of 20 trials. The times are sorted from shortest to longest. The variable “time to respond” is a continuous variable. With time measured accurately (to many decimal places), no two response times would be expected to be the same. Measuring time in milliseconds (thousandths of a second) is often precise enough to approximate a continuous variable in psychology. As you can see in <a href="#tbl-responsetimes" class="quarto-xref">Table&nbsp;<span>5.2</span></a>, measuring David Lane’s responses this way produced times no two of which were the same. As a result, a frequency distribution would be uninformative: it would consist of the 20 times in the experiment, each with a frequency of 1.</p>
 <div id="tbl-responsetimes" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -360,7 +391,7 @@ Table&nbsp;5.2: Response Times
 </div>
 </figure>
 </div>
-<p>The solution to this problem is to create a grouped frequency distribution, as we saw when learning about histograms in Chapter 1. In a grouped frequency distribution, scores falling within various ranges are tabulated. <a href="#tbl-groupfreqdist" class="quarto-xref">Table&nbsp;<span>5.3</span></a> shows a grouped frequency distribution for these 20 times.</p>
+<p>The solution to this problem is to create a grouped frequency distribution, as we saw when learning about histograms in <a href="graphing.html" class="quarto-xref"><span>Chapter 1</span></a>. In a grouped frequency distribution, scores falling within various ranges are tabulated. <a href="#tbl-groupfreqdist" class="quarto-xref">Table&nbsp;<span>5.3</span></a> shows a grouped frequency distribution for these 20 times.</p>
 <div id="tbl-groupfreqdist" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-groupfreqdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -375,15 +406,17 @@ Table&nbsp;5.3: Grouped frequency distribution
 <col style="width: 22%">
 <col style="width: 16%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Range</strong></th>
+<th></th>
+<th><strong>Frequency</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Range</strong></td>
-<td></td>
-<td><strong>Frequency</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>500-600<br>
 600-700<br>
@@ -409,7 +442,7 @@ Table&nbsp;5.3: Grouped frequency distribution
 <div id="fig-groupfreqhist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-groupfreqhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/groupfreqhist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/groupfreqhist.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-groupfreqhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.3: A histogram of the grouped frequency distribution shown in <a href="#tbl-groupfreqdist" class="quarto-xref">Table&nbsp;<span>5.3</span></a>. The labels on the X-axis are the middle values of the range they represent.
@@ -425,7 +458,7 @@ Figure&nbsp;5.3: A histogram of the grouped frequency distribution shown in <a h
 <div id="fig-normaldist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-normaldist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/normaldist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/normaldist.jpg" class="img-fluid figure-img" width="250">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.4: A normal distribution.
@@ -440,7 +473,7 @@ Figure&nbsp;5.4: A normal distribution.
 <div id="fig-posskewdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/posskewdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/posskewdist.jpg" class="img-fluid figure-img" width="375">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-posskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.5: A distribution with a positive skew.
@@ -451,7 +484,7 @@ Figure&nbsp;5.5: A distribution with a positive skew.
 <div id="fig-largeposskewdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-largeposskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/largeposskewdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/largeposskewdist.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-largeposskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.6: A distribution with a very large positive skew.
@@ -462,7 +495,7 @@ Figure&nbsp;5.6: A distribution with a very large positive skew.
 <div id="fig-posskewcontdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posskewcontdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/posskewcontdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/posskewcontdist.jpg" class="img-fluid figure-img" width="275">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-posskewcontdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.7: A continuous distribution with a positive skew.
@@ -473,7 +506,7 @@ Figure&nbsp;5.7: A continuous distribution with a positive skew.
 <div id="fig-negskewdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-negskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/negskewdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/negskewdist.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-negskewdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.8: A distribution with negative skew.
@@ -484,7 +517,7 @@ Figure&nbsp;5.8: A distribution with negative skew.
 <div id="fig-negskewcontdist" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-negskewcontdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/negskewcontdist.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/negskewcontdist.jpg" class="img-fluid figure-img" width="275">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-negskewcontdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.9: A continuous distribution with a negative skew.
@@ -495,7 +528,7 @@ Figure&nbsp;5.9: A continuous distribution with a negative skew.
 <div id="fig-eruptionfreqs" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eruptionfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/eruptionfreqs.jpg" class="img-fluid figure-img">
+<img src="Images/prob-distributions/eruptionfreqs.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eruptionfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.10: Frequencies of times between eruptions of the Old Faithful geyser. Notice the two distinct peaks: one at 1.75 and the other at 4.25.
@@ -504,13 +537,13 @@ Figure&nbsp;5.10: Frequencies of times between eruptions of the Old Faithful gey
 </div>
 </section>
 </section>
-<section id="normal-distributions2" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="normal-distributions2"><span class="header-section-number">5.2</span> Normal Distributions<a href="#_ftn2">[2]</a></h2>
+<section id="normal-distributionsprob-distributions-2" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="normal-distributionsprob-distributions-2"><span class="header-section-number">5.2</span> Normal Distributions<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
 <p>The normal distribution is the most important and most widely used distribution in statistics. It is sometimes called the “bell curve,” although the tonal qualities of such a bell would be less than pleasing. It is also called the “Gaussian curve” after the mathematician Karl Friedrich Gauss. Although Gauss played an important role in its history, Abraham de Moivre first discovered the normal distribution.</p>
 <p>Strictly speaking, it is not correct to talk about “the normal distribution” since there are many normal distributions. Normal distributions can differ in their means and in their standard deviations. <a href="#fig-normaldist" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> shows three normal distributions. The green (left-most) distribution has a mean of -3 and a standard deviation of 0.5, the distribution in red (the middle distribution) has a mean of 0 and a standard deviation of 1, and the distribution in black (right-most) has a mean of 2 and a standard deviation of 3. These as well as all other normal distributions are symmetric with relatively more values at the center of the distribution and relatively few in the tails.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Images/Ch5/normaldist3.png" class="img-fluid figure-img"></p>
+<p><img src="Images/prob-distributions/normaldist3.png" class="img-fluid figure-img" width="325"></p>
 <figcaption>Normal distributions differing in mean and standard deviation.</figcaption>
 </figure>
 </div>
@@ -520,34 +553,34 @@ Figure&nbsp;5.10: Frequencies of times between eruptions of the Old Faithful gey
 <li><p>The mean, median, and mode of a normal distribution are equal.</p></li>
 <li><p>The area under the normal curve is equal to 1.0.</p></li>
 <li><p>Normal distributions are denser in the center and less dense in the tails.</p></li>
-<li><p>Normal distributions are defined by two parameters, the mean (μ) and the standard deviation (σ).</p></li>
+<li><p>Normal distributions are defined by two parameters, the mean (<span class="math inline">\(\mu\)</span>) and the standard deviation (<span class="math inline">\(\sigma\)</span>).</p></li>
 <li><p>68% of the area of a normal distribution is within one standard deviation of the mean.</p></li>
 <li><p>Approximately 95% of the area of a normal distribution is within two standard deviations of the mean.</p></li>
 </ol>
-<section id="importance-of-normal-distributions3" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="importance-of-normal-distributions3"><span class="header-section-number">5.2.1</span> Importance of Normal Distributions<a href="#_ftn3">[3]</a></h3>
+<section id="importance-of-normal-distributionsprob-distributions-3" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="importance-of-normal-distributionsprob-distributions-3"><span class="header-section-number">5.2.1</span> Importance of Normal Distributions<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h3>
 <p>The importance of the normal curve stems primarily from the fact that the distributions of many natural phenomena are at least approximately normally distributed. One of the first applications of the normal distribution was to the analysis of errors of measurement made in astronomical observations, errors that occurred because of imperfect instruments and imperfect observers. Galileo in the 17th century noted that these errors were symmetric and that small errors occurred more frequently than large errors. This led to several hypothesized distributions of errors, but it was not until the early 19th century that it was discovered that these errors followed a normal distribution. Independently, the mathematicians Adrain in 1808 and Gauss in 1809 developed the formula for the normal distribution and showed that errors were fit well by this distribution.</p>
 <p>Most statistical procedures for testing differences between means assume normal distributions. Because the distribution of means is very close to normal, these tests work well even if the original distribution is only roughly normal.</p>
 <p>Quételet was the first to apply the normal distribution to human characteristics. He noted that characteristics such as height, weight, and strength were normally distributed.</p>
 </section>
-<section id="areas-under-normal-distributions4" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="areas-under-normal-distributions4"><span class="header-section-number">5.2.2</span> Areas Under Normal Distributions<a href="#_ftn4">[4]</a></h3>
+<section id="areas-under-normal-distributionsprob-distributions-4" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="areas-under-normal-distributionsprob-distributions-4"><span class="header-section-number">5.2.2</span> Areas Under Normal Distributions<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h3>
 <p>Areas under portions of a normal distribution can be computed by using calculus. Since this is a non-mathematical treatment of statistics, we will rely on computer programs and tables to determine these areas. <a href="#fig-normaldistmean5sd10" class="quarto-xref">Figure&nbsp;<span>5.11</span></a> shows a normal distribution with a mean of 50 and a standard deviation of 10. The shaded area between 40 and 60 contains 68% of the distribution.</p>
 <div id="fig-normaldistmean5sd10" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-normaldistmean5sd10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/normaldistmean5sd10.png" class="img-fluid figure-img">
+<img src="Images/prob-distributions/normaldistmean5sd10.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldistmean5sd10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.11: Normal distribution with a mean of 50 and standard deviation of 10. 68% of the area is within one standard deviation (10) of the mean (50).
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-normaldistmean100sd20" class="quarto-xref">Figure&nbsp;<span>5.12</span></a> shows a normal distribution with a mean of 100 and a standard deviation of 20. <a href="#fig-55mmdist" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, 68% of the distribution is within one standard deviation of the mean.</p>
+<p><a href="#fig-normaldistmean100sd20" class="quarto-xref">Figure&nbsp;<span>5.12</span></a> shows a normal distribution with a mean of 100 and a standard deviation of 20. As in <a href="#fig-normaldistmean5sd10" class="quarto-xref">Figure&nbsp;<span>5.11</span></a>, 68% of the distribution is within one standard deviation of the mean.</p>
 <div id="fig-normaldistmean100sd20" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-normaldistmean100sd20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/normaldistmean100sd20.png" class="img-fluid figure-img">
+<img src="Images/prob-distributions/normaldistmean100sd20.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldistmean100sd20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.12: Normal distribution with a mean of 100 and standard deviation of 20. 68% of the area is within one standard deviation (20) of the mean (100).
@@ -559,18 +592,18 @@ Figure&nbsp;5.12: Normal distribution with a mean of 100 and standard deviation 
 <div id="fig-normaldistmean75sd10" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-normaldistmean75sd10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/normaldistmean75sd10.png" class="img-fluid figure-img">
+<img src="Images/prob-distributions/normaldistmean75sd10.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldistmean75sd10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.13: A normal distribution with a mean of 75 and a standard deviation of 10. 95% of the area is within 1.96 standard deviations of the mean.
 </figcaption>
 </figure>
 </div>
-<p>It is easy to find free online normal distribution calculators that will give you the areas under the normal distribution (e.g., <a href="http://onlinestatbook.com/2/calculators/normal_dist.html" class="uri">http://onlinestatbook.com/2/calculators/normal_dist.html</a>). For example, you can use one to find the proportion of a normal distribution with a mean of 90 and a standard deviation of 12 that is above 110. Set the mean to 90 and the standard deviation to 12. Then enter “110” in the box to the right of the radio button “Above.” At the bottom of the display you will see that the shaded area is 0.0478. See if you can use the calculator to find that the area between 115 and 120 is 0.0124.</p>
+<p>It is easy to find free online normal distribution calculators that will give you the areas under the normal distribution (e.g., <a href="http://onlinestatbook.com/2/calculators/normal_dist.html" class="uri">http://onlinestatbook.com/2/calculators/normal_dist.html</a>). For example, you can use one to find the proportion of a normal distribution with a mean of 90 and a standard deviation of 12 that is above 110 (<a href="#fig-calculator" class="quarto-xref">Figure&nbsp;<span>5.14</span></a>). Set the mean to 90 and the standard deviation to 12. Then enter “110” in the box to the right of the radio button “Above.” At the bottom of the display you will see that the shaded area is 0.0478. See if you can use the calculator to find that the area between 115 and 120 is 0.0124.</p>
 <div id="fig-calculator" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calculator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/calculator.png" class="img-fluid figure-img">
+<img src="Images/prob-distributions/calculator.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calculator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.14: Display from calculator showing the area above 110.
@@ -581,7 +614,7 @@ Figure&nbsp;5.14: Display from calculator showing the area above 110.
 <div id="fig-calculator75percentile" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calculator75percentile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/Ch5/calculator75percentile.png" class="img-fluid figure-img">
+<img src="Images/prob-distributions/calculator75percentile.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calculator75percentile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.15: Display from normal calculator showing that the 75th percentile is 98.09.
@@ -589,19 +622,25 @@ Figure&nbsp;5.15: Display from normal calculator showing that the 75th percentil
 </figure>
 </div>
 </section>
-<section id="the-standard-normal-distribution5" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="the-standard-normal-distribution5"><span class="header-section-number">5.2.3</span> The Standard Normal Distribution<a href="#_ftn5">[5]</a></h3>
-<p>As discussed above, normal distributions do not necessarily have the same means and standard deviations. A normal distribution with a mean of 0 and a standard deviation of 1 is called a <strong><em>standard normal distribution</em></strong>.<br>
-</p>
-<hr>
-<p><a href="#_ftnref1">[1]</a> This section is adapted from David M. Lane and Heidi Ziemer. “Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/distributions.html" class="uri">http://onlinestatbook.com/2/introduction/distributions.html</a></p>
-<p><a href="#_ftnref2">[2]</a> The initial part of this section is adapted from David M. Lane. “Introduction to Normal Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/intro.html" class="uri">http://onlinestatbook.com/2/normal_distribution/intro.html</a></p>
-<p><a href="#_ftnref3">[3]</a> This subsection is adapted from David M. Lane. “History of the Normal Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/history_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/history_normal.html</a></p>
-<p><a href="#_ftnref4">[4]</a> This subsection is adapted from David M. Lane. “Areas Under Normal Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/areas_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/areas_normal.html</a></p>
-<p><a href="#_ftnref5">[5]</a> This subsection is adapted from David M. Lane. “Standard Normal Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/standard_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/standard_normal.html</a></p>
+<section id="sec-the-standard-normal-distribution" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="sec-the-standard-normal-distribution"><span class="header-section-number">5.2.3</span> The Standard Normal Distribution<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h3>
+<p>As discussed above, normal distributions do not necessarily have the same means and standard deviations. A normal distribution with a mean of 0 and a standard deviation of 1 is called a <strong><em>standard normal distribution</em></strong>.</p>
+<p>A value from any normal distribution can be transformed into its corresponding value on a standard normal distribution using the following formula:</p>
+<p><span class="math display">\[Z = (X - \mu) / \sigma\]</span></p>
+<p>where <span class="math inline">\(Z\)</span> is the value on the standard normal distribution, <span class="math inline">\(X\)</span> is the value on the original distribution, <span class="math inline">\(\mu\)</span> is the mean of the original distribution, and <span class="math inline">\(\sigma\)</span> is the standard deviation of the original distribution. Note that this transformation is one we already learned about (“standardization”) in <a href="describing-one-variable.html#sec-standardization" class="quarto-xref"><span>Section 2.4.1</span></a>. Here, we are highlighting that this transformation can be used to relate any normal distribution to the standard normal distribution.</p>
 
 
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This section is adapted from David M. Lane and Heidi Ziemer. “Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/introduction/distributions.html" class="uri">http://onlinestatbook.com/2/introduction/distributions.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The initial part of this section is adapted from David M. Lane. “Introduction to Normal Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/intro.html" class="uri">http://onlinestatbook.com/2/normal_distribution/intro.html</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This subsection is adapted from David M. Lane. “History of the Normal Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/history_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/history_normal.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This subsection is adapted from David M. Lane. “Areas Under Normal Distributions.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/areas_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/areas_normal.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This subsection is adapted from David M. Lane. “Standard Normal Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/normal_distribution/standard_normal.html" class="uri">http://onlinestatbook.com/2/normal_distribution/standard_normal.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

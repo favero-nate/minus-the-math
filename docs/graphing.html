@@ -167,7 +167,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -464,73 +464,75 @@ Table&nbsp;1.2: Grouped Frequency Distribution of Psychology Test Scores
 <col style="width: 35%">
 <col style="width: 27%">
 </colgroup>
+<thead>
+<tr class="header">
+<th><strong>Interval’s Lower Limit</strong></th>
+<th><strong>Interval’s Upper Limit</strong></th>
+<th><strong>Class Frequency</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><strong>Interval’s Lower Limit</strong></td>
-<td><strong>Interval’s Upper Limit</strong></td>
-<td><strong>Class Frequency</strong></td>
-</tr>
-<tr class="even">
 <td>39.5</td>
 <td>49.5</td>
 <td>3</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>49.5</td>
 <td>59.5</td>
 <td>10</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>59.5</td>
 <td>69.5</td>
 <td>53</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>69.5</td>
 <td>79.5</td>
 <td>107</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>79.5</td>
 <td>89.5</td>
 <td>147</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>89.5</td>
 <td>99.5</td>
 <td>130</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>99.5</td>
 <td>109.5</td>
 <td>78</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>109.5</td>
 <td>119.5</td>
 <td>59</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>119.5</td>
 <td>129.5</td>
 <td>36</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>129.5</td>
 <td>139.5</td>
 <td>11</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>139.5</td>
 <td>149.5</td>
 <td>6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>149.5</td>
 <td>159.5</td>
 <td>1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>159.5</td>
 <td>169.5</td>
 <td>1</td>
@@ -562,6 +564,16 @@ Figure&nbsp;1.8: Histogram of scores on a psychology test.
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-box-plots"><span class="header-section-number">1.4.2</span> Box Plots<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h3>
 <p>Box plots are useful for making comparisons and identifying <strong>outliers</strong>, meaning unusually large or small values for a variable. We will explain box plots with the help of data from an in-class experiment. As part of the “Stroop Interference Case Study,”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> students in introductory statistics were presented with a page containing 30 colored rectangles. Their task was to name the colors as quickly as possible. Their times (in seconds) were recorded. We’ll compare the scores for the 16 men and 31 women who participated in the experiment by making separate box plots for each gender. Such a display is said to involve <em>parallel box plots</em>.</p>
 <p>There are several steps in constructing a box plot. The first relies on the 25<sup>th</sup>, 50<sup>th</sup>, and 75<sup>th</sup> percentiles in the distribution of scores. <a href="#fig-boxplot1" class="quarto-xref">Figure&nbsp;<span>1.9</span></a> shows how these three statistics are used. For each gender, we draw a box extending from the 25<sup>th</sup> percentile to the 75<sup>th</sup> percentile. The 50<sup>th</sup> percentile is drawn inside the box. Therefore, the bottom of each box is the 25th percentile, the top is the 75th percentile, and the line in the middle is the 50th percentile. The data for the women in our sample are shown in <a href="#tbl-womenstimes" class="quarto-xref">Table&nbsp;<span>1.3</span></a>.</p>
+<div id="fig-boxplot1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/graphing/boxplot1.jpg" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.9: The first step in creating box plots.
+</figcaption>
+</figure>
+</div>
 <div id="tbl-womenstimes" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-womenstimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -618,16 +630,6 @@ Table&nbsp;1.3: Women’s times.
 </figure>
 </div>
 <p>For these data, the 25th percentile is 17, the 50th percentile is 19, and the 75th percentile is 20. For the men (whose data are not shown), the 25th percentile is 19, the 50th percentile is 22.5, and the 75th percentile is 25.5.</p>
-<div id="fig-boxplot1" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/graphing/boxplot1.jpg" class="img-fluid figure-img" width="300">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.9: The first step in creating box plots.
-</figcaption>
-</figure>
-</div>
 <p>Before proceeding, the terminology in <a href="#tbl-terminology" class="quarto-xref">Table&nbsp;<span>1.4</span></a> is helpful.</p>
 <div id="tbl-terminology" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -715,46 +717,37 @@ Table&nbsp;1.4: Box plot terms and values for women’s times.
 </figure>
 </div>
 <p>Continuing with the box plots, we put “whiskers” above and below each box to give additional information about the spread of the data. Whiskers are vertical lines that end in a horizontal stroke. Whiskers are drawn from the upper and lower hinges to the upper and lower adjacent values (24 and 14 for the women’s data).</p>
-<div id="fig-boxplotwhiskers" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-boxplotwhiskers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/graphing/boxplotwhiskers.jpg" class="img-fluid figure-img" width="300">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotwhiskers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.10: The box plots with the whiskers drawn.
-</figcaption>
-</figure>
-</div>
-<p>Although we don’t draw whiskers all the way to outside or far out values, we still wish to represent them in our box plots. This is achieved by adding additional marks beyond the whiskers. Specifically, outside values are indicated by small “o’s” and far out values are indicated by asterisks (*). In our data, there are no far out values and just one outside value. This outside value of 29 is for the women and is shown in <a href="#fig-boxplotoutsidevalue" class="quarto-xref">Figure&nbsp;<span>1.11</span></a>.</p>
+<!-- ![The box plots with the whiskers drawn.](Images/graphing/boxplotwhiskers.jpg){#fig-boxplotwhiskers width="300"} -->
+<p>Although we don’t draw whiskers all the way to outside or far out values, we still wish to represent them in our box plots. This is achieved by adding additional marks beyond the whiskers. Specifically, outside values are indicated by small “o’s” and far out values are indicated by asterisks (*). In our data, there are no far out values and just one outside value. This outside value of 29 is for the women and is shown in <a href="#fig-boxplotoutsidevalue" class="quarto-xref">Figure&nbsp;<span>1.10</span></a>.</p>
 <div id="fig-boxplotoutsidevalue" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplotoutsidevalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/boxplotoutsidevalue.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotoutsidevalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.11: The box plots with the outside value shown.
+Figure&nbsp;1.10: The box plots with the whiskers and outside value shown.
 </figcaption>
 </figure>
 </div>
-<p>There is one more mark to include in box plots (although sometimes it is omitted). We indicate the mean score for a group by inserting a plus sign. <a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.12</span></a> shows the result of adding means to our box plots.</p>
+<p>There is one more mark to include in box plots (although sometimes it is omitted). We indicate the mean score for a group by inserting a plus sign. <a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.11</span></a> shows the result of adding means to our box plots.</p>
 <div id="fig-completedboxplots" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-completedboxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/graphing/completedboxplots.jpg" class="img-fluid figure-img" width="300">
+<img src="Images/graphing/completedboxplots.jpg" class="img-fluid figure-img" width="400">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-completedboxplots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.12: The completed box plots.
+Figure&nbsp;1.11: The completed box plots.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.12</span></a> provides a revealing summary of the data. Since half the scores in a distribution are between the hinges (recall that the hinges are the 25<sup>th</sup> and 75<sup>th</sup> percentiles), we see that half the women’s times are between 17 and 20 seconds, whereas half the men’s times are between 19 and 25.5. We also see that women generally named the colors faster than the men did, although one woman was slower than almost all of the men. <a href="#fig-boxplotdetailedlabels" class="quarto-xref">Figure&nbsp;<span>1.13</span></a> shows the box plot for the women’s data with detailed labels.</p>
+<p><a href="#fig-completedboxplots" class="quarto-xref">Figure&nbsp;<span>1.11</span></a> provides a revealing summary of the data. Since half the scores in a distribution are between the hinges (recall that the hinges are the 25<sup>th</sup> and 75<sup>th</sup> percentiles), we see that half the women’s times are between 17 and 20 seconds, whereas half the men’s times are between 19 and 25.5. We also see that women generally named the colors faster than the men did, although one woman was slower than almost all of the men. <a href="#fig-boxplotdetailedlabels" class="quarto-xref">Figure&nbsp;<span>1.12</span></a> shows the box plot for the women’s data with detailed labels.</p>
 <div id="fig-boxplotdetailedlabels" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplotdetailedlabels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/boxplotdetailedlabels.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotdetailedlabels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.13: The box plot for the women’s data with detailed labels.
+Figure&nbsp;1.12: The box plot for the women’s data with detailed labels.
 </figcaption>
 </figure>
 </div>
@@ -762,7 +755,7 @@ Figure&nbsp;1.13: The box plot for the women’s data with detailed labels.
 </section>
 <section id="variations-on-box-plots" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="variations-on-box-plots"><span class="header-section-number">1.4.3</span> Variations on box plots</h3>
-<p>Statistical analysis programs may offer options on how box plots are created. For example, the box plots in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.14</span></a> are constructed from our data but differ from the previous box plots in several ways.</p>
+<p>Statistical analysis programs may offer options on how box plots are created. For example, the box plots in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.13</span></a> are constructed from our data but differ from the previous box plots in several ways.</p>
 <ol type="1">
 <li><p>It does not mark outliers.</p></li>
 <li><p>The means are indicated by green lines rather than plus signs.</p></li>
@@ -776,18 +769,18 @@ Figure&nbsp;1.13: The box plot for the women’s data with detailed labels.
 <img src="Images/graphing/boxplotindvscores.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotindvscores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.14: Box plots showing the individual scores and the means.
+Figure&nbsp;1.13: Box plots showing the individual scores and the means.
 </figcaption>
 </figure>
 </div>
-<p>Each dot in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.14</span></a> represents a group of subjects with the same score (rounded to the nearest second). An alternative graphing technique is to “jitter” the points. This means spreading out different dots at the same horizontal position, one dot for each subject. The exact horizontal position of a dot is determined randomly (under the constraint that different dots don’t overlap exactly). Spreading out the dots helps you to see multiple occurrences of a given score. However, depending on the dot size and the screen resolution, some points may be obscured even if the points are jittererd. <a href="#fig-boxplotindvscoresjittered" class="quarto-xref">Figure&nbsp;<span>1.15</span></a> shows what jittering looks like.</p>
+<p>Each dot in <a href="#fig-boxplotindvscores" class="quarto-xref">Figure&nbsp;<span>1.13</span></a> represents a group of subjects with the same score (rounded to the nearest second). An alternative graphing technique is to “jitter” the points. This means spreading out different dots at the same horizontal position, one dot for each subject. The exact horizontal position of a dot is determined randomly (under the constraint that different dots don’t overlap exactly). Spreading out the dots helps you to see multiple occurrences of a given score. However, depending on the dot size and the screen resolution, some points may be obscured even if the points are jittererd. <a href="#fig-boxplotindvscoresjittered" class="quarto-xref">Figure&nbsp;<span>1.14</span></a> shows what jittering looks like.</p>
 <div id="fig-boxplotindvscoresjittered" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplotindvscoresjittered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/boxplotindvscoresjittered.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotindvscoresjittered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.15: Box plots with the individual scores jittered.
+Figure&nbsp;1.14: Box plots with the individual scores jittered.
 </figcaption>
 </figure>
 </div>
@@ -796,47 +789,47 @@ Figure&nbsp;1.15: Box plots with the individual scores jittered.
 <section id="sec-bar-charts-for-quantitative-variables7" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="sec-bar-charts-for-quantitative-variables7"><span class="header-section-number">1.4.4</span> Bar Charts for Quantitative Variables<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></h3>
 <p>In the section on qualitative variables, we saw how bar charts could be used to illustrate the frequencies of different categories. For example, one bar chart showed how many purchasers of iMac computers were previous Macintosh users, previous Windows users, and new computer purchasers.</p>
-<p>In this section, we show how bar charts can be used to present other kinds of quantitative information, not just frequency counts. The bar chart in <a href="#fig-barchartpercentincrease" class="quarto-xref">Figure&nbsp;<span>1.16</span></a> shows the percent increases in the Dow Jones, Standard and Poor 500 (S &amp; P), and Nasdaq stock indexes from May 24<sup>th</sup> 2000 to May 24<sup>th</sup> 2001. Notice that both the S &amp; P and the Nasdaq had “negative increases” which means that they decreased in value. In this bar chart, the Y-axis is not frequency but rather the signed quantity percentage increase<em>.</em></p>
+<p>In this section, we show how bar charts can be used to present other kinds of quantitative information, not just frequency counts. The bar chart in <a href="#fig-barchartpercentincrease" class="quarto-xref">Figure&nbsp;<span>1.15</span></a> shows the percent increases in the Dow Jones, Standard and Poor 500 (S &amp; P), and Nasdaq stock indexes from May 24<sup>th</sup> 2000 to May 24<sup>th</sup> 2001. Notice that both the S &amp; P and the Nasdaq had “negative increases” which means that they decreased in value. In this bar chart, the Y-axis is not frequency but rather the signed quantity percentage increase<em>.</em></p>
 <div id="fig-barchartpercentincrease" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barchartpercentincrease-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/barchartpercentincrease.jpg" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartpercentincrease-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.16: Percent increase in three stock indexes from May 24th 2000 to May 24th 2001.
+Figure&nbsp;1.15: Percent increase in three stock indexes from May 24th 2000 to May 24th 2001.
 </figcaption>
 </figure>
 </div>
-<p>Bar charts are particularly effective for showing change over time. <a href="#fig-barchartpercentchangecpi" class="quarto-xref">Figure&nbsp;<span>1.17</span></a>, for example, shows the percent increase in the Consumer Price Index (CPI) over four three-month periods. The fluctuation in inflation is apparent in the graph.</p>
+<p>Bar charts are particularly effective for showing change over time. <a href="#fig-barchartpercentchangecpi" class="quarto-xref">Figure&nbsp;<span>1.16</span></a>, for example, shows the percent increase in the Consumer Price Index (CPI) over four three-month periods. The fluctuation in inflation is apparent in the graph.</p>
 <div id="fig-barchartpercentchangecpi" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barchartpercentchangecpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/barchartpercentchangecpi.jpg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartpercentchangecpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.17: Percent change in the CPI over time. Each bar represents percent increase for the three months ending at the date indicated.
+Figure&nbsp;1.16: Percent change in the CPI over time. Each bar represents percent increase for the three months ending at the date indicated.
 </figcaption>
 </figure>
 </div>
-<p>Bar charts are often used to compare the means of different experimental conditions. <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.18</span></a> shows the mean time it took one of us (DL) to move the mouse to either a small target or a large target. On average, more time was required for small targets than for large ones.</p>
+<p>Bar charts are often used to compare the means of different experimental conditions. <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.17</span></a> shows the mean time it took one of us (DL) to move the mouse to either a small target or a large target. On average, more time was required for small targets than for large ones.</p>
 <div id="fig-barchartmeantime" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-barchartmeantime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/barchartmeantime.jpg" class="img-fluid figure-img" width="250">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-barchartmeantime-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.18: Bar chart showing the means for the two conditions.
+Figure&nbsp;1.17: Bar chart showing the means for the two conditions.
 </figcaption>
 </figure>
 </div>
-<p>Although bar charts can display means, we do not recommend them for this purpose. Box plots should be used instead since they provide more information than bar charts without taking up more space. For example, a box plot of the mouse-movement data is shown in <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.19</span></a>. You can see that <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.19</span></a> reveals more about the distribution of movement times than does <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.18</span></a>.</p>
+<p>Although bar charts can display means, we do not recommend them for this purpose. Box plots should be used instead since they provide more information than bar charts without taking up more space. For example, a box plot of the mouse-movement data is shown in <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.18</span></a>. You can see that <a href="#fig-boxplotmousemovement" class="quarto-xref">Figure&nbsp;<span>1.18</span></a> reveals more about the distribution of movement times than does <a href="#fig-barchartmeantime" class="quarto-xref">Figure&nbsp;<span>1.17</span></a>.</p>
 <div id="fig-boxplotmousemovement" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-boxplotmousemovement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Images/graphing/boxplotmousemovement.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotmousemovement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.19: Box plots of times to move the mouse to the small and large targets.
+Figure&nbsp;1.18: Box plots of times to move the mouse to the small and large targets.
 </figcaption>
 </figure>
 </div>
@@ -860,15 +853,17 @@ Table&nbsp;1.5: Test Scores.
 <col style="width: 15%">
 <col style="width: 13%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Number</strong></th>
+<th></th>
+<th><strong>Rank</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Number</strong></td>
-<td></td>
-<td><strong>Rank</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>3<br>
 5<br>
@@ -925,15 +920,17 @@ Table&nbsp;1.6: 20 quiz scores.
 <col style="width: 15%">
 <col style="width: 13%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Score</strong></th>
+<th></th>
+<th><strong>Rank</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Score</strong></td>
-<td></td>
-<td><strong>Rank</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>4<br>
 4<br>

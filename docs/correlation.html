@@ -167,7 +167,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
   </div>
 </li>
@@ -236,7 +236,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#a-real-example" id="toc-a-real-example" class="nav-link" data-scroll-target="#a-real-example"><span class="header-section-number">3.4.1</span> A Real Example</a></li>
   </ul></li>
-  <li><a href="#sec-correlation-appendix-multiple-regressioncorrelation-7" id="toc-sec-correlation-appendix-multiple-regressioncorrelation-7" class="nav-link" data-scroll-target="#sec-correlation-appendix-multiple-regressioncorrelation-7"><span>Chapter 3</span> Appendix: Multiple Regression</a>
+  <li><a href="#sec-quick-guide-to-interpreting-regression-results" id="toc-sec-quick-guide-to-interpreting-regression-results" class="nav-link" data-scroll-target="#sec-quick-guide-to-interpreting-regression-results"><span class="header-section-number">3.5</span> Quick Guide to Interpreting Regression Results</a></li>
+  <li><a href="#sec-correlation-appendix-multiple-regressioncorrelation-11" id="toc-sec-correlation-appendix-multiple-regressioncorrelation-11" class="nav-link" data-scroll-target="#sec-correlation-appendix-multiple-regressioncorrelation-11"><span>Chapter 3</span> Appendix: Multiple Regression</a>
   <ul class="collapse">
   <li><a href="#interpretation-of-regression-coefficients" id="toc-interpretation-of-regression-coefficients" class="nav-link" data-scroll-target="#interpretation-of-regression-coefficients">Interpretation of Regression Coefficients</a></li>
   </ul></li>
@@ -340,42 +341,28 @@ Table&nbsp;3.2: Means and standard deviations of spousal ages.
 <div aria-describedby="tbl-spousalagemeansd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 11%">
-<col style="width: 18%">
-<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 19%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Mean</strong></th>
+<th><strong>Standard<br>
+Deviation</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td><strong>Mean</strong></td>
-<td></td>
-<td><strong>Standard<br>
-Deviation</strong></td>
-<td></td>
+<td>Husbands</td>
+<td>49</td>
+<td>11</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Husbands</td>
-<td></td>
-<td>49</td>
-<td></td>
-<td>11</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
 <td>Wives</td>
-<td></td>
 <td>47</td>
-<td></td>
 <td>11</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -383,41 +370,41 @@ Deviation</strong></td>
 </figure>
 </div>
 <p>Each distribution is fairly skewed with a long right tail. From <a href="#tbl-spousalage" class="quarto-xref">Table&nbsp;<span>3.1</span></a> we see that not all husbands are older than their wives and it is important to see that this fact is lost when we separate the variables. That is, even though we provide summary statistics on each variable, the pairing within couple is lost by separating the variables. We cannot say, for example, based on the means alone what percentage of couples has younger husbands than wives. We have to count across pairs to find this out. Only by maintaining the pairing can meaningful answers be found about couples per se. Another example of information not available from the separate descriptions of husbands and wives’ ages is the mean age of husbands with wives of a certain age. For instance, what is the average age of husbands with 45-year-old wives? Finally, we do not know the relationship between the husband’s age and the wife’s age.</p>
-<p>We can learn much more by displaying the bivariate data in a graphical form that maintains the pairing. <a href="#fig-scatterplotspousalage" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> shows a scatter plot of the paired ages. The x-axis represents the age of the husband and the y-axis the age of the wife.</p>
 <div id="fig-scatterplotspousalage" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatterplotspousalage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/scatterplotspousalage.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/scatterplotspousalage.jpg" class="img-fluid figure-img" width="325">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterplotspousalage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.2: Scatter plot showing wife’s age as a function of husband’s age, r = 0.97.
 </figcaption>
 </figure>
 </div>
+<p>We can learn much more by displaying the bivariate data in a graphical form that maintains the pairing. <a href="#fig-scatterplotspousalage" class="quarto-xref">Figure&nbsp;<span>3.2</span></a> shows a scatter plot of the paired ages. The x-axis represents the age of the husband and the y-axis the age of the wife.</p>
 <p>There are two important characteristics of the data revealed by <a href="#fig-scatterplotspousalage" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>. First, it is clear that there is a strong relationship between the husband’s age and the wife’s age: the older the husband, the older the wife. When one variable (Y) increases with the second variable (X), we say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have a <strong>positive association</strong>. Conversely, when <span class="math inline">\(Y\)</span> decreases as <span class="math inline">\(X\)</span> increases, we say that they have a <strong>negative association</strong>.</p>
 <p>Second, the points cluster along a straight line. When this occurs, the relationship is called a <strong>linear relationship</strong>.</p>
-<p><a href="#fig-scatterplotstrength" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> shows a scatter plot of Arm Strength and Grip Strength from 149 individuals working in physically demanding jobs including electricians, construction and maintenance workers, and auto mechanics. Not surprisingly, the stronger someone’s grip, the stronger their arm tends to be. There is therefore a positive association between these variables. Although the points cluster along a line, they are not clustered quite as closely as they are for the scatter plot of spousal age.</p>
 <div id="fig-scatterplotstrength" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatterplotstrength-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/scatterplotstrength.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/scatterplotstrength.jpg" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterplotstrength-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.3: Scatter plot of Grip Strength and Arm Strength, r = 0.63.
 </figcaption>
 </figure>
 </div>
-<p>Not all scatter plots show linear relationships. <a href="#fig-scatterplotgalileo" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> shows the results of an experiment conducted by Galileo on projectile motion.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In the experiment, Galileo rolled balls down an incline and measured how far they traveled as a function of the release height. It is clear from <a href="#fig-scatterplotgalileo" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> that the relationship between “Release Height” and “Distance Traveled” is not described well by a straight line: If you drew a line connecting the lowest point and the highest point, all of the remaining points would be above the line. The data are better fit by a parabola (a type of curved line).</p>
+<p><a href="#fig-scatterplotstrength" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> shows a scatter plot of Arm Strength and Grip Strength from 149 individuals working in physically demanding jobs including electricians, construction and maintenance workers, and auto mechanics. Not surprisingly, the stronger someone’s grip, the stronger their arm tends to be. There is therefore a positive association between these variables. Although the points cluster along a line, they are not clustered quite as closely as they are for the scatter plot of spousal age.</p>
 <div id="fig-scatterplotgalileo" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatterplotgalileo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/scatterplotgalileo.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/scatterplotgalileo.jpg" class="img-fluid figure-img" width="400">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterplotgalileo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.4: Galileo’s data showing a non-linear relationship.
 </figcaption>
 </figure>
 </div>
+<p>Not all scatter plots show linear relationships. <a href="#fig-scatterplotgalileo" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> shows the results of an experiment conducted by Galileo on projectile motion.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> In the experiment, Galileo rolled balls down an incline and measured how far they traveled as a function of the release height. It is clear from <a href="#fig-scatterplotgalileo" class="quarto-xref">Figure&nbsp;<span>3.4</span></a> that the relationship between “Release Height” and “Distance Traveled” is not described well by a straight line: If you drew a line connecting the lowest point and the highest point, all of the remaining points would be above the line. The data are better fit by a parabola (a type of curved line).</p>
 <p>Scatter plots that show linear relationships between variables can differ in several ways including the slope of the line about which they cluster and how tightly the points cluster about the line. We now turn our attention to a statistical measure of the strength of the relationship between two quantitative variables.</p>
 </section>
 <section id="what-is-correlationcorrelation-3" class="level2" data-number="3.2">
@@ -428,7 +415,7 @@ Figure&nbsp;3.4: Galileo’s data showing a non-linear relationship.
 <div id="fig-poslinearrel" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-poslinearrel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/poslinearrel.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/poslinearrel.jpg" class="img-fluid figure-img" width="325">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poslinearrel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.5: A perfect positive linear relationship, r = 1.
@@ -438,7 +425,7 @@ Figure&nbsp;3.5: A perfect positive linear relationship, r = 1.
 <div id="fig-neglinearrel" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-neglinearrel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/neglinearrel.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/neglinearrel.jpg" class="img-fluid figure-img" width="325">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-neglinearrel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.6: A perfect negative linear relationship, r = 1.
@@ -448,7 +435,7 @@ Figure&nbsp;3.6: A perfect negative linear relationship, r = 1.
 <div id="fig-scatterplotnorel" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scatterplotnorel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/scatterplotnorel.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/scatterplotnorel.jpg" class="img-fluid figure-img" width="325">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatterplotnorel-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.7: A scatter plot for which r = 0. Notice that there is no relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.
@@ -470,28 +457,20 @@ Table&nbsp;3.3: Calculation of r.
 </figcaption>
 <div aria-describedby="tbl-rcalulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>X</strong></th>
+<th><strong>Y</strong></th>
+<th><strong>x</strong></th>
+<th><strong>y</strong></th>
+<th><strong>xy</strong></th>
+<th><strong>x<sup>2</sup></strong></th>
+<th><strong>y<sup>2</sup></strong></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>X</strong></td>
-<td><strong>Y</strong></td>
-<td><strong>x</strong></td>
-<td><strong>y</strong></td>
-<td><strong>xy</strong></td>
-<td><strong>x<sup>2</sup></strong></td>
-<td><strong>y<sup>2</sup></strong></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>&nbsp;1</td>
 <td>&nbsp;4</td>
@@ -501,7 +480,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>&nbsp;9</td>
 <td>25</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>&nbsp;3</td>
 <td>&nbsp;6</td>
@@ -511,7 +490,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>&nbsp;1</td>
 <td>&nbsp;9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>&nbsp;5</td>
 <td>10</td>
@@ -521,7 +500,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>&nbsp;1</td>
 <td>&nbsp;1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>&nbsp;5</td>
 <td>12</td>
@@ -531,7 +510,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>&nbsp;1</td>
 <td>&nbsp;9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>&nbsp;6</td>
 <td>13</td>
@@ -541,7 +520,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>&nbsp;4</td>
 <td>16</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Total</td>
 <td>20</td>
 <td>45</td>
@@ -551,7 +530,7 @@ Table&nbsp;3.3: Calculation of r.
 <td>16</td>
 <td>60</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Mean</td>
 <td>&nbsp;4</td>
 <td>&nbsp;9</td>
@@ -590,53 +569,42 @@ Table&nbsp;3.4: Example data.
 </figcaption>
 <div aria-describedby="tbl-exampledata-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 8%">
-</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(X\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td></td>
-<td><span class="math inline">\(X\)</span></td>
-<td></td>
-<td><span class="math inline">\(Y\)</span></td>
+<td>1.00</td>
+<td>1.00</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
-<td>1.00</td>
-<td></td>
-<td>1.00</td>
+<td>2.00</td>
+<td>2.00</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
-<td>2.00</td>
-<td></td>
-<td>2.00</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
 <td>3.00</td>
-<td></td>
 <td>1.30</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>4.00</td>
-<td></td>
 <td>3.75</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>5.00</td>
-<td></td>
 <td>2.25</td>
 <td></td>
 </tr>
@@ -648,7 +616,7 @@ Table&nbsp;3.4: Example data.
 <div id="fig-splotexampledata" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-splotexampledata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/splotexampledata.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/splotexampledata.jpg" class="img-fluid figure-img" width="250">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-splotexampledata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.8: A scatter plot of the example data.
@@ -659,7 +627,7 @@ Figure&nbsp;3.8: A scatter plot of the example data.
 <div id="fig-splotexampledatadetail" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-splotexampledatadetail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/correlations/splotexampledatadetail.jpg" class="img-fluid figure-img">
+<img src="Images/correlations/splotexampledatadetail.jpg" class="img-fluid figure-img" width="325">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-splotexampledatadetail-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.9: A scatter plot of the example data. The black line consists of the predictions, the points are the actual data, and the vertical lines between the points and the black line represent errors of prediction.
@@ -674,26 +642,19 @@ Table&nbsp;3.5: Example data.
 </figcaption>
 <div aria-describedby="tbl-exampledatatable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 14%">
-<col style="width: 16%">
-<col style="width: 21%">
-<col style="width: 10%">
-</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(X\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(\hat{Y}\)</span></th>
+<th><span class="math inline">\(Y-\hat{Y}\)</span></th>
+<th><span class="math inline">\((Y-\hat{Y})^2\)</span></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><span class="math inline">\(X\)</span></td>
-<td><span class="math inline">\(Y\)</span></td>
-<td><span class="math inline">\(\hat{Y}\)</span></td>
-<td><span class="math inline">\(Y-\hat{Y}\)</span></td>
-<td><span class="math inline">\((Y-\hat{Y})^2\)</span></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>1.00</td>
 <td>1.00</td>
@@ -702,7 +663,7 @@ Table&nbsp;3.5: Example data.
 <td>0.044</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>2.00</td>
 <td>2.00</td>
@@ -711,7 +672,7 @@ Table&nbsp;3.5: Example data.
 <td>0.133</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>3.00</td>
 <td>1.30</td>
@@ -720,7 +681,7 @@ Table&nbsp;3.5: Example data.
 <td>0.578</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>4.00</td>
 <td>3.75</td>
@@ -729,7 +690,7 @@ Table&nbsp;3.5: Example data.
 <td>1.600</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>5.00</td>
 <td>2.25</td>
@@ -783,29 +744,108 @@ Figure&nbsp;3.10: University GPA as a function of High School GPA.
 </div>
 </section>
 </section>
-<section id="sec-correlation-appendix-multiple-regressioncorrelation-7" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="sec-correlation-appendix-multiple-regressioncorrelation-7"><a href="#sec-correlation" class="quarto-xref"><span>Chapter 3</span></a> Appendix: Multiple Regression<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></h2>
-<p>In simple linear regression, a dependent variable is predicted from one independent variable. In multiple regression, the dependent variable is predicted by two or more variables. For example, in the SAT case study, you might want to predict a student’s university grade point average on the basis of their High-School GPA (HSGPA) and their total SAT score (verbal + math). The basic idea is to find a linear combination<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> of HSGPA and SAT that best predicts University GPA (UGPA). That is, the problem is to find the values of b<sub>1</sub> and b<sub>2</sub> in the equation shown below that give the best predictions of UGPA. As in the case of simple linear regression, we define the best predictions as the predictions that minimize the squared errors of prediction.</p>
+<section id="sec-quick-guide-to-interpreting-regression-results" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-quick-guide-to-interpreting-regression-results"><span class="header-section-number">3.5</span> Quick Guide to Interpreting Regression Results<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></h2>
+<p>Many social science papers report their main results in the form of a regression table. It’s fairly easy to get started interpreting these results using the three S’s:<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<ul>
+<li><p><strong>Significance</strong>: Is the relationship between the two variables strong enough (relative to the precision of the estimate) to be considered statistically reliable?<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> To assess this, check the p-value. For now, you can use the following rule-of-thumb:</p>
+<ul>
+<li><p>If p &lt; 0.05: the relationship is statistically significant; proceed to evaluating sign and size</p></li>
+<li><p>If p &gt; 0.05: results are somewhat indeterminate; any association detected between the two variables could easily be caused by coincidence or random “noise” (so you may want to skip evaluating sign and size)</p></li>
+</ul></li>
+<li><p><strong>Sign</strong>: Is the relationship positive or negative? Check whether the coefficient has a negative value.</p>
+<ul>
+<li><p>Positive coefficient: as the independent variable <em>increases</em>, the dependent variable is predicted to <em>increase</em></p></li>
+<li><p>Negative coefficient: as the independent variable <em>increases</em>, the dependent variable is predicted to <em>decrease</em></p></li>
+<li><p>Note about odds ratios: For certain types of (non-linear) regression, odds ratios (which always take on positive values) are sometimes displayed instead of coefficients; with an odds ratio, a value greater than one indicates a positive relationship while a value smaller than one indicates a negative relationship</p></li>
+</ul></li>
+<li><p><strong>Size</strong>: How big is the (predictive) effect? This S is often the most difficult to make sense of, and sometimes you may not have enough information to meaningfully evaluate it (e.g., if the units of measurement for a variable are not clearly explained).</p>
+<ul>
+<li><p>For linear models: A one-unit increase in the independent variable predicts a <span class="math inline">\(\beta_i\)</span>-unit change in the dependent variable (where <span class="math inline">\(\beta_i\)</span> represents the value of the coefficent)</p></li>
+<li><p>For non-linear models: Interpreting the size of a coefficient is typically more complicated than for a linear model; look for the authors’ explanation of effect size or “magnitude” of association</p></li>
+</ul></li>
+</ul>
+<p><a href="#tbl-regression-cs-gpa" class="quarto-xref">Table&nbsp;<span>3.6</span></a> provides an example of regression results in a format similar to what you may encounter in many research publications. Note, however, that many publications do not list exact p-values; instead, they often use one or more asterisks (*) to denote coefficients with p-values smaller than 0.05 (sometimes also flagging p-values falling below various other thresholds).</p>
+<div id="tbl-regression-cs-gpa" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regression-cs-gpa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.6: Results for a regression with computer science GPA as the dependent variable.
+</figcaption>
+<div aria-describedby="tbl-regression-cs-gpa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Coef.</th>
+<th>Std. err.</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>verb_sat</td>
+<td>0.0017</td>
+<td>0.0010</td>
+<td>0.10</td>
+</tr>
+<tr class="even">
+<td>math_sat</td>
+<td>0.0048</td>
+<td>0.0012</td>
+<td>0.00014</td>
+</tr>
+<tr class="odd">
+<td>(intercept)</td>
+<td>-0.91</td>
+<td>0.42</td>
+<td>0.033</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>n</td>
+<td>105</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>r^2</td>
+<td>0.487</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Up til now, we have only discussed simple regression, in which we have a single independent variable. But in <a href="#tbl-regression-cs-gpa" class="quarto-xref">Table&nbsp;<span>3.6</span></a>, we find results for a regression where two independent variables—SAT scores on the verbal section (verb_sat) and SAT scores on the math section (math_sat)—are jointly used to predict students’ GPA in computer science classes. It turns out that regression can easily be performed with multiple independent variables, as described in the appendix to this chapter. When we have multiple independent variables, we evaluate each one on its own terms when working through the three S’s. For the results in <a href="#tbl-regression-cs-gpa" class="quarto-xref">Table&nbsp;<span>3.6</span></a>, we can interpret the results as follows:</p>
+<ul>
+<li>verb_sat: The p-value for this variable (0.10) is greater than 0.05, so this variable is not statistically significant. Therefore, we don’t necessarily need to interpret the sign or size. We might simply say that we could not establish a reliable link between verbal SAT scores and computer science GPA in this model.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></li>
+<li>math_sat: The p-value (0.00014) is smaller than 0.05, so math_sat is a statistically significant predictor of computer science GPA. The coefficient (0.0048) has a positive sign, so students with higher math SAT scores are predicted to have higher computer science GPAs. When it comes to size, a one-point increase in the math SAT (e.g., getting a 501 instead of a 500) predicts that the computer science GPA will be 0.0048 points higher. That seems very small, but a one-point increase on an SAT is barely noticeable (and not actually possible if scores are always multiples of ten). In this case, we can get a better sense of size if we consider an increase of 100 points in the math SAT, which requires multiplying the coefficient by 100. A 100-point increase in the math SAT (e.g., getting a 600 instead of a 500) predicts a computer science GPA that is 0.48 points higher (<span class="math inline">\(0.0048 \times 100 = 0.48\)</span>). This is nearly half a grade point higher and would be quite noticeable to most students. Thus, the size of predictive effect now seems reasonably large.</li>
+</ul>
+<p>Note that we do not need to apply the three S’s to the intercept (which can also be labeled the “constant”) because it is not a variable. <a href="#tbl-regression-cs-gpa" class="quarto-xref">Table&nbsp;<span>3.6</span></a> also contains some additional information frquently shown in regression tables: standard errors (which we will learn more about in <a href="sampling-distributions.html" class="quarto-xref"><span>Chapter 6</span></a>), the sample size (n=105), and r-squared (a statistic often used to describe how well the regression model overall explains variation in the dependent variable).</p>
+<p>Remember that the three S’s are just a starting point. But they should be enough to help you follow along a little easier when reading the results sections of many research publications. If you’ve started working with a statistical software package by now, you can also try running your own regression models and seeing if you can use the three S’s to help you understand the results.</p>
+<!-- And We will learn much more about testing for statistical significance in @sec-h-tests. And there are other important tools for interpreting regression results, such as confidence intervals (see @sec-estimation). Slight differences in the setup or type of regression model can sometimes yeild important differences, as discussed more in the appendix for this chapter. Entire books are devoted to the topic of regression, so there is always more to learn! -->
+</section>
+<section id="sec-correlation-appendix-multiple-regressioncorrelation-11" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-correlation-appendix-multiple-regressioncorrelation-11"><a href="#sec-correlation" class="quarto-xref"><span>Chapter 3</span></a> Appendix: Multiple Regression<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></h2>
+<p>In simple linear regression, a dependent variable is predicted from one independent variable. In multiple regression, the dependent variable is predicted by two or more variables. For example, in the SAT case study, you might want to predict a student’s university grade point average on the basis of their High-School GPA (HSGPA) and their total SAT score (verbal + math). The basic idea is to find a linear combination<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> of HSGPA and SAT that best predicts University GPA (UGPA). That is, the problem is to find the values of <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> in the equation shown below that give the best predictions of UGPA. As in the case of simple linear regression, we define the best predictions as the predictions that minimize the squared errors of prediction.</p>
 <p><span class="math display">\[\widehat{UGPA} = \alpha + \beta_1HSGPA + \beta_2SAT\]</span></p>
 <p>where <span class="math inline">\(\widehat{UGPA}\)</span> is the predicted value of University GPA and <span class="math inline">\(\alpha\)</span> is a constant. For these data, the best prediction equation is shown below:</p>
 <p><span class="math display">\[\widehat{UGPA} = 0.540 + 0.541 \times HSGPA + 0.008 \times SAT\]</span></p>
-<p>In other words, to compute the prediction of a student’s University GPA, you add up (a) 0.540, (b) their High-School GPA multiplied by 0.541, and (c) their SAT multiplied by 0.008. <a href="#tbl-multipleregression" class="quarto-xref">Table&nbsp;<span>3.6</span></a> shows the data and predictions for the first five students in the dataset.</p>
+<p>In other words, to compute the prediction of a student’s University GPA, you add up (a) 0.540, (b) their High-School GPA multiplied by 0.541, and (c) their SAT multiplied by 0.008. <a href="#tbl-multipleregression" class="quarto-xref">Table&nbsp;<span>3.7</span></a> shows the data and predictions for the first five students in the dataset.</p>
 <div id="tbl-multipleregression" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-multipleregression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.6: Data and Predictions
+Table&nbsp;3.7: Data and Predictions
 </figcaption>
 <div aria-describedby="tbl-multipleregression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 11%">
-<col style="width: 12%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 24%">
-<col style="width: 11%">
-</colgroup>
 <tbody>
 <tr class="odd">
 <td></td>
@@ -930,14 +970,14 @@ Table&nbsp;3.6: Data and Predictions
 </figure>
 </div>
 <p>The values of <span class="math inline">\(\beta\)</span> (<span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>) are called “regression coefficients.”</p>
-<p>The multiple correlation (R) is equal to the correlation between the predicted scores and the actual scores. In this example, it is the correlation between <span class="math inline">\(\widehat{UGPA}\)</span> and <span class="math inline">\(UGPA\)</span>, which turns out to be 0.79. That is, R = 0.79. Note that R will never be negative since if there are negative correlations between the predictor variables and the criterion, the regression weights will be negative so that the correlation between the predicted and actual scores will be positive.</p>
+<p>The multiple correlation (R) is equal to the correlation between the predicted scores and the actual scores. In this example, it is the correlation between <span class="math inline">\(\widehat{UGPA}\)</span> and <span class="math inline">\(UGPA\)</span>, which turns out to be 0.79. That is, R = 0.79. Note that R will never be negative since if there are negative correlations between the predictor variables and the criterion, the regression coefficients will be negative so that the correlation between the predicted and actual scores will be positive.</p>
 <section id="interpretation-of-regression-coefficients" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="interpretation-of-regression-coefficients">Interpretation of Regression Coefficients</h3>
 <p>A regression coefficient in multiple regression is the slope of the linear relationship between the criterion variable and the part of a predictor variable that is independent of all other predictor variables. In this example, the regression coefficient for HSGPA can be computed by first predicting HSGPA from SAT and saving the errors of prediction (the differences between <span class="math inline">\(HSGPA\)</span> and <span class="math inline">\(\widehat{HSGPA}\)</span>). These errors of prediction are called “residuals” since they are what is left over in HSGPA after the predictions from SAT are subtracted, and represent the part of HSGPA that is independent of SAT. These residuals are referred to as HSGPA.SAT, which means they are the residuals in HSGPA after having been predicted by SAT. The correlation between HSGPA.SAT and SAT is necessarily 0.</p>
 <p>The final step in computing the regression coefficient is to find the slope of the relationship between these residuals and UGPA. This slope is the regression coefficient for HSGPA. The following equation is used to predict HSGPA from SAT:</p>
 <p><span class="math display">\[\widehat{HSGPA} = -1.314 + 0.0036 \times SAT\]</span></p>
 <p>The residuals are then computed as:</p>
-<p><span class="math display">\[HSGPA - \widehat{HSGPA}\]</span></p>
+<p><span class="math display">\[HSGPA.SAT = HSGPA - \widehat{HSGPA}\]</span></p>
 <p>The linear regression equation for the prediction of UGPA by the residuals is</p>
 <p><span class="math display">\[\widehat{UGPA} = 3.173 + 0.541 \times HSGPA.SAT\]</span></p>
 <p>Notice that the slope (0.541) is the same value given previously for <span class="math inline">\(\beta_1\)</span> in the multiple regression equation.</p>
@@ -957,10 +997,14 @@ Table&nbsp;3.6: Data and Predictions
 <li id="fn4"><p>This section is adapted from David M. Lane. “Computing Pearson’s r.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/describing_bivariate_data/calculation.html" class="uri">http://onlinestatbook.com/2/describing_bivariate_data/calculation.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>This section is adapted from David M. Lane. “Introduction to Linear Regression.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/regression/intro.html" class="uri">http://onlinestatbook.com/2/regression/intro.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><a href="http://onlinestatbook.com/2/case_studies/sat.html" class="uri">http://onlinestatbook.com/2/case_studies/sat.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>This section is adapted from Rudy Guerra and David M. Lane. “Introduction to Multiple Regression.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/multiple_regression.html" class="uri">https://onlinestatbook.com/2/regression/multiple_regression.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>A linear combination of variables is a way of creating a new variable by combining other variables. A linear combination is one in which each variable is multiplied by a coefficient and the are products summed. For example, if<br>
+<li id="fn7"><p>This section is written by Nathan Favero.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Wheelan, C. (2010.) <em>Introduction to Public Policy</em>. New York: W. W. Norton &amp; Company.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>In other words, can we conclude it is signal rather than noise? See: Fricker Jr, R. D., Burke, K., Han, X., &amp; Woodall, W. H. (2019). Assessing the statistical analyses used in basic and applied social psychology after their p-value ban. <em>The American Statistician</em>, <em>73</em>(sup1), 374-384.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Note, however, that the absence of evidence is not necessarily evidence of absence. There could very well be a link between verbal SAT scores and computer science GPA—just one that we cannot reliably detect with this analysis (e.g., because our sample is too small to precisely estimate the association).<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>This section is adapted from Rudy Guerra and David M. Lane. “Introduction to Multiple Regression.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/multiple_regression.html" class="uri">https://onlinestatbook.com/2/regression/multiple_regression.html</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>A linear combination of variables is a way of creating a new variable by combining other variables. A linear combination is one in which each variable is multiplied by a coefficient and the products are summed. For example, if<br>
 <span class="math display">\[Y = 3X_1 + 2X_2 + .5X_3\]</span><br>
-then <span class="math inline">\(Y\)</span> is a linear combination of the variables <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+then <span class="math inline">\(Y\)</span> is a linear combination of the variables <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
