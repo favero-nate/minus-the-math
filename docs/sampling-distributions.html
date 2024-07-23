@@ -241,9 +241,15 @@ window.Quarto = {
   <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">6.2.2</span> Variance</a></li>
   <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem"><span class="header-section-number">6.2.3</span> Central Limit Theorem</a></li>
   </ul></li>
-  <li><a href="#confidence-interval-on-the-meansampling-distributions-4" id="toc-confidence-interval-on-the-meansampling-distributions-4" class="nav-link" data-scroll-target="#confidence-interval-on-the-meansampling-distributions-4"><span class="header-section-number">6.3</span> Confidence Interval on the Mean</a></li>
+  <li><a href="#confidence-interval-for-the-meansampling-distributions-4" id="toc-confidence-interval-for-the-meansampling-distributions-4" class="nav-link" data-scroll-target="#confidence-interval-for-the-meansampling-distributions-4"><span class="header-section-number">6.3</span> Confidence Interval for the Mean</a></li>
   <li><a href="#the-t-distributionsampling-distributions-8" id="toc-the-t-distributionsampling-distributions-8" class="nav-link" data-scroll-target="#the-t-distributionsampling-distributions-8"><span class="header-section-number">6.4</span> The T Distribution</a></li>
   <li><a href="#degrees-of-freedomsampling-distributions-11" id="toc-degrees-of-freedomsampling-distributions-11" class="nav-link" data-scroll-target="#degrees-of-freedomsampling-distributions-11"><span class="header-section-number">6.5</span> Degrees of Freedom</a></li>
+  <li><a href="#sec-confidence-interval-for-a-regression-slope-coefficient" id="toc-sec-confidence-interval-for-a-regression-slope-coefficient" class="nav-link" data-scroll-target="#sec-confidence-interval-for-a-regression-slope-coefficient"><span class="header-section-number">6.6</span> Confidence Interval for a Regression Slope Coefficient </a>
+  <ul class="collapse">
+  <li><a href="#calculation-of-a-precise-confidence-interval-for-the-slope" id="toc-calculation-of-a-precise-confidence-interval-for-the-slope" class="nav-link" data-scroll-target="#calculation-of-a-precise-confidence-interval-for-the-slope"><span class="header-section-number">6.6.1</span> Calculation of a Precise Confidence Interval for the Slope</a></li>
+  <li><a href="#assumptions-for-statistical-inference-from-regression" id="toc-assumptions-for-statistical-inference-from-regression" class="nav-link" data-scroll-target="#assumptions-for-statistical-inference-from-regression"><span class="header-section-number">6.6.2</span> Assumptions for Statistical Inference from Regression</a></li>
+  </ul></li>
+  <li><a href="#sec-sampling-distributions-appendix-estimating-the-standard-error-of-a-regression-slopesampling-distributions-13" id="toc-sec-sampling-distributions-appendix-estimating-the-standard-error-of-a-regression-slopesampling-distributions-13" class="nav-link" data-scroll-target="#sec-sampling-distributions-appendix-estimating-the-standard-error-of-a-regression-slopesampling-distributions-13"><span>Chapter 6</span> Appendix: Estimating the Standard Error of a Regression Slope</a></li>
   </ul>
 </nav>
     </div>
@@ -799,8 +805,8 @@ Figure&nbsp;6.6: A simulation of a sampling distribution. The parent population 
 </div>
 </section>
 </section>
-<section id="confidence-interval-on-the-meansampling-distributions-4" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="confidence-interval-on-the-meansampling-distributions-4"><span class="header-section-number">6.3</span> Confidence Interval on the Mean<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
+<section id="confidence-interval-for-the-meansampling-distributions-4" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="confidence-interval-for-the-meansampling-distributions-4"><span class="header-section-number">6.3</span> Confidence Interval for the Mean<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
 <p>When you compute a confidence interval on the mean, you compute the mean of a sample in order to estimate the mean of the population. Clearly, if you already knew the population mean, there would be no need for a confidence interval. However, to explain how confidence intervals are constructed, we are going to work backwards and begin by assuming characteristics of the population. Then we will show how sample data can be used to construct a confidence interval.</p>
 <p>Assume that the weights of 10-year-old children are normally distributed with a mean of 90 and a standard deviation of 36. What is the sampling distribution of the mean for a sample size of 9? Recall from the section on the sampling distribution of the mean that the mean of the sampling distribution is <span class="math inline">\(\mu\)</span> and the standard error of the mean is</p>
 <p><span class="math display">\[
@@ -1287,6 +1293,159 @@ s^2=\frac{\sum{(X-\bar{X})^2}}{n-1}
 \]</span></p>
 <p>The denominator of this formula is the degrees of freedom.</p>
 <p>So far, we’ve only seen examples where the degrees of freedom is equal to n - 1. But in later chapters, we’ll see examples of statistical inference tools that require estimating more than one parameter en route to the estimate in question, and therefore we’ll need to subtract more than one from the number of observations to get the degrees of freedom. For example, the degrees of freedom might be calculated as n - 5 or n - 3, depending on what we are estimating.</p>
+</section>
+<section id="sec-confidence-interval-for-a-regression-slope-coefficient" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-confidence-interval-for-a-regression-slope-coefficient"><span class="header-section-number">6.6</span> Confidence Interval for a Regression Slope Coefficient <a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></h2>
+<section id="calculation-of-a-precise-confidence-interval-for-the-slope" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="calculation-of-a-precise-confidence-interval-for-the-slope"><span class="header-section-number">6.6.1</span> Calculation of a Precise Confidence Interval for the Slope</h3>
+<p>The method for computing a confidence interval for the population slope in a simple linear regression is very similar to methods for computing other confidence intervals. For the 95% confidence interval, the formula is:</p>
+<p><span class="math display">\[ \text{Lower limit} = \hat{\beta} - (t_{.95})(s_{\beta}) \]</span></p>
+<p><span class="math display">\[ \text{Upper limit} = \hat{\beta} + (t_{.95})(s_{\beta}) \]</span></p>
+<p>where <span class="math inline">\(\hat{\beta}\)</span> is the slope coefficient estimate, <span class="math inline">\(t_{.95}\)</span> is the value of t to use for the 95% confidence interval, and <span class="math inline">\(s_{\beta}\)</span> is the standard error for the slope estimate. As before, the t value can be found from a table or an inverse t distribution calculator based on the degrees of freedom.</p>
+<p>We illustrate generating a confidence interval using the same data as in the example from <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>, depicted again here as <a href="#fig-reg-example-cis" class="quarto-xref">Figure&nbsp;<span>6.11</span></a>.</p>
+<div id="fig-reg-example-cis" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reg-example-cis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/correlations/splotexampledatadetail.jpg" class="img-fluid figure-img" width="325">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reg-example-cis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.11: A scatter plot of the example data. The black line consists of the predictions, the points are the actual data, and the vertical lines between the points and the black line represent errors of prediction.
+</figcaption>
+</figure>
+</div>
+<p>When conducting statistical inference for linear regression coefficients, the degrees of freedom is equal to the number of observations minus the number of coefficients being estimated (usually one for the intercept plus one for each independent variable). In the case of simple regression, there is just one independent variable plus a y-intercept, so the number of degrees of freedom is:</p>
+<p><span class="math display">\[ df = n-2 \]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of pairs of scores (number of observations in the sample).</p>
+<p>As we saw in <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>, the estimated regression slope coefficient is 0.425 with this data. An <span class="math inline">\(n\)</span> of 5 yields 3 degrees of freedom (5 - 2 = 3), which means the critical t value (at 95% confidence) is 3.182. Finally, the estimated standard error for this slope coefficient (the calculative of which is shown in this chapter’s appendix) is 0.305 with this data.</p>
+<p>Applying these formulas we obtain a confidence interval with the following lower and upper limits:</p>
+<p><span class="math display">\[ \text{Lower limit} = 0.425 - (3.182)(0.305) = -0.55 \]</span></p>
+<p><span class="math display">\[ \text{Upper limit} = 0.425 + (3.182)(0.305) = 1.40 \]</span></p>
+</section>
+<section id="assumptions-for-statistical-inference-from-regression" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="assumptions-for-statistical-inference-from-regression"><span class="header-section-number">6.6.2</span> Assumptions for Statistical Inference from Regression</h3>
+<p>Although no assumptions were needed to determine the best-fitting straight line, assumptions are made in the calculation of inferential statistics. Naturally, these assumptions refer to the population, not the sample.</p>
+<ol type="1">
+<li><p>Linearity: The relationship between the two variables is linear.</p></li>
+<li><p>Homoscedasticity: The variance around the regression line is the same for all values of X. A clear violation of this assumption is shown in <a href="#fig-homoscedasticity" class="quarto-xref">Figure&nbsp;<span>6.12</span></a>. Notice that the predictions for students with high high-school GPAs are very good, whereas the predictions for students with low high-school GPAs are not very good. In other words, the points for students with high high-school GPAs are close to the regression line, whereas the points for low high-school GPA students are not.</p></li>
+<li><p>The errors of prediction are distributed normally. This means that the deviations from the regression line are normally distributed. It does not mean that X or Y is normally distributed.</p></li>
+</ol>
+<div id="fig-homoscedasticity" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-homoscedasticity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/sampling-distributions/homoscedasticty.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-homoscedasticity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.12: University GPA as a function of High School GPA.
+</figcaption>
+</figure>
+</div>
+<p>We will return to the topic of model assumptions and the consequences of violating them in <a href="models.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
+</section>
+</section>
+<section id="sec-sampling-distributions-appendix-estimating-the-standard-error-of-a-regression-slopesampling-distributions-13" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-sampling-distributions-appendix-estimating-the-standard-error-of-a-regression-slopesampling-distributions-13"><a href="#sec-sampling-distributions" class="quarto-xref"><span>Chapter 6</span></a> Appendix: Estimating the Standard Error of a Regression Slope<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></h2>
+<p>This appendix shows how to compute the standard error the slope of a simple linear regression. The estimated standard error of <span class="math inline">\(\beta\)</span> is computed using the following formula:</p>
+<p><span class="math display">\[
+s_{\beta} = \frac{s_{est}}{\sqrt{SSX}}
+\]</span></p>
+<p>where <span class="math inline">\(s_{\beta}\)</span> is the estimated standard error of <span class="math inline">\(\beta\)</span>, <span class="math inline">\(s_{est}\)</span> is the standard error of the estimate, and <span class="math inline">\(SSX\)</span> is the sum of squared deviations of <span class="math inline">\(X\)</span> from the mean of <span class="math inline">\(X\)</span>. <span class="math inline">\(SSX\)</span> is calculated as:</p>
+<p><span class="math display">\[
+SSX = \sum{(X-\bar{X})^2}
+\]</span></p>
+<p>where <span class="math inline">\(\bar{X}\)</span> is the mean of <span class="math inline">\(X\)</span>. The standard error of the estimate can be calculated as:</p>
+<p><span class="math display">\[
+s_{est} = \sqrt{\frac{(1-r^2)SSY}{n-2}}
+\]</span></p>
+<p>where <span class="math inline">\(r\)</span> is the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, and <span class="math inline">\(SSY\)</span> is the sum of squared deviations of <span class="math inline">\(Y\)</span> from the mean of <span class="math inline">\(Y\)</span>.</p>
+<p>These formulas are illustrated with the data shown in <a href="#tbl-example-calc-st-err" class="quarto-xref">Table&nbsp;<span>6.8</span></a>. These data are reproduced from <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>. The column X has the values of the predictor variable and the column Y has the values of the criterion variable. The third column, x, contains the differences between the values of column X and the mean of X. The fourth column, x<sup>2</sup>, is the square of the x column. The fifth column, y, contains the differences between the values of column Y and the mean of Y. The last column, y<sup>2</sup>, is simply square of the y column.<br>
+</p>
+<div id="tbl-example-calc-st-err" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-calc-st-err-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.8: Example data.
+</figcaption>
+<div aria-describedby="tbl-example-calc-st-err-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>X</th>
+<th>Y</th>
+<th>x</th>
+<th>x<sup>2</sup></th>
+<th>y</th>
+<th>y<sup>2</sup></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>1.00</td>
+<td>1.00</td>
+<td>-2.00</td>
+<td>4</td>
+<td>-1.06</td>
+<td>1.1236</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2.00</td>
+<td>2.00</td>
+<td>-1.00</td>
+<td>1</td>
+<td>-0.06</td>
+<td>0.0036</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3.00</td>
+<td>1.30</td>
+<td>0.00</td>
+<td>0</td>
+<td>-0.76</td>
+<td>0.5776</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>4.00</td>
+<td>3.75</td>
+<td>1.00</td>
+<td>1</td>
+<td>1.69</td>
+<td>2.8561</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5.00</td>
+<td>2.25</td>
+<td>2.00</td>
+<td>4</td>
+<td>0.19</td>
+<td>0.0361</td>
+</tr>
+<tr class="even">
+<td>Sum</td>
+<td>15.00</td>
+<td>10.30</td>
+<td>0.00</td>
+<td>10.00</td>
+<td>0.00</td>
+<td>4.5970</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><span class="math inline">\(SSY\)</span> is the sum of squared deviations from the mean of Y. It is, therefore, equal to the sum of the y<sup>2</sup> column and is equal to 4.597. The correlation (<span class="math inline">\(r\)</span>) between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is 0.6268, and there are 5 observations (n=5). Thus, the standard error of the estimate is:</p>
+<p><span class="math display">\[
+s_{est} = \sqrt{\frac{(1-(0.6268)^2)(4.597)}{5-2}} = \sqrt{\frac{2.791}{3}} = 0.964
+\]</span></p>
+<p><span class="math inline">\(SSX\)</span> can be found as the sum of the x<sup>2</sup> column and is equal to 10.</p>
+<p>We now have all the information to compute the standard error of <span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+s_{\beta} = \frac{0.964}{\sqrt{10}} = 0.305
+\]</span></p>
 
 
 </section>
@@ -1304,6 +1463,8 @@ s^2=\frac{\sum{(X-\bar{X})^2}}{n-1}
 <li id="fn9"><p><a href="http://onlinestatbook.com/2/calculators/inverse_t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/inverse_t_dist.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p><a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>This section is adapted from David M. Lane. “Degrees of Freedom.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/estimation/df.html" class="uri">http://onlinestatbook.com/2/estimation/df.html</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>This section is adapted from David M. Lane. “Inferential Statistics for b and r.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/inferential.html">https://onlinestatbook.com/2/regression/inferent</a><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>This section is adapted from David M. Lane. “Inferential Statistics for b and r.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/inferential.html">https://onlinestatbook.com/2/regression/inferent</a><a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
