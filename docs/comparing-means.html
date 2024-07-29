@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -126,6 +128,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics Minus The Math</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -229,7 +234,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#difference-between-two-meanscomparing-means-1" id="toc-difference-between-two-meanscomparing-means-1" class="nav-link active" data-scroll-target="#difference-between-two-meanscomparing-means-1"><span class="header-section-number">8.1</span> Difference between Two Means</a>
+  <li><a href="#sec-difference-between-two-means" id="toc-sec-difference-between-two-means" class="nav-link active" data-scroll-target="#sec-difference-between-two-means"><span class="header-section-number">8.1</span> Difference between Two Means</a>
   <ul class="collapse">
   <li><a href="#formatting-data-for-computer-analysis" id="toc-formatting-data-for-computer-analysis" class="nav-link" data-scroll-target="#formatting-data-for-computer-analysis"><span class="header-section-number">8.1.1</span> Formatting Data for Computer Analysis</a></li>
   </ul></li>
@@ -238,7 +243,17 @@ window.Quarto = {
   <li><a href="#computer-analysis" id="toc-computer-analysis" class="nav-link" data-scroll-target="#computer-analysis"><span class="header-section-number">8.2.1</span> Computer Analysis</a></li>
   <li><a href="#tukeys-test-need-not-be-a-follow-up-to-anova" id="toc-tukeys-test-need-not-be-a-follow-up-to-anova" class="nav-link" data-scroll-target="#tukeys-test-need-not-be-a-follow-up-to-anova"><span class="header-section-number">8.2.2</span> Tukey’s Test Need Not be a Follow-Up to ANOVA</a></li>
   </ul></li>
-  <li><a href="#analysis-of-variance-anovacomparing-means-8" id="toc-analysis-of-variance-anovacomparing-means-8" class="nav-link" data-scroll-target="#analysis-of-variance-anovacomparing-means-8"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)</a></li>
+  <li><a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)</a>
+  <ul class="collapse">
+  <li><a href="#introductioncomparing-means-9" id="toc-introductioncomparing-means-9" class="nav-link" data-scroll-target="#introductioncomparing-means-9"><span class="header-section-number">8.3.1</span> Introduction</a></li>
+  <li><a href="#sec-the-critical-step-calculating-an-f-ratio" id="toc-sec-the-critical-step-calculating-an-f-ratio" class="nav-link" data-scroll-target="#sec-the-critical-step-calculating-an-f-ratio"><span class="header-section-number">8.3.2</span> The Critical Step: Calculating an F Ratio</a></li>
+  <li><a href="#relationship-to-t-tests-and-regression" id="toc-relationship-to-t-tests-and-regression" class="nav-link" data-scroll-target="#relationship-to-t-tests-and-regression"><span class="header-section-number">8.3.3</span> Relationship to T Tests and Regression</a></li>
+  </ul></li>
+  <li><a href="#sec-comparing-means-appendix-more-about-anova" id="toc-sec-comparing-means-appendix-more-about-anova" class="nav-link" data-scroll-target="#sec-comparing-means-appendix-more-about-anova"><span>Chapter 8</span> Appendix: More about ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#terminology-for-various-designscomparing-means-12" id="toc-terminology-for-various-designscomparing-means-12" class="nav-link" data-scroll-target="#terminology-for-various-designscomparing-means-12">Terminology for Various Designs</a></li>
+  <li><a href="#details-of-one-factor-anova-between-subjectscomparing-means-14" id="toc-details-of-one-factor-anova-between-subjectscomparing-means-14" class="nav-link" data-scroll-target="#details-of-one-factor-anova-between-subjectscomparing-means-14">Details of One-Factor ANOVA (Between Subjects)</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -264,10 +279,11 @@ window.Quarto = {
 </header>
 
 
-<section id="difference-between-two-meanscomparing-means-1" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="difference-between-two-meanscomparing-means-1"><span class="header-section-number">8.1</span> Difference between Two Means<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
-<p>It is much more common for a researcher to be interested in the difference between means than in the specific values of the means themselves. This section covers how to test for differences between means from two separate groups of subjects. Note that we already learned in the chapter on graphing how to visually depict a comparison of two means/medians using boxplots (<a href="graphing.html#sec-box-plots" class="quarto-xref"><span>Section 1.4.2</span></a>).</p>
-<p>We take as an example the data from the “Animal Research” case study, previously described when discussing confidence intervals (<a href="estimation.html#sec-using-confidence-intervals" class="quarto-xref"><span>Section 4.3</span></a>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> As a reminder, students rated (on a 7-point scale) whether they thought animal research is wrong.</p>
+<p>It is much more common for a researcher to be interested in the difference between means—the focus of this chapter—than in the specific values of the means themselves. Note that we already learned in the chapter on graphing how to visually depict a comparison of means/medians using boxplots (<a href="graphing.html#sec-box-plots" class="quarto-xref"><span>Section 1.4.2</span></a>). The formal analyses described in this chapter pair well with that sort of graph, since the formal tests allow one to make statements that explicitly account for the uncertainty and imprecision inherent in statistical inference.</p>
+<section id="sec-difference-between-two-means" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-difference-between-two-means"><span class="header-section-number">8.1</span> Difference between Two Means<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>This section covers how to test for differences between means from two separate groups of subjects, using an independent-groups t test.</p>
+<p>We take as an example the data from the “Animal Research” case study, previously described when discussing confidence intervals (<a href="estimation.html#sec-using-confidence-intervals" class="quarto-xref"><span>Section 4.2.1</span></a>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> As a reminder, students rated (on a 7-point scale) whether they thought animal research is wrong.</p>
 <div id="tbl-meansvaranimalresearch" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-meansvaranimalresearch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -335,9 +351,9 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <li><p>Each value is sampled independently from each other value. This assumption requires that each subject provide only one value. If a subject provides two scores, then the scores are not independent.</p></li>
 </ol>
 <p>One could look at these assumptions in much more detail, but suffice it to say that small-to-moderate violations of assumptions 1 and 2 do not make much difference. It is important not to violate assumption 3.</p>
-<p>We saw the following general formula for significance testing in the section on testing a single mean:</p>
+<p>In practice, most researchers use software to automate calculation of all formulas we encounter in this chapter. Nonetheless, your ability to understand the output of the software will be enhanced if you have some idea of what’s happening under the hood. As we saw in the previous chapter, the following general formula is used for significance testing based on the t distribution:</p>
 <p><span class="math display">\[
-\text{t} = \frac{\text{statistic-hypothesized value}}{\text{estimated standard error of the statistic}}
+\text{t} = \frac{\text{statistic} - \text{hypothesized value}}{\text{estimated standard error of the statistic}}
 \]</span></p>
 <p>In this case, our statistic is the difference between sample means and our hypothesized value is 0. The hypothesized value is the null hypothesis that the difference between population means is 0.</p>
 <p>We continue to use the data from the “Animal Research” case study and will compute a significance test on the difference between the mean score of the females and the mean score of the males. For this calculation, we will make the three assumptions specified above.</p>
@@ -350,7 +366,8 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <p><span class="math display">\[
 \sigma_{\text{diff}} = \sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma^2_2}{n_2}} = \sqrt{\frac{\sigma^2}{n}+\frac{\sigma^2}{n}} = \sqrt{\frac{2\sigma^2}{n}}
 \]</span></p>
-<p>In order to estimate this quantity, we estimate <span class="math inline">\(\sigma^2\)</span> and use that estimate in place of <span class="math inline">\(\sigma^2\)</span>. Since we are assuming the two population variances are the same, we estimate this variance by averaging our two sample variances. Thus, our estimate of variance is computed using the following formula:</p>
+<p>where <span class="math inline">\(\sigma^2_1\)</span> and <span class="math inline">\(n_1\)</span> are the variance and sample size of the first group, and <span class="math inline">\(\sigma^2_2\)</span> and <span class="math inline">\(n_2\)</span> are the variance and sample size of the second group. Note that since we assumed <span class="math inline">\(\sigma^2_1 = \sigma^2_2\)</span> (as our first of the three assumptions listed above), we can represent both of these variances as simply <span class="math inline">\(\sigma^2\)</span>. Likewise, when <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span> (as in our example with equal numbers of females and males), it is conventional to use “<span class="math inline">\(n\)</span>” to refer to the sample size of each group.</p>
+<p>Because the value of <span class="math inline">\(\sigma^2\)</span> is unknown, we estimate it by averaging our two sample variances, relying again on our assumption that the two population variances are the same (and thus each sample’s variance should be an equally valid estimate of <span class="math inline">\(\sigma^2\)</span>). This estimate of variance is can be written as follows:</p>
 <p><span class="math display">\[
 \text{MSE}= \frac{s^2_1+s^2_2}{2}
 \]</span></p>
@@ -358,20 +375,20 @@ Table&nbsp;8.1: Means and Variances in Animal Research study.
 <p><span class="math display">\[
 \text{MSE} = (2.743 + 2.985)/2 = 2.864.
 \]</span></p>
-<p>Since n (the number of scores in each group) is 17,</p>
+<p>We can now estimate <span class="math inline">\(\sigma_{\text{diff}}\)</span> as <span class="math inline">\(S_{\text{diff}}\)</span>, substituting in MSE where we previously saw <span class="math inline">\(\sigma^2\)</span> in the formula for <span class="math inline">\(\sigma_{\text{diff}}\)</span>. Since n (the number of scores in each group) is 17,</p>
 <p><span class="math display">\[
-S_{\text{diff}} = \sqrt{\frac{2MSE}{n}} = \sqrt{\frac{(2)(2.864)}{17}} = 0.5805
+S_{\text{diff}} = \sqrt{\frac{2MSE}{n}} = \sqrt{\frac{(2)(2.864)}{17}} = 0.5805.
 \]</span></p>
 <p>The next step is to compute t by plugging these values into the formula:</p>
 <p><span class="math display">\[
 t = 1.4705/.5805 = 2.533.
 \]</span></p>
-<p>Finally, we compute the probability of getting a <span class="math inline">\(t\)</span> as large or larger than 2.533 or as small or smaller than -2.533. To do this, we need to know the degrees of freedom. The degrees of freedom is the number of independent estimates of variance on which <span class="math inline">\(MSE\)</span> is based. This is equal to (<span class="math inline">\(n_1\)</span> - 1) + (<span class="math inline">\(n_2\)</span> - 1), where <span class="math inline">\(n_1\)</span> is the sample size of the first group and <span class="math inline">\(n_2\)</span> is the sample size of the second group. For this example, <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span> = 17. When <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span>, it is conventional to use “<span class="math inline">\(n\)</span>” to refer to the sample size of each group. Therefore, the degrees of freedom is 16 + 16 = 32.</p>
+<p>Finally, we compute the probability of getting a <span class="math inline">\(t\)</span> as large or larger than 2.533 or as small or smaller than -2.533. To do this, we need to know the degrees of freedom. The degrees of freedom is the number of independent estimates of variance on which <span class="math inline">\(MSE\)</span> is based. This is equal to (<span class="math inline">\(n_1\)</span> - 1) + (<span class="math inline">\(n_2\)</span> - 1), and for this example, <span class="math inline">\(n_1\)</span> = <span class="math inline">\(n_2\)</span> = 17. Therefore, the degrees of freedom is 16 + 16 = 32.</p>
 <p>Once we have the degrees of freedom, we can use a t distribution calculator<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> to find the probability. <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> shows that the probability value for a two-tailed test is 0.0164. The two-tailed test is used when the null hypothesis can be rejected regardless of the direction of the effect. As shown in <a href="#fig-2tailprob" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>, it is the probability of a t &lt; -2.533 or a t &gt; 2.533.</p>
 <div id="fig-2tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/comparing-means/2tailprob.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/2tailprob.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.1: The two-tailed probability.
@@ -382,7 +399,7 @@ Figure&nbsp;8.1: The two-tailed probability.
 <div id="fig-1tailprob" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/comparing-means/1tailprob.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/1tailprob.png" class="img-fluid figure-img" width="300">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1tailprob-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.2: The one-tailed probability.
@@ -399,29 +416,31 @@ Table&nbsp;8.2: Example data.
 </figcaption>
 <div aria-describedby="tbl-exampledata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Group 1</strong></th>
+<th></th>
+<th><strong>Group 2</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Group 1</strong></td>
-<td></td>
-<td><strong>Group 2</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>3</td>
 <td></td>
 <td>2</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>4</td>
 <td></td>
 <td>6</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>5</td>
 <td></td>
@@ -441,50 +460,52 @@ Table&nbsp;8.3: Reformatted data.
 </figcaption>
 <div aria-describedby="tbl-reformatdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>G</strong></th>
+<th></th>
+<th><strong>Y</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>G</strong></td>
-<td></td>
-<td><strong>Y</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>1</td>
 <td></td>
 <td>3</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>1</td>
 <td></td>
 <td>4</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>1</td>
 <td></td>
 <td>5</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>2</td>
 <td></td>
 <td>2</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>2</td>
 <td></td>
 <td>6</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>2</td>
 <td></td>
@@ -501,7 +522,7 @@ Table&nbsp;8.3: Reformatted data.
 </section>
 <section id="pairwise-comparisons-among-multiple-meanscomparing-means-5" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="pairwise-comparisons-among-multiple-meanscomparing-means-5"><span class="header-section-number">8.2</span> Pairwise Comparisons Among Multiple Means<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h2>
-<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In this study, the effect of different types of smiles on the leniency shown to a person was investigated. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>8.4</span></a>.</p>
+<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In this study, the effect of different smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, and miserable) were shown. “Type of Smile” is the independent variable, and the dependent variable is a leniency rating given by the subject to a fictional student (depicted with one of the four smiles) in an academic misconduct case. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>8.4</span></a>.</p>
 <div id="tbl-feltmisneutral" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -516,30 +537,45 @@ Table&nbsp;8.4: Six Comparisons among Means.
 </colgroup>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">felt vs.&nbsp;miserable</td>
-<td style="text-align: center;"><img src="Images/comparing-means/feltjpg.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
+<td>false vs.&nbsp;felt</td>
+<td><img src="Images/comparing-means/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/felt.png" class="img-fluid figure-img"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">felt vs.&nbsp;neutral</td>
-<td style="text-align: center;"><img src="Images/comparing-means/feltjpg.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
+<td>false vs.&nbsp;miserable</td>
+<td><img src="Images/comparing-means/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">miserable vs.&nbsp;neutral</td>
-<td style="text-align: center;"><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
-<td style="text-align: center;"><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
+<td>false vs.&nbsp;neutral</td>
+<td><img src="Images/comparing-means/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td>felt vs.&nbsp;miserable</td>
+<td><img src="Images/comparing-means/felt.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="odd">
+<td>felt vs.&nbsp;neutral</td>
+<td><img src="Images/comparing-means/felt.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td>miserable vs.&nbsp;neutral</td>
+<td><img src="Images/comparing-means/miserable.png" class="img-fluid figure-img"></td>
+<td><img src="Images/comparing-means/neutral.png" class="img-fluid figure-img"></td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>The problem with this approach is that if you did this analysis, you would have six chances to make a Type I error. Therefore, if you were using the 0.05 significance level, the probability that you would make a Type I error on at least one of these comparisons is greater than 0.05. The more means that are compared, the more the Type I error rate is inflated. <a href="#fig-pairwisecompfmean" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of possible comparisons between pairs of means (pairwise comparisons) as a function of the number of means. If there are only two means, then only one comparison can be made. If there are 12 means, then there are 66 possible comparisons.</p>
+<p>The problem with this approach is that if you did this analysis, you would have six chances to make a Type I error. Therefore, if you were using the 0.05 significance level, the probability that you would make a Type I error on at least one of these comparisons is greater than 0.05.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The more means that are compared, the more the Type I error rate is inflated. <a href="#fig-pairwisecompfmean" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> shows the number of possible comparisons between pairs of means (pairwise comparisons) as a function of the number of means. If there are only two means, then only one comparison can be made. If there are 12 means, then there are 66 possible comparisons.</p>
 <div id="fig-pairwisecompfmean" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/comparing-means/pairwisecompfmean.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/pairwisecompfmean.png" class="img-fluid figure-img" width="375">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.3: Number of pairwise comparisons as a function of the number of means.
@@ -550,7 +586,7 @@ Figure&nbsp;8.3: Number of pairwise comparisons as a function of the number of m
 <div id="fig-type1error" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/comparing-means/type1error.png" class="img-fluid figure-img">
+<img src="Images/comparing-means/type1error.png" class="img-fluid figure-img" width="375">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8.4: Probability of a Type I error as a function of the number of means.
@@ -560,20 +596,28 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 <p>The Type I error rate can be controlled using a test called the Tukey Honestly Significant Difference test or Tukey HSD for short. The Tukey HSD test is one example of a multiple comparison test, but several alternatives are frequently used, such as the Bonferroni correction. Regardless of the exact method used for a multiple comparison test, the interpretation of results is similar. The Tukey HSD is based on a variation of the t distribution that takes into account the number of means being compared. This distribution is called the studentized range distribution.</p>
 <p>Normally, statistical software will make all the necessary calculations for you in the background. But to illustrate what sorts of calculations the software is relying on, let’s return to the leniency study to see how to compute the Tukey HSD test. You will see that the computations are very similar to those of an independent-groups t test. The steps are outlined below:</p>
 <ol type="1">
-<li>Compute the means and variances of each group. They are shown below.</li>
+<li>Compute the means and variances of each group. For our example, they are shown in <a href="#tbl-sum-stats-leniency" class="quarto-xref">Table&nbsp;<span>8.5</span></a>.</li>
 </ol>
+<div id="tbl-sum-stats-leniency" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sum-stats-leniency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.5: Means and Variances from the “Smiles and Leniency” Study.
+</figcaption>
+<div aria-describedby="tbl-sum-stats-leniency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Condition</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Mean</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Variance</strong></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Condition</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Mean</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Variance</strong></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">False</td>
 <td style="text-align: center;"></td>
@@ -582,7 +626,7 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 <td style="text-align: center;">3.34</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Felt</td>
 <td style="text-align: center;"></td>
@@ -591,7 +635,7 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 <td style="text-align: center;">2.83</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Miserable</td>
 <td style="text-align: center;"></td>
@@ -600,7 +644,7 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 <td style="text-align: center;">2.11</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Neutral</td>
 <td style="text-align: center;"></td>
@@ -611,115 +655,68 @@ Figure&nbsp;8.4: Probability of a Type I error as a function of the number of me
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <ol start="2" type="1">
 <li><p>Compute MSE, which is simply the mean of the variances. It is equal to 2.65.</p></li>
-<li><p>Compute</p></li>
-</ol>
-<p><span class="math display">\[
+<li><p>Compute Q (using the formula below) for each pair of means, where <span class="math inline">\(\bar{X}_i\)</span> is one mean, <span class="math inline">\(\bar{X}_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279. <span class="math display">\[
 Q=\frac{\bar{X}_i-\bar{X}_j}{\sqrt{\frac{MSE}{n}}}
-\]</span></p>
-<p>for each pair of means, where <span class="math inline">\(\bar{X}_i\)</span> is one mean, <span class="math inline">\(\bar{X}_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279.</p>
-<ol start="4" type="1">
-<li>Compute p for each comparison using a Studentized Range Calculator.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</li>
+\]</span></p></li>
+<li><p>Compute p for each comparison using a Studentized Range Calculator.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</p></li>
 </ol>
-<p>The tests for these data are shown in <a href="#tbl-6pairwisecomp" class="quarto-xref">Table&nbsp;<span>8.5</span></a>.</p>
+<p>The tests for these data are shown in <a href="#tbl-6pairwisecomp" class="quarto-xref">Table&nbsp;<span>8.6</span></a>.</p>
 <div id="tbl-6pairwisecomp" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.5: Six Pairwise Comparisons.
+Table&nbsp;8.6: Six Pairwise Comparisons.
 </figcaption>
 <div aria-describedby="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 5%">
-<col style="width: 25%">
-<col style="width: 5%">
-<col style="width: 29%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 8%">
-<col style="width: 5%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;"></th>
 <th style="text-align: center;">Comparison</th>
-<th style="text-align: center;"></th>
 <th style="text-align: center;"><span class="math inline">\(\bar{X}_i - \bar{X}_j\)</span></th>
-<th style="text-align: center;"></th>
 <th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
-<th style="text-align: center;"></th>
 <th style="text-align: center;"><span class="math inline">\(p\)</span></th>
-<th style="text-align: center;"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">False - Felt</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.46</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">1.65</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.649</td>
-<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">False - Miserable</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.46</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">1.65</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.649</td>
-<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">False - Neutral</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">1.25</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">4.48</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.010</td>
-<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">Felt - Miserable</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.00</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.00</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">1.000</td>
-<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">Felt - Neutral</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.79</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">2.83</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.193</td>
-<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">Miserable - Neutral</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.79</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">2.83</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">0.193</td>
-<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
@@ -735,125 +732,393 @@ Table&nbsp;8.5: Six Pairwise Comparisons.
 </section>
 <section id="tukeys-test-need-not-be-a-follow-up-to-anova" class="level3" data-number="8.2.2">
 <h3 data-number="8.2.2" class="anchored" data-anchor-id="tukeys-test-need-not-be-a-follow-up-to-anova"><span class="header-section-number">8.2.2</span> Tukey’s Test Need Not be a Follow-Up to ANOVA</h3>
-<p>Some textbooks introduce the Tukey test only as a follow-up to an analysis of variance. There is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA (or even know what one is). If you or your instructor do not wish to take our word for this, see the excellent article on this and other issues in statistical analysis by Leland Wilkinson and the APA Board of Scientific Affairs’ Task Force on Statistical Inference, published in the <em>American Psychologist</em>, August 1999, Vol. <em>54</em>, No.&nbsp;8, 594–604.</p>
+<p>Some textbooks introduce the Tukey test only as a follow-up to an analysis of variance (ANOVA), a technique introduced in the following section. There is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA (or even know what one is). If you or your instructor do not wish to take our word for this, see the excellent article on this and other issues in statistical analysis by Leland Wilkinson and the APA Board of Scientific Affairs’ Task Force on Statistical Inference, published in the <em>American Psychologist</em>, August 1999, Vol. <em>54</em>, No.&nbsp;8, 594–604.</p>
 </section>
 </section>
-<section id="analysis-of-variance-anovacomparing-means-8" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="analysis-of-variance-anovacomparing-means-8"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></h2>
-<p><strong>Analysis of Variance (ANOVA)</strong> is a statistical method used to test differences between two or more means. It may seem odd that the technique is called “Analysis of Variance” rather than “Analysis of Means.” As you will see, the name is appropriate because inferences about means are made by analyzing variance.</p>
-<p>ANOVA is used to test general rather than specific differences among means. This can be seen best by example. In the case study “Smiles and Leniency,”<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> the effect of different types of smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, miserable) were investigated. In the prior section, we learned how to test differences among means. The results from the Tukey HSD test are shown in <a href="#tbl-6pairwisecomp2" class="quarto-xref">Table&nbsp;<span>8.6</span></a>.</p>
-<div id="tbl-6pairwisecomp2" class="quarto-float anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.6: Six Pairwise Comparisons.
+<section id="analysis-of-variance-anova" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="analysis-of-variance-anova"><span class="header-section-number">8.3</span> Analysis of Variance (ANOVA)</h2>
+<section id="introductioncomparing-means-9" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="introductioncomparing-means-9"><span class="header-section-number">8.3.1</span> Introduction<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h3>
+<p><strong>Analysis of Variance (ANOVA)</strong> is a statistical method used to test differences between two or more means. It may seem odd that the technique is called “Analysis of Variance” rather than “Analysis of Means.” The name is appropriate because inferences about means are made by analyzing variance, as outlined in this chapter’s appendix.</p>
+<p>ANOVA is used to test general rather than specific differences among means. This can be seen best by example, so we will continue considering the data on leniency and smiles we examined in the prior section on the Tukey HSD test.</p>
+<p>ANOVA tests the non-specific null hypothesis that all four population means are equal. That is,</p>
+<p><span class="math display">\[
+μ_{false} = μ_{felt}~ = μ_{miserable} = μ_{neutral}
+\]</span></p>
+<p>in our example. More generally, the null hypothesis tested by ANOVA is that the population means for all conditions are the same. For whatever data is being examined, this can be written as:</p>
+<p><span class="math display">\[ H_0: \mu_1 = \mu_2 = ... = \mu_k \]</span></p>
+<p>where <span class="math inline">\(H_0\)</span> is the null hypothesis and k is the number of conditions (k = 4 in our example).</p>
+<p>This non-specific null hypothesis is sometimes called the omnibus null hypothesis. When the omnibus null hypothesis is rejected, the conclusion is that at least one population mean is different from at least one other mean. However, since the ANOVA does not reveal which means are different from which, it offers less specific information than the Tukey HSD test. The Tukey HSD is therefore preferable to ANOVA in this situation.</p>
+<p>You might be wondering why you should learn about ANOVA when the Tukey test is better. One reason is that there are complex types of analyses that can be done with ANOVA and not with the Tukey test. A second is that ANOVA is one of the most commonly-used technique for comparing means, and it is important to understand ANOVA in order to understand research reports.</p>
+</section>
+<section id="sec-the-critical-step-calculating-an-f-ratio" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="sec-the-critical-step-calculating-an-f-ratio"><span class="header-section-number">8.3.2</span> The Critical Step: Calculating an F Ratio<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></h3>
+<p>There are many types of ANOVA, but for our example, we will use what is called a one-factor between-subjects design. Other types of ANOVA are beyond the scope of what is covered in this text.</p>
+<p>More details are provided in this chapter’s appendix, but the critical step in an ANOVA is comparing what is called the mean square error (MSE) to the mean square between (MSB). MSB estimates a larger quantity than MSE only when the population means are not equal, so finding a larger MSB than an MSE is a sign that the population means are not equal. But since MSB could be larger than MSE by chance even if the population means are equal, MSB must be much larger than MSE in order to justify the conclusion that the population means differ. But how much larger must MSB be? For the “Smiles and Leniency” data, the MSB and MSE are 9.179 and 2.649, respectively. Is that difference big enough? To answer, we would need to know the probability of getting that big a difference or a bigger difference if the population means were all equal. The mathematics necessary to answer this question were worked out by the statistician R. Fisher. Although Fisher’s original formulation took a slightly different form, the standard method for determining the probability is based on the ratio of MSB to MSE. This ratio is named after Fisher and is called the F ratio.</p>
+<p>For these data, the F ratio is</p>
+<p><span class="math display">\[
+F = \frac{9.179}{2.649} = 3.465.
+\]</span></p>
+<p>Therefore, the MSB is 3.465 times higher than MSE. Would this have been likely to happen if all the population means were equal? That depends on the sample size. With a small sample size, it would not be too surprising because results from small samples are unstable. However, with a very large sample, the MSB and MSE are almost always about the same, and an F ratio of 3.465 or larger would be very unusual. <a href="#fig-fdist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> shows the sampling distribution of F for the sample size in the “Smiles and Leniency” study. As you can see, it has a positive skew.</p>
+<div id="fig-fdist" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/comparing-means/fdist_smiles.png" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.5: Distribution of F.
 </figcaption>
-<div aria-describedby="tbl-6pairwisecomp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figure>
+</div>
+<p>From <a href="#fig-fdist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a>, you can see that F ratios of 3.465 or above are unusual occurrences. The area to the right of 3.465 represents the probability of an F that large or larger and is equal to 0.018. In other words, given the null hypothesis that all the population means are equal, the probability value is 0.018 and therefore the null hypothesis can be rejected. The conclusion that at least one of the population means is different from at least one of the others is justified.</p>
+<p>The shape of the F distribution depends on the sample size. More precisely, it depends on two degrees of freedom (df) parameters: one for the numerator (MSB) and one for the denominator (MSE). Recall that the degrees of freedom for an estimate of variance is equal to the number of observations minus one. Since the MSB is the variance of k means (where k is the number of groups), it has k - 1 df. The MSE is an average of k variances, each with n - 1 df. Therefore, the df for MSE is k(n - 1) = N - k, where N is the total number of observations, n is the number of observations in each group, and k is the number of groups. To summarize:</p>
+<p><span class="math display">\[
+df_{\text{numerator}} = k-1
+\]</span><span class="math display">\[
+df_{\text{denominator}} = N-k
+\]</span></p>
+<p>For the “Smiles and Leniency” data,</p>
+<p><span class="math display">\[
+df_{\text{numerator}} = k-1 = 4-1 = 3
+\]</span><span class="math display">\[
+df_{\text{denominator}} = N-k = 136-4 = 132
+\]</span><span class="math display">\[
+F = 3.465
+\]</span></p>
+<p>An F distribution calculator<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> shows that p = 0.018. Again, because this value is less than 0.05, one would generally reject the null hypothesis and conclude that average leniency varies depending on type of smile. The p-value from an ANOVA is sometimes reported in a larger table of summary results such as <a href="#tbl-anova-results-summary" class="quarto-xref">Table&nbsp;<span>8.7</span></a>.</p>
+<div id="tbl-anova-results-summary" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anova-results-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.7: ANOVA Summary Table.
+</figcaption>
+<div aria-describedby="tbl-anova-results-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 25%">
-<col style="width: 6%">
-<col style="width: 28%">
-<col style="width: 6%">
-<col style="width: 7%">
-<col style="width: 6%">
-<col style="width: 8%">
-<col style="width: 6%">
-</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Comparison</th>
-<th></th>
-<th><span class="math inline">\(\bar{X}_i-\bar{X}_j\)</span></th>
-<th></th>
-<th><span class="math inline">\(Q\)</span></th>
-<th></th>
-<th><span class="math inline">\(p\)</span></th>
-<th></th>
+<th style="text-align: center;">Source</th>
+<th style="text-align: center;">df</th>
+<th style="text-align: center;">SSQ</th>
+<th style="text-align: center;">MS</th>
+<th style="text-align: center;">F</th>
+<th style="text-align: center;">p</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td>False - Felt</td>
-<td></td>
-<td>0.46</td>
-<td></td>
-<td>1.65</td>
-<td></td>
-<td>0.649</td>
-<td></td>
+<td style="text-align: center;">Condition</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">27.5349</td>
+<td style="text-align: center;">9.1783</td>
+<td style="text-align: center;">3.465</td>
+<td style="text-align: center;">0.0182</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>False - Miserable</td>
-<td></td>
-<td>0.46</td>
-<td></td>
-<td>1.65</td>
-<td></td>
-<td>0.649</td>
-<td></td>
+<td style="text-align: center;">Error</td>
+<td style="text-align: center;">132</td>
+<td style="text-align: center;">349.6544</td>
+<td style="text-align: center;">2.6489</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>False - Neutral</td>
-<td></td>
-<td>1.25</td>
-<td></td>
-<td>4.48</td>
-<td></td>
-<td>0.010</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Felt - Miserable</td>
-<td></td>
-<td>0.00</td>
-<td></td>
-<td>0.00</td>
-<td></td>
-<td>1.000</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Felt - Neutral</td>
-<td></td>
-<td>0.79</td>
-<td></td>
-<td>2.83</td>
-<td></td>
-<td>0.193</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Miserable - Neutral</td>
-<td></td>
-<td>0.79</td>
-<td></td>
-<td>2.83</td>
-<td></td>
-<td>0.193</td>
-<td></td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">135</td>
+<td style="text-align: center;">377.1893</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
+<td style="text-align: center;">&nbsp;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>Notice that the only significant difference is between the False and Neutral conditions.</p>
-<p>ANOVA tests the non-specific null hypothesis that all four population means are equal. That is,</p>
+</section>
+<section id="relationship-to-t-tests-and-regression" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="relationship-to-t-tests-and-regression"><span class="header-section-number">8.3.3</span> Relationship to T Tests and Regression</h3>
+<p>Since an ANOVA and an independent-groups t test can both test the difference between two means, you might be wondering which one to use. Fortunately, it does not matter since the results will always be the same. When there are only two groups, the following relationship between F and t will always hold:</p>
 <p><span class="math display">\[
-μ_{false} = μ_{felt}~ = μ_{miserable} = μ_{neutral}
+F(1,dfd) = t^2(df)
 \]</span></p>
-<p>This non-specific null hypothesis is sometimes called the omnibus null hypothesis. When the omnibus null hypothesis is rejected, the conclusion is that at least one population mean is different from at least one other mean. However, since the ANOVA does not reveal which means are different from which, it offers less specific information than the Tukey HSD test. The Tukey HSD is therefore preferable to ANOVA in this situation. Some textbooks introduce the Tukey test only as a follow-up to an ANOVA. However, there is no logical or statistical reason why you should not use the Tukey test even if you do not compute an ANOVA.</p>
-<p>You might be wondering why you should learn about ANOVA when the Tukey test is better. One reason is that there are complex types of analyses that can be done with ANOVA and not with the Tukey test. A second is that ANOVA is by far the most commonly-used technique for comparing means, and it is important to understand ANOVA in order to understand research reports.</p>
+<p>where dfd is the degrees of freedom for the denominator of the F test and df is the degrees of freedom for the t test. dfd will always equal df. And because of how their probability distributions are constructed, these values of F and t will yield identical p-values for the (two tailed) null hypothesis of no difference between the two means.</p>
+<p>There is also a third equivalent way to compare two means: using regression, as described in <a href="regression-qual-predictors.html" class="quarto-xref"><span>Chapter 12</span></a>. More generally, regression and ANOVA are two sides of the same coin and will yield equivalent results (assuming the same data/assumptions), even when testing for differences among more than two means. Statistical software will generally include a model F statistic among the results shown for a regression, and in the case of a model a single qualitative independent variable, the regression model F statistic will be the same F ratio used in an ANOVA. Because of this equivalence, whether one reports results as an ANOVA or regression is usually a matter of habit and familiarity. In some social science literatures, ANOVA results are rarely reported because researchers typically default to using regression instead.</p>
+</section>
+</section>
+<section id="sec-comparing-means-appendix-more-about-anova" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-comparing-means-appendix-more-about-anova"><a href="#sec-comparing-means" class="quarto-xref"><span>Chapter 8</span></a> Appendix: More about ANOVA</h2>
+<section id="terminology-for-various-designscomparing-means-12" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="terminology-for-various-designscomparing-means-12">Terminology for Various Designs<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></h3>
+<p>There are many types of experimental designs that can be analyzed by ANOVA. This section discusses many of these designs and defines several key terms used.</p>
+<section id="factors-and-levels" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="factors-and-levels">Factors and Levels</h4>
+<p>In describing an ANOVA design, the term factor is a synonym of independent variable. Therefore, in the case study “Smiles and Leniency,” “Type of Smile” is the factor in this experiment. Since four types of smiles were compared, the factor “Type of Smile” has four levels.</p>
+<p>An ANOVA conducted on a design in which there is only one factor is called a one-way ANOVA. If an experiment has two factors, then the ANOVA is called a two-way ANOVA. For example, suppose an experiment on the effects of age and gender on reading speed were conducted using three age groups (8 years, 10 years, and 12 years) and the two genders (male and female). The factors would be age and gender. Age would have three levels and gender would have two levels.</p>
+</section>
+<section id="between--and-within-subjects-factors" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="between--and-within-subjects-factors">Between- and Within-Subjects Factors</h4>
+<p>In the “Smiles and Leniency” study, the four levels of the factor “Type of Smile” were represented by four separate groups of subjects. When different subjects are used for the levels of a factor, the factor is called a between-subjects factor or a between-subjects variable. The term “between subjects” reflects the fact that comparisons are between different groups of subjects.</p>
+<p>In the “ADHD Treatment” study,<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> in which every subject was tested with each of four dosage levels (0, 0.15, 0.30, 0.60 mg/kg) of a drug. Therefore there was only one group of subjects, and comparisons were not between different groups of subjects but between conditions within the same subjects. When the same subjects are used for the levels of a factor, the factor is called a within-subjects factor or a within-subjects variable. Within-subjects variables are sometimes referred to as repeated-measures variables since there are repeated measurements of the same subjects.</p>
+</section>
+<section id="multi-factor-designs" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="multi-factor-designs">Multi-Factor Designs</h4>
+<p>It is common for designs to have more than one factor. For example, consider a hypothetical study of the effects of age and gender on reading speed in which males and females from the age levels of 8 years, 10 years, and 12 years are tested. There would be a total of six different groups as shown in <a href="#tbl-factorial-design" class="quarto-xref">Table&nbsp;<span>8.8</span></a>.</p>
+<div id="tbl-factorial-design" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-factorial-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.8: Gender x Age Design.
+</figcaption>
+<div aria-describedby="tbl-factorial-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Group</th>
+<th style="text-align: center;">Gender</th>
+<th style="text-align: center;">Age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">Female</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Female</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">Female</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">Male</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">Male</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">Male</td>
+<td style="text-align: center;">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>This design has two factors: age and gender. Age has three levels and gender has two levels. When all combinations of the levels are included (as they are here), the design is called a <em>factorial design</em>. A concise way of describing this design is as a Gender (2) x Age (3) factorial design where the numbers in parentheses indicate the number of levels. Complex designs frequently have more than two factors and may have combinations of between- and within-subjects factors.</p>
+</section>
+</section>
+<section id="details-of-one-factor-anova-between-subjectscomparing-means-14" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="details-of-one-factor-anova-between-subjectscomparing-means-14">Details of One-Factor ANOVA (Between Subjects)<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></h3>
+<p>This section shows how ANOVA can be used to analyze a one-factor between-subjects design.</p>
+<p>Analysis of variance is a method for testing differences among means by analyzing variance. The test is based on two estimates of the population variance (<span class="math inline">\(\sigma^2\)</span>). One estimate is called the mean square error (MSE) and is based on differences among scores within the groups. MSE estimates <span class="math inline">\(\sigma^2\)</span> regardless of whether the null hypothesis is true (the population means are equal). The second estimate is called the mean square between (MSB) and is based on differences among the sample means. MSB only estimates <span class="math inline">\(\sigma^2\)</span> if the population means are equal. If the population means are not equal, then MSB estimates a quantity larger than <span class="math inline">\(\sigma^2\)</span>. Therefore, if the MSB is much larger than the MSE, then the population means are unlikely to be equal. On the other hand, if the MSB is about the same as MSE, then the data are consistent with the null hypothesis that the population means are equal.</p>
+<p>Before proceeding with the calculation of MSE and MSB, it is important to consider the assumptions made by ANOVA:</p>
+<ol type="1">
+<li><p>The populations have the same variance. This assumption is called the assumption of homogeneity of variance.</p></li>
+<li><p>The populations are normally distributed.</p></li>
+<li><p>Each value is sampled independently from each other value. This assumption requires that each subject provide only one value. If a subject provides two scores, then the values are not independent. The analysis of data with two scores per subject is shown in the section on within-subjects ANOVA later in this chapter.</p></li>
+</ol>
+<p>These assumptions are the same as for a t test of differences between groups (<a href="#sec-difference-between-two-means" class="quarto-xref"><span>Section 8.1</span></a>) except that they apply to two or more groups, not just to two groups.</p>
+<section id="sample-sizes" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sample-sizes">Sample Sizes</h4>
+<p>As in the main part of the chapter, we will use as our example the “Smiles and Leniency” case study. The first calculations in this section all assume that there is an equal number of observations in each group (unequal sample size calculations are shown later in this appendix). We will refer to the number of observations in each group as n and the total number of observations as N. For these data there are four groups of 34 observations. Therefore, n = 34 and N = 136.</p>
+</section>
+<section id="computing-mse" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="computing-mse">Computing MSE</h4>
+<p>Recall that the assumption of homogeneity of variance states that the variance within each of the populations (<span class="math inline">\(\sigma^2\)</span>) is the same. This variance, <span class="math inline">\(\sigma^2\)</span>, is the quantity estimated by MSE and is computed as the mean of the sample variances. For these data, the MSE is equal to 2.6489.</p>
+</section>
+<section id="computing-msb" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="computing-msb">Computing MSB</h4>
+<p>The formula for MSB is based on the fact that the variance of the sampling distribution of the mean is</p>
+<p><span class="math display">\[
+\sigma^2_\mu = \frac{\sigma^2}{n}
+\]</span></p>
+<p>where n is the sample size of each group. Rearranging this formula, we have</p>
+<p><span class="math display">\[
+\sigma^2 = n\sigma^2_\mu.
+\]</span></p>
+<p>Therefore, if we knew the variance of the sampling distribution of the mean, we could compute <span class="math inline">\(\sigma^2\)</span> by multiplying it by n.&nbsp;Although we do not know the variance of the sampling distribution of the mean, we can estimate it with the variance of the sample means. For the leniency data, the variance of the four sample means is 0.270. To estimate <span class="math inline">\(\sigma^2\)</span>, we multiply the variance of the sample means (0.270) by n (the number of observations in each group, which is 34). We find that MSB = 9.179.</p>
+<p>To sum up these steps:</p>
+<ol type="1">
+<li><p>Compute the means.</p></li>
+<li><p>Compute the variance of the means.</p></li>
+<li><p>Multiply the variance of the means by n.</p></li>
+</ol>
+</section>
+<section id="recap" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="recap">Recap</h4>
+<p>If the population means are equal, then both MSE and MSB are estimates of <span class="math inline">\(\sigma^2\)</span> and should therefore be about the same. Naturally, they will not be exactly the same since they are just estimates and are based on different aspects of the data: The MSB is computed from the sample means and the MSE is computed from the sample variances.</p>
+<p>If the population means are not equal, then MSE will still estimate <span class="math inline">\(\sigma^2\)</span> because differences in population means do not affect variances. However, differences in population means affect MSB since differences among population means are associated with differences among sample means. It follows that the larger the differences among sample means, the larger the MSB. <em>In short, MSE estimates</em> <span class="math inline">\(\sigma^2\)</span> <em>whether or not the population means are equal, whereas MSB estimates</em> <span class="math inline">\(\sigma^2\)</span> <em>only when the population means are equal and estimates a larger quantity when they are not equal.</em></p>
+<p>As shown in <a href="#sec-the-critical-step-calculating-an-f-ratio" class="quarto-xref"><span>Section 8.3.2</span></a>, we compare the MSE to the MSB by way of an F ratio in order to determine a p-value for the null hypothesis that the population means are all equal.</p>
+</section>
+<section id="one-tailed-or-two" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="one-tailed-or-two">One-Tailed or Two?</h4>
+<p>Is the probability value from an F ratio a one-tailed or a two-tailed probability? In the literal sense, it is a one-tailed probability since, as you could see in <a href="#fig-fdist" class="quarto-xref">Figure&nbsp;<span>8.5</span></a> earlier in the chapter, the probability is the area in the right-hand tail of the distribution. However, the F ratio is sensitive to any pattern of differences among means. It is, therefore, a test of a two-tailed hypothesis and is best considered a two-tailed test.</p>
+</section>
+<section id="sources-of-variation" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sources-of-variation">Sources of Variation</h4>
+<p>Why do scores in an experiment differ from one another? Consider the scores of two subjects in the “Smiles and Leniency” study: one from the “False Smile” condition and one from the “Felt Smile” condition. An obvious possible reason that the scores could differ is that the subjects were treated differently (they were in different conditions and saw different stimuli). A second reason is that the two subjects may have differed with regard to their tendency to judge people leniently. A third is that, perhaps, one of the subjects was in a bad mood after receiving a low grade on a test. You can imagine that there are innumerable other reasons why the scores of the two subjects could differ. All of these reasons except the first (subjects were treated differently) are possibilities that were not under experimental investigation and, therefore, all of the differences (variation) due to these possibilities are unexplained. It is traditional to call unexplained variance error even though there is no implication that an error was made. Therefore, the variation in this experiment can be thought of as being either variation due to the condition the subject was in or due to error (the sum total of all reasons the subjects’ scores could differ that were not measured).</p>
+<p>One of the important characteristics of ANOVA is that it partitions the variation into its various sources. In ANOVA, the term sum of squares (SSQ) is used to indicate variation. The total variation is defined as the sum of squared differences between each score and the mean of all subjects. The mean of all subjects is called the grand mean and is designated as GM. (When there is an equal number of subjects in each condition, the grand mean is the mean of the condition means.) The total sum of squares is defined as</p>
+<p><span class="math display">\[
+SSQ_\text{total} = \sum(X - GM)^2
+\]</span></p>
+<p>which means to take each score, subtract the grand mean from it, square the difference, and then sum up these squared values. For the “Smiles and Leniency” study, <span class="math inline">\(\text{SSQ}_\text{total} = 377.19\)</span>.</p>
+<p>The sum of squares condition is calculated as shown below.</p>
+<p><span class="math display">\[
+SSQ_\text{condition} = n \left[ (\bar{X}_1 - GM)^2 + (\bar{X}_2 - GM)^2 + ... +(\bar{X}_k - GM)^2 \right]
+\]</span></p>
+<p>where n is the number of scores in each group, k is the number of groups, <span class="math inline">\(\bar{X}_1\)</span> is the mean for Condition 1, <span class="math inline">\(\bar{X}_2\)</span> is the mean for Condition 2, and <span class="math inline">\(\bar{X}_k\)</span> is the mean for Condition k. For the Smiles and Leniency study, the values are:</p>
+<p><span class="math display">\[
+SSQ_\text{condition} = 34 \left[ (5.37-4.83)^2 + (4.91-4.83)^2 + (4.91-4.83)^2 +(4.12-4.83)^2 \right]
+\]</span><span class="math display">\[
+= 27.5
+\]</span></p>
+<p>If there are unequal sample sizes, the only change is that the following formula is used for the sum of squares condition:</p>
+<p><span class="math display">\[
+SSQ_\text{condition} = n_1 (\bar{X}_1 - GM)^2 + n_2 (\bar{X}_2 - GM)^2 + ... + n_k (\bar{X}_k - GM)^2
+\]</span></p>
+<p>where <span class="math inline">\(n_i\)</span> is the sample size of the <span class="math inline">\(i\)</span>th condition. <span class="math inline">\(\text{SSQ}_\text{total}\)</span> is computed the same way as shown above.</p>
+<p>The sum of squares error is the sum of the squared deviations of each score from its group mean. This can be written as</p>
+<p><span class="math display">\[
+SSQ_\text{error} = \sum(X_{i1} - \bar{X}_1)^2 + \sum(X_{i2} - \bar{X}_2)^2 + ...+  \sum(X_{ik} - \bar{X}_k)^2.
+\]</span></p>
+<p>where <span class="math inline">\(X_{i1}\)</span> is the <span class="math inline">\(i\)</span>th score in group 1 and <span class="math inline">\(\bar{X}_1\)</span> is the mean for group 1, <span class="math inline">\(X_{i2}\)</span> is the <span class="math inline">\(i\)</span>th score in group 2 and <span class="math inline">\(\bar{X}_2\)</span> is the mean for group 2, etc. For the “Smiles and Leniency” study, the means are: 5.368, 4.912, 4.912, and 4.118. The <span class="math inline">\(SSQ_\text{error}\)</span> is therefore:</p>
+<p><span class="math display">\[
+(2.5-5.368)^2 + (5.5-5.368)^2 + ... + (6.5-4.118)^2 = 349.65
+\]</span></p>
+<p>The sum of squares error can also be computed by subtraction:</p>
+<p><span class="math display">\[
+SSQ_\text{error} = SSQ_\text{totoal} - SSQ_\text{condition}
+\]</span><span class="math display">\[
+SSQ_\text{error} = 377.189 - 27.535 = 349.65
+\]</span></p>
+<p>Therefore, the total sum of squares of 377.19 can be partitioned into <span class="math inline">\(SSQ_\text{condition}\)</span> (27.53) and <span class="math inline">\(SSQ_\text{error}\)</span> (349.66).</p>
+<p>Once the sums of squares have been computed, the mean squares (MSB and MSE) can be computed easily. The formulas are:</p>
+<p><span class="math display">\[
+MSB = \frac{SSQ_\text{condition}}{dfn}
+\]</span></p>
+<p>where dfn is the degrees of freedom numerator and is equal to k - 1 = 3.</p>
+<p><span class="math display">\[
+MSB = \frac{27.535}{3} = 9.18
+\]</span></p>
+<p>which is the same value of MSB obtained previously (except for rounding error). Similarly,</p>
+<p><span class="math display">\[
+MSE = \frac{SSQ_\text{error}}{dfd}
+\]</span></p>
+<p>where dfd is the degrees of freedom for the denominator and is equal to N - k.</p>
+<p><span class="math display">\[
+dfd = 136 - 4 = 132
+\]</span><span class="math display">\[
+MSE = 349.66/132 = 2.65
+\]</span></p>
+<p>which is the same as obtained previously (except for rounding error). Note that the dfd is often called the dfe for degrees of freedom error.</p>
+<p>As we saw in the main partion of the chapter, SSQ and MSB/MSE can be reported alongside the F statistic and p-value for an ANOVA in a results table (<a href="#tbl-anova-results-summary" class="quarto-xref">Table&nbsp;<span>8.7</span></a>). Since most people conducting ANOVA these days do so with automated computer software, you will like see a results table along these lines in whatever software you use if you conduct ANOVA yourself.</p>
+</section>
+<section id="formatting-data-for-computer-analysis-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="formatting-data-for-computer-analysis-1">Formatting Data for Computer Analysis</h4>
+<p>Most computer programs that compute ANOVAs require your data to be in a specific form. Consider the data in <a href="#tbl-reformatting-anova-wide" class="quarto-xref">Table&nbsp;<span>8.9</span></a>.</p>
+<div id="tbl-reformatting-anova-wide" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reformatting-anova-wide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.9: Example Data.
+</figcaption>
+<div aria-describedby="tbl-reformatting-anova-wide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Group 1</th>
+<th style="text-align: center;">Group 2</th>
+<th style="text-align: center;">Group 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Here there are three groups, each with three observations. To format these data for a computer program, you normally have to use two variables: the first specifies the group the subject is in and the second is the score itself. The reformatted version of the data in <a href="#tbl-reformatting-anova-wide" class="quarto-xref">Table&nbsp;<span>8.9</span></a> is shown in <a href="#tbl-reformatting-anova-long" class="quarto-xref">Table&nbsp;<span>8.10</span></a>.</p>
+<div id="tbl-reformatting-anova-long" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reformatting-anova-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;8.10: Reformatted Data.
+</figcaption>
+<div aria-describedby="tbl-reformatting-anova-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">G</th>
+<th style="text-align: center;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 
 
+</section>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
@@ -864,9 +1129,14 @@ Table&nbsp;8.6: Six Pairwise Comparisons.
 <li id="fn4"><p><a href="http://onlinestatbook.com/2/calculators/t_dist.html" class="uri">http://onlinestatbook.com/2/calculators/t_dist.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>This section is adapted from David M. Lane. “All Pairwise Comparisons Among Means.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/tests_of_means/pairwise.html" class="uri">http://onlinestatbook.com/2/tests_of_means/pairwise.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p><a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p><a href="http://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">http://onlinestatbook.com/2/calculators/studentized_range_dist.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>This section is adapted from David M. Lane. “Introduction.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/analysis_of_variance/intro.html" class="uri">http://onlinestatbook.com/2/analysis_of_variance/intro.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p><a href="http://onlinestatbook.com/2/case_studies/leniency.html" class="uri">http://onlinestatbook.com/2/case_studies/leniency.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>When discussing probability of Type I errors, we assume all null hypotheses are true, since a Type I error can’t occur if the null hypothesis is false.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p><a href="http://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">http://onlinestatbook.com/2/calculators/studentized_range_dist.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This subsection is adapted from David M. Lane. “Introduction.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/analysis_of_variance/intro.html" class="uri">http://onlinestatbook.com/2/analysis_of_variance/intro.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>This subsection and the following are adapted from David M. Lane. “One-Factor ANOVA (Between Subjects).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/analysis_of_variance/one-way.html" class="uri">https://onlinestatbook.com/2/analysis_of_variance/one-way.html</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><a href="https://onlinestatbook.com/2/calculators/F_dist.html" class="uri">https://onlinestatbook.com/2/calculators/F_dist.html</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>This subsection is adapted from David M. Lane. “Analysis of Variance Designs.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/analysis_of_variance/anova_designs.html" class="uri">https://onlinestatbook.com/2/analysis_of_variance/anova_designs.html</a><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p><a href="https://onlinestatbook.com/2/case_studies/adhd.html" class="uri">https://onlinestatbook.com/2/case_studies/adhd.html</a><a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>This subsection is adapted from David M. Lane. “One-Factor ANOVA (Between Subjects).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/analysis_of_variance/one-way.html" class="uri">https://onlinestatbook.com/2/analysis_of_variance/one-way.html</a><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -891,6 +1161,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

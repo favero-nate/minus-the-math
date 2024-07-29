@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -70,10 +36,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -159,6 +127,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics Minus The Math</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -282,94 +253,84 @@ window.Quarto = {
 </header>
 
 
-<p>Suppose I want to build a model of voting. I decide to use the 2016 American National Election Studies<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> survey results to try to understand how race is associated with voting. Respondents in the 2016 survey were asked about who they voted for in 2012, and I’m going to focus on their 2012 voting patterns for now. Here are the distributions for my two main variables of interest:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">. tab vote         </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">PRE: RECALL OF LAST (2012) PRESIDENTAL  |</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">                            VOTE CHOICE |      Freq.     Percent        Cum.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">----------------------------------------+-----------------------------------</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">                        1. Barack Obama |      1,728       56.58       56.58</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">                         2. Mitt Romney |      1,268       41.52       98.10</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">                       5. Other SPECIFY |         58        1.90      100.00</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">----------------------------------------+-----------------------------------</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">                                  Total |      3,054      100.00</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">. tab race</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="in">  PRE: SUMMARY - R SELF-IDENTIFIED RACE |      Freq.     Percent        Cum.</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">----------------------------------------+-----------------------------------</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">                 1. White, non-Hispanic |      3,038       71.68       71.68</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">                 2. Black, non-Hispanic |        398        9.39       81.08</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="in">3. Asian, native Hawaiian or other Paci |        148        3.49       84.57</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="in">4. Native American or Alaska Native, no |         27        0.64       85.21</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">                            5. Hispanic |        450       10.62       95.82</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="in">6. Other non-Hispanic incl multiple rac |        177        4.18      100.00</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="in">----------------------------------------+-----------------------------------</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="in">                                  Total |      4,238      100.00</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Notice that my dependent variable (vote) is qualitative. It can take on three possible values: voted for Obama, voted for Romney, or voted for other. I can build a simple set of regression models to see how race predicts vote choice. The key is to first convert each of the three categories for my dependent variable into its own dummy variable—meaning a variable that is always equal to either 0 or 1. I can accomplish this with the following code:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">tab vote, gen(vote_)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Suppose I want to build a model of voting. I decide to use the 2016 American National Election Studies<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> survey results to try to understand how race is associated with voting. Respondents in the 2016 survey were asked about who they voted for in 2012, and I’m going to focus on their 2012 voting patterns for now. Using the statistical software package Stata to conduct my analysis, I find the following distributions for my two main variables of interest:</p>
+<pre><code>. tab vote         
+PRE: RECALL OF LAST (2012) PRESIDENTAL  |
+                            VOTE CHOICE |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                        1. Barack Obama |      1,728       56.58       56.58
+                         2. Mitt Romney |      1,268       41.52       98.10
+                       5. Other SPECIFY |         58        1.90      100.00
+----------------------------------------+-----------------------------------
+                                  Total |      3,054      100.00
+
+. tab race
+  PRE: SUMMARY - R SELF-IDENTIFIED RACE |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                 1. White, non-Hispanic |      3,038       71.68       71.68
+                 2. Black, non-Hispanic |        398        9.39       81.08
+3. Asian, native Hawaiian or other Paci |        148        3.49       84.57
+4. Native American or Alaska Native, no |         27        0.64       85.21
+                            5. Hispanic |        450       10.62       95.82
+6. Other non-Hispanic incl multiple rac |        177        4.18      100.00
+----------------------------------------+-----------------------------------
+                                  Total |      4,238      100.00</code></pre>
+<p>Notice that my dependent variable (vote) is qualitative. It can take on three possible values: voted for Obama, voted for Romney, or voted for other. I can build a simple set of regression models to see how race predicts vote choice. The key is to first convert each of the three categories for my dependent variable into its own dummy (or binary) variable—meaning a variable that is always equal to either 0 or 1. I can accomplish this in Stata with the following code:</p>
+<pre><code>tab vote, gen(vote_)</code></pre>
 <p>I now have several new variables in my dataset that have names starting with “race_”:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">. tab vote_1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">   vote==1. |</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">     Barack |</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">      Obama |      Freq.     Percent        Cum.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">          0 |      1,326       43.42       43.42</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">          1 |      1,728       56.58      100.00</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">      Total |      3,054      100.00</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">          </span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">. tab vote_2</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="in">   vote==2. |</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">Mitt Romney |      Freq.     Percent        Cum.</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">          0 |      1,786       58.48       58.48</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">          1 |      1,268       41.52      100.00</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">      Total |      3,054      100.00</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="in">. tab vote_3</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">   vote==5. |</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">      Other |</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">    SPECIFY |      Freq.     Percent        Cum.</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">          0 |      2,996       98.10       98.10</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">          1 |         58        1.90      100.00</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">------------+-----------------------------------</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">      Total |      3,054      100.00</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>. tab vote_1
+
+   vote==1. |
+     Barack |
+      Obama |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      1,326       43.42       43.42
+          1 |      1,728       56.58      100.00
+------------+-----------------------------------
+      Total |      3,054      100.00
+          
+. tab vote_2
+
+   vote==2. |
+Mitt Romney |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      1,786       58.48       58.48
+          1 |      1,268       41.52      100.00
+------------+-----------------------------------
+      Total |      3,054      100.00
+
+. tab vote_3
+
+   vote==5. |
+      Other |
+    SPECIFY |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      2,996       98.10       98.10
+          1 |         58        1.90      100.00
+------------+-----------------------------------
+      Total |      3,054      100.00</code></pre>
 <p>I also convert my race variable into a set of dummy variables by running:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">tab race, gen(race_)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>I can then run three regressions, one for each value of my dependent variable. Let’s start with voting for Obama (vote_1):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">. reg vote_1 race_2 race_3 race_4 race_5 race_6</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">      Source |       SS           df       MS      Number of obs   =     3,036</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   F(5, 3030)      =     76.29</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">       Model |  83.3981974         5  16.6796395   Prob &gt; F        =    0.0000</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Residual |  662.426572     3,030  .218622631   R-squared       =    0.1118</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   Adj R-squared   =    0.1104</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">       Total |  745.824769     3,035  .245741275   Root MSE        =    .46757</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="in">------------------------------------------------------------------------------</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="in">      vote_1 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------------------------------------</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="in">      race_2 |   .4972868   .0281049    17.69   0.000     .4421802    .5523934</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="in">      race_3 |   .2078207   .0541766     3.84   0.000     .1015941    .3140472</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="in">      race_4 |   .1028423   .1353307     0.76   0.447     -.162507    .3681916</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="in">      race_5 |   .3135004    .032158     9.75   0.000     .2504466    .3765542</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="in">      race_6 |   .1042547   .0441427     2.36   0.018      .017702    .1908075</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="in">       _cons |    .480491   .0097901    49.08   0.000     .4612952    .4996868</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>tab race, gen(race_)</code></pre>
+<p>I can then run three regressions, one for each value of my dependent variable. I will use regular linear regression (least squares) for this example, although there are arguably better and more precise models for qualitative dependent variables (e.g., various types of probit and logit regression). Nonetheless, we can get by with linear regression. When using linear regression with a binary dependent variable, we call the model a linear probability model.</p>
+<p>Let’s start by analyzing voting for Obama (vote_1) as the dependent variable:</p>
+<pre><code>. reg vote_1 race_2 race_3 race_4 race_5 race_6
+
+      Source |       SS           df       MS      Number of obs   =     3,036
+-------------+----------------------------------   F(5, 3030)      =     76.29
+       Model |  83.3981974         5  16.6796395   Prob &gt; F        =    0.0000
+    Residual |  662.426572     3,030  .218622631   R-squared       =    0.1118
+-------------+----------------------------------   Adj R-squared   =    0.1104
+       Total |  745.824769     3,035  .245741275   Root MSE        =    .46757
+
+------------------------------------------------------------------------------
+      vote_1 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      race_2 |   .4972868   .0281049    17.69   0.000     .4421802    .5523934
+      race_3 |   .2078207   .0541766     3.84   0.000     .1015941    .3140472
+      race_4 |   .1028423   .1353307     0.76   0.447     -.162507    .3681916
+      race_5 |   .3135004    .032158     9.75   0.000     .2504466    .3765542
+      race_6 |   .1042547   .0441427     2.36   0.018      .017702    .1908075
+       _cons |    .480491   .0097901    49.08   0.000     .4612952    .4996868</code></pre>
 <p>Since our independent variable is qualitative, we have an omitted category. In this case, we’ve left category 1 (race_1) out of our regression, which indicates non-Hispanic white respondents. Our constant indicates that predicted value of the dependent variable when all independent variables are equal to zero. We can see this by writing out the regression equation:</p>
 <p><span id="eq-a"><span class="math display">\[
 \widehat{vote\_1}=.48+.50race\_2+.21race\_3 +.10race\_4+.31race\_5+.10race\_6
@@ -382,74 +343,68 @@ window.Quarto = {
 <p>Now, let’s look at the slope coefficients. The coefficient for black (race_2) equals .50. Thus, a one-unit increase in race_2 is associated with a .50-unit increase in vote_1. Let’s break that down a bit to see if we can create a clearer interpretation. Since race_2 is a dummy variable and non-Hispanic white is the omitted category, a one-unit increase in race_2 correspondents to having a black respondent instead of a white respondent. And since our dependent variable is binary, we should think in terms of probabilities, which can be converted to percentages: a .50-unit increase in vote_1 means a 50 percentage-point increase in the probability of voting for Obama. So putting this altogether, we’d say: (non-Hispanic) black voters are 50 percentage points more likely to vote for Obama than (non-Hispanic) white voters, according to this model.</p>
 <p>Similarly, Asian voters are 21 percentage points more likely to vote for Obama than (non-Hispanic) white voters. Native Americans are 10 percentage points more likely to vote for Obama than (non-Hispanic) white voters. Hispanics are 31 percentage points more likely to vote for Obama than non-Hispanic white voters. And voters identifying as multiracial or other race are 10 percentage points more likely to vote for Obama than (non-Hispanic) white voters. All of these differences are statistically significant, except for Native American versus white voters (probably because there are only 27 Native Americans in the sample, making the estimate of this difference very imprecise).</p>
 <p>Let’s move onto running a regression for the second category of our dependent variable:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">. reg vote_2 race_2 race_3 race_4 race_5 race_6</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">      Source |       SS           df       MS      Number of obs   =     3,036</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   F(5, 3030)      =     72.35</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">       Model |  78.6117037         5  15.7223407   Prob &gt; F        =    0.0000</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Residual |  658.463395     3,030  .217314652   R-squared       =    0.1067</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   Adj R-squared   =    0.1052</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="in">       Total |  737.075099     3,035  .242858352   Root MSE        =    .46617</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">------------------------------------------------------------------------------</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">      vote_2 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------------------------------------</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="in">      race_2 |   -.483031   .0280207   -17.24   0.000    -.5379725   -.4280895</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">      race_3 |  -.2002027   .0540143    -3.71   0.000     -.306111   -.0942944</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="in">      race_4 |  -.0822373   .1349253    -0.61   0.542    -.3467917     .182317</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">      race_5 |  -.3014791   .0320617    -9.40   0.000     -.364344   -.2386142</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">      race_6 |  -.1344972   .0440105    -3.06   0.002    -.2207906   -.0482038</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">       _cons |    .498904   .0097607    51.11   0.000     .4797657    .5180423</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>. reg vote_2 race_2 race_3 race_4 race_5 race_6
+
+      Source |       SS           df       MS      Number of obs   =     3,036
+-------------+----------------------------------   F(5, 3030)      =     72.35
+       Model |  78.6117037         5  15.7223407   Prob &gt; F        =    0.0000
+    Residual |  658.463395     3,030  .217314652   R-squared       =    0.1067
+-------------+----------------------------------   Adj R-squared   =    0.1052
+       Total |  737.075099     3,035  .242858352   Root MSE        =    .46617
+
+------------------------------------------------------------------------------
+      vote_2 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      race_2 |   -.483031   .0280207   -17.24   0.000    -.5379725   -.4280895
+      race_3 |  -.2002027   .0540143    -3.71   0.000     -.306111   -.0942944
+      race_4 |  -.0822373   .1349253    -0.61   0.542    -.3467917     .182317
+      race_5 |  -.3014791   .0320617    -9.40   0.000     -.364344   -.2386142
+      race_6 |  -.1344972   .0440105    -3.06   0.002    -.2207906   -.0482038
+       _cons |    .498904   .0097607    51.11   0.000     .4797657    .5180423</code></pre>
 <p>Now we’re looking at predictions of voting for Mitt Romney. Our constant is .50, indicating that a non-Hispanic white voter has a 50% chance of voting for Mitt Romney. The coefficient of -.48 for race_2 indicates that (non-Hispanic) black voters are 48 percentage points less likely to vote for Mitt Romney than (non-Hispanic) white voters. I won’t go on to interpret the rest of the coefficients, but they follow the same pattern.</p>
 <p>Finally, let’s look at a regression with vote_3 as the dependent variable:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">. reg vote_3 race_2 race_3 race_4 race_5 race_6</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">      Source |       SS           df       MS      Number of obs   =     3,036</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   F(5, 3030)      =      2.23</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">       Model |   .20833556         5  .041667112   Prob &gt; F        =    0.0490</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Residual |  56.6836275     3,030  .018707468   R-squared       =    0.0037</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   Adj R-squared   =    0.0020</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="in">       Total |  56.8919631     3,035  .018745293   Root MSE        =    .13678</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">------------------------------------------------------------------------------</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">      vote_3 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------------------------------------</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="in">      race_2 |  -.0142558   .0082213    -1.73   0.083    -.0303757    .0018642</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="in">      race_3 |   -.007618   .0158479    -0.48   0.631    -.0386917    .0234557</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="in">      race_4 |   -.020605   .0395873    -0.52   0.603    -.0982258    .0570158</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="in">      race_5 |  -.0120213    .009407    -1.28   0.201     -.030466    .0064234</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="in">      race_6 |   .0302425   .0129128     2.34   0.019     .0049238    .0555611</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="in">       _cons |    .020605   .0028638     7.19   0.000     .0149898    .0262202</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>. reg vote_3 race_2 race_3 race_4 race_5 race_6
+
+      Source |       SS           df       MS      Number of obs   =     3,036
+-------------+----------------------------------   F(5, 3030)      =      2.23
+       Model |   .20833556         5  .041667112   Prob &gt; F        =    0.0490
+    Residual |  56.6836275     3,030  .018707468   R-squared       =    0.0037
+-------------+----------------------------------   Adj R-squared   =    0.0020
+       Total |  56.8919631     3,035  .018745293   Root MSE        =    .13678
+
+------------------------------------------------------------------------------
+      vote_3 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      race_2 |  -.0142558   .0082213    -1.73   0.083    -.0303757    .0018642
+      race_3 |   -.007618   .0158479    -0.48   0.631    -.0386917    .0234557
+      race_4 |   -.020605   .0395873    -0.52   0.603    -.0982258    .0570158
+      race_5 |  -.0120213    .009407    -1.28   0.201     -.030466    .0064234
+      race_6 |   .0302425   .0129128     2.34   0.019     .0049238    .0555611
+       _cons |    .020605   .0028638     7.19   0.000     .0149898    .0262202</code></pre>
 <p>This regression provides some insights into who supported third-party candidates in the 2012 election. First, our constant indicates that a non-Hispanic white voter has a 2% chance of voting third-party. (Non-Hispanic) black voters are one percentage point less likely to vote third-party than white voters, although this difference is only significant at the .10 level. The only other significant slope coefficient is for race_6, where we see that people who identify as multiracial or other race are estimated to be three percentage points more likely to vote third-party than (non-Hispanic) white respondents.</p>
 <p>Now that we’ve run one regression for each category of our dependent variable, we’ve completed an analysis. Note that using regular linear regression (the reg function in Stata) is not the only way (or even necessarily the preferred way) to analyze a qualitative dependent variable. There are other models (e.g., multinomial logistic regression) that are specifically designed to be used with a qualitative dependent variable. However, using simple linear regression is a good way to get started looking at qualitative variables if you haven’t learned these fancier models and how to properly interpret them.</p>
 <p>One final thing I want to show you is that our results will be in a slightly different format but will be in one sense equivalent if we decide to use a different category as our omitted category when using a qualitative independent variable. Let’s say we want to make black (race_2) our reference category. Compare the following results to what we saw near the top of this page:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">. reg vote_3 race_1 race_3 race_4 race_5 race_6</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="in">      Source |       SS           df       MS      Number of obs   =     3,036</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   F(5, 3030)      =      2.23</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="in">       Model |   .20833556         5  .041667112   Prob &gt; F        =    0.0490</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="in">    Residual |  56.6836275     3,030  .018707468   R-squared       =    0.0037</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------   Adj R-squared   =    0.0020</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="in">       Total |  56.8919631     3,035  .018745293   Root MSE        =    .13678</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="in">------------------------------------------------------------------------------</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="in">      vote_3 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="in">-------------+----------------------------------------------------------------</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="in">      race_1 |   .0142558   .0082213     1.73   0.083    -.0018642    .0303757</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="in">      race_3 |   .0066378    .017388     0.38   0.703    -.0274557    .0407313</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="in">      race_4 |  -.0063492   .0402287    -0.16   0.875    -.0852274     .072529</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="in">      race_5 |   .0022345   .0118186     0.19   0.850    -.0209387    .0254077</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="in">      race_6 |   .0444983   .0147623     3.01   0.003      .015553    .0734435</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="in">       _cons |   .0063492   .0077064     0.82   0.410    -.0087611    .0214595</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>. reg vote_3 race_1 race_3 race_4 race_5 race_6
+
+      Source |       SS           df       MS      Number of obs   =     3,036
+-------------+----------------------------------   F(5, 3030)      =      2.23
+       Model |   .20833556         5  .041667112   Prob &gt; F        =    0.0490
+    Residual |  56.6836275     3,030  .018707468   R-squared       =    0.0037
+-------------+----------------------------------   Adj R-squared   =    0.0020
+       Total |  56.8919631     3,035  .018745293   Root MSE        =    .13678
+
+------------------------------------------------------------------------------
+      vote_3 |      Coef.   Std. Err.      t    P&gt;|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      race_1 |   .0142558   .0082213     1.73   0.083    -.0018642    .0303757
+      race_3 |   .0066378    .017388     0.38   0.703    -.0274557    .0407313
+      race_4 |  -.0063492   .0402287    -0.16   0.875    -.0852274     .072529
+      race_5 |   .0022345   .0118186     0.19   0.850    -.0209387    .0254077
+      race_6 |   .0444983   .0147623     3.01   0.003      .015553    .0734435
+       _cons |   .0063492   .0077064     0.82   0.410    -.0087611    .0214595</code></pre>
 <p>Now, our constant tells us that a black voter has a .6% chance of voting third-party. This is the same prediction we would get from our prior model where race_1 was the omitted category: to find our prediction for black voters from the prior results we would have added the coefficient for race_2 (-.014) to the constant (.021), yielding .6% or .006 (or .007 if we use the rounded numbers shown in parentheses).</p>
 <p>The coefficient for race_1 tells us about how white voters differ from black voters. Notice that the p-value is exactly the same as what we saw in the prior table for race_2, and the coefficient for race_1 in this table is the same as the coefficient for race_2 in the prior table, except the sign has changed. That’s because comparing black to white is the same as comparing white to black, except that we’re going in the opposite direction.</p>
-<p>You can go on to play around with these two sets of results more on your own if you’d like. Both regression equations will yield the same prediction for a voter of any given race. The difference lies only in the starting point, as represented fby the constant. However, the p-values will usually differ because they are describing a different comparison (e.g., comparing Asian to black in this table versus comparing Asian to white in the prior table). Thus, it doesn’t really matter which category you pick as your omitted category, except that you may care more about some comparisons than others. You can also run the same regression multiple times but with different omitted categories so that you can get the p-values for a full set of comparisons across groups.</p>
+<p>If you download the data yourself and have access to statistical software, you can go on to play around with these two sets of results more on your own if you’d like. Both regression equations will yield the same prediction for a voter of any given race. The difference lies only in the starting point, as represented by the constant. However, the p-values will usually differ because they are describing a different comparison (e.g., comparing Asian to black in this table versus comparing Asian to white in the prior table). Thus, it doesn’t really matter which category you pick as your omitted category, except that you may care more about some comparisons than others. You can also run the same regression multiple times but with different omitted categories so that you can get the p-values for a full set of comparisons across groups.</p>
 
 
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
@@ -480,6 +435,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

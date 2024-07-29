@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -126,6 +128,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics Minus The Math</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -241,7 +246,7 @@ window.Quarto = {
   <li><a href="#what-is-variability" id="toc-what-is-variability" class="nav-link" data-scroll-target="#what-is-variability"><span class="header-section-number">2.3.1</span> What is Variability?</a></li>
   <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range"><span class="header-section-number">2.3.2</span> Range</a></li>
   <li><a href="#interquartile-range" id="toc-interquartile-range" class="nav-link" data-scroll-target="#interquartile-range"><span class="header-section-number">2.3.3</span> Interquartile Range</a></li>
-  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">2.3.4</span> Variance</a></li>
+  <li><a href="#sec-variance" id="toc-sec-variance" class="nav-link" data-scroll-target="#sec-variance"><span class="header-section-number">2.3.4</span> Variance</a></li>
   <li><a href="#standard-deviation" id="toc-standard-deviation" class="nav-link" data-scroll-target="#standard-deviation"><span class="header-section-number">2.3.5</span> Standard Deviation</a></li>
   </ul></li>
   <li><a href="#transforming-variablesdescribing-one-variable-6" id="toc-transforming-variablesdescribing-one-variable-6" class="nav-link" data-scroll-target="#transforming-variablesdescribing-one-variable-6"><span class="header-section-number">2.4</span> Transforming Variables</a>
@@ -281,24 +286,18 @@ window.Quarto = {
 <p>The <strong>mean</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is the most common measure of central tendency. It is simply the sum of the numbers divided by the number of numbers. When using symbols and formulas to represent different statistics, we often distinguish between whether we are looking at a “sample” or a “population.” We’ll cover this distinction in more detail in <a href="estimation.html" class="quarto-xref"><span>Chapter 4</span></a>. For now, think of a pollster who has conducted a survey with a sample of 1000 people. Even though only 1000 people responded to the survey, the pollster is actually interested in estimating the attitudes of a larger population—the entire public.</p>
 <p>The symbol <span class="math inline">\(\mu\)</span> is used for the mean of a population. The symbol <span class="math inline">\(\bar{X}\)</span> is used for the mean of a sample. The formula for <span class="math inline">\(\mu\)</span> is shown below:</p>
 <p><span class="math display">\[
-\mu = ΣX/N
+\mu = \frac{\sum X}{N}
 \]</span></p>
-<p>where <span class="math inline">\(ΣX\)</span> is the sum of all the numbers in the population and <span class="math inline">\(N\)</span> is the number of numbers in the population.</p>
+<p>where <span class="math inline">\(\sum X\)</span> is the sum of all the numbers in the population and <span class="math inline">\(N\)</span> is the number of numbers in the population.</p>
 <p>The formula for <span class="math inline">\(\bar{X}\)</span> is essentially identical:</p>
 <p><span class="math display">\[
-\bar{X} = ΣX/n
+\bar{X} = \frac{\sum X}{n}
 \]</span></p>
-<p>where <span class="math inline">\(ΣX\)</span> is the sum of all the numbers in the sample and <span class="math inline">\(n\)</span> is the number of numbers in the sample.</p>
+<p>where <span class="math inline">\(\sum X\)</span> is the sum of all the numbers in the sample and <span class="math inline">\(n\)</span> is the number of numbers in the sample.</p>
 <p>As an example, the mean of the numbers 1, 2, 3, 6, 8 is 20/5 = 4 regardless of whether the numbers constitute the entire population or just a sample from the population.</p>
 <p><a href="#tbl-tdownpasses" class="quarto-xref">Table&nbsp;<span>2.1</span></a> shows the number of touchdown (TD) passes thrown by each of the 31 teams in the National Football League in the 2000 season. The mean number of touchdown passes thrown is 20.4516 as shown below.</p>
 <p><span class="math display">\[
-\begin{split}
-\mu = ΣX/N\
-\\
-= 634/31\
-\\
-= 20.4516
-\end{split}
+\mu = \frac{\sum X}{N} = \frac{634}{31} = 20.4516
 \]</span></p>
 <div id="tbl-tdownpasses" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -308,9 +307,9 @@ Table&nbsp;2.1: Number of touchdown passes.
 <div aria-describedby="tbl-tdownpasses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 83%">
-<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 90%">
+<col style="width: 4%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -343,10 +342,10 @@ Table&nbsp;2.2: Grouped frequency distribution.
 <div aria-describedby="tbl-groupfreqdist1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
+<col style="width: 5%">
 <col style="width: 16%">
 <col style="width: 22%">
-<col style="width: 13%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -402,10 +401,10 @@ Table&nbsp;2.3: Measures of central tendency for the test scores.
 <div aria-describedby="tbl-testscoremeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
+<col style="width: 5%">
 <col style="width: 19%">
 <col style="width: 16%">
-<col style="width: 13%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -451,11 +450,11 @@ Table&nbsp;2.4: Measures of central tendency for baseball salaries (in thousands
 <div aria-describedby="tbl-bballmeasures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 12%">
+<col style="width: 5%">
 <col style="width: 19%">
-<col style="width: 12%">
+<col style="width: 5%">
 <col style="width: 16%">
-<col style="width: 12%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -524,8 +523,8 @@ IQR = \text{ 75th percentile } - \text{ 25th percentile }
 \]</span></p>
 <p>For Quiz 1, the 75th percentile is 8 and the 25th percentile is 6. The interquartile range is therefore 2. For Quiz 2, which has greater spread, the 75th percentile is 9, the 25th percentile is 5, and the interquartile range is 4. Recall that in the discussion of box plots (<a href="graphing.html#sec-box-plots" class="quarto-xref"><span>Section 1.4.2</span></a>), the 75th percentile was called the upper hinge and the 25th percentile was called the lower hinge. Thus, the interquartile range is neatly depicted by the box portion of a boxplot.</p>
 </section>
-<section id="variance" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="variance"><span class="header-section-number">2.3.4</span> Variance</h3>
+<section id="sec-variance" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="sec-variance"><span class="header-section-number">2.3.4</span> Variance</h3>
 <p>Variability can also be defined in terms of how close the scores in the distribution are to the middle of the distribution. Using the mean as the measure of the middle of the distribution, the <strong>variance</strong> is defined as the average squared difference of the scores from the mean. The data from Quiz 1 are shown in <a href="#tbl-quiz1var" class="quarto-xref">Table&nbsp;<span>2.5</span></a>. The mean score is 7.0. Therefore, the column “Deviation from Mean” contains the score minus 7. The column “Squared Deviation” is simply the previous column squared.</p>
 <div id="tbl-quiz1var" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -535,13 +534,13 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 <div aria-describedby="tbl-quiz1var-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 12%">
-<col style="width: 8%">
-<col style="width: 25%">
-<col style="width: 8%">
-<col style="width: 23%">
-<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 15%">
+<col style="width: 6%">
+<col style="width: 31%">
+<col style="width: 6%">
+<col style="width: 28%">
+<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -760,12 +759,12 @@ Table&nbsp;2.5: Calculation of Variance for Quiz 1 scores.
 </div>
 <p>One thing that is important to notice is that the mean deviation from the mean is 0. This will always be the case. The mean of the squared deviations is 1.5. Therefore, the variance is 1.5. Analogous calculations with Quiz 2 show that its variance is 6.7. The formula for the variance is:</p>
 <p><span class="math display">\[
-\sigma^2=\frac{Σ(X-\mu)^2}{N}
+\sigma^2=\frac{\sum (X-\mu)^2}{N}
 \]</span></p>
 <p>where <span class="math inline">\(\sigma2\)</span> is the variance, <span class="math inline">\(\mu\)</span> is the mean, and <span class="math inline">\(N\)</span> is the number of numbers. For Quiz 1, <span class="math inline">\(\mu\)</span> = 7 and <span class="math inline">\(N\)</span> = 20.</p>
 <p>If the variance in a sample is used to estimate the variance in a population, then the previous formula underestimates the variance and the following formula should be used:</p>
 <p><span class="math display">\[
-s^2=\frac{Σ(X-\bar{X})^2}{n-1}
+s^2=\frac{\sum(X-\bar{X})^2}{n-1}
 \]</span></p>
 <p>where <span class="math inline">\(s^2\)</span> is the estimate of the variance and <span class="math inline">\(\bar{X}\)</span> is the sample mean.</p>
 <p>Note that <span class="math inline">\(\bar{X}\)</span> is the mean of a sample taken from a population with a mean of <span class="math inline">\(\mu\)</span>. Since, in practice, the variance is usually computed in a sample, this formula is most often used. While it is not easy to succinctly explain why we divide by <span class="math inline">\(n-1\)</span> rather than simply <span class="math inline">\(n\)</span>, the simulation “estimating variance”<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> illustrates the bias that arises if we use <span class="math inline">\(n\)</span> as the denominator in the formula.</p>
@@ -775,7 +774,7 @@ s^2=\frac{Σ(X-\bar{X})^2}{n-1}
 \]</span></p>
 <p><span class="math display">\[
 s^2 = [(1-3)^2 + (2-3)^2 + (4-3)^2 + (5-3)^2]/(4-1)
-\\
+\]</span><span class="math display">\[
 = (4 + 1 + 1 + 4)/3 = 10/3 = 3.333
 \]</span></p>
 </section>
@@ -795,11 +794,11 @@ Table&nbsp;2.6: Converting between feet and inches.
 <div aria-describedby="tbl-heightconversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
+<col style="width: 5%">
 <col style="width: 15%">
-<col style="width: 11%">
+<col style="width: 5%">
 <col style="width: 18%">
-<col style="width: 11%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -838,13 +837,13 @@ Table&nbsp;2.7: Temperatures in 5 cities on 11/16/2002.
 <div aria-describedby="tbl-temp5cities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 14%">
-<col style="width: 8%">
-<col style="width: 23%">
-<col style="width: 8%">
-<col style="width: 23%">
-<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 17%">
+<col style="width: 4%">
+<col style="width: 29%">
+<col style="width: 4%">
+<col style="width: 29%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -970,6 +969,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

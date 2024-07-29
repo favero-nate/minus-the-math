@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -126,6 +128,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Statistics Minus The Math</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -231,7 +236,12 @@ window.Quarto = {
   <ul>
   <li><a href="#chi-square-distributioncomparing-groups-1" id="toc-chi-square-distributioncomparing-groups-1" class="nav-link active" data-scroll-target="#chi-square-distributioncomparing-groups-1"><span class="header-section-number">9.1</span> Chi Square Distribution</a></li>
   <li><a href="#one-way-tablescomparing-groups-2" id="toc-one-way-tablescomparing-groups-2" class="nav-link" data-scroll-target="#one-way-tablescomparing-groups-2"><span class="header-section-number">9.2</span> One-Way Tables</a></li>
-  <li><a href="#contingency-tablescomparing-groups-4" id="toc-contingency-tablescomparing-groups-4" class="nav-link" data-scroll-target="#contingency-tablescomparing-groups-4"><span class="header-section-number">9.3</span> Contingency Tables</a></li>
+  <li><a href="#contingency-tablescomparing-groups-5" id="toc-contingency-tablescomparing-groups-5" class="nav-link" data-scroll-target="#contingency-tablescomparing-groups-5"><span class="header-section-number">9.3</span> Contingency Tables</a>
+  <ul class="collapse">
+  <li><a href="#sec-drawing-substantive-conclusions-from-a-contingency-table" id="toc-sec-drawing-substantive-conclusions-from-a-contingency-table" class="nav-link" data-scroll-target="#sec-drawing-substantive-conclusions-from-a-contingency-table"><span class="header-section-number">9.3.1</span> Drawing Substantive Conclusions from a Contingency Table</a></li>
+  <li><a href="#key-assumption-of-the-chi-square-test" id="toc-key-assumption-of-the-chi-square-test" class="nav-link" data-scroll-target="#key-assumption-of-the-chi-square-test"><span class="header-section-number">9.3.2</span> Key Assumption of the Chi Square Test</a></li>
+  </ul></li>
+  <li><a href="#sec-comparing-groups-appendix-more-about-the-chi-square-distributioncomparing-groups-9" id="toc-sec-comparing-groups-appendix-more-about-the-chi-square-distributioncomparing-groups-9" class="nav-link" data-scroll-target="#sec-comparing-groups-appendix-more-about-the-chi-square-distributioncomparing-groups-9"><span>Chapter 9</span> Appendix: More about the Chi Square Distribution</a></li>
   </ul>
 </nav>
     </div>
@@ -240,7 +250,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></h1>
+<h1 class="title"><span id="sec-comparing-groups" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></h1>
 </div>
 
 
@@ -257,16 +267,15 @@ window.Quarto = {
 </header>
 
 
-<p>We previously learned how to graphically depict the relationship between two qualitative variables (<a href="graphing.html#sec-comparing-distributions" class="quarto-xref"><span>Section 1.3.3.1</span></a>). To make a comparison that includes a significance test, we will need to use the chi square distribution, together with a contingency table.</p>
+<p>We previously learned how to graphically depict the relationship between two qualitative variables with a bar chart (<a href="graphing.html#sec-comparing-distributions" class="quarto-xref"><span>Section 1.3.3.1</span></a>). To make a comparison that includes a significance test, we will need to use the chi square distribution, together with a contingency table.</p>
 <section id="chi-square-distributioncomparing-groups-1" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="chi-square-distributioncomparing-groups-1"><span class="header-section-number">9.1</span> Chi Square Distribution<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
-<p>A standard normal deviate is a random sample from the standard normal distribution. The Chi Square distribution is the distribution of the sum of squared standard normal deviates. The degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Therefore, Chi Square with one degree of freedom, written as χ<sup>2</sup>(1), is simply the distribution of a single normal deviate squared. The area of a Chi Square distribution below 4 is the same as the area of a standard normal distribution below 2, since 4 is 2<sup>2</sup>.</p>
-<p>Consider the following problem: you sample two scores from a standard normal distribution, square each score, and sum the squares. What is the probability that the sum of these two squares will be six or higher? Since two scores are sampled, the answer can be found using the Chi Square distribution with two degrees of freedom. A Chi Square calculator can be used to find that the probability of a Chi Square (with 2 df) being six or higher is 0.050.</p>
-<p>The mean of a Chi Square distribution is its degrees of freedom. Chi Square distributions are positively skewed, with the degree of skew decreasing with increasing degrees of freedom. As the degrees of freedom increases, the Chi Square distribution approaches a normal distribution. <a href="#fig-chisquare" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> shows density functions for three Chi Square distributions. Notice how the skew decreases as the degrees of freedom increases.</p>
+<p>While the details of the Chi Square distribution are not so important to understanding how to interpret a test of the relationship between two qualitative variable, a brief explanation is nonetheless provided here (with more information provided in this chapter’s appendix). A standard normal deviate is a random sample from the standard normal distribution. The Chi Square distribution is the distribution of the sum of squared standard normal deviates, and the degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Again, don’t worry if you don’t follow these details since they are not important for the average reader of this text.</p>
+<p>Chi Square distributions are positively skewed, but as the degrees of freedom increases, the degree of skew decreases and the Chi Square distribution approaches a normal distribution. <a href="#fig-chisquare" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> shows density functions for three Chi Square distributions. Notice how the skew decreases as the degrees of freedom increases.</p>
 <div id="fig-chisquare" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Images/comparing-groups/chisquare.png" class="img-fluid figure-img">
+<img src="Images/comparing-groups/chisquare.png" class="img-fluid figure-img" width="350">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9.1: Chi Square distributions with 2, 4, and 6 degrees of freedom.
@@ -285,50 +294,52 @@ Table&nbsp;9.1: Outcome Frequencies from a Six-Sided Die.
 </figcaption>
 <div aria-describedby="tbl-sixsidedie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th><strong>Frequency</strong></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Outcome</strong></td>
-<td></td>
-<td><strong>Frequency</strong></td>
-<td></td>
-</tr>
-<tr class="even">
 <td></td>
 <td>1</td>
 <td></td>
 <td>8</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>2</td>
 <td></td>
 <td>5</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>3</td>
 <td></td>
 <td>9</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>4</td>
 <td></td>
 <td>2</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>5</td>
 <td></td>
 <td>7</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>6</td>
 <td></td>
@@ -356,75 +367,53 @@ Table&nbsp;9.2: Outcome Frequencies from a Six-Sided Die.
 <div aria-describedby="tbl-sixsidedieoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 14%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 39%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 30%">
 </colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Outcome</strong></th>
+<th style="text-align: center;"><strong>E</strong></th>
+<th style="text-align: center;"><strong>O</strong></th>
+<th style="text-align: center;"><span class="math inline">\(\frac{(E-O)^2}{E}\)</span></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>Outcome</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>E</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"><strong>O</strong></td>
-<td style="text-align: center;"><img src="images/clipboard-2656411378.png" class="img-fluid figure-img"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">8</td>
 <td style="text-align: center;">0.667</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
+<tr class="even">
 <td style="text-align: center;">2</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">0.167</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"></td>
+<tr class="odd">
 <td style="text-align: center;">3</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">9</td>
 <td style="text-align: center;">1.500</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
+<tr class="even">
 <td style="text-align: center;">4</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">2.667</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"></td>
+<tr class="odd">
 <td style="text-align: center;">5</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">7</td>
 <td style="text-align: center;">0.167</td>
 </tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
+<tr class="even">
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">6</td>
-<td style="text-align: center;"></td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">0.167</td>
 </tr>
@@ -435,20 +424,20 @@ Table&nbsp;9.2: Outcome Frequencies from a Six-Sided Die.
 </div>
 <p>Next we add up all the values in Column 4 of <a href="#tbl-sixsidedieoutcomes" class="quarto-xref">Table&nbsp;<span>9.2</span></a>.</p>
 <p><span class="math display">\[
-\sum\frac{(E-O)^2}{E}=5.333
+\sum{\frac{(E-O)^2}{E}}=5.333
 \]</span></p>
 <p>This sampling distribution of</p>
 <p><span class="math display">\[
-Σ\frac{(E-O)^2}{E}
+\sum{\frac{(E-O)^2}{E}}
 \]</span></p>
 <p>is approximately distributed as Chi Square with k-1 degrees of freedom, where k is the number of categories. Therefore, for this problem the test statistic is</p>
 <p><span class="math display">\[
-X^2_5=5.333
+\chi^2_5=5.333
 \]</span></p>
 <p>which means the value of Chi Square with 5 degrees of freedom is 5.333.</p>
 <p>From a Chi Square calculator<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> it can be determined that the probability of a Chi Square of 5.333 or larger is 0.377. Therefore, the null hypothesis that the die is fair cannot be rejected.</p>
-<p>This Chi Square test can also be used to test other deviations between expected and observed frequencies. The following example shows a test of whether the variable “University GPA” in the SAT and College GPA case study is normally distributed.</p>
-<p>The first column in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a> shows the normal distribution divided into five ranges. The second column shows the proportions of a normal distribution falling in the ranges specified in the first column. The expected frequencies (E) are calculated by multiplying the number of scores (105) by the proportion. The final column shows the observed number of scores in each range. It is clear that the observed frequencies vary greatly from the expected frequencies. Note that if the distribution were normal, then there would have been only about 35 scores between 0 and 1, whereas 60 were observed.</p>
+<p>This Chi Square test can also be used to test other deviations between expected and observed frequencies. The following example shows a test of whether the variable “University GPA” in the “SAT and College GPA” case study<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (used previously to demonstrate regression) is normally distributed.</p>
+<p>The first column in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a> shows the standard normal distribution divided into four ranges. The second column shows the proportions of a standard normal distribution falling in the ranges specified in the first column. For example, we see that for the range 0 to 1, the proportion is 0.341 (or 34.1%). This follows directly from what we learned in <a href="prob-distributions.html" class="quarto-xref"><span>Chapter 5</span></a>; 68% of the area under the standard normal distribution lies between -1 and 1, so naturally 34% (half of 68%) will be covered by [0, 1]. The expected frequencies (E) are calculated by multiplying the number of scores (105) by the proportion expected according to the standard normal distribution. The final column shows the observed number of scores (O) in each range, after standardizing the University GPA variable so that it will map onto the standard normal distribution (see <a href="prob-distributions.html#sec-the-standard-normal-distribution" class="quarto-xref"><span>Section 5.2.3</span></a>). It is clear from the table that the observed frequencies vary greatly from the expected frequencies. Note that if the distribution were normal, then there would have been only about 35 scores between 0 and 1, whereas 60 were observed.</p>
 <div id="tbl-universitygpascores" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -457,71 +446,43 @@ Table&nbsp;9.3: Expected and Observed Scores for 105 University GPA Scores.
 <div aria-describedby="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 13%">
-<col style="width: 7%">
-<col style="width: 19%">
-<col style="width: 7%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 7%">
+<col style="width: 18%">
+<col style="width: 23%">
+<col style="width: 18%">
+<col style="width: 18%">
 </colgroup>
+<thead>
+<tr class="header">
+<th><strong>Range</strong></th>
+<th><strong>Proportion</strong></th>
+<th><strong>E</strong></th>
+<th><strong>O</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td><strong>Range</strong></td>
-<td></td>
-<td><strong>Proportion</strong></td>
-<td></td>
-<td><strong>E</strong></td>
-<td></td>
-<td><strong>O</strong></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
 <td>Above 1</td>
-<td></td>
 <td>0.159</td>
-<td></td>
 <td>16.695</td>
-<td></td>
 <td>9</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>0 to 1</td>
-<td></td>
-<td>0.341</td>
-<td></td>
-<td>35.805</td>
-<td></td>
-<td>60</td>
-<td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td>-1 to 0</td>
-<td></td>
+<td>0 to 1</td>
 <td>0.341</td>
-<td></td>
 <td>35.805</td>
-<td></td>
-<td>17</td>
-<td></td>
+<td>60</td>
 </tr>
 <tr class="odd">
-<td></td>
+<td>-1 to 0</td>
+<td>0.341</td>
+<td>35.805</td>
+<td>17</td>
+</tr>
+<tr class="even">
 <td>Below -1</td>
-<td></td>
 <td>0.159</td>
-<td></td>
 <td>16.695</td>
-<td></td>
 <td>19</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -530,13 +491,13 @@ Table&nbsp;9.3: Expected and Observed Scores for 105 University GPA Scores.
 </div>
 <p>The test of whether the observed scores deviate significantly from the expected scores is computed using the familiar calculation.</p>
 <p><span class="math display">\[
-X^2_3=\sum\frac{(E-O)^2}{E}=30.09
+\chi^2_3=\sum\frac{(E-O)^2}{E}=30.09
 \]</span></p>
-<p>The subscript “3” means there are three degrees of freedom. As before, the degrees of freedom is the number of outcomes minus 1, which is 4 - 1 = 3 in this example. A Chi Square distribution calculator shows that p &lt; 0.001 for this Chi Square. Therefore, the null hypothesis that the scores are normally distributed can be rejected.</p>
+<p>The subscript “3” means there are three degrees of freedom. As before, the degrees of freedom is the number of outcomes (in our example, the number of ranges listed in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a>) minus 1, which is 4 - 1 = 3 in this example. A Chi Square distribution calculator shows that p &lt; 0.001 for this Chi Square. Therefore, the null hypothesis that the scores are normally distributed can be rejected.</p>
 </section>
-<section id="contingency-tablescomparing-groups-4" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="contingency-tablescomparing-groups-4"><span class="header-section-number">9.3</span> Contingency Tables<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
-<p>This section shows how to use Chi Square to test the relationship between nominal variables for significance. For example, <a href="#tbl-studyfreqs" class="quarto-xref">Table&nbsp;<span>9.4</span></a> shows the data from the Mediterranean Diet and Health case study.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<section id="contingency-tablescomparing-groups-5" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="contingency-tablescomparing-groups-5"><span class="header-section-number">9.3</span> Contingency Tables<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h2>
+<p>This section shows how to use Chi Square to test the relationship between qualitative variables for significance. For example, <a href="#tbl-studyfreqs" class="quarto-xref">Table&nbsp;<span>9.4</span></a> shows the data from the Mediterranean Diet and Health case study,<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> in which 605 survivors of a heart attack were randomly assigned follow either (1) a low-fat diet similar to one recommended at the time by the American Heart Association (AHA) or (2) a Mediterranean-type diet rich in vegetables, fruits, and grains.</p>
 <div id="tbl-studyfreqs" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -545,106 +506,66 @@ Table&nbsp;9.4: Frequencies for Diet and Health Study.
 <div aria-describedby="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 10%">
+<col style="width: 10%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Outcome</th>
+<th></th>
+<th></th>
+<th></th>
+<th>Total</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td><strong>Outcome</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Diet</td>
-<td></td>
+<td><strong>Diet</strong></td>
 <td>Cancers</td>
-<td></td>
 <td>Fatal Heart Disease</td>
-<td></td>
 <td>Non-Fatal Heart Disease</td>
-<td></td>
 <td>Healthy</td>
 <td></td>
-<td>Total</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>AHA</td>
-<td></td>
-<td>15</td>
-<td></td>
-<td>24</td>
-<td></td>
-<td>25</td>
-<td></td>
-<td>239</td>
-<td></td>
-<td>303</td>
-<td></td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Mediterranean</td>
-<td></td>
-<td>7</td>
-<td></td>
-<td>14</td>
-<td></td>
-<td>8</td>
-<td></td>
-<td>273</td>
-<td></td>
-<td>302</td>
-<td></td>
+<td>AHA</td>
+<td>15</td>
+<td>24</td>
+<td>25</td>
+<td>239</td>
+<td>303</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Total</td>
-<td></td>
+<td>Mediterranean</td>
+<td>7</td>
+<td>14</td>
+<td>8</td>
+<td>273</td>
+<td>302</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
 <td>22</td>
-<td></td>
 <td>38</td>
-<td></td>
 <td>33</td>
-<td></td>
 <td>512</td>
-<td></td>
 <td>605</td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>The question is whether there is a <em>significant relationship</em> between diet and outcome. Again, software can calculate a p-value for us in order to test for significance. But if we are wondering what’s going on under the hood, the first step is to compute the expected frequency for each cell based on the assumption that there is no relationship. These expected frequencies are computed from the totals as follows. We begin by computing the expected frequency for the AHA Diet/Cancers combination. Note that 22/605 subjects developed cancer. The proportion who developed cancer is therefore 0.0364. If there were no relationship between diet and outcome, then we would expect 0.0364 of those on the AHA diet to develop cancer. Since 303 subjects were on the AHA diet, we would expect (0.0364)(303) = 11.02 cancers on the AHA diet. Similarly, we would expect (0.0364)(302) = 10.98 cancers on the Mediterranean diet. In general, the expected frequency for a cell in the ith row and the jth column is equal to</p>
+<p>The question is whether there is a <em>significant relationship</em> between diet and outcome. Again, software can calculate a p-value for us in order to test for significance. But if we are wondering what’s going on under the hood, the first step is to compute the expected frequency for each cell based on the assumption that there is no relationship. These expected frequencies are computed from the totals as follows. We begin by computing the expected frequency for the AHA Diet/Cancers combination. Note that 22/605 subjects developed cancer. The proportion who developed cancer is therefore 0.0364. If there were no relationship between diet and outcome, then we would expect 0.0364 of those on the AHA diet to develop cancer. Since 303 subjects were on the AHA diet, we would expect (0.0364)(303) = 11.02 cancers on the AHA diet. Similarly, we would expect (0.0364)(302) = 10.98 cancers on the Mediterranean diet. In general, the expected frequency for a cell in the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column is equal to</p>
 <p><span class="math display">\[
 E_{ij}=\frac{T_iT_j}{T}
 \]</span></p>
-<p>where <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell i,j, Ti is the total for the ith row, Tj is the total for the jth column, and T is the total number of observations. For the AHA Diet/Cancers cell, i = 1, j = 1, Ti = 303, Tj = 22, and T = 605. <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a> shows the expected frequencies (in parenthesis) for each cell in the experiment.</p>
+<p>where <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell <span class="math inline">\(i,j\)</span>, <span class="math inline">\(T_i\)</span> is the total for the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(T_j\)</span> is the total for the <span class="math inline">\(j\)</span>th column, and <span class="math inline">\(T\)</span> is the total number of observations. For the AHA Diet/Cancers cell, <span class="math inline">\(i = 1\)</span>, <span class="math inline">\(j = 1\)</span>, <span class="math inline">\(T_i = 303\)</span>, <span class="math inline">\(T_j = 22\)</span>, and <span class="math inline">\(T = 605\)</span>. <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a> shows the expected frequencies (in parenthesis) for each cell in the experiment.</p>
 <div id="tbl-observedstudyfreqs" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -653,32 +574,30 @@ Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
 <div aria-describedby="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 15%">
+<col style="width: 17%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 27%">
 <col style="width: 13%">
-<col style="width: 21%">
-<col style="width: 25%">
-<col style="width: 10%">
 </colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td><strong>Outcome</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Diet</td>
+<td><strong>Diet</strong></td>
 <td>Cancers</td>
 <td>Fatal Heart Disease</td>
 <td>Non-Fatal Heart Disease</td>
 <td>Healthy</td>
 </tr>
-<tr class="odd">
-<td></td>
+<tr class="even">
 <td>AHA</td>
 <td>15<br>
 (11.02)</td>
@@ -689,8 +608,7 @@ Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
 <td>239<br>
 (256.42)</td>
 </tr>
-<tr class="even">
-<td></td>
+<tr class="odd">
 <td>Mediterranean</td>
 <td>7<br>
 (10.98)</td>
@@ -701,9 +619,8 @@ Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
 <td>273<br>
 (255.58)</td>
 </tr>
-<tr class="odd">
-<td></td>
-<td>Total</td>
+<tr class="even">
+<td><strong>Total</strong></td>
 <td>22</td>
 <td>38</td>
 <td>33</td>
@@ -716,33 +633,205 @@ Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
 </div>
 <p>The significance test is conducted by computing Chi Square as follows.</p>
 <p><span class="math display">\[
-X^2_3=\sum\frac{(E-O)^2}{E}=-16.55
+\chi^2_3=\sum\frac{(E-O)^2}{E}=-16.55
 \]</span></p>
-<p>The degrees of freedom is equal to (r-1)(c-1), where <span class="math inline">\(r\)</span> is the number of rows and c is the number of columns. For this example, the degrees of freedom is (2-1)(4-1) = 3. The Chi Square calculator<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> can be used to determine that the probability value for a Chi Square of 16.55 with three degrees of freedom is equal to 0.0009. Therefore, the null hypothesis of no relationship between diet and outcome can be rejected.</p>
-<p>A key assumption of this Chi Square test is that each subject contributes data to only one cell. Therefore, the sum of all cell frequencies in the table must be the same as the number of subjects in the experiment. Consider an experiment in which each of 16 subjects attempted two anagram problems. The data are shown in <a href="#tbl-anagramdata" class="quarto-xref">Table&nbsp;<span>9.6</span></a>.</p>
-<div id="tbl-anagramdata" class="quarto-float anchored">
+<p>The degrees of freedom is equal to <span class="math inline">\((r-1)(c-1)\)</span>, where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> is the number of columns. For this example, the degrees of freedom is <span class="math inline">\((2-1)(4-1) = 3\)</span>. The Chi Square calculator<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> can be used to determine that the probability value for a Chi Square of 16.55 with three degrees of freedom is equal to 0.0009. Therefore, the null hypothesis of no relationship between diet and outcome can be rejected.</p>
+<section id="sec-drawing-substantive-conclusions-from-a-contingency-table" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="sec-drawing-substantive-conclusions-from-a-contingency-table"><span class="header-section-number">9.3.1</span> Drawing Substantive Conclusions from a Contingency Table<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></h3>
+<p>Now that we know there is a statistically significant relationship between diet and health outcome (since we rejected the null hypothesis of no relationship), we will naturally wonder what kind of relationship exists. Specifically, which diet is associated with better health? To answer this, we must look to the specific values within the cells and describe the patterns we observe. One straightforward way to do this is to make note of where the observed frequency differs notably from the expected frequency.</p>
+<p>From <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a>, we can see that for those on the AHA diet, the frequencies for cancers, fatal heart disease, and non-fatal heart disease are all higher than expected. At the same time, the frequency for “healthy” is lower than expected on the AHA diet. Results for the Mediterranean diet are the exact opposite: cancers and both types of heart disease occur less frequently than expected, and the healthy outcome occurs more than expected. Thus, the Mediterranean diet is unambiguously associated with better outcomes, compared to the AHA diet.</p>
+<p>Though it is easy to make sense of results in this manner based on a comparison of observe to expected frequencies, the typical contingency table you encounter will probably not display expected frequencies. Instead, it is common to include percentages by row or by column, which can also be used to draw conclusions about the nature of a relationship between variables. For example, in <a href="#tbl-diet-row-percentages" class="quarto-xref">Table&nbsp;<span>9.6</span></a>, the expected frequencies from the prior table have been replaced by percentages. The percentages shown in this table are calculated by row, meaning that they are found by dividing the frequency in each cell by the total shown at under the Total column on the right end of the table.</p>
+<div id="tbl-diet-row-percentages" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9.6: Anagram Problem Data.
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diet-row-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.6: Frequencies and Percentages by Row for Diet and Health Study.
 </figcaption>
-<div aria-describedby="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-diet-row-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 24%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td><strong>Anagram 1</strong></td>
-<td><strong>Anagram 2</strong></td>
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
 <td></td>
 </tr>
 <tr class="even">
+<td>AHA</td>
+<td>15<br>
+4.95%</td>
+<td>24<br>
+7.92%</td>
+<td>25<br>
+8.25%</td>
+<td>239<br>
+78.88%</td>
+<td>303<br>
+100%</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+2.32%</td>
+<td>14<br>
+4.64%</td>
+<td>8<br>
+2.65%</td>
+<td>273<br>
+90.40%</td>
+<td>302<br>
+100%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22<br>
+3.64%</td>
+<td>38<br>
+6.28%</td>
+<td>33<br>
+5.45%</td>
+<td>512<br>
+84.63%</td>
+<td>605<br>
+100%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Drawing conclusions based on column or row percentages takes some care, and it is easy to make mistakes if you are not careful. For example, consider the AHA-Cancers cell, which shows 4.95%. Because this seems like a small percentage, it is tempting to conclude that being on the AHA diet is not associated with having cancer. However, that conclusion would be wrong. Since the percentages have been calculated by row, the key to finding meaningful patterns will be to compare across the percentages found within the same column. In this case, we see that the 4.95% in the AHA-Cancers cell is over twice as large as the 2.32% shown in the Mediterranean-Cancers cell right below it. To make sense of these percentages, remember that we have calculated percentages by row, meaning that the frequency in the cell is divided by the total at the far right of the table. So the 4.95% means that among all those on the AHA diet (303 individuals in total), 4.95% have cancer. By comparison, only around 2% (2.32% to be precise) of those on a Mediterranean diet have cancer. Both percentages are small, because cancer is (fortunately) a relatively rare outcome; at the bottom of the table we see that only 3.64% of participants overall have cancer. Still, since the percentage is higher among those on the AHA diet than on the Mediterranean diet, we can say that the AHA diet is positively associated with having cancer.</p>
+<p>If we continue moving down the table column by column, we see that rates of heart disease are higher among those on the AHA diet (7.92% for fatal and 8.25% for nonfatal) than among those on the Mediterranean diet (4.64% and 2.65%). Finally, around 90% of those on the Mediterranean diet are healthy, while just under 79% of those on the AHA diet are.</p>
+<p>We can reach an equivalent conclusion by examining percentages that are calculated by column, as shown in <a href="#tbl-diet-column-percentages" class="quarto-xref">Table&nbsp;<span>9.7</span></a>. Here, percentages are calculated by dividing the frequency in each cell by the total shown at the bottom of the column.</p>
+<div id="tbl-diet-column-percentages" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diet-column-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.7: Frequencies and Percentages by Column for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-diet-column-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 24%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15<br>
+68.18%</td>
+<td>24<br>
+63.16%</td>
+<td>25<br>
+75.76%</td>
+<td>239<br>
+46.68%</td>
+<td>303<br>
+50.08%</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+31.82%</td>
+<td>14<br>
+36.84%</td>
+<td>8<br>
+24.24%</td>
+<td>273<br>
+53.32%</td>
+<td>302<br>
+49.92%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22<br>
+100%</td>
+<td>38<br>
+100%</td>
+<td>33<br>
+100%</td>
+<td>512<br>
+100%</td>
+<td>605<br>
+100%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The AHA-Cancer cell shows 68.18%, indicating that around 68% of those who have cancer are on the AHA diet. In the case of this particular dataset, the split of participants between the two diets is approximately 50-50 (as shown by the percentages in the final column), so finding that the percentage of those with cancer who are on the AHA diet is well above 50% actually does indicate that individuals on the AHA diet are overrepresented among those with cancer. But remember, you cannot generally assume that 50% is a reasonable baseline for comparison; if, for example, 80% of study participants were on the AHA diet, seeing any percentage smaller than 80% for the AHA-Cancers would indicate that those on the AHA diet were underrepresented among those with cancer.</p>
+<p>As a general rule, when percentages are calculated by columns, the key to finding meaningful patterns is making comparisons across the columns (within the same row), such as noticing that the 68.18% in the AHA-Cancers cell is greater than the 50.08% in the AHA Total cell. One can also see that while people on the AHA diet make up a clear majority of those with heart disease (both fatal and non-fatal), among those who are healthy only around 47% are on the AHA diet.</p>
+<p>Regardless of whether we examine expected versus observed outcomes, percentages by row, or percentages by column, we reach the same conclusion: health outcomes are uniformly better for those on the Mediterranean diet.</p>
+</section>
+<section id="key-assumption-of-the-chi-square-test" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="key-assumption-of-the-chi-square-test"><span class="header-section-number">9.3.2</span> Key Assumption of the Chi Square Test</h3>
+<p>A key assumption of this Chi Square test is that each subject contributes data to only one cell. Therefore, the sum of all cell frequencies in the table must be the same as the number of subjects in the experiment. Consider an experiment in which each of 16 subjects attempted two anagram problems. The data are shown in <a href="#tbl-anagramdata" class="quarto-xref">Table&nbsp;<span>9.8</span></a>.</p>
+<div id="tbl-anagramdata" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.8: Anagram Problem Data.
+</figcaption>
+<div aria-describedby="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th><strong>Anagram 1</strong></th>
+<th><strong>Anagram 2</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td></td>
 <td>Solved</td>
 <td>10</td>
 <td>4</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>Did not Solve</td>
 <td>6</td>
@@ -755,6 +844,13 @@ Table&nbsp;9.6: Anagram Problem Data.
 </figure>
 </div>
 <p>It would not be valid to use the Chi Square test on these data since each subject contributed data to two cells: one cell based on their performance on Anagram 1 and one cell based on their performance on Anagram 2. The total of the cell frequencies in the table is 32, but the total number of subjects is only 16.</p>
+</section>
+</section>
+<section id="sec-comparing-groups-appendix-more-about-the-chi-square-distributioncomparing-groups-9" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-comparing-groups-appendix-more-about-the-chi-square-distributioncomparing-groups-9"><a href="#sec-comparing-groups" class="quarto-xref"><span>Chapter 9</span></a> Appendix: More about the Chi Square Distribution<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h2>
+<p>As noted in the main text, the degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Therefore, Chi Square with one degree of freedom, written as <span class="math inline">\(\chi^2(1)\)</span>, is simply the distribution of a single normal deviate squared. The area of a Chi Square distribution below 4 is the same as the area of a standard normal distribution below 2, since 4 is 2<sup>2</sup>.</p>
+<p>Consider the following problem: you sample two scores from a standard normal distribution, square each score, and sum the squares. What is the probability that the sum of these two squares will be six or higher? Since two scores are sampled, the answer can be found using the Chi Square distribution with two degrees of freedom. A Chi Square calculator can be used to find that the probability of a Chi Square (with 2 df) being six or higher is 0.050.</p>
+<p>The mean of a Chi Square distribution is its degrees of freedom.</p>
 
 
 </section>
@@ -764,9 +860,12 @@ Table&nbsp;9.6: Anagram Problem Data.
 <li id="fn1"><p>This section is adapted from David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/distribution.html" class="uri">http://onlinestatbook.com/2/chi_square/distribution.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This section is adapted from David M. Lane. “One-Way Tables (Testing Goodness of Fit).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/one-way.html" class="uri">http://onlinestatbook.com/2/chi_square/one-way.html</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p><a href="http://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">http://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>This section is adapted from David M. Lane. “Contingency Tables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/contingency.html" class="uri">http://onlinestatbook.com/2/chi_square/contingency.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p><a href="http://onlinestatbook.com/2/case_studies/diet.html" class="uri">http://onlinestatbook.com/2/case_studies/diet.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p><a href="http://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">http://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://onlinestatbook.com/2/case_studies/sat.html" class="uri">https://onlinestatbook.com/2/case_studies/sat.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This section is adapted from David M. Lane. “Contingency Tables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/contingency.html" class="uri">http://onlinestatbook.com/2/chi_square/contingency.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="http://onlinestatbook.com/2/case_studies/diet.html" class="uri">http://onlinestatbook.com/2/case_studies/diet.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="http://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">http://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This subsection is written by Nathan Favero.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This section is adapted from David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="http://onlinestatbook.com/2/chi_square/distribution.html" class="uri">http://onlinestatbook.com/2/chi_square/distribution.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -791,6 +890,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
