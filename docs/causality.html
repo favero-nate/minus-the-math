@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics Minus The Math - 10&nbsp; Causality</title>
+<title>Statistics Minus The Math - 10&nbsp; Causality and Experimental Designs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./causality.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./causality.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality and Experimental Designs</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./causality.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality and Experimental Designs</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -205,12 +205,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#causationchapter10-1" id="toc-causationchapter10-1" class="nav-link active" data-scroll-target="#causationchapter10-1"><span class="header-section-number">10.1</span> Causation</a>
+  <li><a href="#causationcausality-1" id="toc-causationcausality-1" class="nav-link active" data-scroll-target="#causationcausality-1"><span class="header-section-number">10.1</span> Causation</a>
   <ul class="collapse">
   <li><a href="#establishing-causation-in-experiments" id="toc-establishing-causation-in-experiments" class="nav-link" data-scroll-target="#establishing-causation-in-experiments"><span class="header-section-number">10.1.1</span> Establishing Causation in Experiments</a></li>
   <li><a href="#causation-in-non-experimental-designs" id="toc-causation-in-non-experimental-designs" class="nav-link" data-scroll-target="#causation-in-non-experimental-designs"><span class="header-section-number">10.1.2</span> Causation in Non-Experimental Designs</a></li>
   </ul></li>
-  <li><a href="#experimental-designschapter10-6" id="toc-experimental-designschapter10-6" class="nav-link" data-scroll-target="#experimental-designschapter10-6"><span class="header-section-number">10.2</span> Experimental Designs</a>
+  <li><a href="#experimental-designscausality-6" id="toc-experimental-designscausality-6" class="nav-link" data-scroll-target="#experimental-designscausality-6"><span class="header-section-number">10.2</span> Experimental Designs</a>
   <ul class="collapse">
   <li><a href="#between-subjects-designs" id="toc-between-subjects-designs" class="nav-link" data-scroll-target="#between-subjects-designs"><span class="header-section-number">10.2.1</span> Between-Subjects Designs</a></li>
   <li><a href="#multi-factor-between-subject-designs" id="toc-multi-factor-between-subject-designs" class="nav-link" data-scroll-target="#multi-factor-between-subject-designs"><span class="header-section-number">10.2.2</span> Multi-Factor Between-Subject Designs</a></li>
@@ -226,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality</span></h1>
+<h1 class="title"><span id="sec-causality-and-experimental-designs" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality and Experimental Designs</span></span></h1>
 </div>
 
 
@@ -243,26 +243,26 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="causationchapter10-1" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="causationchapter10-1"><span class="header-section-number">10.1</span> Causation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="causationcausality-1" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="causationcausality-1"><span class="header-section-number">10.1</span> Causation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
 <p>The concept of causation is a complex one in the philosophy of science.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Since a full coverage of this topic is well beyond the scope of this text, we focus on two specific topics: (1) the establishment of causation in experiments and (2) the establishment of causation in non-experimental designs.</p>
 <section id="establishing-causation-in-experiments" class="level3" data-number="10.1.1">
 <h3 data-number="10.1.1" class="anchored" data-anchor-id="establishing-causation-in-experiments"><span class="header-section-number">10.1.1</span> Establishing Causation in Experiments</h3>
 <p>Consider a simple experiment in which subjects are sampled randomly from a population and then assigned randomly to either the experimental group or the control group. Assume the condition means on the dependent variable differed. Does this mean the treatment caused the difference?</p>
 <p>To make this discussion more concrete, assume that the experimental group received a drug for insomnia, the control group received a placebo, and the dependent variable was the number of minutes the subject slept that night. An obvious obstacle to inferring causality is that there are many unmeasured variables that affect how many hours someone sleeps. Among them are how much stress the person is under, physiological and genetic factors, how much caffeine they consumed, how much sleep they got the night before, etc. Perhaps differences between the groups on these factors are responsible for the difference in the number of minutes slept.</p>
 <p>At first blush it might seem that the random assignment eliminates differences in unmeasured variables. However, this is not the case. Random assignment ensures that differences on unmeasured variables are chance differences. It does not ensure that there are no differences. Perhaps, by chance, many subjects in the control group were under high stress and this stress made it more difficult to fall asleep. The fact that the greater stress in the control group was due to chance does not mean it could not be responsible for the difference between the control and the experimental groups. In other words, the observed difference in “minutes slept” could have been due to a chance difference between the control group and the experimental group rather than due to the drug’s effect.</p>
-<p>This problem seems intractable since, by definition, it is impossible to measure an “unmeasured variable” just as it is impossible to measure and control all variables that affect the dependent variable. However, although it is impossible to assess the effect of any single unmeasured variable, it is possible to assess the combined effects of all unmeasured variables. Since everyone in a given condition is treated the same in the experiment, differences in their scores on the dependent variable must be due to the unmeasured variables. Therefore, a measure of the differences among the subjects within a condition is a measure of the sum total of the effects of the unmeasured variables. The most common measure of differences is the variance. By using the within-condition variance to assess the effects of unmeasured variables, statistical methods determine the probability that these unmeasured variables could produce a difference between conditions as large or larger than the differenc<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>e obtained in the experiment. If that probability is low, then it is inferred (that’s why they call it inferential statistics) that the treatment had an effect and that the differences are not entirely due to chance. Of course, there is always some nonzero probability that the difference occurred by chance so total certainty is not a possibility.</p>
+<p>This problem seems intractable since, by definition, it is impossible to measure an “unmeasured variable” just as it is impossible to measure and control all variables that affect the dependent variable. However, although it is impossible to assess the effect of any single unmeasured variable, it is possible to assess the combined effects of all unmeasured variables. Since everyone in a given condition is treated the same in the experiment, differences in their scores on the dependent variable must be due to the unmeasured variables. Therefore, a measure of the differences among the subjects within a condition is a measure of the sum total of the effects of the unmeasured variables. The most common measure of differences is the variance. By using the within-condition variance to assess the effects of unmeasured variables, statistical methods (e.g., the independent-groups t test from <a href="comparing-means.html" class="quarto-xref"><span>Chapter 8</span></a>) determine the probability that these unmeasured variables could produce a difference between conditions as large or larger than the difference obtained in the experiment. If that probability is low, then it is inferred (that’s why they call it inferential statistics) that the treatment had an effect and that the differences are not entirely due to chance. Of course, there is always some nonzero probability that the difference occurred by chance so total certainty is not a possibility.</p>
 </section>
 <section id="causation-in-non-experimental-designs" class="level3" data-number="10.1.2">
 <h3 data-number="10.1.2" class="anchored" data-anchor-id="causation-in-non-experimental-designs"><span class="header-section-number">10.1.2</span> Causation in Non-Experimental Designs</h3>
-<p>It is almost a cliché that correlation does not mean causation. The main fallacy in inferring causation from correlation is called the third variable problem and means that a third variable is responsible for the correlation between two other variables. An excellent example used by Li (1975) to illustrate this point is the positive correlation in Taiwan in the 1970’s between the use of contraception and the number of electric appliances in one’s house. Of course, using contraception does not induce you to buy electrical appliances or vice versa. Instead, the third variable of education level affects both.</p>
+<p>It is almost a cliché that correlation does not mean causation. The main fallacy in inferring causation from correlation is called the third variable problem and means that a third variable is responsible for the correlation between two other variables. An excellent example used by Li (1975)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> to illustrate this point is the positive correlation in Taiwan in the 1970’s between the use of contraception and the number of electric appliances in one’s house. Of course, using contraception does not induce you to buy electrical appliances or vice versa. Instead, the third variable of education level affects both.</p>
 <p>Does the possibility of a third-variable problem make it impossible to draw causal inferences without doing an experiment? One approach is to simply assume that you do not have a third-variable problem. This approach, although common, is not very satisfactory. However, be aware that the assumption of no third-variable problem may be hidden behind a complex causal model that contains sophisticated and elegant mathematics.</p>
-<p>A better though, admittedly more difficult approach, is to find converging evidence. This was the approach taken to conclude that smoking causes cancer. The analysis included converging evidence from retrospective studies, prospective studies, lab studies with animals, and theoretical understandings of cancer causes.</p>
+<p>A better, though admittedly more difficult approach, is to find converging evidence. This was the approach taken to conclude that smoking causes cancer. The analysis included converging evidence from retrospective studies, prospective studies, lab studies with animals, and theoretical understandings of cancer causes.</p>
 <p>A second problem is determining the direction of causality. A correlation between two variables does not indicate which variable is causing which. For example, Reinhart and Rogoff (2010)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> found a strong correlation between public debt and GDP growth. Although some have argued that public debt slows growth, most evidence supports the alternative that slow growth increases public debt.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 </section>
 </section>
-<section id="experimental-designschapter10-6" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="experimental-designschapter10-6"><span class="header-section-number">10.2</span> Experimental Designs<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></h2>
+<section id="experimental-designscausality-6" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="experimental-designscausality-6"><span class="header-section-number">10.2</span> Experimental Designs<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></h2>
 <p>There are many ways an experiment can be designed. For example, subjects can all be tested under each of the treatment conditions or a different group of subjects can be used for each treatment. An experiment might have just one independent variable or it might have several. This section describes basic experimental designs and their advantages and disadvantages.</p>
 <section id="between-subjects-designs" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="between-subjects-designs"><span class="header-section-number">10.2.1</span> Between-Subjects Designs</h3>
@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="multi-factor-between-subject-designs" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="multi-factor-between-subject-designs"><span class="header-section-number">10.2.2</span> Multi-Factor Between-Subject Designs</h3>
 <p>In the “Bias Against Associates of the Obese”<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> experiment, the qualifications of potential job applicants were judged. Each applicant was accompanied by an associate. The experiment had two independent variables: the weight of the associate (obese or average) and the applicant’s relationship to the associate (girl friend or acquaintance). This design can be described as an Associate’s Weight (2) x Associate’s Relationship (2) factorial design. The numbers in parentheses represent the number of levels of the independent variable. The design was a factorial design because all four combinations of associate’s weight and associate’s relationship were included. The dependent variable was a rating of the applicant’s qualifications (on a 9-point scale).</p>
-<p>If two separate experiments had been conducted, one to test the effect of Associate’s Weight and one to test the effect of Associate’s Relationship then there would be no way to assess whether the effect of Associate’s Weight depended on the Associate’s Relationship. One might imagine that the Associate’s Weight would have a larger effect if the associate were a girl friend rather than merely an acquaintance. A factorial design allows this question to be addressed. When the effect of one variable does differ depending on the level of the other variable then it is said that there is an interaction between the variables.</p>
+<p>If two separate experiments had been conducted, one to test the effect of Associate’s Weight and one to test the effect of Associate’s Relationship then there would be no way to assess whether the effect of Associate’s Weight depended on the Associate’s Relationship. One might imagine that the Associate’s Weight would have a larger effect if the associate were a girl friend rather than merely an acquaintance. A factorial design allows this question to be addressed. When the effect of one variable does differ depending on the level of the other variable then it is said that there is an <em>interaction</em> (also known as moderation) between the variables.</p>
 <p>Factorial designs can have three or more independent variables. In order to be a between-subjects design there must be a separate group of subjects for each combination of the levels of the independent variables.</p>
 </section>
 <section id="within-subjects-designs" class="level3" data-number="10.2.3">
