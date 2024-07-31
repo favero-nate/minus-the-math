@@ -1,4 +1,4 @@
-I've created some (Stata-based) lecture slides and videos that do not closely present the content in the textbook but do generally track thematically (for the first 10 chapters).
+I've created some (Stata-based) lecture slides and videos that do not directly present the material from the textbook but do generally track thematically (for the first 10 chapters).
 
 The videos are available here: https://youtube.com/playlist?list=PLbcj9ai0wESD349fEIAuxoYwziBt4e6PS&si=vegLYbOk2pVHtrnd
 
