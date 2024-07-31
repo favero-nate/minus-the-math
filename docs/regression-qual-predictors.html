@@ -262,7 +262,7 @@ window.Quarto = {
 
 
 <p>In this chapter, I will walk you through some analysis I conduct with an example dataset, in order to show how regression works with qualitative independent variables. I could have easily completed this analysis using the methods from <a href="comparing-means.html" class="quarto-xref"><span>Chapter 8</span></a>, but it is important to see how regression can also be used as a method for comparing means across groups.</p>
-<p>Let’s say I’m interested in studying how personality relates to gender. The most common personality measure in psychology is called the “Big Five” personality inventory. There is a standard set of 50 survey items that researchers can use to measure five aspects of personality. <a href="#fig-Big5" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> shows some of these questions and how they are formatted.</p>
+<p>Let’s say I’m interested in studying how personality relates to gender. The most common model of personality in psychology is called the “Big Five.” One common measure consists of 50 survey items (the IPIP Big-Five Factor Markers), with 10 items for each of the five personality traits from the model.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="#fig-Big5" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> shows some of these questions and how they are formatted.</p>
 <div id="fig-Big5" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-Big5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -274,7 +274,7 @@ Figure&nbsp;12.1: Example survey items used in the “Big Five” case study.
 </figure>
 </div>
 <p>For now, I decide to focus on whether people are introverted or extroverted. Extroverts are outgoing and tend to enjoy interacting with others. Extroverts will tend to agree with the statement “I am the life of the party” while introverts will tend to agree with the item “I don’t talk a lot.”</p>
-<p>I find a dataset that contains lots of responses to the Big Five personality questions as well as information on the gender of each respondent.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> There are 10 different questions related to extroversion, and the dataset has one variable for each of these 10 questions (<a href="#fig-big5dataset" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>). The variable labeled e1 shows responses to the item “I am the life of the party.” A value of 1 means the respondent disagrees with this statement, while a 3 indicates neutral, and a 5 means they agree.</p>
+<p>I find a dataset that contains lots of responses to the Big Five personality questions as well as information on the gender of each respondent.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> There are 10 different questions related to extroversion, and the dataset has one variable for each of these 10 questions (<a href="#fig-big5dataset" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>). The variable labeled e1 shows responses to the item “I am the life of the party.” A value of 1 means the respondent disagrees with this statement, while a 3 indicates neutral, and a 5 means they agree.</p>
 <div id="fig-big5dataset" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-big5dataset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -390,7 +390,8 @@ Figure&nbsp;12.5: Distribution of extroversion trait among those identifying wit
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p><a href="https://openpsychometrics.org/_rawdata/" class="uri">https://openpsychometrics.org/_rawdata/</a> (the file I used is called “BIG5.zip”)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. <em>Psychological assessment</em>, <em>4</em>(1), 26.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://openpsychometrics.org/_rawdata/" class="uri">https://openpsychometrics.org/_rawdata/</a> (the file I used is called “BIG5.zip”)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
