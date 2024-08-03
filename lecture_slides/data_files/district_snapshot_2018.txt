@@ -1,0 +1,143 @@
+Dataset        :     DISTRICT
+Records in file:     1,200
+Delimiter      :     Comma
+Variables shown in position order
+
+Pos Name          Type      Length        Description
+------------------------------------------------------------------------
+
+1   DISTNAME      Character   34    DISTRICT NAME
+2   DISTRICT      Character   6     DISTRICT NUMBER
+3   DZCNTYNM      Character   38    COUNTY NUMBER AND NAME
+4   REGION        Character   2     EDUCATION SERVICE CENTER REGION
+5   DZRATING      Character   50    DISTRICT ACCOUNTABILITY RATINGS
+6   DZCAMPUS      Numeric     8     TOTAL NUMBER OF SCHOOLS
+7   DPETALLC      Numeric     8     TOTAL STUDENTS
+8   DPETBLAP      Numeric     8     STUDENTS: % AFRICAN AMERICAN
+9   DPETHISP      Numeric     8     STUDENTS: % HISPANIC
+10  DPETWHIP      Numeric     8     STUDENTS: % WHITE
+11  DPETINDP      Numeric     8     STUDENTS: % AMERICAN INDIAN
+12  DPETASIP      Numeric     8     STUDENTS: % ASIAN
+13  DPETPCIP      Numeric     8     STUDENTS: % PACIFIC ISLANDER
+14  DPETTWOP      Numeric     8     STUDENTS: % TWO OR MORE RACES
+15  DPETECOP      Numeric     8     STUDENTS: % ECONOMICALLY DISADVANTAGED
+16  DPETLEPP      Numeric     8     STUDENTS: % ENGLISH LEARNERS (EL)
+17  DPETSPEP      Numeric     8     STUDENTS: % SPECIAL EDUCATION
+18  DPETBILP      Numeric     8     STUDENTS: % BILINGUAL/ESL EDUCATION
+19  DPETVOCP      Numeric     8     STUDENTS: % CAREER & TECHNICAL EDUCATION
+20  DPETGIFP      Numeric     8     STUDENTS: % GIFTED & TALENTED EDUCATION
+21  DA0AT17R      Numeric     8     ATTENDANCE RATE (2016-17)
+22  DA0912DR17R   Numeric     8     ANNUAL DROPOUT RATE GR. 9-12 (2016-17)
+23  DAGC4X17R     Numeric     8     4-YR LONGITUDINAL GRADUATION RATE (CLASS OF 2017) DISTRICT EXCL
+24  DAGC5X16R     Numeric     8     5-YR LONGITUDINAL GRADUATION RATE (CLASS OF 2016) DISTRICT EXCL
+25  DAGC6X15R     Numeric     8     6-YR LONGITUDINAL GRADUATION RATE (CLASS OF 2015) DISTRICT EXCL
+26  DA0GR17N      Numeric     8     ANNUAL GRADUATE COUNT (2016-17)
+27  DA0GS17N      Numeric     8     ANNUAL RHSP/DAP/FHSP-E/FHSP-DLA GRADUATE COUNT (2016-17)
+28  DDA00A001S18R Numeric     8     STAAR: % ALL SUBJECTS at approaches grade level standard or above
+29  DDA00A001218R Numeric     8     STAAR: % ALL SUBJECTS at Meets Grade Level standard or Above
+30  DDA00A001318R Numeric     8     STAAR: % ALL SUBJECTS at masters Grade Level standard
+31  DDA00AR01S18R Numeric     8     STAAR: % ELA/READING at approaches grade level standard or above
+32  DDA00AR01218R Numeric     8     STAAR: % ELA/READING at Meets Grade Level standard or Above
+33  DDA00AR01318R Numeric     8     STAAR: % ELA/READING at masters Grade Level standard
+34  DDA00AW01S18R Numeric     8     STAAR: % WRITING at approaches grade level standard or above
+35  DDA00AW01218R Numeric     8     STAAR: % WRITING at Meets Grade Level standard or Above
+36  DDA00AW01318R Numeric     8     STAAR: % WRITING at masters Grade Level standard
+37  DDA00AM01S18R Numeric     8     STAAR: % MATHEMATICS at approaches grade level standard or above
+38  DDA00AM01218R Numeric     8     STAAR: % MATHEMATICS at Meets Grade Level standard or Above
+39  DDA00AM01318R Numeric     8     STAAR: % MATHEMATICS at masters Grade Level standard
+40  DDA00AC01S18R Numeric     8     STAAR: % SCIENCE at approaches grade level standard or above
+41  DDA00AC01218R Numeric     8     STAAR: % SCIENCE at Meets Grade Level standard or Above
+42  DDA00AC01318R Numeric     8     STAAR: % SCIENCE at masters Grade Level standard
+43  DDA00AS01S18R Numeric     8     STAAR: % SOCIAL STUDIES at approaches grade level standard or above
+44  DDA00AS01218R Numeric     8     STAAR: % SOCIAL STUDIES at Meets Grade Level standard or Above
+45  DDA00AS01318R Numeric     8     STAAR: % SOCIAL STUDIES at masters Grade Level standard
+46  DDB00A001S18R Numeric     8     STAAR: % AFRICAN AMERICAN at approaches grade level standard or above
+47  DDB00A001218R Numeric     8     STAAR: % AFRICAN AMERICAN at Meets Grade Level standard or Above
+48  DDB00A001318R Numeric     8     STAAR: % AFRICAN AMERICAN at masters Grade Level standard
+49  DDH00A001S18R Numeric     8     STAAR: % HISPANIC at approaches grade level standard or above
+50  DDH00A001218R Numeric     8     STAAR: % HISPANIC at Meets Grade Level standard or Above
+51  DDH00A001318R Numeric     8     STAAR: % HISPANIC at masters Grade Level standard
+52  DDW00A001S18R Numeric     8     STAAR: % WHITE at approaches grade level standard or above
+53  DDW00A001218R Numeric     8     STAAR: % WHITE at Meets Grade Level standard or Above
+54  DDW00A001318R Numeric     8     STAAR: % WHITE at masters Grade Level standard
+55  DDI00A001S18R Numeric     8     STAAR: % AMERICAN INDIAN at approaches grade level standard or above
+56  DDI00A001218R Numeric     8     STAAR: % AMERICAN INDIAN at Meets Grade Level standard or Above
+57  DDI00A001318R Numeric     8     STAAR: % AMERICAN INDIAN at masters Grade Level standard
+58  DD300A001S18R Numeric     8     STAAR: % ASIAN at approaches grade level standard or above
+59  DD300A001218R Numeric     8     STAAR: % ASIAN at Meets Grade Level standard or Above
+60  DD300A001318R Numeric     8     STAAR: % ASIAN at masters Grade Level standard
+61  DD400A001S18R Numeric     8     STAAR: % PACIFIC ISLANDER at approaches grade level standard or above
+62  DD400A001218R Numeric     8     STAAR: % PACIFIC ISLANDER at Meets Grade Level standard or Above
+63  DD400A001318R Numeric     8     STAAR: % PACIFIC ISLANDER at masters Grade Level standard
+64  DD200A001S18R Numeric     8     STAAR: % TWO OR MORE RACES at approaches grade level standard or above
+65  DD200A001218R Numeric     8     STAAR: % TWO OR MORE RACES at Meets Grade Level standard or Above
+66  DD200A001318R Numeric     8     STAAR: % TWO OR MORE RACES at masters Grade Level standard
+67  DDE00A001S18R Numeric     8     STAAR: % ECONOMICALLY DISADVANTAGED at approaches grade level standard or above
+68  DDE00A001218R Numeric     8     STAAR: % ECONOMICALLY DISADVANTAGED at Meets Grade Level standard or Above
+69  DDE00A001318R Numeric     8     STAAR: % ECONOMICALLY DISADVANTAGED at masters Grade Level standard
+70  DA0CT17R      Numeric     8     COLLEGE ADMISSIONS: % TESTED (CLASS OF 2017)
+71  DA0CC17R      Numeric     8     COLLEGE ADMISSIONS: % AT/ABOVE CRITERION (CLASS OF 2017)
+72  DA0CSA17R     Numeric     8     SAT-AVERAGE SCORE (CLASS OF 2017)
+73  DA0CAA17R     Numeric     8     ACT-AVERAGE SCORE (CLASS OF 2017)
+74  DPSATOFC      Numeric     8     TOTAL STAFF FTE
+75  DPSTTOFC      Numeric     8     TOTAL TEACHER FTE
+76  DPSCTOFP      Numeric     8     STAFF: % CENTRAL ADMINISTRATIVE
+77  DPSSTOFP      Numeric     8     STAFF: % SCHOOL ADMINISTRATIVE
+78  DPSUTOFP      Numeric     8     STAFF: % PROFESSIONAL SUPPORT
+79  DPSTTOFP      Numeric     8     STAFF: % TEACHERS
+80  DPSETOFP      Numeric     8     STAFF: % EDUCATIONAL AIDES
+81  DPSXTOFP      Numeric     8     STAFF: % AUXILIARY
+82  DPSCTOSA      Numeric     8     AVERAGE SALARY: CENTRAL ADMINISTRATIVE
+83  DPSSTOSA      Numeric     8     AVERAGE SALARY: SCHOOL ADMINISTRATIVE
+84  DPSUTOSA      Numeric     8     AVERAGE SALARY: PROFESSIONAL SUPPORT
+85  DPSTTOSA      Numeric     8     AVERAGE SALARY: TEACHER
+86  DPSAMIFP      Numeric     8     STAFF: % MINORITY
+87  DPSAKIDR      Numeric     8     NUMBER OF STUDENTS PER TOTAL STAFF
+88  DPSTKIDR      Numeric     8     NUMBER OF STUDENTS PER TEACHER
+89  DPST05FP      Numeric     8     TEACHER: % WITH 5 OR FEWER YEARS OF EXPERIENCE
+90  DPSTEXPA      Numeric     8     TEACHER: AVERAGE YEARS OF EXPERIENCE
+91  DPSTADFP      Numeric     8     TEACHER: % WITH ADVANCED DEGREES
+92  DPSTURNR      Numeric     8     TEACHER: TURNOVER RATE
+93  DPSTBLFP      Numeric     8     TEACHER: % AFRICAN AMERICAN
+94  DPSTHIFP      Numeric     8     TEACHER: % HISPANIC
+95  DPSTWHFP      Numeric     8     TEACHER: % WHITE
+96  DPSTO2FP      Numeric     8     TEACHER: % OTHER
+97  DPSTREFP      Numeric     8     TEACHER: % REGULAR EDUCATION
+98  DPSTSPFP      Numeric     8     TEACHER: % SPECIAL EDUCATION
+99  DPSTCOFP      Numeric     8     TEACHER: % COMPENSATORY EDUCATION
+100 DPSTBIFP      Numeric     8     TEACHER: % BILINGUAL/ESL EDUCATION
+101 DPSTVOFP      Numeric     8     TEACHER: % CAREER & TECHNICAL EDUCATION
+102 DPSTGOFP      Numeric     8     TEACHER: % OTHER EDUCATION (INCLUDES G & T)
+103 DPFVTOTK      Numeric     8     TAXABLE VALUE PER PUPIL (2015 TAX YEAR)
+104 DPFTADPR      Numeric     8     LOCALLY ADOPTED TAX RATE (2016 TAX YEAR)
+105 DPFRAALLT     Numeric     8     TOTAL ACTUAL REVENUE (2016-17)
+106 DPFRAALLK     Numeric     8     TOTAL ACTUAL REVENUE PER PUPIL
+107 DPFRASTAP     Numeric     8     REVENUE: % STATE
+108 DZRVLOCP      Numeric     8     REVENUE: % LOCAL AND OTHER
+109 DPFRAFEDP     Numeric     8     REVENUE: % FEDERAL
+110 DPFUNAB1T     Numeric     8     FUND BALANCE (FOR ISDS)
+111 DPFUNA4T      Numeric     8     NET ASSETS (CHARTER SCHOOLS)
+112 DPFEAALLT     Numeric     8     TOTAL ACTUAL EXPENDITURES (2016-17)
+113 DPFEAOPFT     Numeric     8     TOTAL ACTUAL OPERATING EXPENDITURES (2016-17)
+114 DPFEAOPFK     Numeric     8     TOTAL ACTUAL OPERATING EXPENDITURES PER PUPIL
+115 DPFEAINSP     Numeric     8     EXPENDITURE: % INSTRUCTIONAL
+116 DZEXADMP      Numeric     8     EXPENDITURE: % CENTRAL ADMINISTRATIVE
+117 DZEXADSP      Numeric     8     EXPENDITURE: % SCHOOL LEADERSHIP
+118 DZEXPLAP      Numeric     8     EXPENDITURE: % PLANT SERVICES
+119 DZEXOTHP      Numeric     8     EXPENDITURE: % OTHER OPERATING
+120 DPFEAINST     Numeric     8     TOTAL ACTUAL INSTRUCTIONAL EXPENDITURES
+121 DPFEAINSK     Numeric     8     TOTAL ACTUAL INSTRUCTIONAL EXPENDITURES PER PUPIL
+122 DPFPAREGP     Numeric     8     EXPENDITURE: % REGULAR EDUCATION
+123 DPFPASPEP     Numeric     8     EXPENDITURE: % SPECIAL EDUCATION
+124 DPFPACOMP     Numeric     8     EXPENDITURE: % ACCELERATED EDUCATION
+125 DPFPABILP     Numeric     8     EXPENDITURE: % BILINGUAL/ESL EDUCATION
+126 DPFPAVOCP     Numeric     8     EXPENDITURE: % CAREER & TECHNICAL EDUCATION
+127 DPFPAGIFP     Numeric     8     EXPENDITURE: % GIFTED & TALENTED EDUCATION
+128 DPFPAATHP     Numeric     8     EXPENDITURE: % ATHLETICS/RELATED ACTIVITIES
+129 DPFPAHSAP     Numeric     8     EXPENDITURE: % HIGH SCHOOL ALLOTMENT
+130 DPFPREKP      Numeric     8     EXPENDITURE: % PREKINDERGARTEN
+131 DPFPAOTHP     Numeric     8     EXPENDITURE: % OTHER
+132 DISTSIZE      Character   30    DISTRICT SIZE
+133 COMMTYPE      Character   30    COMMUNITY TYPE
+134 PROPWLTH      Character   30    PROPERTY WEALTH
+135 TAXRATE       Character   30    TAX RATE
