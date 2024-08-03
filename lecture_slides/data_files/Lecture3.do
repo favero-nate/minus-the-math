@@ -20,17 +20,17 @@ order charter passrate tsal tturn oneschooldist
 
 *******
 
-// slide 5:	
+// slide 5
 sum passrate if charter==0
 sum passrate if charter==1
 
-// slide 8:
+// slide 8
 tabstat passrate, s(median) by(charter)
 
-// slide 10:
+// slide 10
 graph box passrate, over(charter)	
 
-// slides 12/13:
+// slides 12/13
 tab oneschooldist charter, col
 
 
@@ -40,6 +40,25 @@ tab oneschooldist charter, col
 // slide 16
 use https://www.stata-press.com/data/r16/auto, clear
 twoway scatter price weight, title("Price & Weight of Common Automobiles")
+
+
+*******
+
+clear all
+set seed 1234567
+
+set obs 20
+
+gen x1 = rnormal()
+gen y1 = -.2 * x1 + sqrt(.3) * rnormal()
+
+// slide 22
+twoway scatter (y1 x1) ///
+	, aspectratio(1) xsize(4) ysize(4) ylabel(-4(1)4) xlabel(-4(1)4) scheme(s1mono) legend(off) ytitle("y1")
+
+// slide 23
+twoway (scatter y1 x1) (lfit y1 x1, lwidth(medthick) lcolor(black) ) ///
+	, aspectratio(1) xsize(4) ysize(4) ylabel(-4(1)4) xlabel(-4(1)4) scheme(s1mono) legend(off) ytitle("y1")
 
 
 ****** scatter plots demonstrating correlation/covariance with simulated data ******
