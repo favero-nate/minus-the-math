@@ -1,0 +1,1 @@
+data_20170517.csv: data shared under CC BY (http://creativecommons.org/licenses/by/4.0/), Hwang S-H, Lee JY, Yi S-M, Kim H (2017) Associations of particulate matter and its components with emergency room visits for cardiovascular and respiratory diseases. PLoS ONE 12(8): e0183224. https://doi.org/10.1371/journal.pone.0183224
