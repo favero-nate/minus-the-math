@@ -4,6 +4,6 @@ As you can see in this folder, I've created some (Stata-based) lecture slides an
 
 The videos are available here: https://youtube.com/playlist?list=PLbcj9ai0wESD349fEIAuxoYwziBt4e6PS&si=vegLYbOk2pVHtrnd
 
-Please feel free to reach out if you would like a copy of the Tex files used to create these slides (my contact info can be found at https://nathanfavero.com).
+Please feel free to reach out if you would like a copy of the Tex files used to create these slides (my contact info can be found at https://nathanfavero.com). I've now created a PowerPoint version of the slides (see powerpoint_conversion folder), though it was done through an automated process so formatting is not optimal.
 
 Link to main textbook: https://minusthemath.com
