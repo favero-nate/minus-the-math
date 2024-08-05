@@ -1,6 +1,4 @@
-Some weeks, there are too many labs to go over them all. The idea is to provide some options, and you can choose what makes sense for you.
-
-Lab numbers correspond to the chapter I might recommend pairing them with, though for some labs there is lots of flexibility.
+Lab numbers correspond to the chapter I might recommend pairing them with, though for some labs there is lots of flexibility. I generally spend two weeks on Ch. 3, hence 3 labs for that week.
 
  - Lab 1: basic graphing & labeling (data: college binge drinking)
  - Lab 2: basic data processing, descriptive stats, variable transformations, and more graphing (data: Texas school districts)
