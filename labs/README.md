@@ -11,6 +11,7 @@ Data files are not shown here because I point to them (often directly loading th
  - Lab 5: data processing; doesn't relate to Ch. 5, so could easily be another week (data: NYC schools)
  - Lab 6: simulations; additional simulations available with the Lecture 6 code/slides (https://github.com/favero-nate/minus-the-math/tree/main/lecture_slides)
  - Lab 8: comparing means through t-tests, ANOVA, & regression (data: U.S. states)
+ - Lab 9: chi-squared test (from contingency table), linear probability models (data: U.S. election survey)
  - Lab 10: graphing, multiple regression/partial slopes (data: automobiles)
  - Lab 12: comparing means through t-tests, ANOVA, & regression (data: Big 5 personality traits)
  - Lab 13: linear probability models; comparing t-tests, ANOVA, chi-squared tests (contingency tables), & regression (data: labor force survey)
