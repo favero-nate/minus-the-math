@@ -20,7 +20,7 @@ data <- data |>
   mutate(white=ifelse(race=="white", 1, ifelse(race=="black",0,NA)))
 table(data$white, data$race, useNA="ifany")
 
-# 3 methods of seeing whether the mean wage is different for whites and blacks
+# 3 methods of seeing whether the mean wage is different for white vs black women
 
   # two-sample t-test
   t.test(wage ~ white, data = data)

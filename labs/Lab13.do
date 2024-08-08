@@ -11,7 +11,7 @@ gen white=0 if race==2
 replace white=1 if race==1
 tab race white, missing
 
-*** 3 methods of seeing whether the mean wage is different for whites and blacks
+*** 3 methods of seeing whether the mean wage is different for white vs black women
 
 	// two-sample t-test
 	ttest wage, by(white)
