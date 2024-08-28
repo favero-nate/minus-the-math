@@ -1,5 +1,5 @@
 // Nathan Favero (https://minusthemath.com)
-// Chapter 1 Lab (version: Aug 4, 2024)
+// Chapter 1a Lab (version: Aug 4, 2024)
 
 insheet using "https://minusthemath.com/data/binge.csv"
 // original file downloaded as Excel doc from https://onlinestatbook.com/2/case_studies/binge.html

@@ -2,7 +2,8 @@ Lab numbers correspond to the textbook chapter I recommend pairing them with, th
 
 Data files are not shown here because I point to them (often directly loading them in) within each script file.
 
- - Lab 1: basic graphing & labeling (data: college binge drinking)
+ - Lab 1a: basic graphing & labeling (data: college binge drinking)
+ - Lab 1b: scatter plots (data: General Social Survey)
  - Lab 2: basic data processing, descriptive stats, variable transformations, and more graphing (data: Texas school districts)
  - Lab 3a: bivariate data description, regression; assumes Lab 2 was completed (data: Texas school districts)
  - Lab 3b: basic regression examples, closely tracking Ch. 3 example (data: university GPAs)
