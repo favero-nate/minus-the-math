@@ -10,7 +10,7 @@ cd ""
 
 
 // Note: If the following line gives you an error, try manually downloading the 2018 file from this site: https://gss.norc.org/
-unzipfile "https://gss.norc.org/documents/stata/2018_stata.zip"
+unzipfile "https://gss.norc.org/content/dam/gss/get-the-data/documents/stata/2018_stata.zip"
 
 use "GSS2018.dta" // update if the unzipped file has a different name (e.g., changed names in a new version)
 
