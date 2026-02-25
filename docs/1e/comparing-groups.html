@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Comparing Groups (How Two Qualitative Variables Relate to One Another) – Statistics Minus The Math</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./causality.html" rel="next">
+<link href="./comparing-means.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./comparing-groups.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus The Math</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graphing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Graphical Tools for Describing Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics for Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools for Describing the Relationship Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probability Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-means.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comparing-groups.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality and Experimental Designs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Models and Uncertainty</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Regression with Qualitative Independent Variables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression-qual-outcome.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression with Qualitative Dependent Variables</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#chi-square-distributioncomparing-groups-1" id="toc-chi-square-distributioncomparing-groups-1" class="nav-link active" data-scroll-target="#chi-square-distributioncomparing-groups-1"><span class="header-section-number">9.1</span> Chi Square Distribution</a></li>
+  <li><a href="#one-way-tablescomparing-groups-2" id="toc-one-way-tablescomparing-groups-2" class="nav-link" data-scroll-target="#one-way-tablescomparing-groups-2"><span class="header-section-number">9.2</span> One-Way Tables</a></li>
+  <li><a href="#sec-contingency-tables" id="toc-sec-contingency-tables" class="nav-link" data-scroll-target="#sec-contingency-tables"><span class="header-section-number">9.3</span> Contingency Tables</a>
+  <ul class="collapse">
+  <li><a href="#sec-drawing-substantive-conclusions-from-a-contingency-table" id="toc-sec-drawing-substantive-conclusions-from-a-contingency-table" class="nav-link" data-scroll-target="#sec-drawing-substantive-conclusions-from-a-contingency-table"><span class="header-section-number">9.3.1</span> Drawing Substantive Conclusions from a Contingency Table</a></li>
+  <li><a href="#key-assumption-of-the-chi-square-test" id="toc-key-assumption-of-the-chi-square-test" class="nav-link" data-scroll-target="#key-assumption-of-the-chi-square-test"><span class="header-section-number">9.3.2</span> Key Assumption of the Chi Square Test</a></li>
+  </ul></li>
+  <li><a href="#appendix-more-about-the-chi-square-distributioncomparing-groups-9" id="toc-appendix-more-about-the-chi-square-distributioncomparing-groups-9" class="nav-link" data-scroll-target="#appendix-more-about-the-chi-square-distributioncomparing-groups-9"><span class="header-section-number">9.4</span> Appendix: More about the Chi Square Distribution</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-comparing-groups" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing Groups (How Two Qualitative Variables Relate to One Another)</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>We previously learned how to graphically depict the relationship between two qualitative variables with a bar chart (<a href="graphing.html#sec-comparing-distributions" class="quarto-xref"><span>Section 1.3.3.1</span></a>). To make a comparison that includes a significance test, we will need to use the chi square distribution, together with a contingency table.</p>
+<section id="chi-square-distributioncomparing-groups-1" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="chi-square-distributioncomparing-groups-1"><span class="header-section-number">9.1</span> Chi Square Distribution<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>While the details of the Chi Square distribution are not so important for understanding how to interpret a test of the relationship between two qualitative variable, a brief explanation is nonetheless provided here (with more information provided in this chapter’s appendix). A standard normal deviate is a random sample from the standard normal distribution. The Chi Square distribution is the distribution of the sum of squared standard normal deviates, and the degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Again, don’t worry if you don’t follow these details since they are not important for the average reader of this text.</p>
+<p>Chi Square distributions are positively skewed, but as the degrees of freedom increases, the degree of skew decreases and the Chi Square distribution approaches a normal distribution. <a href="#fig-chisquare" class="quarto-xref">Figure&nbsp;<span>9.1</span></a> shows density functions for three Chi Square distributions. Notice how the skew decreases as the degrees of freedom increases.</p>
+<div id="fig-chisquare" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/comparing-groups/chisquare.png" class="img-fluid figure-img" width="375">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chisquare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Chi Square distributions with 2, 4, and 6 degrees of freedom.
+</figcaption>
+</figure>
+</div>
+<p>The Chi Square distribution is very important because many test statistics are approximately distributed as Chi Square. Two of the more common tests using the Chi Square distribution are tests of deviations of differences between theoretically expected and observed frequencies (one-way tables) and the relationship between qualitative variables (contingency tables). Numerous other tests beyond the scope of this work are based on the Chi Square distribution.</p>
+</section>
+<section id="one-way-tablescomparing-groups-2" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="one-way-tablescomparing-groups-2"><span class="header-section-number">9.2</span> One-Way Tables<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></h2>
+<p>The Chi Square distribution can be used to test whether observed data differ <em>significantly</em> from theoretical expectations. For example, for a fair six-sided die, the probability of any given outcome on a single roll would be 1/6. The data in <a href="#tbl-sixsidedie" class="quarto-xref">Table&nbsp;<span>9.1</span></a> were obtained by rolling a six-sided die 36 times. However, as can be seen in <a href="#tbl-sixsidedie" class="quarto-xref">Table&nbsp;<span>9.1</span></a>, some outcomes occurred more frequently than others. For example, a “3” came up nine times, whereas a “4” came up only two times. Are these data consistent with the hypothesis that the die is a fair die? Naturally, we do not expect the sample frequencies of the six possible outcomes to be the same since chance differences will occur. So, the finding that the frequencies differ does not mean that the die is not fair. One way to test whether the die is fair is to conduct a significance (hypothesis) test. The null hypothesis is that the die is fair. This hypothesis is tested by computing the probability of obtaining frequencies as discrepant or more discrepant from a uniform distribution of frequencies as obtained in the sample. If this probability is sufficiently low, then the null hypothesis that the die is fair can be rejected.</p>
+<div id="tbl-sixsidedie" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sixsidedie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.1: Outcome Frequencies from a Six-Sided Die.
+</figcaption>
+<div aria-describedby="tbl-sixsidedie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th><strong>Frequency</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>1</td>
+<td></td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2</td>
+<td></td>
+<td>5</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3</td>
+<td></td>
+<td>9</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>5</td>
+<td></td>
+<td>7</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>6</td>
+<td></td>
+<td>5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The first step in conducting the significance test is to compute the expected frequency for each outcome given that the null hypothesis is true. For example, the expected frequency of a “1” is 6 since the probability of a “1” coming up is 1/6 and there were a total of 36 rolls of the die.</p>
+<p>Expected frequency = (1/6)(36) = 6</p>
+<p>Note that the expected frequencies are expected only in a theoretical sense. We do not really “expect” the observed frequencies to match the “expected frequencies” exactly.</p>
+<p>The calculation continues as follows. Letting E be the expected frequency of an outcome and O be the observed frequency of that outcome, compute</p>
+<p><span class="math display">\[
+\frac{(E-O)^2}{E}
+\]</span></p>
+<p>for each outcome. <a href="#tbl-sixsidedieoutcomes" class="quarto-xref">Table&nbsp;<span>9.2</span></a> shows these calculations.</p>
+<div id="tbl-sixsidedieoutcomes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sixsidedieoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.2: Outcome Frequencies from a Six-Sided Die.
+</figcaption>
+<div aria-describedby="tbl-sixsidedieoutcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Outcome</strong></th>
+<th style="text-align: center;"><strong>E</strong></th>
+<th style="text-align: center;"><strong>O</strong></th>
+<th style="text-align: center;"><span class="math inline">\(\frac{(E-O)^2}{E}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">0.667</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2.667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Next we add up all the values in Column 4 of <a href="#tbl-sixsidedieoutcomes" class="quarto-xref">Table&nbsp;<span>9.2</span></a>.</p>
+<p><span class="math display">\[
+\sum{\frac{(E-O)^2}{E}}=5.333
+\]</span></p>
+<p>This sampling distribution of</p>
+<p><span class="math display">\[
+\sum{\frac{(E-O)^2}{E}}
+\]</span></p>
+<p>is approximately distributed as Chi Square with k-1 degrees of freedom, where k is the number of categories (in our example, the six possible values we might get from a die roll). Therefore, for this problem the test statistic is</p>
+<p><span class="math display">\[
+\chi^2_5=5.333
+\]</span></p>
+<p>which means the value of Chi Square with 5 degrees of freedom is 5.333.</p>
+<p>From a Chi Square calculator<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> it can be determined that the probability of a Chi Square of 5.333 or larger is 0.377. Therefore, the null hypothesis that the die is fair cannot be rejected.</p>
+<p>This Chi Square test can also be used to test other deviations between expected and observed frequencies. The following example shows a test of whether the variable “University GPA” in the “SAT and College GPA” case study<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (used previously to demonstrate regression) is normally distributed.</p>
+<p>The first column in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a> shows the standard normal distribution divided into four ranges. The second column shows the proportions of a standard normal distribution falling in the ranges specified in the first column. For example, we see that for the range 0 to 1, the proportion is 0.341 (or 34.1%). This follows directly from what we learned in <a href="prob-distributions.html" class="quarto-xref"><span>Chapter 5</span></a>; 68% of the area under the standard normal distribution lies between -1 and 1, so naturally 34% (half of 68%) will be covered by [0, 1]. The expected frequencies (E) are calculated by multiplying the number of scores (105) by the proportion expected according to the standard normal distribution. The final column shows the observed number of scores (O) in each range, after standardizing the University GPA variable so that it will map onto the standard normal distribution (see <a href="prob-distributions.html#sec-the-standard-normal-distribution" class="quarto-xref"><span>Section 5.2.3</span></a>). It is clear from the table that the observed frequencies vary greatly from the expected frequencies. Note that if the distribution were normal, we would expect only about 35 scores between 0 and 1, whereas 60 were observed.</p>
+<div id="tbl-universitygpascores" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.3: Expected and Observed Scores for 105 University GPA Scores.
+</figcaption>
+<div aria-describedby="tbl-universitygpascores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 23%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Range</strong></th>
+<th><strong>Proportion</strong></th>
+<th><strong>E</strong></th>
+<th><strong>O</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Above 1</td>
+<td>0.159</td>
+<td>16.695</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>0 to 1</td>
+<td>0.341</td>
+<td>35.805</td>
+<td>60</td>
+</tr>
+<tr class="odd">
+<td>-1 to 0</td>
+<td>0.341</td>
+<td>35.805</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>Below -1</td>
+<td>0.159</td>
+<td>16.695</td>
+<td>19</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The test of whether the observed scores deviate significantly from the expected scores is computed using the familiar calculation.</p>
+<p><span class="math display">\[
+\chi^2_3=\sum\frac{(E-O)^2}{E}=30.09
+\]</span></p>
+<p>The subscript “3” means there are three degrees of freedom. As before, the degrees of freedom is the number of outcomes (in our example, the number of ranges listed in <a href="#tbl-universitygpascores" class="quarto-xref">Table&nbsp;<span>9.3</span></a>) minus 1, which is 4 - 1 = 3 in this example. A Chi Square distribution calculator shows that p &lt; 0.001 for this Chi Square. Therefore, the null hypothesis that the scores are normally distributed can be rejected.</p>
+</section>
+<section id="sec-contingency-tables" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sec-contingency-tables"><span class="header-section-number">9.3</span> Contingency Tables<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h2>
+<p>This section shows how to use Chi Square to test the relationship between qualitative variables for significance. For example, <a href="#tbl-studyfreqs" class="quarto-xref">Table&nbsp;<span>9.4</span></a> shows the data from the Mediterranean Diet and Health case study,<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> in which 605 survivors of a heart attack were randomly assigned to follow either (1) a low-fat diet similar to one recommended at the time by the American Heart Association (AHA) or (2) a Mediterranean-type diet rich in vegetables, fruits, and grains.</p>
+<div id="tbl-studyfreqs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.4: Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Outcome</th>
+<th></th>
+<th></th>
+<th></th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15</td>
+<td>24</td>
+<td>25</td>
+<td>239</td>
+<td>303</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7</td>
+<td>14</td>
+<td>8</td>
+<td>273</td>
+<td>302</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22</td>
+<td>38</td>
+<td>33</td>
+<td>512</td>
+<td>605</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The question is whether there is a <em>significant relationship</em> between diet and outcome. Again, software can calculate a p-value for us in order to test for significance. But if we are wondering what’s going on under the hood, the first step is to compute the expected frequency for each cell based on the assumption that there is no relationship. These expected frequencies are computed from the totals as follows. We begin by computing the expected frequency for the AHA Diet-Cancers combination. Note that 22/605 subjects developed cancer. The proportion who developed cancer is therefore 0.0364. If there were no relationship between diet and outcome, then we would expect 0.0364 of those on the AHA diet to develop cancer. Since 303 subjects were on the AHA diet, we would expect (0.0364)(303) = 11.02 cancers on the AHA diet. Similarly, we would expect (0.0364)(302) = 10.98 cancers on the Mediterranean diet. In general, the expected frequency for a cell in the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column is equal to</p>
+<p><span class="math display">\[
+E_{ij}=\frac{T_iT_j}{T}
+\]</span></p>
+<p>where <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell <span class="math inline">\(i,j\)</span>, <span class="math inline">\(T_i\)</span> is the total for the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(T_j\)</span> is the total for the <span class="math inline">\(j\)</span>th column, and <span class="math inline">\(T\)</span> is the total number of observations. For the AHA Diet-Cancers cell, <span class="math inline">\(i = 1\)</span>, <span class="math inline">\(j = 1\)</span>, <span class="math inline">\(T_i = 303\)</span>, <span class="math inline">\(T_j = 22\)</span>, and <span class="math inline">\(T = 605\)</span>. <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a> shows the expected frequencies (in parenthesis) for each cell in the experiment.</p>
+<p>The significance test is conducted by computing Chi Square as follows.</p>
+<p><span class="math display">\[ \chi^2_3=\sum\frac{(E-O)^2}{E}=16.55 \]</span></p>
+<p>The degrees of freedom is equal to <span class="math inline">\((r-1)(c-1)\)</span>, where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> is the number of columns. For this example, the degrees of freedom is <span class="math inline">\((2-1)(4-1) = 3\)</span>. The Chi Square calculator<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> can be used to determine that the probability value for a Chi Square of 16.55 with three degrees of freedom is equal to 0.0009. Therefore, the null hypothesis of no relationship between diet and outcome can be rejected.</p>
+<div id="tbl-observedstudyfreqs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.5: Observed and Expected Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 27%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15<br>
+(11.02)</td>
+<td>24<br>
+(19.03)</td>
+<td>25<br>
+(16.53)</td>
+<td>239<br>
+(256.42)</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+(10.98)</td>
+<td>14<br>
+(18.97)</td>
+<td>8<br>
+(16.47)</td>
+<td>273<br>
+(255.58)</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22</td>
+<td>38</td>
+<td>33</td>
+<td>512</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="sec-drawing-substantive-conclusions-from-a-contingency-table" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="sec-drawing-substantive-conclusions-from-a-contingency-table"><span class="header-section-number">9.3.1</span> Drawing Substantive Conclusions from a Contingency Table<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></h3>
+<p>Now that we know there is a statistically significant relationship between diet and health outcome (since we rejected the null hypothesis of no relationship), we will naturally wonder what kind of relationship exists. Specifically, which diet is associated with better health? To answer this, we must look to the specific values within the cells and describe the patterns we observe. One straightforward way to do this is to make note of where the observed frequency differs notably from the expected frequency.</p>
+<p>From <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>9.5</span></a>, we can see that for those on the AHA diet, the frequencies for cancers, fatal heart disease, and non-fatal heart disease are all higher than expected. At the same time, the frequency for “healthy” is lower than expected on the AHA diet. Results for the Mediterranean diet are the exact opposite: cancers and both types of heart disease occur less frequently than expected, and the healthy outcome occurs more than expected. Thus, the Mediterranean diet is unambiguously associated with better outcomes than the AHA diet.</p>
+<p>Though it is easy to make sense of results in this manner based on a comparison of observe to expected frequencies, the typical contingency table you encounter will probably not display expected frequencies. Instead, it is common to include percentages by row or by column, which can also be used to draw conclusions about the nature of a relationship between variables. For example, in <a href="#tbl-diet-row-percentages" class="quarto-xref">Table&nbsp;<span>9.6</span></a>, the expected frequencies from the prior table have been replaced by percentages. The percentages shown in this table are calculated by row, meaning that they are found by dividing the frequency in each cell by the total for that row, shown in the final column.</p>
+<div id="tbl-diet-row-percentages" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diet-row-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.6: Frequencies and Percentages by Row for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-diet-row-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 24%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15<br>
+4.95%</td>
+<td>24<br>
+7.92%</td>
+<td>25<br>
+8.25%</td>
+<td>239<br>
+78.88%</td>
+<td>303<br>
+100%</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+2.32%</td>
+<td>14<br>
+4.64%</td>
+<td>8<br>
+2.65%</td>
+<td>273<br>
+90.40%</td>
+<td>302<br>
+100%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22<br>
+3.64%</td>
+<td>38<br>
+6.28%</td>
+<td>33<br>
+5.45%</td>
+<td>512<br>
+84.63%</td>
+<td>605<br>
+100%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Drawing conclusions based on column or row percentages takes some care, and it is easy to make mistakes if you are not careful. For example, consider the AHA-Cancers cell, which shows 4.95%. Because this seems like a small percentage, it is tempting to conclude that being on the AHA diet is not associated with having cancer. However, that conclusion would be wrong. Since the percentages have been calculated by row, the key to finding meaningful patterns will be to compare across the percentages found within the same column. In this case, we see that the 4.95% in the AHA-Cancers cell is over twice as large as the 2.32% shown in the Mediterranean-Cancers cell right below it. To make sense of these percentages, remember that we have calculated percentages by row, meaning that the frequency in the cell is divided by the total at the far right of the table. So the 4.95% means that among all those on the AHA diet (303 individuals in total), 4.95% have cancer. By comparison, only around 2% (2.32% to be precise) of those on a Mediterranean diet have cancer. Both percentages are small, because cancer is (fortunately) a relatively rare outcome; at the bottom of the table we see that only 3.64% of participants overall have cancer. Still, since the percentage is higher among those on the AHA diet than on the Mediterranean diet, we can say that the AHA diet is positively associated with having cancer.</p>
+<p>If we continue moving down the table column by column, we see that rates of heart disease are higher among those on the AHA diet (7.92% for fatal and 8.25% for non-fatal) than among those on the Mediterranean diet (4.64% and 2.65%). Finally, around 90% of those on the Mediterranean diet are healthy, while just under 79% of those on the AHA diet are.</p>
+<p>We can reach an equivalent conclusion by examining percentages that are calculated by column, as shown in <a href="#tbl-diet-column-percentages" class="quarto-xref">Table&nbsp;<span>9.7</span></a>. Here, percentages are calculated by dividing the frequency in each cell by the total shown at the bottom of the column.</p>
+<div id="tbl-diet-column-percentages" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diet-column-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.7: Frequencies and Percentages by Column for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-diet-column-percentages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 24%">
+<col style="width: 10%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15<br>
+68.18%</td>
+<td>24<br>
+63.16%</td>
+<td>25<br>
+75.76%</td>
+<td>239<br>
+46.68%</td>
+<td>303<br>
+50.08%</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+31.82%</td>
+<td>14<br>
+36.84%</td>
+<td>8<br>
+24.24%</td>
+<td>273<br>
+53.32%</td>
+<td>302<br>
+49.92%</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22<br>
+100%</td>
+<td>38<br>
+100%</td>
+<td>33<br>
+100%</td>
+<td>512<br>
+100%</td>
+<td>605<br>
+100%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The AHA-Cancers cell shows 68.18%, indicating that around 68% of those who have cancer are on the AHA diet. In the case of this particular dataset, the split of participants between the two diets is approximately 50-50 (as shown by the percentages in the final column), so finding that the percentage of those with cancer who are on the AHA diet is well above 50% actually does indicate that individuals on the AHA diet are overrepresented among those with cancer. But remember, you cannot generally assume that 50% is a reasonable baseline for comparison; if, for example, 80% of study participants were on the AHA diet, seeing any percentage smaller than 80% in the AHA-Cancers cell would indicate that those on the AHA diet were underrepresented among those with cancer.</p>
+<p>As a general rule, when percentages are calculated by columns, the key to finding meaningful patterns is making comparisons across the columns (within the same row), such as noticing that the 68.18% in the AHA-Cancers cell is greater than the 50.08% in the AHA Total cell. One can also see that while people on the AHA diet make up a clear majority of those with heart disease (both fatal and non-fatal), among those who are healthy only around 47% are on the AHA diet. As a clear contrast, those on the Mediterranean diet make up around 53% of the healthy subjects but just 32% of those with cancer, 37% of those with fatal heart disease, and 24% of those with non-fatal heart disease. Thus, we see consistent indication that outcomes are better for subjects on the Mediterranean diet, as opposed to the AHA one.</p>
+<p>As you can now see, regardless of whether we examine (1) expected versus observed outcomes, (2) percentages by row, or (3) percentages by column, we reach the same conclusion: health outcomes are uniformly better for those on the Mediterranean diet. All three approaches are equally valid ways of evaluating associations from a contingency table, and you normally need use only one. We examined all three here for illustrative purposes since each approach is one you may encounter in your own analysis or in a research report.</p>
+</section>
+<section id="key-assumption-of-the-chi-square-test" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="key-assumption-of-the-chi-square-test"><span class="header-section-number">9.3.2</span> Key Assumption of the Chi Square Test</h3>
+<p>A key assumption of this Chi Square test is that each subject contributes data to only one cell. Therefore, the sum of all cell frequencies in the table must be the same as the number of subjects in the experiment. Consider an experiment in which each of 16 subjects attempted two anagram problems. The data are shown in <a href="#tbl-anagramdata" class="quarto-xref">Table&nbsp;<span>9.8</span></a>.</p>
+<div id="tbl-anagramdata" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;9.8: Anagram Problem Data.
+</figcaption>
+<div aria-describedby="tbl-anagramdata-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th><strong>Anagram 1</strong></th>
+<th><strong>Anagram 2</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Solved</td>
+<td>10</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Did not Solve</td>
+<td>6</td>
+<td>12</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>It would not be valid to use the Chi Square test on these data since each subject contributed data to two cells: one cell based on their performance on Anagram 1 and one cell based on their performance on Anagram 2. The total of the cell frequencies in the table is 32, but the total number of subjects is only 16.</p>
+</section>
+</section>
+<section id="appendix-more-about-the-chi-square-distributioncomparing-groups-9" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="appendix-more-about-the-chi-square-distributioncomparing-groups-9"><span class="header-section-number">9.4</span> Appendix: More about the Chi Square Distribution<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h2>
+<p>As noted in the main text, the degrees of freedom of the distribution is equal to the number of standard normal deviates being summed. Therefore, Chi Square with one degree of freedom, written as <span class="math inline">\(\chi^2(1)\)</span>, is simply the distribution of a single normal deviate squared. The area of the <span class="math inline">\(\chi^2(1)\)</span> distribution below 4 is the same as the area of a standard normal distribution below 2, since 4 is 2<sup>2</sup>.</p>
+<p>Consider the following problem: you sample two scores from a standard normal distribution, square each score, and sum the squares. What is the probability that the sum of these two squares will be six or higher? Since two scores are sampled, the answer can be found using the Chi Square distribution with two degrees of freedom. A Chi Square calculator can be used to find that the probability of a Chi Square (with 2 df) being six or higher is 0.050.</p>
+<p>The mean of a Chi Square distribution is its degrees of freedom.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This section is adapted from David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/distribution.html" class="uri">https://onlinestatbook.com/2/chi_square/distribution.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This section is adapted from David M. Lane. “One-Way Tables (Testing Goodness of Fit).” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/one-way.html" class="uri">https://onlinestatbook.com/2/chi_square/one-way.html</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">https://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://onlinestatbook.com/2/case_studies/sat.html" class="uri">https://onlinestatbook.com/2/case_studies/sat.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This section is adapted from David M. Lane. “Contingency Tables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/contingency.html" class="uri">https://onlinestatbook.com/2/chi_square/contingency.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://onlinestatbook.com/2/case_studies/diet.html" class="uri">https://onlinestatbook.com/2/case_studies/diet.html</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><a href="https://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">https://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This subsection is written by Nathan Favero.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This section is adapted from David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/distribution.html" class="uri">https://onlinestatbook.com/2/chi_square/distribution.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./comparing-means.html" class="pagination-link" aria-label="Comparing Means (How a Qualitative Variable Relates to a Quantitative One)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparing Means (How a Qualitative Variable Relates to a Quantitative One)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./causality.html" class="pagination-link" aria-label="Causality and Experimental Designs">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Causality and Experimental Designs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

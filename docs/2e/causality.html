@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Research Designs and Causality – Statistics Minus the Math (2e)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./measurement.html" rel="next">
+<link href="./sampling-distributions.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./causality.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus the Math (2e)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relationships Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qual-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Relationships with Qualitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stat-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Going Deeper with Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./change-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change Log</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#types-of-research-designs" id="toc-types-of-research-designs" class="nav-link active" data-scroll-target="#types-of-research-designs"><span class="header-section-number">9.1</span> Types of Research Designs</a></li>
+  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality"><span class="header-section-number">9.2</span> Causality</a>
+  <ul class="collapse">
+  <li><a href="#a-framework-for-assessing-causality" id="toc-a-framework-for-assessing-causality" class="nav-link" data-scroll-target="#a-framework-for-assessing-causality"><span class="header-section-number">9.2.1</span> A framework for assessing causality</a></li>
+  <li><a href="#establishing-causation-in-experimentscausality-5" id="toc-establishing-causation-in-experimentscausality-5" class="nav-link" data-scroll-target="#establishing-causation-in-experimentscausality-5"><span class="header-section-number">9.2.2</span> Establishing Causation in Experiments</a></li>
+  <li><a href="#causation-in-non-experimental-designs" id="toc-causation-in-non-experimental-designs" class="nav-link" data-scroll-target="#causation-in-non-experimental-designs"><span class="header-section-number">9.2.3</span> Causation in Non-Experimental Designs</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">9.3</span> Exercises</a></li>
+  <li><a href="#sec-causality-appendix-classic-experimental-designs-from-psychologycausality-9" id="toc-sec-causality-appendix-classic-experimental-designs-from-psychologycausality-9" class="nav-link" data-scroll-target="#sec-causality-appendix-classic-experimental-designs-from-psychologycausality-9"><span>Chapter 9</span> Appendix: Classic Experimental Designs from Psychology</a>
+  <ul class="collapse">
+  <li><a href="#between-subjects-designs" id="toc-between-subjects-designs" class="nav-link" data-scroll-target="#between-subjects-designs">Between-Subjects Designs</a></li>
+  <li><a href="#multi-factor-between-subject-designs" id="toc-multi-factor-between-subject-designs" class="nav-link" data-scroll-target="#multi-factor-between-subject-designs">Multi-Factor Between-Subject Designs</a></li>
+  <li><a href="#within-subjects-designs" id="toc-within-subjects-designs" class="nav-link" data-scroll-target="#within-subjects-designs">Within-Subjects Designs</a></li>
+  <li><a href="#advantage-of-within-subjects-designs" id="toc-advantage-of-within-subjects-designs" class="nav-link" data-scroll-target="#advantage-of-within-subjects-designs">Advantage of Within-Subjects Designs</a></li>
+  <li><a href="#complex-designs" id="toc-complex-designs" class="nav-link" data-scroll-target="#complex-designs">Complex Designs</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./causality.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-causality" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>We analyze data because we wish to learn things about the world around us, but all data has limitations. How do we establish what our data can and cannot tell us? There are no simple answers to this question; the critical thinking we have been practicing with Three Questions to Always Ask about Data is one place to start. But more generally, we can help clarify what our data is capable of revealing through a <strong>research design</strong>. A research design describes how your data relates to the particular questions you hope to answer. Ideally, your research design is compelling enough that someone (other scientists, maybe even yourself) could be convinced to rethink their opinion if the results the design yields don’t match their expectations. In other words, when we speak of research design, we are trying to separate out the <em>process</em> from the <em>results</em>. The research design describes the process through we obtain and analyze the data. Using a rigorous process will make your results more credible.</p>
+<section id="types-of-research-designs" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="types-of-research-designs"><span class="header-section-number">9.1</span> Types of Research Designs</h2>
+<p>There are many types of research designs, so it can be helpful to organize them into different categories. For example, we often distinguish between inductive and deductive research. <strong>Inductive research</strong> refers to drawing general conclusions (inferring broader principles or patterns) based on observations of specific examples. We often use the term <strong>exploratory</strong> when describing inductive research. Inductive studies can help us to develop hypotheses. We might begin an inductive study with some research questions, or we might not even have particularly precise questions at the start of the study.</p>
+<p><strong>Deductive research</strong> applies broader theories or principles to specific situations or data. For example, a deductive study might test a hypothesis (or the implications of some theory) in a particular setting. We can also refer to this as <strong>confirmatory</strong> research. One important element of confirmatory work is that it can be clearly stated what it would look like to get results that negate the argument being tested.</p>
+<p>In practice, the lines between inductive and deductive research are often blurry. Many studies use elements of both approaches.</p>
+<p>We can also categorize research as descriptive versus causal. <strong>Descriptive</strong> research addresses questions about what is. For example, we might want to know how closely the general public follows the news, or whether countries generally moved away from democracy during the past decade. <strong>Causal</strong> research allows us to get at “why” questions. Why do some people follow the news more carefully than others? Why do countries move away from democracy?</p>
+<p>Once again, the lines between categories are often blurry in practice. For example, many studies advance causal arguments about what is occurring in the world, but the actual data analyzed may not allow for drawing any strong conclusions about causality.</p>
+<p>Another way we can categorize research is to distinguish between experimental and observational studies. In an <strong>experiment</strong>, the researcher is involved in manipulating one or more variables of interest. We saw an example in <a href="stat-inference.html" class="quarto-xref"><span>Chapter 5</span></a>, where researchers studying a food assistance program assigned applicants to either receive text message reminders about an interview or to be part of a control group that received no such reminders. In social science, we usually want to randomize any experimental manipulation (e.g., use a random number generator to determine whether a subject receives the treatment or control), in order to match the assumptions of statistical models used for analysis.</p>
+<p>In <strong>observational studies</strong>, the researcher observes variation in variables caused by something other than the researcher’s own intervention. There are practical and ethical barriers to manipulating many variables we care about in the social world, so important research questions are not always suitable for experimental study. A sub-category of observational studies is <strong>quasi-experimental studies</strong>, which utilitize research designs aimed at assessing causality rigorously, despite lacking true experimental manipulation. For example, a researcher might study a specific policy shock, such as a court ruling that altered a policy in certain jurisdictions but not others (creating plausibly distinct “treatment” and “control” groups). While such designs are generally beyond the scope of what is covered in this text, they are an important and growing part of the social scientific literature.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The concepts of internal and external validity can help us describe the strengths and weaknesses of various research designs. <strong>Internal validity</strong> refers to confidence that a causal conclusion can be drawn about one or more relationships among variables. Internal validity refers specifically to learning about the causal effects that exist <em>among the units observed in the study</em>. <strong>External validity</strong> describes confidence that the findings of a study can be generalized to a broader set of units, beyond those directly observed in the study. For an application of these concepts, consider that many classic psychology studies consisted of lab experiments conducted with undergraduate psychology students. While well-constructed lab experiments allow for strong conclusions to be reached about the causal effects of a manipulation on the students within the lab (good internal validity), such studies have also been criticized for poor external validity since undergraduate psychology students may tend to react differently to certain stimuli than the general public. More recent innovations like the use of online survey experiments have allowed psychologists to regularly collect data from more a diverse cross section of the public, although the precision and control afforded by a lab setting is weakened in an online experiment. Thus, online experiments may be generally considered to have weaker internal validity than lab experiments (due to less precise control of experimental manipulations), while the more diverse populations associated with online experiments may afford greater external validity. Many other considerations are important for a detailed assessment of the internal and external validity of any given experiment, but this broad (and somewhat simplistic) summary of experimental psychology illustrates how these concepts can help us identify important aspects of research designs to scrutinize.</p>
+</section>
+<section id="causality" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="causality"><span class="header-section-number">9.2</span> Causality</h2>
+<p>Causality is a complex concept that is difficult to precisely define. One way to think about causality in a social science context is as the sequence in which our variables are ordered. Researchers often depict variables sequentially with directional arrows showing the presumed causal connections among variables. As already introduced in <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>, we give variables different designations depending on where they appear in this sequence (although we introduced this idea by focusing on prediction rather than causation). An <strong>independent variable</strong> is supposed to be a cause of the <strong>dependent variable</strong>. If we have a sequence that extends beyond two variables, we can call an in-between variable a <strong>mediator</strong> or <strong>mediating variable</strong> (e.g., if A causes B and B causes C, we consider B to be a mediator in the relationship between A and C).</p>
+<section id="a-framework-for-assessing-causality" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="a-framework-for-assessing-causality"><span class="header-section-number">9.2.1</span> A framework for assessing causality</h3>
+<p>How can we evaluate whether an independent variable X causes a dependent variable Y? There are many different tools for assessing causality, but for now we will introduce a simple framework that can help us informally evaluate evidence.</p>
+<p>To begin with, we start from the assumption that an association (e.g., a correlation or non-zero regression slope) between X and Y has been found. If X does cause Y, then there should be some sort of association between the two variables,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> even though an association is not sufficient to conclude causation. If no association is found, then our data indicate no evidence in support of a causal relationship.</p>
+<p>Under this framework, there are five possibilities for why X is associated with Y:</p>
+<ol type="1">
+<li>The association is a coincidence</li>
+<li>Z causes X and Y</li>
+<li>Y causes X</li>
+<li>Research design problems create an artificial association</li>
+<li>X causes Y</li>
+</ol>
+<p>Assessing causality under this framework is a bit like detective work: we can potentially use the process of elimination to establish causality. Specifically, if we rule out options 1-4, we can conclude 5 must be true. Of course, we do not normally reach purely binary conclusions (that something is certainly true or certainly false); instead, we are weighing evidence and assessing the relatively plausibility of these 5 possibilities. The more confident we are that 1-4 are untrue, the more sure we are that 5 is true.</p>
+<p>Let’s briefly discuss some considerations under each of the five possibilities.</p>
+<section id="the-association-is-a-coincidence" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="the-association-is-a-coincidence">1. The association is a coincidence</h4>
+<p>The social world is fully of complexity and variation, so we can never hope to create a perfectly sterile environment where everything is held constant except a single variable. In other words, we always have an error term to contend with, as described in <a href="prob-models.html#sec-models-and-uncertainty" class="quarto-xref"><span>Section 7.2</span></a>. There is always a risk that by pure coincidence, the random noisiness of the world will yield an apparent association in our particular sample, even if there is no systematic linkage in reality.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Fortunately, confidence intervals and hypothesis tests explicitly allow us to account for such random noise. Thus, the standard way studies address this first possibility is by testing whether an association is strong enough to achieve statistical significance. When we achieve statistical significance, we are essentially concluding that the relationship between variables is unlikely to be coincidental.</p>
+<p>In many ways, this first possibility is the easiest to assess, given that the fundamental tools of statistical inference are designed to address it. Yet for some research questions, it impossible to collect large samples, making statistical significance very difficult to achieve. For example, studies of presidential elections within a single country typically suffer from small sample sizes, since current institutional practices and data availability usually extend back at most for several decades (and presidential elections typically occur once every several years).</p>
+<p>Another common difficulty is that failing to meet model assumptions can distort the results of hypothesis tests, as when standard errors are not accurately estimated.</p>
+<p>Cherry picking of results (or data) is another common concern, since false positives will sometimes occur due to coincidence (at a rate consistent with the chosen alpha level, at least in theory). If insignificant results are discarded and only significant results are presented, the rate of false positives among the remaining results could be dramatically inflated. Recent attention to issues of p-hacking and publication bias directly address such concerns, and efforts to adapt research designs to incorporate practices like preregistration may help to mitigate such problems in the social scientific literature.</p>
+</section>
+<section id="z-causes-x-and-y" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="z-causes-x-and-y">2. Z causes X and Y</h4>
+<p>This possibility is perhaps the most vexing cause for concern in observational studies. If a third variable Z causes both X and Y, then X and Y will generally exhibit an association even if there is no direct causal link between X and Y. Such a third variable may be called a <strong>confounder</strong> (or confounding variable). For example, suppose an observational study finds that participants in a microloan program experience substantial improvements in economic wellbeing compared to peers who did not participate in the program. If the program had an opt-in element, we should be worried about self-selection distorting accurate estimation of program effects. People with higher levels of ambition (a third variable Z) will probably be more likely to participate in the program (the X variable), but this ambition will likely also serve to boost future economic wellbeing (the Y variable). Thus, even if the program itself has no effect on future economic wellbeing, we can still expect to find a positive association between X and Y due to Z affecting both variables.</p>
+<p>If we can successfully identify any (and all) confounders and are able to perfectly measure them, we can control for them (include them as additional independent variables) in a regression, which will generally address this concern. Specifically, if Z is the only confounder of concern, we can run a multiple regression that includes both X and Z as independent variables (and Y as the dependent variable). Multiple regression is explained in more detail in the following chapter. If X exhibits a (significant) association with Y in this multiple regression, we can generally be satisfied that Z was not the cause of the association between X and Y since multiple regression will estimate an association for X independent of Z.</p>
+<p>However, as a practical matter, it is very difficult to be confident we have identified and precisely measured all potential confounders. Going back to the microloan example, a practical difficulty is that ambition is difficult to precisely measure, challenging our ability to fully remove any confounding effect of ambition by controlling for it in a regression. Given such difficulties, the most persuasive tests of causality generally rely on examining variation in X that is believed to be random (as in an experiment) or near-random (e.g., varying substantially and sharply in response to a clear cause, such that third factors are unlikely to be varying in a similarly arbitrary pattern). If the value of X was randomly assigned (e.g., determined by the result of a random number generator), then we have no reason to worry that some confounder Z caused both X and Y (since the result of the random number generator should have no direct effect on Y). This is why experiments utilizing random assignment are considered the gold standard for building evidence of causality.</p>
+</section>
+<section id="y-causes-x" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="y-causes-x">3. Y causes X</h4>
+<p>Sometimes, we can be fairly confident that this is not a concern. For example, if X clearly precedes Y in time and there is no concern about anticipatory effects (i.e., it is implausible that Y could be predicted or that people adjusted X in anticipation of Y), we might logically conclude that Y causing X is unlikely. Or we might simply deem it rather implausible that Y would affect X based on our existing understanding of social behavior. For example, we might assumed that voting intention does not affect economic conditions, since it is hard to imagine a mechanism by which macroeconomic conditions would notable shift in response to how people planned to vote (at least assuming a reasonably close election for which the results were in doubt ahead of time).</p>
+<p>Sometimes, collecting data over time (e.g., panel data) will help us better evaluate this possibility. Random or near-random variation again provides some of the best means of address this concern (where such variation can plausibly be identified), since a random assignment of values to X implies that Y was not causing the values of X.</p>
+</section>
+<section id="research-design-problems-create-an-artificial-association" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="research-design-problems-create-an-artificial-association">4. Research design problems create an artificial association</h4>
+<p>This fourth possibility is quite open ended, since artificial findings of an association may arise due to a variety of issues associated with a study’s design. We cannot possibly provide an exhaustive list here, so some examples will have to suffice. A study might suffer attrition (people dropping out of a study) in particular patterns that distort the picture of how variables are associated with one another. More generally, non-random patterns of missing data may bias estimates of associations. Measurement error can also bias results, especially if misreporting is correlated with another variable of interest. Another common concern in social science is that people may distort their behavior due to awareness that they are being studied (a Hawthorne effect) or treated (placebo effects); good research designs will make efforts to mitigate such effects by, for example, creating a carefully constructed control condition for an experiment.</p>
+</section>
+<section id="x-causes-y" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="x-causes-y">5. X causes Y</h4>
+<p>Beyond considering whether there are any good rival explanations (possibilities 1-4), it is important to assess the plausibility of this relationship itself. Is there a theory or a plausible mechanism that explains how X could affect Y? If we are examining the effects of a policy change on future electoral outcomes, is the public broadly aware of the policy or its effects? If not, it is probably difficult to imagine how the policy change could have a large effect on a subsequent election.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+</section>
+</section>
+<section id="establishing-causation-in-experimentscausality-5" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="establishing-causation-in-experimentscausality-5"><span class="header-section-number">9.2.2</span> Establishing Causation in Experiments<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h3>
+<p>Consider a simple experiment in which subjects are sampled randomly from a population and then assigned randomly to either the experimental group or the control group. Assume the condition means on the dependent variable differed. Does this mean the treatment caused the difference?</p>
+<p>To make this discussion more concrete, assume that the experimental group received a drug for insomnia, the control group received a placebo, and the dependent variable was the number of minutes the subject slept that night. An obvious obstacle to inferring causality is that there are many unmeasured variables that affect how many hours someone sleeps. Among them are how much stress the person is under, physiological and genetic factors, how much caffeine they consumed, how much sleep they got the night before, etc. Perhaps differences between the groups on these factors are responsible for the difference in the number of minutes slept.</p>
+<p>At first blush it might seem that the random assignment eliminates differences in unmeasured variables. However, this is not the case. Random assignment ensures that differences on unmeasured variables are chance differences. It does not ensure that there are no differences. Perhaps, by chance, many subjects in the control group were under high stress and this stress made it more difficult to fall asleep. The fact that the greater stress in the control group was due to chance does not mean it could not be responsible for the difference between the control and the experimental groups. In other words, the observed difference in “minutes slept” could have been due to a chance difference between the control group and the experimental group rather than due to the drug’s effect.</p>
+<p>This problem seems intractable since, by definition, it is impossible to measure an “unmeasured variable” just as it is impossible to measure and control all variables that affect the dependent variable. However, although it is impossible to assess the effect of any single unmeasured variable, it is possible to assess the combined effects of all unmeasured variables. Since everyone in a given condition is treated the same in the experiment, differences in their scores on the dependent variable must be due to the unmeasured variables. Therefore, a measure of the differences among the subjects within a condition is a measure of the sum total of the effects of the unmeasured variables. The most common measure of differences is the variance. By using the within-condition variance to assess the effects of unmeasured variables, statistical methods (e.g., regression or a comparison of means t-test) determine the probability that these unmeasured variables could produce a difference between conditions as large or larger than the difference obtained in the experiment. If that probability is low, then it is inferred (that’s why they call it inferential statistics) that the treatment had an effect and that the differences are not entirely due to chance. Of course, there is always some nonzero probability that the difference occurred by chance so total certainty is not a possibility.</p>
+</section>
+<section id="causation-in-non-experimental-designs" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="causation-in-non-experimental-designs"><span class="header-section-number">9.2.3</span> Causation in Non-Experimental Designs</h3>
+<p>It is almost a cliché that correlation does not mean causation. The main fallacy in inferring causation from correlation is called the third variable problem and means that a third variable is responsible for the correlation between two other variables. An excellent example used by Li (1975)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> to illustrate this point is the positive correlation in Taiwan in the 1970’s between the use of contraception and the number of electric appliances in one’s house. Of course, using contraception does not induce you to buy electrical appliances or vice versa. Instead, the third variable of education level affects both.</p>
+<p>Does the possibility of a third-variable problem make it impossible to draw causal inferences without doing an experiment? One approach is to simply assume that you do not have a third-variable problem. This approach, although common, is not very satisfactory. However, be aware that the assumption of no third-variable problem may be hidden behind a complex causal model that contains sophisticated and elegant mathematics.</p>
+<p>A better, though admittedly more difficult approach, is to find converging evidence. This was the approach taken to conclude that smoking causes cancer. The analysis included converging evidence from retrospective studies, prospective studies, lab studies with animals, and theoretical understandings of cancer causes.</p>
+<p>A second problem is determining the direction of causality. A correlation between two variables does not indicate which variable is causing which. For example, Reinhart and Rogoff (2010)<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> found a strong correlation between public debt and GDP growth. Although some have argued that public debt slows growth, most evidence supports the alternative that slow growth increases public debt.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">9.3</span> Exercises</h2>
+<ol type="1">
+<li>You present some research in which you randomly assigned a set of AU undergraduate students to either be part of a control group or to be part of a treatment group. Students in the treatment group received extra advising and mentoring services. After tracking the students for 4 years, you find better outcomes for the treatment group. A colleague expresses concern that even though this program appears to have worked at AU, it may not work at other colleges/universities since most have very different student populations. Which type of validity is your colleague expressing concern about?</li>
+<li>What type of research design is described in the prior question?</li>
+<li>A finding of <em>statistical significance</em> helps me to rule out which of the five reasons X might be associated with Y (under the framework for assessing causality)?</li>
+<li>I’m doing research on how education shapes political attitudes in the US. I find that there is a positive correlation between years of education and political liberalism. My colleague, however, is skeptical that education causes students to become more liberal. He argues that a conservative political worldview makes people less interested in obtaining advanced degrees. In other words, he thinks political ideology causes educational attainment. Which of the five reasons X might be associated with Y best describes my colleague’s concern?</li>
+<li>Use the 5-part framework for assessing causality to explain why randomized experiments are usually considered the best type of research design for establishing causality.</li>
+<li>Supposed you’re studying which U.S. states have adopted “red flag laws.” Such laws allow the government to remove guns from individuals who are shown to be a risk to themselves or others. High-quality data indicates that red flag laws have mostly been adopted in states that tend to vote for Democrats in relatively high proportions, and this relationship is statistically significant. Do you think that state partisanship (which political party the state’s residents tend to support) <em>causes</em> adoption of red flag laws, or is it more likely that causality flows in the opposite direction? Justify your answer with a sentence or two explaining your reasoning.</li>
+<li>Come up with your own example of a research question where observational research would likely suffer from the issue of Z causing X and Y.</li>
+</ol>
+</section>
+<section id="sec-causality-appendix-classic-experimental-designs-from-psychologycausality-9" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-causality-appendix-classic-experimental-designs-from-psychologycausality-9"><a href="#sec-causality" class="quarto-xref"><span>Chapter 9</span></a> Appendix: Classic Experimental Designs from Psychology<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h2>
+<p>There are many ways an experiment can be designed. For example, subjects can all be tested under each of the treatment conditions or a different group of subjects can be used for each treatment. An experiment might have just one independent variable or it might have several. This section describes basic experimental designs and their advantages and disadvantages.</p>
+<section id="between-subjects-designs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="between-subjects-designs">Between-Subjects Designs</h3>
+<p>In a <strong>between-subjects</strong> design, the various experimental treatments are given to different groups of subjects. For example, in the “Teacher Ratings”<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> case study, subjects were randomly divided into two groups. Subjects were all told they were going to see a video of an instructor’s lecture after which they would rate the quality of the lecture. The groups differed in that the subjects in one group were told that prior teaching evaluations indicated that the instructor was charismatic whereas subjects in the other group were told that the evaluations indicated the instructor was punitive. In this experiment, the independent variable is “Condition” and has two levels (charismatic teacher and punitive teacher). It is a between-subjects variable because different subjects were used for the two levels of the independent variable: subjects were in either the “charismatic teacher” or the “punitive teacher” condition. Thus the comparison of the charismatic-teacher condition with the punitive-teacher condition is a comparison between the subjects in one condition with the subjects in the other condition.</p>
+<p>The two conditions were treated exactly the same except for the instructions they received. Therefore, it would appear that any difference between conditions should be attributed to the treatments themselves. However, this ignores the possibility of chance differences between the groups. That is, by chance, the raters in one condition might have, on average, been more lenient than the raters in the other condition. Randomly assigning subjects to treatments ensures that all differences between conditions are chance differences; it does not ensure there will be no differences. The key question, then, is how to distinguish real differences from chance differences. The field of inferential statistics answers just this question. Analyzing the data from this experiment reveals that the ratings in the charismatic-teacher condition were higher than those in the punitive-teacher condition. Using inferential statistics, it can be calculated that the probability of finding a difference as large or larger than the one obtained if the treatment had no effect is only 0.018. Therefore it seems likely that the treatment had an effect and it is not the case that all differences were chance differences.</p>
+<p>Independent variables often have several levels. For example, in the “Smiles and Leniency” case study the independent variable is “type of smile” and there are four levels of this independent variable: (1) false smile, (2) felt smile, (3) miserable smile, and (4) a neutral control. Keep in mind that although there are four levels, there is only one independent variable. Designs with more than one independent variable are considered next.</p>
+</section>
+<section id="multi-factor-between-subject-designs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="multi-factor-between-subject-designs">Multi-Factor Between-Subject Designs</h3>
+<p>In the “Bias Against Associates of the Obese”<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> experiment, the qualifications of potential job applicants were judged. Each applicant was accompanied by an associate. The experiment had two independent variables: the weight of the associate (obese or average) and the applicant’s relationship to the associate (girl friend or acquaintance). This design can be described as an Associate’s Weight (2) x Associate’s Relationship (2) factorial design. The numbers in parentheses represent the number of levels of the independent variable. The design was a factorial design because all four combinations of associate’s weight and associate’s relationship were included. The dependent variable was a rating of the applicant’s qualifications (on a 9-point scale).</p>
+<p>If two separate experiments had been conducted, one to test the effect of Associate’s Weight and one to test the effect of Associate’s Relationship then there would be no way to assess whether the effect of Associate’s Weight depended on the Associate’s Relationship. One might imagine that the Associate’s Weight would have a larger effect if the associate were a girl friend rather than merely an acquaintance. A factorial design allows this question to be addressed. When the effect of one variable does differ depending on the level of the other variable then it is said that there is an <em>interaction</em> (also known as moderation) between the variables.</p>
+<p>Factorial designs can have three or more independent variables. In order to be a between-subjects design there must be a separate group of subjects for each combination of the levels of the independent variables.</p>
+</section>
+<section id="within-subjects-designs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="within-subjects-designs">Within-Subjects Designs</h3>
+<p>A <strong>within-subjects</strong> design differs from a between-subjects design in that the same subjects perform at all levels of the independent variable. For example consider the “ADHD Treatment”<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> case study. In this experiment, subjects diagnosed as having attention deficit disorder were each tested on a delay of gratification task after receiving methylphenidate (MPH). All subjects were tested four times, once after receiving one of the four doses. Since each subject was tested under <em>each</em> of the four levels of the independent variable “dose,” the design is a within-subjects design and dose is a within-subjects variable. Within-subjects designs are sometimes called repeated-measures designs.</p>
+</section>
+<section id="advantage-of-within-subjects-designs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="advantage-of-within-subjects-designs">Advantage of Within-Subjects Designs</h3>
+<p>An advantage of within-subjects designs is that individual differences in subjects’ overall levels of performance are controlled. This is important because subjects invariably will differ greatly from one another. In an experiment on problem solving, some subjects will be better than others regardless of the condition they are in. Similarly, in a study of blood pressure some subjects will have higher blood pressure than others regardless of the condition. Within-subjects designs control these individual differences by comparing the scores of a subject in one condition to the scores of the same subject in other conditions. In this sense each subject serves as his or her own control. This typically gives within-subjects designs considerably more power (ability to find precise estimates) than between-subjects designs. That is, this makes within-subjects designs more able to detect an effect of the independent variable than are between-subjects designs.</p>
+<p>Within-subjects designs are often called “repeated-measures” designs since repeated measurements are taken for each subject. Similarly, a within-subject variable can be called a repeated-measures factor.</p>
+</section>
+<section id="complex-designs" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="complex-designs">Complex Designs</h3>
+<p>Designs can contain combinations of between-subject and within-subject variables. For example, the “Weapons and Aggression”<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> case study has one between-subject variable (gender) and two within-subject variables (the type of priming word and the type of word to be responded to).</p>
+
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>For an excellent conceptual overview of several quasi-experimental designs, see Chapter 13 of Wheelan, C. (2010.) <em>Introduction to Public Policy</em>. New York: W. W. Norton &amp; Company.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This association can take the form of a partial correlation (and a bivariate correlation may be altogether absent) if there is a confounding effect that masks the bivariate association between the two variables that are causally linked.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>In fact, a sample correlation between two variables will almost never be exactly 0, even if two variables are unrelated to one another.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Of course in some settings, it might be plausible that elites (who have greater awareness of the policy change) can affect public sentiment through endorsements or campaign contributions. The greater point is that the plausibility of such mechanisms should be assessed on their own terms; establishing a plausible mechanism for how X could affect Y makes this fifth possibility itself more plausible when weighing it against the other four possibilities in this framework.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This subsection and the next are adapted from David M. Lane. “Causation.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/research_design/causation.html" class="uri">https://onlinestatbook.com/2/research_design/causation.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Li, C. (1975) <em>Path analysis: A primer</em>. Boxwood Press, Pacific Grove, CA.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Reinhart, C. M. and Rogoff, K. S. (2010). Growth in a Time of Debt. Working Paper 15639, National Bureau of Economic Research, <a href="https://www.nber.org/papers/w15639" class="uri">https://www.nber.org/papers/w15639</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>For a video on causality featuring evidence that smoking causes cancer, see <a href="https://www.learner.org/series/against-all-odds-inside-statistics/the-question-of-causation/" class="uri">https://www.learner.org/series/against-all-odds-inside-statistics/the-question-of-causation/</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This section is adapted from David M. Lane. “Experimental Designs.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/research_design/designs.html" class="uri">https://onlinestatbook.com/2/research_design/designs.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><a href="https://onlinestatbook.com/2/case_studies/ratings.html" class="uri">https://onlinestatbook.com/2/case_studies/ratings.html</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><a href="https://onlinestatbook.com/2/case_studies/obesity_relation.html" class="uri">https://onlinestatbook.com/2/case_studies/obesity_relation.html</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><a href="https://onlinestatbook.com/2/case_studies/adhd.html" class="uri">https://onlinestatbook.com/2/case_studies/adhd.html</a><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p><a href="https://onlinestatbook.com/2/case_studies/guns.html" class="uri">https://onlinestatbook.com/2/case_studies/guns.html</a><a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sampling-distributions.html" class="pagination-link" aria-label="Sampling Distributions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./measurement.html" class="pagination-link" aria-label="Measurement">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

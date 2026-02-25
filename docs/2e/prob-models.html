@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Probabilistic Models – Statistics Minus the Math (2e)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./sampling-distributions.html" rel="next">
+<link href="./h-tests.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./prob-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus the Math (2e)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relationships Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qual-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Relationships with Qualitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stat-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Going Deeper with Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./change-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change Log</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link active" data-scroll-target="#probability-distributions"><span class="header-section-number">7.1</span> Probability distributions</a>
+  <ul class="collapse">
+  <li><a href="#sec-normal-distributions" id="toc-sec-normal-distributions" class="nav-link" data-scroll-target="#sec-normal-distributions"><span class="header-section-number">7.1.1</span> Normal distributions</a></li>
+  </ul></li>
+  <li><a href="#sec-models-and-uncertainty" id="toc-sec-models-and-uncertainty" class="nav-link" data-scroll-target="#sec-models-and-uncertainty"><span class="header-section-number">7.2</span> Models and Uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#assumptions-about-error-terms" id="toc-assumptions-about-error-terms" class="nav-link" data-scroll-target="#assumptions-about-error-terms"><span class="header-section-number">7.2.1</span> Assumptions About Error Terms</a></li>
+  <li><a href="#models-and-probabilistic-thinking" id="toc-models-and-probabilistic-thinking" class="nav-link" data-scroll-target="#models-and-probabilistic-thinking"><span class="header-section-number">7.2.2</span> Models and Probabilistic Thinking</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.3</span> Exercises</a></li>
+  <li><a href="#sec-prob-models-appendix-expected-values-and-conditional-probabilities" id="toc-sec-prob-models-appendix-expected-values-and-conditional-probabilities" class="nav-link" data-scroll-target="#sec-prob-models-appendix-expected-values-and-conditional-probabilities"><span>Chapter 7</span> Appendix: Expected Values and Conditional Probabilities</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./prob-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-prob-models" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Managers, policy makers, and researchers all face uncertainty in the world around them. One way we can describe uncertainty about a particular matter is to list out alternative possibilities for what could happen and then describe how likely we think each alternative is to occur. In doing so, we would essentially be creating a probability distribution.</p>
+<section id="probability-distributions" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">7.1</span> Probability distributions</h2>
+<p><strong>Probability distributions</strong> are precise descriptions of all possible values that could be obtained from a random process as well as the probability of each value occurring. One of the simplest probability distributions describes a coin flip. The two possible values are “heads” and “tails,” and each value has a 50% chance—or .5 probability—of occurring. Probability distributions are very useful in statistics because they allow us to build statistical models that account for randomness or uncertainty.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Anticipating How Many Visitors to Expect
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose you run an organization and want to plan for how many customers to expect the next day. If you are operating in a stable environment, you might be able to use data on past customer volume to make reasonable predictions about the future.</p>
+<p>To demonstrate how past data might help predict the future, we will examine some data on hospital emergency room (ER) visits. This data comes from 2018 and indicates the number of daily visits across 30 different hospitals in Seoul, South Korea.</p>
+<div id="fig-cardio-admissions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cardio-admissions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/circ1.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cardio-admissions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Histogram of daily volume of cardiovascular ER admissions; data from <a href="https://doi.org/10.1371/journal.pone.0183224">Hwang et al.</a> (<a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a>)
+</figcaption>
+</figure>
+</div>
+<p>When making a prediction for how many cardiovascular admissions there will be tomorrow, we could provide a guess in the form of a single number. In that case, we would probably want to pick a number that appears to be near the center of the distribution, such as 130. However, if we want to give a more sophisticated (and comprehensive) prediction, we could list out many possible values and indicate each one’s probability of occurring. In doing so, we would be creating a probability distribution. We could present this information either graphically or in a table. One very simple approach to creating a probability distribution based on past experience would be to use the exact proportion of times each value was observed in the past year as the probability we assign to that value for the future. If we recreate <a href="#fig-cardio-admissions" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> with a bin width of 1 so that each bar displays only a single value, we get a precise visual depiction of this distribution.</p>
+<div id="fig-cardio-admissions-binwidth-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cardio-admissions-binwidth-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/circ2.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cardio-admissions-binwidth-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Histogram of daily cardiovascular ER admissions with a bin width of 1
+</figcaption>
+</figure>
+</div>
+<p>From <a href="#fig-cardio-admissions-binwidth-1" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>, we might begin to spot some problems with the simple approach of using last year’s proportions as direct probabilities for forecasting. The data looks a bit “choppy,” with some bars noticeably taller or shorter than those surrounding them. In the tails, the issue is particularly pronounced. For example, some values (e.g., 91, 92) were never observed in the last year, but that doesn’t necessarily mean they have 0 probability of occurring in the future.</p>
+<p>A savvier approach to making a prediction might be to take the general shape of this distribution of past occurrences but then smooth it out since we have no reason to believe that the probability of one number should differ much from the numbers immediately around it. One way to accomplish this is to use one of the many well-known distributions that statisticians have developed to describe data generated under various assumptions. We can pick a distribution that resembles the general shape we see here. Let’s try a normal distribution,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> since it is the most widely-used distribution.</p>
+<div id="fig-cardio-admissions-normal-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cardio-admissions-normal-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/circ3.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cardio-admissions-normal-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: Normal distribution (solid line) overlaid on histogram of daily cardiovascular ER admissions
+</figcaption>
+</figure>
+</div>
+<p>We can see in <a href="#fig-cardio-admissions-normal-dist" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> how the normal distribution provides a smooth curve that generally matches the shape of the distribution of observations from 2018. The height of the normal distribution indicates the probability associated with draws from that area of the curve, so values between 120 and 140 are more likely to occur than values between 140 and 160, according to this probability distribution. There are ways we could further refine our prediction for future visits, such as by differentiating among days of the week (more cardiovascular ER admissions occur on Mondays and Fridays) and accounting for the fact that we probably observe more outliers than the normal distribution assumes. (Technically, a Poisson distribution would also be more appropriate for this data since the number of admissions will always be a whole number, and the normal distribution is more appropriate for situations where we measure a variable to many digits.) Still, you can see how the normal distribution could provide a reasonable basis for making predictions about the relative probability of observing different values for the number of visitors in the future. More generally, this example demonstrates how a probability distribution can be used to think about possible values that may occur for a variable.</p>
+</div>
+</div>
+<p>We learned in <a href="describing-one-variable.html" class="quarto-xref"><span>Chapter 2</span></a> that a distribution describes how frequently every possible value for a variable occurs in a dataset. In contrast to this sort of distribution, a <em>probability</em> distribution doesn’t describe data we’ve collected; instead, probability distributions are used to describe a (theoretical) <em>process</em> and indicate how likely we are to obtain different possible values from this random process.</p>
+<p>This distinction between a distribution of data versus a probability distribution is subtle but important. For example, if we write out the (theoretical) probabilities for each possible outcome of a die roll (1, 2, 3, etc.), we’re talking about a probability distribution. If we roll a die 20 times and record the results, we’re looking at a distribution of data. Because there is plenty of variability from one player’s die rolls to the next’s (some will be luckier than others), the distribution of one player’s results will not necessarily provide a close match to the theoretical probabilities associated with a die roll (where each of the six values on a six-sided die have a probability of 1/6 each).</p>
+<p>Another way to think about this distinction is that for a distribution of data we’ve collected, each observation was (theoretically) drawn from the probability distribution. In our example from the box above, if we have a distribution that describes how likely we think it is that we get various numbers of patients visiting the ER on a given day, we’re looking at a probability distribution. If we’re looking at data (e.g., a histogram) of past daily totals for the number of patients who visited the ER, we’re looking at a distribution of data (not a probability distribution).</p>
+<p>Many of the same statistics and words we use to describe data that’s been collected can also be used (with a bit of adaptation) to describe probability distributions. For example, a probability distribution will (often) have a mean (also called the expected value) and a variance. A probability distribution can be skewed or symmetric. It can be bimodal or unimodal.</p>
+<p>Probability distributions can be described using (usually complex) equations, but in this text, we’ll mainly depict probability distributions graphically. We generally depict complex (continuous) distributions by plotting what is called a probability density function (PDF). The normal distribution depicted in the box above for ER visits is an example of a PDF. Statisticians have developed PDFs for distributions with many different shapes.</p>
+<p>You can basically interpret a graph of a PDF like a kernel density plot (or even a histogram): for values where the graph is taller (indicating greater “density”), those values are more likely to occur. But kernel density plots and histograms are used for data that we’ve already collected; PDF graphs depict a probability distribution from which data can be theoretically “drawn” (you can’t necessarily tell the difference between a kernel density plot and a PDF plot from just looking at the graph). A precise interpretation for PDFs is a bit tricky since any value can be measured to infinite digits (and therefore has infinitely small probability of being selected) when we are discussing continuous distributions like the normal distribution. The total area under a PDF will always equals 1. To calculate actual probabilities, we need to identify a range of values: for example, we can use software (or various online calculators) to determine the probability of drawing a value between 0 and 0.7 for a well-known continuous distribution. This probability will be equal to the area under the line within that range (which can be found using calculus). Our statistics software will often be relying on calculus behind the scenes based on these PDFs to provide relevant statistical results.</p>
+<p>A <strong>random variable</strong> is a term used to describe a variable generated through draws from a probability distribution.</p>
+<section id="sec-normal-distributions" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="sec-normal-distributions"><span class="header-section-number">7.1.1</span> Normal distributions</h3>
+<p><strong>Normal distributions</strong> are one of the most important sets of probability distributions we use in statistics. As can be seen in <a href="#fig-normaldist" class="quarto-xref">Figure&nbsp;<span>7.4</span></a>, a normal distribution has a symmetrical shape called a bell curve. Many variables in nature appear to approximately follow a normal distribution. For example, if you measure the heights of a population of adult humans belonging to a single sex (male or female), the distribution should look similar to a normal distribution. We often encounter normal distributions because of a principle called the central limit theorem, which states that any variable that results from adding up many small, independent factors will approximately follow a normal distribution.</p>
+<div id="fig-normaldist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normaldist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/normaldist.jpg" class="img-fluid figure-img" width="250">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: An example of the normal distribution. Source: <a href="https://onlinestatbook.com/2/introduction/distributions.html">Lane &amp; Ziemer</a> (public domain).
+</figcaption>
+</figure>
+</div>
+<p>All normal distributions have the basic “bell curve” shape seen in <a href="#fig-normaldist" class="quarto-xref">Figure&nbsp;<span>7.4</span></a>, but we can get different versions of the normal distribution by shifting this curve to the left or right, and by squishing or expanding the width of the curve. <a href="#fig-normaldist3" class="quarto-xref">Figure&nbsp;<span>7.5</span></a> illustrates this by showing three different versions of the normal curve in one graph. Any normal distribution can be uniquely identified by its two parameters: the mean (<span class="math inline">\(\mu\)</span>) and standard deviation (<span class="math inline">\(\sigma\)</span>). Because the normal curve is unimodal and symmetric, the mean, median, and mode are all equal to one another. Thus, the mean can be identified visually as the tallest point (the mode) on the curve. Changing the mean will move the curve to the left or to the right; in <a href="#fig-normaldist3" class="quarto-xref">Figure&nbsp;<span>7.5</span></a>, the mean must be smallest for the green curve since it is furthest to the left (although no axis labels are provided). Changing the standard deviation will expand or narrow the width of the curve; the black curve in <a href="#fig-normaldist3" class="quarto-xref">Figure&nbsp;<span>7.5</span></a> has the largest standard deviation since it is the widest curve. As noted above, all probability density functions have a total area under the curve equal to one, so the narrower versions of the normal distribution (e.g., the green one in <a href="#fig-normaldist3" class="quarto-xref">Figure&nbsp;<span>7.5</span></a>) have to be taller than the wider curves in order to maintain that same area of 1 under each curve.</p>
+<div id="fig-normaldist3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normaldist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/normaldist3.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldist3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.5: Three different examples of normal distributions. Source: <a href="https://onlinestatbook.com/2/normal_distribution/intro.html">Lane</a> (public domain).
+</figcaption>
+</figure>
+</div>
+<p>There are some numbers you can memorize to help describe the probabilities associated with any normal distribution:</p>
+<ul>
+<li><p>68% of the area under a normal curve is within approximately <em>one</em> standard deviation of the mean</p></li>
+<li><p>95% of the area under a normal curve is within approximately <em>two</em> standard deviations of the mean<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
+<li><p>99.7% of the area under a normal curve is within approximately <em>three</em> standard deviations of the mean</p></li>
+</ul>
+<p>Let’s consider the normal distribution with a mean of 100 and a standard deviation of 20. To find the range describing one standard deviation from the mean, we first subtract the value of the standard deviation from the mean to find the lower bound (100 - 20 = 80), and then we add the standard deviation to the mean to find the upper bound (100 + 20 = 120). We can then say that there is a 68% chance that a draw from this distribution will yield a number between 80 and 120. <a href="#fig-normaldistmean100sd20" class="quarto-xref">Figure&nbsp;<span>7.6</span></a> shows this visually, with the blue highlighted region representing an area of 0.68 (compared to a total area of 1 under the entire cure).</p>
+<div id="fig-normaldistmean100sd20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normaldistmean100sd20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/prob-models/normaldistmean100sd20.png" class="img-fluid figure-img" width="300">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normaldistmean100sd20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.6: A normal distribution with mean of 100 and standard deviation of 20; the region within one standard deviation of the mean is highlighted. Source: <a href="https://onlinestatbook.com/2/normal_distribution/areas_normal.html">Lane</a> (public domain).
+</figcaption>
+</figure>
+</div>
+<p>To consider two standard deviations from the mean, we would first multiply the standard deviation by two (20 × 2 = 40). For the lower bound, we subtract this value from the mean (100 - 40 = 60), and for the upper bound we add (100 + 40 = 140). Thus, there is a 95% chance that a draw from this normal distribution yields a value between 60 and 140.</p>
+<p>Using a normal distribution calculator (available online<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or in statistical software), we can easily determine the areas for other ranges of values. For example, still looking at this same normal distribution (mean=100, standard deviation=20), we could discover that the area for values less than 65 is 0.04, meaning there is a 4% chance a draw will yield a value less than 65.</p>
+<p>The <strong><em>standard</em></strong> <strong>normal distribution</strong> refers to a normal distribution with a mean of 0 and a standard deviation of 1. This name is related to the term <em>standardization</em> we encountered in <a href="describing-one-variable.html#sec-standardization" class="quarto-xref"><span>Section 2.6.1</span></a>; recall that standardizing a variable means transforming it so that its mean is 0 and its standard deviation is 1. The standard normal distribution, and other closely related distributions, are often utilized in statistical tests. Sometimes, variables or individual values are standardized (turned into Z scores) and then compared to the standard normal distribution.</p>
+</section>
+</section>
+<section id="sec-models-and-uncertainty" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="sec-models-and-uncertainty"><span class="header-section-number">7.2</span> Models and Uncertainty</h2>
+<p>Before I leave my house each morning, I need to decide whether to take an umbrella. So I check my phone to see whether it’s supposed to rain. Instead of giving me a direct yes or no answer, the weather app tells me the percent chance of rain for the day.</p>
+<p>Why does the weather app give me a percentage? Because there’s uncertainty. Science has done a lot to help us understand the weather. And as our understanding of the weather improves, our predictions get better. But we still can’t predict rain perfectly.</p>
+<p>Facing uncertainty is a common problem when we’re looking at data. Whether we’re trying to explain the weather, human behavior, or even plant growth, we can’t make perfect predictions because there are things we can’t fully explain with our current scientific knowledge.</p>
+<p>In statistics, we have several tools that allow us to acknowledge uncertainty. This enables us to build models like the ones powering my weather app—models that give us a prediction that includes a description of how uncertain we are. Some days we are 100% sure it will rain, other days only 60%.</p>
+<p>In order to build these models that acknowledge uncertainty, we need a way to talk about what we do know and what we don’t know. Consider this simple example of a model that accounts for uncertainty:</p>
+<p><span id="eq-a"><span class="math display">\[
+happiness = 3.0 + 2.3 \times income + \varepsilon
+\tag{7.1}\]</span></span></p>
+<p>This model attempts to explain one’s level of happiness based on their income. You might notice that it looks very similar to the regression equations we saw in <a href="correlation.html" class="quarto-xref"><span>Chapter 3</span></a>, except that we have added an extra term at the end (<span class="math inline">\(\varepsilon\)</span>). That’s because regression is one of the main tools used to estimate a model that includes uncertainty.</p>
+<p>What does this model mean in practical terms? Well, there are no obvious units we can use to quantify the amount of happiness someone experiences, so the exact values of the numbers we see are not particularly meaningful. But the fact that there’s a positive number (2.3) that is being multiplied by income implies that as income gets bigger, happiness gets larger.</p>
+<p>The key part of this equation that I want to focus on is the little Greek letter at the end of the equation: <span class="math inline">\(\varepsilon\)</span>. This letter is called “epsilon,” and it is often used to represent what we call an <strong>error term</strong> (also sometimes called a <strong>disturbance term</strong>). The error term (<span class="math inline">\(\varepsilon\)</span>) represents everything else besides income that affects happiness. It is a formal acknowledgement that if all we know about someone is their income, we will have uncertainty about their exact level of happiness. An error term (<span class="math inline">\(\varepsilon\)</span>) in the model makes clear that we only claim to have a partial understanding of happiness, not a complete one.</p>
+<p>The first part of our model that appears on the right side of the equation (<span class="math inline">\(3.0 + 2.3 \times income\)</span>) is the <em>systematic</em> part of our model. It’s what we would use to build a prediction of happiness if all we knew about someone was their income level. Suppose, for example, that someone has an income of 4 units (perhaps income is measured in tens of thousands of dollars of annual income, so a salary of $40,000 is coded as a 4). According to our model, that person’s happiness would be:</p>
+<p><span class="math display">\[
+happiness=3.0+2.3 \times (4)+\varepsilon
+\]</span> <span class="math display">\[
+happiness=12.2+\varepsilon
+\]</span></p>
+<p>We, therefore, predict that someone with an income of 4 will have a happiness of 12.2, but we also acknowledge that their actual happiness will likely be at least a bit different from our prediction since our model indicates that their actual happiness will equal 12.2 plus the value of the error term (<span class="math inline">\(\varepsilon\)</span>).</p>
+<p>The error term describes something unknown, so we can’t measure it or directly observe it. But what we can do is talk about its characteristics using concepts from probability theory. Specifically, we’re going to describe the value of the error term as being randomly drawn from a probability distribution.</p>
+<section id="assumptions-about-error-terms" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="assumptions-about-error-terms"><span class="header-section-number">7.2.1</span> Assumptions About Error Terms</h3>
+<p>It’s easy to write out an equation that includes an error term, but we are not going to be able to do much with our model unless we make some assumptions about the error term. One of the most important (and challenging) parts of doing statistical analysis is making assumptions about the possible values of the error term. Different assumptions about the error term can result in very different conclusions.</p>
+<p>As one example, we might assume the following things about the error term (<span class="math inline">\(\varepsilon\)</span>):</p>
+<ol type="1">
+<li>The values of the error term (<span class="math inline">\(\varepsilon\)</span>) can be described by a normal distribution with a mean of 0</li>
+<li>Knowing someone’s income doesn’t help us predict the values of the error term (<span class="math inline">\(\varepsilon\)</span>)</li>
+</ol>
+<p>What do these two assumptions mean?</p>
+<p>First, if the error term (<span class="math inline">\(\varepsilon\)</span>) follows a normal distribution with a mean of zero, that means that (according to our model), people are just as likely to have a positive value of the error term as they are to have a negative value of the error term. In other words, all those factors we haven’t accounted for in our model are equally likely to push people in the direction of being happier or in the direction of being less happy. Our model and assumptions tell us that if we predict happiness purely based on income, we’ll <em>overestimate</em> some people’s happiness, and we’ll <em>underestimate</em> an equal number of people’s happiness.</p>
+<p>Second, these assumptions allow us to describe how much individual observations will tend to deviate from our income-based predictions. We haven’t specified in our assumptions what the standard deviation is for the normal distribution for the error term (<span class="math inline">\(\varepsilon\)</span>), but statistical analysis will let us estimate the standard deviation of an error term. And we know that there is a 95% chance of drawing a value within two standard deviations of the mean for any normal distribution. So whatever the standard deviation of the error term (<span class="math inline">\(\varepsilon\)</span>) is, we would expect that 95% of the time, the error term will take on a value that is within two standard deviations of zero. Conversely, 5% of the time, the error term will take on a value that is more than two standard deviations away from zero. Suppose that the standard deviation of the error term (<span class="math inline">\(\varepsilon\)</span>) happens to be three. If we have a dataset containing the income and happiness of 1,000 randomly selected people, we would expect that about 950 of these people will have a level of happiness that falls within six units of our income-based prediction. But for about 50 of these people, our prediction of their happiness will be off by more than six units.</p>
+<p>Third, our assumptions imply that income is not tied in any consistent way to (the total sum of) factors other than income that also affect peoples’ happiness. Remember, the error term (<span class="math inline">\(\varepsilon\)</span>) represents all factors other than income that affect satisfaction. If income is related to these other factors, then the value of income should help us predict the value of the error term. For example, if having a stable environment in childhood directly causes (on average) both higher incomes and greater happiness in adulthood,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> the error term will partially reflect the effect of childhood stability on happiness, so high incomes (which are partially caused by childhood stability) will probably be predictive of a more positive error term. This would constitute a violation of our assumptions since we indicated that income wasn’t predictive of the error term. As this example illustrates, our assumptions about error terms are often quite strict, making it rather difficult in practice to build good models that account for uncertainty. This example also illustrates how problems of causality can often be conceptualized as violations of assumptions about the error term; in <a href="causality.html" class="quarto-xref"><span>Chapter 9</span></a>, we will see that we can label the problem posed for our analysis by the effects of childhood stability a “third-variable problem,” but here we have shown how it can also be understood as problematic correlation between the dependent variable and the error term.</p>
+<p>If you want to explore in more detail how equations can be used to describe statistical models, this chapter’s appendix provides a more formal presentation of some ideas from this section.</p>
+</section>
+<section id="models-and-probabilistic-thinking" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="models-and-probabilistic-thinking"><span class="header-section-number">7.2.2</span> Models and Probabilistic Thinking</h3>
+<p>Despite the difficulty inherent in building models that accommodate uncertainty, we have little alternative unless we wish to build only <em>deterministic</em> models, meaning models that are supposed to predict with 100% accuracy. Little (if anything) about the social world follows absolute laws, so deterministic models are arguably not well suited to social scientific study. Instead, the best we can hope for is a <em>probabilistic</em> model, indicating the conditions under which particular outcomes are more or less likely. And fortunately, our models do not always have to be perfectly correct in order to generate useful predictions or explanations. As the statistician George Box famously said, “all models are wrong, but some are useful.”</p>
+<p>An important part of learning to do good statistical analysis is learning to think clearly about models so that you can pick out a model that is useful for whatever it is you want to accomplish. And the first step toward understanding many statistical models is learning to think about the world in probabilistic terms, as we’ve done throughout this chapter. Probabilistic thinking asks questions like:</p>
+<ul>
+<li><p>Based on what I do know and what I don’t know, what can I predict?</p></li>
+<li><p>How does adding or removing different pieces of information change my prediction?</p></li>
+<li><p>How much uncertainty is there in my prediction?</p></li>
+<li><p>How often will my prediction differ greatly from what actually happens (even if my model is correct)?</p></li>
+</ul>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.3</span> Exercises</h2>
+<ol type="1">
+<li>What is the difference between a distribution of data and a probability distribution?</li>
+<li>What are the two parameters of a normal distribution?</li>
+<li>A draw from a normal distribution with a mean of 5 and a standard deviation of 10 has a 95% chance (approximately) of being between ______ and ______.</li>
+<li>A draw from a normal distribution with a mean of ______ and a standard deviation of ______ has a 68% chance (approximately) of being between 80 and 100.</li>
+<li>What is size of the total area underneath a PDF?</li>
+<li>If the area underneath a PDF between 3 and 5 is .31, what is the probability of drawing a value between 3 and 5?</li>
+<li>What is unique about the standard normal distribution (compared to other normal distributions)?</li>
+<li>What does an error term represent?</li>
+<li>In social science, do we normally use deterministic or probabilistic models? What is the difference?</li>
+</ol>
+</section>
+<section id="sec-prob-models-appendix-expected-values-and-conditional-probabilities" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-prob-models-appendix-expected-values-and-conditional-probabilities"><a href="#sec-prob-models" class="quarto-xref"><span>Chapter 7</span></a> Appendix: Expected Values and Conditional Probabilities</h2>
+<p>Let us now practice using equations to more formally describe some of what we discussed in the main chapter. Given our assumptions and the equation representing our model of happiness, we can use the notation of expected value to express the predictions we previously made:</p>
+<p><span class="math display">\[ \mathbb{E}[happiness|income=4]=\mathbb{E}[(3.0+2.3 \times (4)+\varepsilon)|income=4] \]</span><span class="math display">\[
+=12.2+\mathbb{E}[\varepsilon|income=4] = 12.2 \]</span></p>
+<p>We use <span class="math inline">\(\mathbb{E}\)</span> to indicate an expected value and the symbol <span class="math inline">\(|\)</span> indicates “conditional on,” meaning that we want to know the expected value of happiness conditional on income being equal to 4. Given that the error term (<span class="math inline">\(\varepsilon\)</span>) is independent of income (our second assumption), <span class="math inline">\(\mathbb{E}[\varepsilon|income=4]\)</span> simplifies to <span class="math inline">\(\mathbb{E}[\varepsilon]\)</span> and since <span class="math inline">\(\varepsilon\)</span> is drawn from a normal distribution with a mean of 0, <span class="math inline">\(\mathbb{E}[\varepsilon]=0\)</span>.</p>
+<p>We can also apply the notion of conditionals to probabilities. For example, we might want to say something about the probability of happiness being greater than some value. To make the math simpler, I will choose values that correspond to 0, 1, 2, or 3 standard deviations from the center of the distribution of <span class="math inline">\(\varepsilon\)</span> since that will make it easy to do the math by hand using the proportions of the normal distribution we learned in the main part of this chapter. A normal distribution calculator could be used to find probabilities for other values (e.g., greater than 1.47 standard deviations above the mean).</p>
+<p>First, let’s consider the probability of happiness being greater than our prediction of 12.2 when income is 4:</p>
+<p><span class="math display">\[ Pr(happiness &gt; 12.2 | income=4)=Pr((3.0+2.3 \times (4)+\varepsilon)&gt;12.2)\]</span><span class="math display">\[
+=Pr(12.2+\varepsilon&gt;12.2) = Pr(\varepsilon&gt;0) = .5 \]</span></p>
+<p>From any normal distribution, half of the area under the curve will be above the mean, while half of the area will be below the mean. Since we assume <span class="math inline">\(\varepsilon\)</span> is drawn from a normal distribution with a mean of 0, the probability of a value greater than 0 is .5. In other words, there is a 50% chance that the actual value of happiness will exceed the predicted value. Similarly, there is a 50% chance the true happiness will fall below the predicted value:</p>
+<p><span class="math display">\[ Pr(happiness &lt; 12.2 | income=4)=Pr(12.2+\varepsilon&lt;12.2)\]</span><span class="math display">\[
+= Pr(\varepsilon&lt;0) = .5 \]</span></p>
+<p>Let us again assume for the moment that the standard deviation of the normal distribution from which <span class="math inline">\(\varepsilon\)</span> is drawn is three (in real-world analysis, we can estimate the standard deviation of this normal distribution based on the data we observe). Given this value, we can now calculate other conditional probabilities. We can calculate the probability of happiness exceeding 15.2 when income is 4:</p>
+<p><span class="math display">\[ Pr(happiness &gt; 15.2 | income=4)=Pr(12.2+\varepsilon&gt;15.2)
+\]</span><span class="math display">\[
+= Pr(\varepsilon&gt;3) = .16 \]</span></p>
+<p>For the final step, we rely on the fact that for any normal distribution, 68% of the area under the curve falls within one standard deviation of the mean. Remember, we assumed <span class="math inline">\(\varepsilon\)</span> is drawn from a normal distribution with a standard deviation of three (and mean of 0), so there is a .68 probability of drawing a value between -3 and 3. Thus, the probability of drawing a value outside this range must be .32 (<span class="math inline">\(1-.68=.32\)</span>). Half of this .32 will belong to the lower tail (values less than -3) and half to the upper tail (values greater than 3). Thus, the probability that <span class="math inline">\(\varepsilon\)</span> is greater than 3 is .16.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Specifically, we use a normal distribution with mean and standard deviation set equal to the mean and standard deviation of the 2018 sample we’re examining.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>As we will see in <a href="sampling-distributions.html" class="quarto-xref"><span>Chapter 8</span></a>, a more precise value is 1.96 standard deviations from the mean.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For example: <a href="https://onlinestatbook.com/2/calculators/normal_dist.html" class="uri">https://onlinestatbook.com/2/calculators/normal_dist.html</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>By “directly cause” greater happiness in adulthood, I mean that a stable childhood environment causes greater adult happiness by means other than increasing income (which in turn may increase happiness).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./h-tests.html" class="pagination-link" aria-label="Hypothesis Testing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./sampling-distributions.html" class="pagination-link" aria-label="Sampling Distributions">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

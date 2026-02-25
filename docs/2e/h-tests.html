@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Hypothesis Testing – Statistics Minus the Math (2e)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prob-models.html" rel="next">
+<link href="./stat-inference.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started.html">Data Essentials</a></li><li class="breadcrumb-item"><a href="./h-tests.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus the Math (2e)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relationships Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qual-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Relationships with Qualitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stat-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Going Deeper with Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./change-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change Log</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#getting-started-a-binary-quantitative-relationship" id="toc-getting-started-a-binary-quantitative-relationship" class="nav-link active" data-scroll-target="#getting-started-a-binary-quantitative-relationship"><span class="header-section-number">6.1</span> Getting Started: A Binary-Quantitative Relationship</a>
+  <ul class="collapse">
+  <li><a href="#null-and-alternative-hypotheses" id="toc-null-and-alternative-hypotheses" class="nav-link" data-scroll-target="#null-and-alternative-hypotheses"><span class="header-section-number">6.1.1</span> Null and Alternative Hypotheses</a></li>
+  <li><a href="#evaluating-hypotheses-with-a-confidence-interval" id="toc-evaluating-hypotheses-with-a-confidence-interval" class="nav-link" data-scroll-target="#evaluating-hypotheses-with-a-confidence-interval"><span class="header-section-number">6.1.2</span> Evaluating Hypotheses with a Confidence Interval</a></li>
+  <li><a href="#substantive-significance" id="toc-substantive-significance" class="nav-link" data-scroll-target="#substantive-significance"><span class="header-section-number">6.1.3</span> Substantive Significance</a></li>
+  </ul></li>
+  <li><a href="#testing-relationships-for-various-types-of-variables" id="toc-testing-relationships-for-various-types-of-variables" class="nav-link" data-scroll-target="#testing-relationships-for-various-types-of-variables"><span class="header-section-number">6.2</span> Testing Relationships for Various Types of Variables</a>
+  <ul class="collapse">
+  <li><a href="#qualitative-quantitative-relationships" id="toc-qualitative-quantitative-relationships" class="nav-link" data-scroll-target="#qualitative-quantitative-relationships"><span class="header-section-number">6.2.1</span> Qualitative-Quantitative Relationships</a></li>
+  <li><a href="#relationships-between-quantitative-variables" id="toc-relationships-between-quantitative-variables" class="nav-link" data-scroll-target="#relationships-between-quantitative-variables"><span class="header-section-number">6.2.2</span> Relationships between Quantitative Variables</a></li>
+  <li><a href="#sec-contingency-tables" id="toc-sec-contingency-tables" class="nav-link" data-scroll-target="#sec-contingency-tables"><span class="header-section-number">6.2.3</span> Relationships between Qualitative Variables</a></li>
+  </ul></li>
+  <li><a href="#probability-values" id="toc-probability-values" class="nav-link" data-scroll-target="#probability-values"><span class="header-section-number">6.3</span> Probability Values</a></li>
+  <li><a href="#type-i-and-type-ii-errors" id="toc-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#type-i-and-type-ii-errors"><span class="header-section-number">6.4</span> Type I and Type II Errors</a></li>
+  <li><a href="#one-tailed-and-two-tailed-tests" id="toc-one-tailed-and-two-tailed-tests" class="nav-link" data-scroll-target="#one-tailed-and-two-tailed-tests"><span class="header-section-number">6.5</span> One-Tailed and Two-Tailed Tests</a></li>
+  <li><a href="#avoiding-hypothesis-testing-pitfalls" id="toc-avoiding-hypothesis-testing-pitfalls" class="nav-link" data-scroll-target="#avoiding-hypothesis-testing-pitfalls"><span class="header-section-number">6.6</span> Avoiding Hypothesis Testing Pitfalls</a></li>
+  <li><a href="#varying-terminology-and-equivalent-methods" id="toc-varying-terminology-and-equivalent-methods" class="nav-link" data-scroll-target="#varying-terminology-and-equivalent-methods"><span class="header-section-number">6.7</span> Varying Terminology and Equivalent Methods</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.8</span> Exercises</a></li>
+  <li><a href="#sec-h-tests-appendix-i-multiple-comparison-tests" id="toc-sec-h-tests-appendix-i-multiple-comparison-tests" class="nav-link" data-scroll-target="#sec-h-tests-appendix-i-multiple-comparison-tests"><span class="header-section-number">6.9</span> <span>Chapter 6</span> Appendix I: Multiple Comparison Tests</a></li>
+  <li><a href="#sec-h-tests-appendix-ii-chi-square-testsh-tests-13" id="toc-sec-h-tests-appendix-ii-chi-square-testsh-tests-13" class="nav-link" data-scroll-target="#sec-h-tests-appendix-ii-chi-square-testsh-tests-13"><span class="header-section-number">6.10</span> <span>Chapter 6</span> Appendix II: Chi Square Tests</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started.html">Data Essentials</a></li><li class="breadcrumb-item"><a href="./h-tests.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-h-tests" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Hypothesis tests allow us to determine whether a finding is “statistically significant,” an idea we briefly encountered in <a href="correlation.html" class="quarto-xref"><span>Chapter 3</span></a> when discussing how to interpret regression results tables. Testing for statistical significance is the dominant way that the probabilistic conclusions from inferential statistics are communicated in science. However, many statisticians (and other methodologists) have criticized this broad reliance on significance testing as overly simplistic, confusing, or otherwise ill-founded. Hypothesis testing is important to learn because of its widespread use, but confidence intervals are often more informative for describing statistical results.</p>
+<p>As we will see in this chapter, hypothesis testing can often be understood as a particular application of confidence intervals. The risk with hypothesis tests is that we reduce our results down to a binary (significant or not significant), ignoring other nuances that may be present in the results. We will discuss some of these limitations in more detail throughout this chapter.</p>
+<section id="getting-started-a-binary-quantitative-relationship" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="getting-started-a-binary-quantitative-relationship"><span class="header-section-number">6.1</span> Getting Started: A Binary-Quantitative Relationship</h2>
+<p>We learned in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a> that we can use a comparison of means to evaluate how a binary (qualitative) variable relates to a quantitative variable. To see how hypothesis testing applies when comparing two means, we will use data describing U.S. congressional districts. Each district elects a single member (a congressperson) to the U.S. House of Representatives. There is a binary variable <code>rural</code> indicating whether a majority of the district’s residents live in a rural area. A quantitative variable <code>ideology</code> is an estimate of the political ideology of the elected official representing that district.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Ideology can be measured on a continuous left-to-right scale (also called “liberal” to “conservative” in the US political system), with higher values indicating an official is further to the right.</p>
+<section id="null-and-alternative-hypotheses" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="null-and-alternative-hypotheses"><span class="header-section-number">6.1.1</span> Null and Alternative Hypotheses</h3>
+<p>The starting point for hypothesis testing is a <strong>null hypothesis</strong>, which is sometimes just called “the null.” Practically speaking, the null hypothesis usually indicates that there is no relationship between variables.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> So if we are comparing two means, the null hypothesis would typically be that the two means are the same. The null hypothesis always describes a parameter being estimated, not a sample statistic. Therefore, when writing a null hypothesis as an equation, we generally use Greek letters. For example, a null hypothesis may contain one or more instances of <span class="math inline">\(\mu\)</span>, representing a population mean. If there is no clearly-defined population, <span class="math inline">\(\mu\)</span> might represent the “expected value” (defined in the following chapter) for a variable that we assume was generated through a (partially) random process. This latter interpretation is probably more appropriate to the example data we’re using. <span class="math inline">\(H_0\)</span> is how we formally denote the null hypothesis, so for our data example we can write:</p>
+<p><span id="eq-rural-null-equal-means"><span class="math display">\[
+H_0: \mu_R = \mu_U
+\tag{6.1}\]</span></span> using the subscripts <span class="math inline">\(R\)</span> and <span class="math inline">\(U\)</span> to indicate “rural” and “urban,” and <span class="math inline">\(\mu\)</span> for the expected value (or population mean) of the quantitative variable: <code>ideology</code>. Simply put, this null hypothesis states that the expected value of <code>ideology</code> among rural districts is the same as the expected value of <code>ideology</code> among urban districts.</p>
+<p>Another way to write this null hypothesis is:</p>
+<p><span id="eq-rural-null-diff-means"><span class="math display">\[
+H_0: \mu_R - \mu_U = 0
+\tag{6.2}\]</span></span></p>
+<p>This indicates that the difference in the expected value of <code>ideology</code> between rural versus urban districts is zero (there is no difference).</p>
+<p>As we learned in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a>, we can use a regression equation to indicate a difference in means. Thus, we often rewrite <span class="math inline">\(\mu_R - \mu_U\)</span> as <span class="math inline">\(\beta\)</span>:</p>
+<p><span id="eq-rural-null-beta"><span class="math display">\[
+H_0: \beta = 0
+\tag{6.3}\]</span></span></p>
+<p>Note that when analyzing an experimental study, a null hypothesis of this form might be used but with <span class="math inline">\(\beta\)</span> defined as the average treatment effect.</p>
+<p>Every null hypothesis should be paired with an <strong>alternative hypothesis</strong>, which is the logical opposite of the null hypothesis. We write <span class="math inline">\(H_A\)</span> (or <span class="math inline">\(H_1\)</span>) to represent the alternative hypothesis, and our alternative to <a href="#eq-rural-null-equal-means" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> is:</p>
+<p><span id="eq-rural-alt-equal-means"><span class="math display">\[
+H_A: \mu_R \neq \mu_U
+\tag{6.4}\]</span></span></p>
+<p>Or equivalently:</p>
+<p><span id="eq-rural-alt-diff-means"><span class="math display">\[
+H_A: \mu_R - \mu_U \neq 0
+\tag{6.5}\]</span></span></p>
+<p>Or:</p>
+<p><span id="eq-rural-alt-beta"><span class="math display">\[
+H_A: \beta \neq 0
+\tag{6.6}\]</span></span></p>
+<p>Moving forward, we will focus on the final form in which we’ve written the null and alternative hypotheses (<a href="#eq-rural-null-beta" class="quarto-xref">Equation&nbsp;<span>6.3</span></a> and <a href="#eq-rural-alt-beta" class="quarto-xref">Equation&nbsp;<span>6.6</span></a>). We have already learned that confidence intervals can be constructed for regression coefficients, so let’s see if we can evaluate these hypotheses using a confidence interval from a regression.</p>
+</section>
+<section id="evaluating-hypotheses-with-a-confidence-interval" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="evaluating-hypotheses-with-a-confidence-interval"><span class="header-section-number">6.1.2</span> Evaluating Hypotheses with a Confidence Interval</h3>
+<p><a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a> presents results for a regression where ideology is the dependent variable and the binary variable <code>rural</code> is the independent variable. The table includes confidence intervals for the coefficients:</p>
+<div id="tbl-ideology-rural" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ideology-rural-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: Results for a regression with ideology as the dependent variable
+</figcaption>
+<div aria-describedby="tbl-ideology-rural-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Coef.</th>
+<th>Std. Err.</th>
+<th>p-value</th>
+<th>95% Conf. Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>rural</td>
+<td>2.294</td>
+<td>0.446</td>
+<td>0.000</td>
+<td>[1.418, 3.170]</td>
+</tr>
+<tr class="even">
+<td>(intercept)</td>
+<td>-0.024</td>
+<td>0.140</td>
+<td>0.864</td>
+<td>[-0.299, 0.251]</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>n</td>
+<td>435</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>r^2</td>
+<td>0.058</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The row labeled <code>rural</code> corresponds to what we have written as <span class="math inline">\(\beta\)</span> in our hypotheses. The null hypothesis indicates that <span class="math inline">\(\beta\)</span> is 0, but the value of 0 is not included within the range identified by the 95% confidence interval (0 is not between 1.418 and 3.170). Thus, we can <em>reject</em> the null hypothesis. The alternative hypothesis indicates that <span class="math inline">\(\beta\)</span> is not zero, and the 95% confidence interval suggests that <span class="math inline">\(\beta\)</span> is indeed not zero. Thus, we <em>accept</em> the alternative hypothesis. Given that null and alternative hypotheses are logical opposites, we accept the alternative hypothesis whenever we reject the null hypothesis.</p>
+<p>Because we reject the null hypothesis of no relationship between the two variables, we can say that the relationship is <em>statistically significant</em>. We previously learned to draw this same conclusion by noting that the coefficient’s p-value is less than 0.05. It is no coincidence that <a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a> indicates a p-value smaller than 0.05 for the <code>rural</code> coefficient, aligning with what we concluded using the confidence interval. The calculation of the p-value follows a process that perfectly aligns with the confidence interval, such that the p-value will always be less than 0.05 when the confidence interval indicates we reject the null hypothesis. It does not matter, therefore, whether we use a confidence interval or a p-value to test a hypothesis. Note that in any regression table, the p-value shown for each coefficient will typically correspond to the null hypothesis stating that the coefficient is 0.</p>
+<p>If the 95% confidence interval for the <code>rural</code> coefficient had included 0 (i.e., if the lower bound was negative and the upper bound was positive), we would have <em>failed to reject</em> the null hypothesis.</p>
+</section>
+<section id="substantive-significance" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="substantive-significance"><span class="header-section-number">6.1.3</span> Substantive Significance</h3>
+<p>A word of caution about our conclusion here: statistical significance doesn’t mean that the relationship between variables is strong—only that we could reject the possibility of a relationship being entirely absent (i.e., we reject the notion that the expected value of <code>ideology</code> is exactly the same in rural and urban districts). To assess whether a relationship is strong or <em>substantively</em> significant, we need to use tools other than standard hypothesis tests (such as scrutinizing the range of the confidence interval, as we did in the prior chapter). This is one reason I encourage you to always consider “How big are the differences?” (the third Question to Always Ask about Data): many publications clearly indicate statistical significance but do not devote sufficient attention to substantive significance.</p>
+<p>In this case, assessing substantive size is a bit difficult because ideology is measured in unfamiliar units. Ideology scores (among congresspersons in this sample) range from -4.10 to 4.57, and the standard deviation is 2.85. Since the smallest number (in absolute value) within the confidence interval for the <code>rural</code> coefficient is its lower bound of 1.42, we can say that the systematic difference between urban and rural districts appears to be at least half a standard deviation (<span class="math inline">\(1.42 \div 2.85 = 0.498\)</span>). A difference of half a standard deviation is generally considered to be quite large, so we can say that congresspersons from rural districts are notably further to the right politically (more conservative) than congresspersons from urban districts.</p>
+<p>While I will not walk through an analysis of substantive size for every example presented in this chapter (for sake of brevity), it is almost always important in applied research to consider substantive strength of associations when interpreting statistically significant findings.</p>
+</section>
+</section>
+<section id="testing-relationships-for-various-types-of-variables" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="testing-relationships-for-various-types-of-variables"><span class="header-section-number">6.2</span> Testing Relationships for Various Types of Variables</h2>
+<p>Let’s now consider each possible pairing of qualitative and quantitative variable types and see how a hypothesis test can be applied to each relationship.</p>
+<section id="qualitative-quantitative-relationships" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="qualitative-quantitative-relationships"><span class="header-section-number">6.2.1</span> Qualitative-Quantitative Relationships</h3>
+<p>We already saw how to evaluate this when the qualitative variable is binary, but what about when it is not? <a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a> shows results for a regression where the independent variable is now the qualitative variable <code>region</code>, coded according to the U.S. Census Bureau’s delineation of the country into four regions.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Northeast is the omitted category (see <a href="qual-associations.html#sec-prediction-with-multiple-categories" class="quarto-xref"><span>Section 4.2.2.2</span></a>).</p>
+<div id="tbl-ideology-region" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ideology-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: Results for a regression with ideology as the dependent variable
+</figcaption>
+<div aria-describedby="tbl-ideology-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Coef.</th>
+<th>Std. Err.</th>
+<th>p-value</th>
+<th>95% Conf. Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Northeast</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>Midwest</td>
+<td>1.885</td>
+<td>0.413</td>
+<td>0.000</td>
+<td>[1.074, 2.697]</td>
+</tr>
+<tr class="odd">
+<td>South</td>
+<td>2.602</td>
+<td>0.369</td>
+<td>0.000</td>
+<td>[1.878, 3.327]</td>
+</tr>
+<tr class="even">
+<td>West</td>
+<td>0.468</td>
+<td>0.401</td>
+<td>0.244</td>
+<td>[-0.320, 1.256]</td>
+</tr>
+<tr class="odd">
+<td>(intercept)</td>
+<td>-1.285</td>
+<td>0.305</td>
+<td>0.000</td>
+<td>[-1.884, -0.686]</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>N</td>
+<td>435</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>r2</td>
+<td>0.140</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>F(3, 431)</td>
+<td>23.35 (p=0.000)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>In this regression, each slope coefficient estimate indicates the difference in means between the given region and the omitted category (Northeast). The null hypothesis should indicate that there is no relationship between the two variables <code>region</code> and <code>ideology</code>, but what does that look like in practice?</p>
+<section id="null-and-alternative-hypotheses-1" class="level4" data-number="6.2.1.1">
+<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="null-and-alternative-hypotheses-1"><span class="header-section-number">6.2.1.1</span> Null and Alternative Hypotheses</h4>
+<p>If there is no relationship in this context, then changing the value of <code>region</code> should result in no change in the prediction for <code>ideology</code>. This implies that each pair of differences should be equal to 0, so all regression slope coefficients should be 0 (according to the null hypothesis). We can write this as a single hypothesis, using <span class="math inline">\(\beta_1\)</span> to indicate the first slope coefficient, <span class="math inline">\(\beta_2\)</span> to indicate the second slope coefficient, and so on:</p>
+<p><span id="eq-region-null-betas"><span class="math display">\[
+H_0: \beta_1 = \beta_2 = \beta_3 = 0
+\tag{6.7}\]</span></span></p>
+<p>If all differences between categories are 0, this implies that the means (or expected values) for all regions are equal, so another way to write this hypothesis is:</p>
+<p><span id="eq-region-null-means"><span class="math display">\[
+H_0: \mu_N = \mu_M = \mu_S = \mu_W
+\tag{6.8}\]</span></span> where the subscripts (<span class="math inline">\(N\)</span>, <span class="math inline">\(M\)</span>, <span class="math inline">\(S\)</span>, and <span class="math inline">\(W\)</span>) indicate each region by its first letter.</p>
+<p>What does our alternative hypothesis look like? For the null hypothesis to be false, at least one pair of regions must differ in their population means (or expected values). We can write this formally in either of the following forms:</p>
+<p><span id="eq-region-alt-betas"><span class="math display">\[
+H_A: \beta_i \ne 0 \text{ for some } i
+\tag{6.9}\]</span></span></p>
+<p><span id="eq-region-alt-means"><span class="math display">\[ H_A: \mu_i \ne \mu_j \text{ for some } i,j \tag{6.10}\]</span></span></p>
+</section>
+<section id="evaluating-hypotheses-with-an-f-test" class="level4" data-number="6.2.1.2">
+<h4 data-number="6.2.1.2" class="anchored" data-anchor-id="evaluating-hypotheses-with-an-f-test"><span class="header-section-number">6.2.1.2</span> Evaluating Hypotheses with an F Test</h4>
+<p>How can we use the regression output to evaluate these hypotheses? A natural place to start is by again evaluating the confidence intervals on each slope coefficient: while the coefficient for West could very well be 0 (0 is within the confidence interval), the confidence intervals for Midwest and South both contain all positive (non-zero) values. Thus, we can conclude that the expected value of ideology for congresspersons in the Midwest is different than in the Northeast, and there is also a difference for the South versus the Northeast. This would seem to imply that the null hypothesis (<a href="#eq-region-null-betas" class="quarto-xref">Equation&nbsp;<span>6.7</span></a>) should be rejected.</p>
+<p>However, this approach of evaluating each slope coefficient one-by-one is not the ideal way to test the null hypothesis indicated in <a href="#eq-region-null-betas" class="quarto-xref">Equation&nbsp;<span>6.7</span></a>. Instead, it is better to take an all-in-one approach to match the nature of the hypothesis, which makes a joint statement about three coefficients. While there is no easy way to do this with confidence intervals, we can utilize something called an F test, which provides a p-value like we used initially when learning about statistical significance for regression (in <a href="correlation.html" class="quarto-xref"><span>Chapter 3</span></a>). The typical F test that is performed by default with a regression in statistical software packages tests the null hypothesis that all coefficient slopes are equal to zero, which is exactly what we want in this case. You may have noticed that the bottom of <a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a> includes an extra row (not seen in prior regression tables) displaying an F statistic (23.35) and a corresponding p-value (0.000). The exact details of how this F test is conducted are beyond the scope of this book, but you can use what you’ve already learned (in the context of regression slopes) about comparing p-values to a 0.05 threshold to evaluate this null hypothesis. Because this p-value is less than 0.05, we reject the null hypothesis and conclude that at least one slope coefficient is non-zero. Thus, we conclude that regarding congresspersons’ ideology, at least one region has a different expected value (population mean) from another region.</p>
+</section>
+<section id="pairwise-comparisons" class="level4" data-number="6.2.1.3">
+<h4 data-number="6.2.1.3" class="anchored" data-anchor-id="pairwise-comparisons"><span class="header-section-number">6.2.1.3</span> Pairwise Comparisons</h4>
+<p>Note that the alternative hypothesis we accepted in the prior section is particularly vague: we only know that at least one region differs from at least one other region. While this is a meaningful statement in the sense that it tells us <code>region</code> is related <code>ideology</code>, it is a rather open-ended conclusion. Because analysts often want to provide more specific description of differences across categories, it is common when examining a qualitative-quantitative relationship to also evaluate “pairwise” hypotheses that compare only two categories at a time. When there are four categories for the qualitative variable, there are a total of six unique pairings. One way to write the null hypotheses for these six comparisons is as follows:</p>
+<p><span class="math display">\[
+H_0: \mu_N = \mu_M
+\]</span><span class="math display">\[
+H_0: \mu_N = \mu_S
+\]</span><span class="math display">\[
+H_0: \mu_N = \mu_W
+\]</span><span class="math display">\[
+H_0: \mu_M = \mu_S
+\]</span><span class="math display">\[
+H_0: \mu_M = \mu_W
+\]</span><span id="eq-region-nulls-pairwise"><span class="math display">\[
+H_0: \mu_S = \mu_W
+\tag{6.11}\]</span></span></p>
+<p><a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a> allows us to easily test the first three of these pairwise null hypotheses. In fact, we already observed that the first and second hypotheses can be rejected but the third cannot (since the coefficient for West could plausibly be 0, given the 95% confidence interval). It may seem odd that I am returning to evaluating each comparison one-by-one, after I said in the prior section that doing so was not a good way to evaluate <a href="#eq-region-null-betas" class="quarto-xref">Equation&nbsp;<span>6.7</span></a>. What is important to highlight is that the way we test the single hypothesis <a href="#eq-region-null-betas" class="quarto-xref">Equation&nbsp;<span>6.7</span></a> is different from how we test a series of pairwise null hypotheses (<a href="#eq-region-nulls-pairwise" class="quarto-xref">Equation&nbsp;<span>6.11</span></a>). While the distinction can be confusing, since the series of pairwise nulls implies in combination the single combined null, the details of how we evaluate a single hypothesis differ from testing a series of hypotheses. For this reason, it is also possible (though not particularly common) that results for the pairwise hypotheses will appear to contradict results for the single combined hypothesis. Applied researchers commonly use both the combined single hypothesis and the pairwise series of hypotheses, sometimes in combination and sometimes separately. Thus, it is important to be familiar with both approaches to testing a qualitative-quantitative relationship. When results seem to differ from the two approaches, it is hard to give broad advice about which testing approach to favor since researchers apply varied standards, and different research settings may merit different priorities.</p>
+<p>Returning to the present example, we said the first three of the pairwise null hypotheses (in <a href="#eq-region-nulls-pairwise" class="quarto-xref">Equation&nbsp;<span>6.11</span></a>) can be evaluated with the results from <a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a>, but what about the other three? We can re-specify the regression by changing the omitted category, in order to make the remaining three comparisons. <a href="#tbl-ideology-region-pairwise" class="quarto-xref">Table&nbsp;<span>6.3</span></a> shows the results, with information corresponding to each coefficient (standard errors, p-values, and confidence intervals) now shown in vertical rather than horizontal format, in order to make space to display four regression models in one table.</p>
+<div id="tbl-ideology-region-pairwise" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ideology-region-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.3: Results for a regression with ideology as the dependent variable, standard errors shown in parentheses and 95% confidence intervals in square brackets
+</figcaption>
+<div aria-describedby="tbl-ideology-region-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Model 1</th>
+<th>Model 2</th>
+<th>Model 3</th>
+<th>Model 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Northeast</td>
+<td>-</td>
+<td>-1.885</td>
+<td>-2.602</td>
+<td>-0.468</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-</td>
+<td>(0.413)</td>
+<td>(0.369)</td>
+<td>(0.401)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td>p=0.000</td>
+<td>p=0.000</td>
+<td>p=0.244</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-</td>
+<td>[-2.697,-1.074]</td>
+<td>[-3.327,-1.878]</td>
+<td>[-1.256,0.320]</td>
+</tr>
+<tr class="odd">
+<td>Midwest</td>
+<td>1.885</td>
+<td>-</td>
+<td>-0.717</td>
+<td>1.418</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.413)</td>
+<td>-</td>
+<td>(0.347)</td>
+<td>(0.381)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>p=0.000</td>
+<td>-</td>
+<td>p=0.040</td>
+<td>p=0.000</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>[1.074,2.697]</td>
+<td>-</td>
+<td>[-1.399,-0.034]</td>
+<td>[0.668,2.167]</td>
+</tr>
+<tr class="odd">
+<td>South</td>
+<td>2.602</td>
+<td>0.717</td>
+<td>-</td>
+<td>2.135</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.369)</td>
+<td>(0.347)</td>
+<td>-</td>
+<td>(0.333)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>p=0.000</td>
+<td>p=0.040</td>
+<td>-</td>
+<td>p=0.000</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>[1.878,3.327]</td>
+<td>[0.034,1.399]</td>
+<td>-</td>
+<td>[1.480,2.789]</td>
+</tr>
+<tr class="odd">
+<td>West</td>
+<td>0.468</td>
+<td>-1.418</td>
+<td>-2.135</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.401)</td>
+<td>(0.381)</td>
+<td>(0.333)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>p=0.244</td>
+<td>p=0.000</td>
+<td>p=0.000</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>[-0.320,1.256]</td>
+<td>[-2.167,-0.668]</td>
+<td>[-2.789,-1.480]</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>(intercept)</td>
+<td>-1.285</td>
+<td>0.601</td>
+<td>1.318</td>
+<td>-0.817</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.305)</td>
+<td>(0.279)</td>
+<td>(0.207)</td>
+<td>(0.261)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>p=0.000</td>
+<td>p=0.032</td>
+<td>p=0.000</td>
+<td>p=0.002</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>[-1.884,-0.686]</td>
+<td>[0.053,1.148]</td>
+<td>[0.910,1.725]</td>
+<td>[-1.329,-0.305]</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>N</td>
+<td>435</td>
+<td>435</td>
+<td>435</td>
+<td>435</td>
+</tr>
+<tr class="odd">
+<td>r2</td>
+<td>0.140</td>
+<td>0.140</td>
+<td>0.140</td>
+<td>0.140</td>
+</tr>
+<tr class="even">
+<td>F(3, 431)</td>
+<td>23.35 (p=0.000)</td>
+<td>23.35 (p=0.000)</td>
+<td>23.35 (p=0.000)</td>
+<td>23.35 (p=0.000)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Model 1 duplicates (in the new format) what we already saw in <a href="#tbl-ideology-region" class="quarto-xref">Table&nbsp;<span>6.2</span></a>. Looking to Model 2, we see that the first coefficient (Northeast) indicates a comparison we already considered in Model 1: the comparison of the Northeast with the Midwest (the new omitted category). The sign of the coefficient has flipped from what it was before (because we have changed which mean we subtract from the other), but otherwise information is identical to what we saw for the Midwest coefficient in Model 1. Across the models, all of the coefficients appearing above the omitted category will turn out to duplicate a comparison we already saw in a prior model, so we will skip over examining these coefficients. Model 4 turns out to be entirely unnecessary, since it only duplicates comparisons that have already been made.</p>
+<p>The South coefficient in Model 2 indicates the difference between the South and the Midwest (the omitted category in this model). The confidence interval indicates a range of all-positive (non-zero) values, so we can reject the null hypothesis of no difference between the South and the Midwest. The West coefficient has a confidence interval that contains all-negative values, so we also reject the null hypothesis for the West-Midwest comparison.</p>
+<p>In Model 3, we find the final comparison in the West coefficient, which has a confidence interval consisting of all-negative values. Therefore, we reject the null hypothesis of no difference between the West and the South.</p>
+<p>Keeping track of this many comparisons can get a bit overwhelming (and will be even more so when a qualitative variable has more than four categories). It is often helpful to create a visualization of the relationship, as we learned in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a>, which we can reference as we evaluate each hypothesis. <a href="#fig-ideology-region" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> helps make clear why we couldn’t reject a null hypothesis of no difference when it came to the Northeast versus the West: their medians appear to be virtually identical. Note, however, that the ability to find statistical significance also depends on sample size. Two distributions that look very different in a box plot may fail to have a statistically significant difference if the sample size of one or both distributions is very small. In this case, we have a reasonable number of observations (at least 76) in each of the four regions.</p>
+<div id="fig-ideology-region" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ideology-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/h-tests/ideology_region.png" class="img-fluid figure-img" width="450">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ideology-region-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Box plots of the political ideology of U.S. congressmembers, by region
+</figcaption>
+</figure>
+</div>
+<p>The first appendix to this chapter discusses a concern that is often raised when doing a series of (pairwise) hypothesis tests in the manner we have just done. Because we relied on a standard 95% confidence threshold for each estimate we evaluated, our process will generally yield errors more than 5% of the time for <em>at least one</em> estimate we are evaluating (even if all assumptions are met). Exactly what should be done about this is a matter of some debate, and there are multiple ways that researchers conduct pairwise comparisons of means in practice; see the appendix for additional details.</p>
+</section>
+</section>
+<section id="relationships-between-quantitative-variables" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="relationships-between-quantitative-variables"><span class="header-section-number">6.2.2</span> Relationships between Quantitative Variables</h3>
+<p>If we have two quantitative variables, it is straightforward to test for the statistical significance of the relationship between the two variables. Let us consider the relationship between the geographic size of a congressional district (measured in logged square miles) and the elected member’s ideology.</p>
+<section id="null-and-alternative-hypotheses-2" class="level4" data-number="6.2.2.1">
+<h4 data-number="6.2.2.1" class="anchored" data-anchor-id="null-and-alternative-hypotheses-2"><span class="header-section-number">6.2.2.1</span> Null and Alternative Hypotheses</h4>
+<p>A null hypothesis of no relationship between two quantitative variables can be written either using <span class="math inline">\(\beta\)</span> to represent a regression coefficient or <span class="math inline">\(\rho\)</span> to represent a population correlation:</p>
+<p><span id="eq-ideology-null-beta"><span class="math display">\[ H_0: \beta = 0  \tag{6.12}\]</span></span></p>
+<p><span id="eq-ideology-null-rho"><span class="math display">\[
+H_0: \rho = 0
+\tag{6.13}\]</span></span></p>
+<p>The alternative hypothesis will be the logical opposite:</p>
+<p><span id="eq-ideology-alt-beta"><span class="math display">\[ H_A: \beta \ne 0  \tag{6.14}\]</span></span></p>
+<p><span id="eq-ideology-alt-rho"><span class="math display">\[ H_A: \rho \ne 0  \tag{6.15}\]</span></span></p>
+<p>Though a simple regression slope coefficient and correlation coefficient normally have different values, their signs are always the same, as noted in <a href="correlation.html" class="quarto-xref"><span>Chapter 3</span></a>. Tests of the above null hypotheses (<a href="#eq-ideology-null-beta" class="quarto-xref">Equation&nbsp;<span>6.12</span></a> and <a href="#eq-ideology-null-rho" class="quarto-xref">Equation&nbsp;<span>6.13</span></a>) also yield equivalent p-values, so we will obtain equivalent results regardless of which statistic (<span class="math inline">\(\hat{\beta}\)</span> or <span class="math inline">\(\hat{\rho}\)</span>) we use for our hypothesis testing. We will focus here on using regression.</p>
+</section>
+<section id="evaluating-hypotheses-with-a-confidence-interval-1" class="level4" data-number="6.2.2.2">
+<h4 data-number="6.2.2.2" class="anchored" data-anchor-id="evaluating-hypotheses-with-a-confidence-interval-1"><span class="header-section-number">6.2.2.2</span> Evaluating Hypotheses with a Confidence Interval</h4>
+<p>In <a href="#tbl-ideology-area" class="quarto-xref">Table&nbsp;<span>6.4</span></a>, we see a confidence interval for the geographic size coefficient, labeled <code>log_area</code>. The confidence interval ranges from 0.811 to 1.046 and does not include 0. Therefore, we reject the null hypothesis of a regression slope of 0 (meaning we also reject that the correlation could be 0). Note that the p-value is also less than 0.05, which is another way to arrive at the conclusion that we reject the null hypothesis and accept the alternative.</p>
+<div id="tbl-ideology-area" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ideology-area-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.4: Results for a regression with ideology as the dependent variable
+</figcaption>
+<div aria-describedby="tbl-ideology-area-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Coef.</th>
+<th>Std. Err.</th>
+<th>p-value</th>
+<th>95% Conf. Interval</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>log_area</td>
+<td>0.929</td>
+<td>0.060</td>
+<td>0.000</td>
+<td>[0.811,1.046]</td>
+</tr>
+<tr class="even">
+<td>(intercept)</td>
+<td>-6.687</td>
+<td>0.456</td>
+<td>0.000</td>
+<td>[-7.583,-5.791]</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>N</td>
+<td>429</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>r2</td>
+<td>0.362</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-contingency-tables" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-contingency-tables"><span class="header-section-number">6.2.3</span> Relationships between Qualitative Variables</h3>
+<p>It is not very straightforward to use regression to test whether a relationship between two qualitative variables is statistically significant, so we will use a different approach that builds on the contingency tables we learned about in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a>. To add a test of statistical significance to a contingency table, we can use a test called a Chi Square test. More details can be found in the second appendix to this chapter, but we will focus here on using the p-value resulting from the test to draw a conclusion. Note, however, that the Chi Square test does not work well with very small samples.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>To demonstrate the Chi Square test, we again look to data from the Mediterranean Diet and Health case study,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> in which heart attack survivors were randomly assigned to follow one of two diets. We already discussed in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a> how the frequencies in <a href="#tbl-studyfreqs" class="quarto-xref">Table&nbsp;<span>6.5</span></a> indicate that people on the Mediterranean diet tended to have better outcomes, but we did not say anything previously about the <em>statistical significance</em> of this relationship.</p>
+<div id="tbl-studyfreqs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.5: Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-studyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 21%">
+<col style="width: 25%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Outcome</th>
+<th></th>
+<th></th>
+<th></th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15</td>
+<td>24</td>
+<td>25</td>
+<td>239</td>
+<td>303</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7</td>
+<td>14</td>
+<td>8</td>
+<td>273</td>
+<td>302</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22</td>
+<td>38</td>
+<td>33</td>
+<td>512</td>
+<td>605</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>As with all other hypothesis tests in this chapter, the null hypothesis indicates no relationship between the two variables. Writing out an exact equation representing the null and alternative hypotheses is not very straightforward, so we will simply use words to describe the hypotheses in this case. The alternative hypothesis indicates that knowing the value of one variable helps us predict the value of the other variable (in the population or in expectation). When conducting a Chi Square test with statistical software, it is common that the software will report both a Chi Square test statistic and a p-value. In this case, the test statistic is 16.55 and the p-value is 0.0009. Because the p-value is less than 0.05, we reject the null hypothesis that the two qualitative variables (diet and health outcome) are unrelated (in the population or in the random process that generated the sample). The relationship is statistically significant.</p>
+</section>
+</section>
+<section id="probability-values" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="probability-values"><span class="header-section-number">6.3</span> Probability Values</h2>
+<p>While confidence intervals can be used to conduct many hypothesis tests, it is still important to learn about <strong>probability values</strong>, usually referred to as p-values or just “p.” The basic logic underlying p-values is that we want to consider whether our data would be unusual to observe if the null hypothesis were true. It can be helpful to describe the null hypothesis in terms of indicating a “hypothesized value” for the parameter of interest. We calculate a p-value under the assumption that the parameter is equal to the hypothesized value. The p-value answers the question “If the null hypothesis is true, how likely are we to get a sample statistic as far away from the hypothesized value as the one we got in our sample?” For example, if the null hypothesis states that a regression coefficient <span class="math inline">\(\beta\)</span> is 0, the p-value is the probability of obtaining a coefficient estimate (<span class="math inline">\(\hat{\beta}\)</span>) at least as far from 0 as the one we obtained with our sample. The p-value will very much depend on the sample size, since getting estimates that are far from the truth is quite common with small samples. But with a large sample, it would be quite surprising to find a coefficient estimate with a very large absolute value if the true coefficient value was 0.</p>
+<p>To help us evaluate p-values, we typically rely on a significance level, referred to as alpha (<span class="math inline">\(\alpha\)</span>). The alpha level establishes a threshold for deciding at what point a statistical result is “unlikely” enough (under the assumption of a true null hypothesis) that the null hypothesis is rejected. The most common alpha is 0.05, the benchmark we have been referencing so far whenever we have discussed p-values. Any time the p-value is smaller than alpha, we reject the null hypothesis (and accept the alternative hypothesis). Any time the p-value is greater than alpha, we fail to reject the null hypothesis. “Failing to reject” is perhaps clunky language, but it is meant to imply an inconclusive result.</p>
+<p>While 0.05 is the standard default alpha, social science researchers also frequently utilize alpha levels of 0.10, 0.01, and 0.001. In many publications, several alphas are used simultaneously. For example, a table may use a plus sign (+) to indicate significance at the 0.10 alpha level, a single asterisk for significance at 0.05 (*), and two asterisks for significance at 0.01 (**). This usage implies that we can evaluate null hypotheses as being rejected with varying levels of confidence: a p-value that is very small (e.g., 0.0004) suggests greater certainty that the null hypothesis is wrong than a p-value that is larger (e.g., 0.08), all else equal.</p>
+<p>You may have noticed that significance levels appear to be the flip side of confidence levels. A confidence level of 95% (0.95 as a proportion) implies a significance level of 5% (0.05). That is why we can use a 95% confidence interval to test a null hypothesis with a 0.05 alpha. More generally, the confidence level and corresponding significance level will always add up to 100% (or a proportion of 1). Thus, a 99% confidence interval can be used to test a null hypothesis with an alpha of 0.01, for example.</p>
+</section>
+<section id="type-i-and-type-ii-errors" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="type-i-and-type-ii-errors"><span class="header-section-number">6.4</span> Type I and Type II Errors</h2>
+<p>When discussing the tradeoffs associating with using different alpha levels, we often reference “type I” and “type II” errors. A type I error refers to rejecting a null hypothesis that is actually true. Type I errors are also called “false positives”. A type II error occurs when we fail to reject a null hypothesis that is false.</p>
+<p>With a relatively large alpha (e.g., <span class="math inline">\(\alpha = 0.10\)</span>), we accept a fairly high risk of a type I error. If the null hypothesis happens to be true, we will still reject it at a rate of alpha (10% of the time if <span class="math inline">\(\alpha = 0.10\)</span>). Setting a lower alpha means that we lower the risk of type I errors, but we increase the risk of type II errors. For example, with an alpha of 0.001, we expect that even if the null hypothesis is true, we will fail to reject it more often because we have set a high threshold for rejecting the null hypothesis.</p>
+</section>
+<section id="one-tailed-and-two-tailed-tests" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="one-tailed-and-two-tailed-tests"><span class="header-section-number">6.5</span> One-Tailed and Two-Tailed Tests</h2>
+<p>So far, our coverage of hypothesis testing has assumed that we are using what is called a <strong>two-tailed test</strong>. It is also possible to conduct a <strong>one-tailed test</strong>. A one-tailed test has an alternative hypothesis with a greater-than (&gt;) or less-than (&lt;) sign rather than an unequal sign (<span class="math inline">\(\ne\)</span>). Returning to the example at the start of this chapter, we could indicate that we are testing whether rural districts have more right-leaning (conservative) congresspersons with this alternative hypothesis:</p>
+<p><span id="eq-rural-alt-beta-1-sided"><span class="math display">\[
+H_A: \beta &gt; 0
+\tag{6.16}\]</span></span></p>
+<p>Another way to write this would be:</p>
+<p><span id="eq-rural-alt-equal-means-1-sided"><span class="math display">\[
+H_A: \mu_R &gt; \mu_U
+\tag{6.17}\]</span></span></p>
+<p>There are differing conventions (described in the next section) for how to write a 1-sided null hypothesis, but the clearest approach for our purposes is as follows:</p>
+<p><span id="eq-rural-null-beta-1-sided"><span class="math display">\[
+H_0: \beta \leq 0
+\tag{6.18}\]</span></span></p>
+<p>Or equivalently:</p>
+<p><span id="eq-rural-null-equal-means-1-sided"><span class="math display">\[
+H_0: \mu_R \leq \mu_U
+\tag{6.19}\]</span></span></p>
+<p>A confidence interval can be used to conduct a 1-tailed hypothesis test, but an adjustment needs to be made for the fact that a 2-tailed confidence interval is being used to conduct a 1-tailed test. Specifically, one should use an interval derived from a confidence level that corresponds to two times the alpha level. For example, with an alpha of 0.05, we use a 90% confidence interval (<span class="math inline">\(1-(2\times.05) = 0.9\)</span>) to conduct a 1-sided test.</p>
+<p>In our example, the 90% confidence interval for the rural coefficient is [1.559, 3.029]. The 90% confidence interval is always a bit narrower than the 95% one (as seen if we compare to <a href="#tbl-ideology-rural" class="quarto-xref">Table&nbsp;<span>6.1</span></a>). In this case, we reject the null hypothesis (<a href="#eq-rural-null-beta-1-sided" class="quarto-xref">Equation&nbsp;<span>6.18</span></a>) because the entire confidence interval consists of positive (non-zero) values. We therefore accept the alternative hypothesis.</p>
+<p>The logic underlying the practice of using a 90% confidence interval to test a one-sided hypothesis at the 0.05 alpha level may be difficult to follow, but I will provide an explanation nonetheless. With a 2-tailed test, a standard 95% confidence interval will map to a 5% type I error rate (assuming a true null hypothesis) in hypothesis testing because the interval estimate will “miss” the truth with 5% probability. That 5% probability of a miss is evenly divided between the two sides of distribution of estimates. In other words, there is a 2.5% probability that the interval estimate will be fully above the true parameter value and a 2.5% probability that it will be fully below the true parameter value. With a 1-tailed test, we only reject the null hypothesis (and accept the alternative) if we are on one side of the (assumed) null parameter value. Thus, under the assumption that the null hypothesis is true, we only have a 2.5% chance of a type I error when using a 95% confidence interval to conduct our hypothesis test, since half of the “misses” will be in the opposite direction of the alternative hypothesis. Using a 95% confidence interval to test a 1-sided hypothesis at an alpha of 0.05 will therefore result in a test that is not properly calibrated: the error rate (2.5%) does not match the alpha levels of 0.05 (5%). Using a confidence interval that corresponds to two times the alpha level brings the error rate back into alignment with alpha. If working directly with p-values, the equivalent procedure involves dividing a 2-sided p-value by two to obtain the 1-sided p-value, assuming that the point estimate aligns with the alternative hypothesis (if the point estimate is in the opposite direction of the alternative hypothesis, the 1-sided p-value will be one minus the 2-sided p-value divided by two). Thus, it is generally understood that using a 1-sided test makes it easier to find support for a directional argument (since the p-value will be smaller—and thus will more easily fall below alpha—whenever the point estimate indicates the direction suggested by the alternative hypothesis).</p>
+<p>Two-tailed tests are more commonly used in applied social science than one-tailed tests, but you will sometimes still encounter one-tailed tests. Many statistical software programs will offer two-tailed results by default, and there is generally nothing wrong with using two-tailed tests. One benefit of one-tailed tests is that if there is a clear directional research hypothesis, it is slightly easier to detect a statistically significant association consistent with the hypothesis when using a one-tailed test. However, unless the study is preregistered (meaning that the hypotheses, research design details, and statistical modeling approach are publicly described ahead of time), there may be concerns about cherry-picking results and building a directional hypothesis after seeing the results (even if there was originally no strong expectation that an association should point in a particular direction).</p>
+</section>
+<section id="avoiding-hypothesis-testing-pitfalls" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="avoiding-hypothesis-testing-pitfalls"><span class="header-section-number">6.6</span> Avoiding Hypothesis Testing Pitfalls</h2>
+<p>It is easy to make mistakes when interpreting hypothesis tests. Keep the following in mind:</p>
+<ul>
+<li><p>Hypothesis tests are just a starting point. Tests of statistical significance evaluate a bare minimum threshold of a relationship strong enough to stand out from the general noisiness of any finite sample, but they don’t tell you tell you if a relationship is practically meaningful (substantively significant).</p></li>
+<li><p>A null hypothesis can never be confirmed. We can fail to reject a null hypothesis, but this implies an inconclusive result. Put differently, the absence of evidence does not necessarily indicate evidence of absence. For example, a very small sample size virtually guarantees we will fail to reject the null, since we won’t have enough evidence in front of us to draw any real conclusions. If you’re trying to figure out whether there is evidence of a near-zero association, look at the confidence interval and see if all values within the interval are what you would consider to be very small. There are also tests that can be used to formalize this evaluation (called equivalence tests), which require one to identify the “smallest effect size of interest.”<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p></li>
+<li><p>Beware of cherry-picked results (also known as “p-hacking”). Anyone who runs enough statistical significance tests will eventually find something “significant,” even if they are looking at purely random data.</p></li>
+<li><p>When looking at regression results: If coefficient A is statistically significant and coefficient B is not, that doesn’t necessarily mean variable A matters more (to the prediction). For example, coefficient B could simply have a wider confidence interval, making it harder to draw firm conclusions about it.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p></li>
+</ul>
+</section>
+<section id="varying-terminology-and-equivalent-methods" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="varying-terminology-and-equivalent-methods"><span class="header-section-number">6.7</span> Varying Terminology and Equivalent Methods</h2>
+<p>There are various hypothesis testing procedures beyond what’s been described here that are often covered in introductory statistics textbooks. Many of these tests are equivalent to regression, which is why I do not cover them in detail here. However, it is useful to know some of these other tests’ names and what they are equivalent to, since you may encounter them when reading research reports:</p>
+<ul>
+<li><p><strong>Two-sample (unpaired) t-test</strong> (or a <strong>difference of means test</strong>): This is equivalent to our first example, where we had a single binary variable as our independent variable in a simple linear regression.</p></li>
+<li><p><strong>Analysis of Variance (ANOVA)</strong>: There are many types of ANOVA, and each one should be equivalent to a regression model of some sort. The most basic and common type of ANOVA (one-way ANOVA) is equivalent to the F-test from regression that we examined when looking at a qualitative-quantitative relationship. Note that when there are only two categories for the qualitative variable, the F-test will yield the same results as the approach described for the binary variable we began with; ANOVA will also be equivalent to a two-sample (unpaired) t-test in this case.</p></li>
+<li><p><strong>One-sample t-test</strong> (or a <strong>single mean t-test</strong>): This is equivalent to what we obtain from a linear (OLS) regression where there are no independent variables, just an intercept. In this case, the confidence interval for the intercept is also a confidence interval for the mean.</p></li>
+</ul>
+<p>Terminology and syntax can also vary as follows:</p>
+<ul>
+<li><p>Some sources use the terms <strong>one-sided</strong> and <strong>two-sided</strong> instead of one-tailed and two-tailed.</p></li>
+<li><p>With a one-tailed hypothesis, some sources will write the null hypothesis the same way they do for a two-sided hypothesis (e.g., <span class="math inline">\(H_A: \beta &gt; 0\)</span> is paired with <span class="math inline">\(H_0: \beta = 0\)</span> instead of <span class="math inline">\(H_0: \beta \leq 0\)</span>). This may seem counterintuitive (since the null and alternative hypotheses are no longer perfect opposites), but it corresponds to how the p-value is calculated (e.g., <span class="math inline">\(\beta=0\)</span> is assumed to be true when calculating the p-value for <span class="math inline">\(H_A: \beta &gt; 0\)</span>). Appendix III of <a href="sampling-distributions.html" class="quarto-xref"><span>Chapter 8</span></a> provides further details.</p></li>
+</ul>
+</section>
+<section id="exercises" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.8</span> Exercises</h2>
+<ol type="1">
+<li>What is the null hypothesis when we test for the statistical significance of a regression coefficient? What about the alternative hypothesis? Write out the hypotheses as equations, and also explain what they mean in words.</li>
+<li>What type of hypothesis (null or alternative, 1- or 2- sided) is the following an example of (note: <span class="math inline">\(\rho\)</span> represents the population correlation)? <strong>H</strong>: The correlation between X and Y in the population is zero (<span class="math inline">\(\rho\)</span>=0)</li>
+<li>Which type of hypothesis is the following an example of? <strong>H</strong>: The mean of population A is <em>greater than</em> the mean of population B (<span class="math inline">\(\mu_A &gt; \mu_B\)</span>)</li>
+<li>What type of hypothesis is the following an example of? <strong>H</strong>: Average extraversion among women is different from average extraversion among men (<span class="math inline">\(\mu_W \ne \mu_M\)</span>)</li>
+<li>Can the alternative hypothesis ever be rejected?</li>
+<li>Can the null hypothesis ever be rejected?</li>
+<li>If I reject a null hypothesis that is actually true, what type of error have I committed?</li>
+<li>If I have a p-value of .03 and I use an alpha level of 0.05, what do I conclude?</li>
+</ol>
+</section>
+<section id="sec-h-tests-appendix-i-multiple-comparison-tests" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-h-tests-appendix-i-multiple-comparison-tests"><span class="header-section-number">6.9</span> <a href="#sec-h-tests" class="quarto-xref"><span>Chapter 6</span></a> Appendix I: Multiple Comparison Tests</h2>
+<p><em>Both appendices to this chapter consist of content adapted from the public domain resource Online Statistics Education: A Multimedia Course of Study (<a href="https://onlinestatbook.com" class="uri">https://onlinestatbook.com</a> Project Leader: David M. Lane, Rice University)</em><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>Many experiments are designed to compare more than two conditions. We will take as an example the case study “Smiles and Leniency.”<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> In this study, the effect of different smiles on the leniency shown to a person was investigated. Four different types of smiles (neutral, false, felt, and miserable) were shown. “Type of Smile” is the independent variable, and the dependent variable is a leniency rating given by the subject to a fictional student (depicted with one of the four smiles) in an academic misconduct case. An obvious way to proceed would be to do a t test of the difference between each group mean and each of the other group means. This procedure would lead to the six comparisons shown in <a href="#tbl-feltmisneutral" class="quarto-xref">Table&nbsp;<span>6.6</span></a>.</p>
+<div id="tbl-feltmisneutral" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.6: Six Comparisons among Means.
+</figcaption>
+<div aria-describedby="tbl-feltmisneutral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 38%">
+<col style="width: 38%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>false vs.&nbsp;felt</td>
+<td><img src="Images/h-tests-applied/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/felt.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td>false vs.&nbsp;miserable</td>
+<td><img src="Images/h-tests-applied/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/miserable.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="odd">
+<td>false vs.&nbsp;neutral</td>
+<td><img src="Images/h-tests-applied/false.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td>felt vs.&nbsp;miserable</td>
+<td><img src="Images/h-tests-applied/felt.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/miserable.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="odd">
+<td>felt vs.&nbsp;neutral</td>
+<td><img src="Images/h-tests-applied/felt.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+<tr class="even">
+<td>miserable vs.&nbsp;neutral</td>
+<td><img src="Images/h-tests-applied/miserable.png" class="img-fluid figure-img"></td>
+<td><img src="Images/h-tests-applied/neutral.png" class="img-fluid figure-img"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>You can certainly conduct a series of six t tests in this manner. However, one potential problem with this approach is that if you did this analysis, you would have six chances to make a Type I error. Therefore, if you were using the 0.05 significance level, the probability that you would make a Type I error on at least one of these comparisons is greater than 0.05.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> The more means that are compared, the more the Type I error rate is inflated. <a href="#fig-pairwisecompfmean" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> shows the number of possible comparisons between pairs of means (pairwise comparisons) as a function of the number of means. If there are only two means, then only one comparison can be made. If there are 12 means, then there are 66 possible comparisons.</p>
+<div id="fig-pairwisecompfmean" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/h-tests-applied/pairwisecompfmean.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pairwisecompfmean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Number of pairwise comparisons as a function of the number of means.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-type1error" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> shows the probability of a Type I error as a function of the number of means. As you can see, if you have an experiment with 12 means, the probability is about 0.70 that at least one of the 66 comparisons among means would be significant even if all 12 population means were the same.</p>
+<div id="fig-type1error" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/h-tests-applied/type1error.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type1error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: Probability of a Type I error as a function of the number of means.
+</figcaption>
+</figure>
+</div>
+<p>The collective Type I error rate can be controlled using various methods such as the Tukey Honestly Significant Difference test or Tukey HSD for short. The Tukey HSD test is one example of a multiple comparison test or adjustment, but several alternatives are frequently used, such as the Bonferroni correction and the Benjamini–Hochberg procedure. All approaches will make it more difficult to find statistical significance and thereby reduce the Type I error rate. There is ongoing debate on whether, how, and in what circumstances to adjust for multiple comparisons, so you are likely to encounter a variety of approaches when reading applied research reports.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>The Tukey HSD is based on a variation of the t distribution that takes into account the number of means being compared. This distribution is called the studentized range distribution.</p>
+<p>Normally, statistical software will make all the necessary calculations for you in the background. But to illustrate what sorts of calculations the software is relying on, let’s return to the leniency study to see how to compute the Tukey HSD test. You will see that the computations are very similar to those of an independent-groups t test. The steps are outlined below:</p>
+<ol type="1">
+<li>Compute the means and variances of each group. For our example, they are shown in <a href="#tbl-sum-stats-leniency" class="quarto-xref">Table&nbsp;<span>6.7</span></a>.</li>
+</ol>
+<div id="tbl-sum-stats-leniency" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sum-stats-leniency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.7: Means and Variances from the “Smiles and Leniency” Study.
+</figcaption>
+<div aria-describedby="tbl-sum-stats-leniency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Condition</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Mean</strong></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><strong>Variance</strong></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">False</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5.37</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3.34</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Felt</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.91</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Miserable</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.91</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.11</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Neutral</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.12</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">2.32</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<ol start="2" type="1">
+<li><p>Compute MSE, which is simply the mean of the variances. It is equal to 2.65.</p></li>
+<li><p>Compute Q (using the formula below) for each pair of means, where <span class="math inline">\(\bar{X}_i\)</span> is one mean, <span class="math inline">\(\bar{X}_j\)</span> is the other mean, and <span class="math inline">\(n\)</span> is the number of scores in each group. For these data, there are 34 observations per group. The value in the denominator is 0.279. <span class="math display">\[ Q=\frac{\bar{X}_i-\bar{X}_j}{\sqrt{\frac{MSE}{n}}} \]</span></p></li>
+<li><p>Compute p for each comparison using a Studentized Range Calculator.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> The degrees of freedom is equal to the total number of observations minus the number of means. For this experiment, df = 136 - 4 = 132.</p></li>
+</ol>
+<p>The tests for these data are shown in <a href="#tbl-6pairwisecomp" class="quarto-xref">Table&nbsp;<span>6.8</span></a>.</p>
+<div id="tbl-6pairwisecomp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.8: Six Pairwise Comparisons.
+</figcaption>
+<div aria-describedby="tbl-6pairwisecomp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Comparison</th>
+<th style="text-align: center;"><span class="math inline">\(\bar{X}_i - \bar{X}_j\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">False - Felt</td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;">1.65</td>
+<td style="text-align: center;">0.649</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">False - Miserable</td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;">1.65</td>
+<td style="text-align: center;">0.649</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">False - Neutral</td>
+<td style="text-align: center;">1.25</td>
+<td style="text-align: center;">4.48</td>
+<td style="text-align: center;">0.010</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Felt - Miserable</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">0.00</td>
+<td style="text-align: center;">1.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Felt - Neutral</td>
+<td style="text-align: center;">0.79</td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;">0.193</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Miserable - Neutral</td>
+<td style="text-align: center;">0.79</td>
+<td style="text-align: center;">2.83</td>
+<td style="text-align: center;">0.193</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The only significant comparison is between the false smile and the neutral smile.</p>
+<p>It is not unusual to obtain results that on the surface appear paradoxical. For example, these results appear to indicate that (a) the false smile is the same as the miserable smile, (b) the miserable smile is the same as the neutral control, and (c) the false smile is different from the neutral control. This apparent contradiction is avoided if you are careful not to accept the null hypothesis when you fail to reject it. The finding that the false smile is not significantly different from the miserable smile does not mean that they are really the same. Rather it means that there is not convincing evidence that they are different. Similarly, the non-significant difference between the miserable smile and the control does not mean that they are the same. The proper conclusion is that the false smile is higher than the control and that the miserable smile is either (a) equal to the false smile, (b) equal to the control, or (c) somewhere in-between.</p>
+</section>
+<section id="sec-h-tests-appendix-ii-chi-square-testsh-tests-13" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="sec-h-tests-appendix-ii-chi-square-testsh-tests-13"><span class="header-section-number">6.10</span> <a href="#sec-h-tests" class="quarto-xref"><span>Chapter 6</span></a> Appendix II: Chi Square Tests<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></h2>
+<p>A Chi Square test is so-named because it relies on a probability distribution called the Chi Square distribution (more details are beyond the scope of this text and can be found elsewhere<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>).</p>
+<p>The first step is to compute the expected frequency for each cell based on the assumption that there is no relationship. These expected frequencies are computed from the totals as follows. We begin by computing the expected frequency for the AHA Diet-Cancers combination. Note that 22/605 subjects developed cancer. The proportion who developed cancer is therefore 0.0364. If there were no relationship between diet and outcome (as the null hypothesis states), then we would expect 0.0364 of those on the AHA diet to develop cancer. Since 303 subjects were on the AHA diet, we would expect (0.0364)(303) = 11.02 cancers on the AHA diet. Similarly, we would expect (0.0364)(302) = 10.98 cancers on the Mediterranean diet. In general, the expected frequency for a cell in the <span class="math inline">\(i\)</span>th row and the <span class="math inline">\(j\)</span>th column is equal to</p>
+<p><span class="math display">\[ E_{ij}=\frac{T_iT_j}{T} \]</span></p>
+<p>where <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell <span class="math inline">\(i,j\)</span>, <span class="math inline">\(T_i\)</span> is the total for the <span class="math inline">\(i\)</span>th row, <span class="math inline">\(T_j\)</span> is the total for the <span class="math inline">\(j\)</span>th column, and <span class="math inline">\(T\)</span> is the total number of observations. For the AHA Diet-Cancers cell, <span class="math inline">\(i = 1\)</span>, <span class="math inline">\(j = 1\)</span>, <span class="math inline">\(T_i = 303\)</span>, <span class="math inline">\(T_j = 22\)</span>, and <span class="math inline">\(T = 605\)</span>. <a href="#tbl-observedstudyfreqs" class="quarto-xref">Table&nbsp;<span>6.9</span></a> shows the expected frequencies (in parenthesis) for each cell in the experiment.</p>
+<p>The significance test is conducted by computing Chi Square as follows.</p>
+<p><span class="math display">\[ \chi^2_3=\sum\frac{(E-O)^2}{E}=16.55 \]</span></p>
+<p>The degrees of freedom is equal to <span class="math inline">\((r-1)(c-1)\)</span>, where <span class="math inline">\(r\)</span> is the number of rows and <span class="math inline">\(c\)</span> is the number of columns. For this example, the degrees of freedom is <span class="math inline">\((2-1)(4-1) = 3\)</span>. A Chi Square calculator<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> can be used to determine that the probability value for a Chi Square of 16.55 with three degrees of freedom is equal to 0.0009. Therefore, the null hypothesis of no relationship between diet and outcome can be rejected.</p>
+<div id="tbl-observedstudyfreqs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.9: Observed and Expected Frequencies for Diet and Health Study.
+</figcaption>
+<div aria-describedby="tbl-observedstudyfreqs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 27%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Outcome</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Diet</strong></td>
+<td>Cancers</td>
+<td>Fatal Heart Disease</td>
+<td>Non-Fatal Heart Disease</td>
+<td>Healthy</td>
+</tr>
+<tr class="even">
+<td>AHA</td>
+<td>15<br>
+(11.02)</td>
+<td>24<br>
+(19.03)</td>
+<td>25<br>
+(16.53)</td>
+<td>239<br>
+(256.42)</td>
+</tr>
+<tr class="odd">
+<td>Mediterranean</td>
+<td>7<br>
+(10.98)</td>
+<td>14<br>
+(18.97)</td>
+<td>8<br>
+(16.47)</td>
+<td>273<br>
+(255.58)</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td>22</td>
+<td>38</td>
+<td>33</td>
+<td>512</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Data shared under <a href="https://opendatacommons.org/licenses/by/1-0/">ODC-BY 1.0</a>: Bonica, Adam. 2024. Database on Ideology, Money in Politics, and Elections: Public version 4.0 [Computer file]. Stanford, CA: Stanford University Libraries. <a href="https://data.stanford.edu/dime" class="uri">https://data.stanford.edu/dime</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This description of “no relationship” is confined to a specific measure of association. For example, the null hypothesis might indicate no <em>linear</em> relationship between two variables (a correlation of zero) but say nothing about possibilities for a nonlinear relationship. Or it might indicate that the means are equal, saying nothing about medians or variances.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf" class="uri">https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://onlinestatbook.com/2/chi_square/contingency.html" class="uri">https://onlinestatbook.com/2/chi_square/contingency.html</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://onlinestatbook.com/2/case_studies/diet.html" class="uri">https://onlinestatbook.com/2/case_studies/diet.html</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Rainey, C. (2014). Arguing for a negligible effect. <em>American Journal of Political Science</em>, <em>58</em>(4), 1083-1091. <a href="#0">https://doi.org/10.1111/ajps.12102</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Gelman, A., &amp; Stern, H. (2006). The difference between “significant” and “not significant” is not itself statistically significant. <em>The American Statistician</em>, <em>60</em>(4), 328-331. <a href="#0">https://doi.org/10.1198/000313006X152649</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>“All Pairwise Comparisons Among Means.” <a href="https://onlinestatbook.com/2/tests_of_means/pairwise.html" class="uri">https://onlinestatbook.com/2/tests_of_means/pairwise.html</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><a href="https://onlinestatbook.com/2/case_studies/leniency.html" class="uri">https://onlinestatbook.com/2/case_studies/leniency.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>When discussing probability of Type I errors, we assume all null hypotheses are true, since a Type I error can’t occur if the null hypothesis is false.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>García-Pérez, M. A. (2023). Use and misuse of corrections for multiple testing. <em>Methods in Psychology</em>, <em>8</em>, 100120. <a href="https://doi.org/10.1016/j.metip.2023.100120" class="uri">https://doi.org/10.1016/j.metip.2023.100120</a><a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><a href="https://onlinestatbook.com/2/calculators/studentized_range_dist.html" class="uri">https://onlinestatbook.com/2/calculators/studentized_range_dist.html</a><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>This section is adapted from David M. Lane. “Contingency Tables.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/contingency.html" class="uri">https://onlinestatbook.com/2/chi_square/contingency.html</a><a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>For example, see David M. Lane. “Chi Square Distribution.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/chi_square/distribution.html" class="uri">https://onlinestatbook.com/2/chi_square/distribution.html</a><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p><a href="https://onlinestatbook.com/2/calculators/chi_square_prob.html" class="uri">https://onlinestatbook.com/2/calculators/chi_square_prob.html</a><a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./stat-inference.html" class="pagination-link" aria-label="Statistical Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prob-models.html" class="pagination-link" aria-label="Probabilistic Models">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

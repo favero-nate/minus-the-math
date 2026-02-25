@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Regression Models – Statistics Minus the Math (2e)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./teaching-resources.html" rel="next">
+<link href="./measurement.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus the Math (2e)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relationships Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qual-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Relationships with Qualitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stat-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Going Deeper with Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./change-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change Log</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-regression-assumptions" id="toc-sec-regression-assumptions" class="nav-link active" data-scroll-target="#sec-regression-assumptions"><span class="header-section-number">11.1</span> Regression Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity">1. Validity</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness">2. Representativeness</a></li>
+  <li><a href="#additivity-and-linearity" id="toc-additivity-and-linearity" class="nav-link" data-scroll-target="#additivity-and-linearity">3. Additivity and linearity</a></li>
+  <li><a href="#independence-of-errors" id="toc-independence-of-errors" class="nav-link" data-scroll-target="#independence-of-errors">4. Independence of errors</a></li>
+  <li><a href="#equal-variance-of-errorsregression-4" id="toc-equal-variance-of-errorsregression-4" class="nav-link" data-scroll-target="#equal-variance-of-errorsregression-4">5. Equal variance of errors</a></li>
+  <li><a href="#normality-of-errors" id="toc-normality-of-errors" class="nav-link" data-scroll-target="#normality-of-errors">6. Normality of errors</a></li>
+  </ul></li>
+  <li><a href="#sec-multiple-regression" id="toc-sec-multiple-regression" class="nav-link" data-scroll-target="#sec-multiple-regression"><span class="header-section-number">11.2</span> Multiple Regression</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-regression-coefficients" id="toc-interpretation-of-regression-coefficients" class="nav-link" data-scroll-target="#interpretation-of-regression-coefficients">Interpretation of Regression Coefficients</a></li>
+  <li><a href="#sec-deciding-which-independent-variables-to-include" id="toc-sec-deciding-which-independent-variables-to-include" class="nav-link" data-scroll-target="#sec-deciding-which-independent-variables-to-include"><span class="header-section-number">11.2.1</span> Deciding Which Independent Variables to Include</a></li>
+  </ul></li>
+  <li><a href="#modeling-non-linear-relationships" id="toc-modeling-non-linear-relationships" class="nav-link" data-scroll-target="#modeling-non-linear-relationships"><span class="header-section-number">11.3</span> Modeling Non-linear Relationships</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">11.4</span> Exercises</a></li>
+  <li><a href="#sec-regression-appendix-more-explanation-of-partial-slopesassociations" id="toc-sec-regression-appendix-more-explanation-of-partial-slopesassociations" class="nav-link" data-scroll-target="#sec-regression-appendix-more-explanation-of-partial-slopesassociations"><span>Chapter 11</span> Appendix: More Explanation of Partial Slopes/Associations</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prob-models.html">Going Deeper with Data</a></li><li class="breadcrumb-item"><a href="./regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-regression" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Regression is the most important tool for statistical analysis in the social sciences, and we have already seen several examples of how regression is used, starting from <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>. In this chapter, we will learn more about the assumptions that typically underlie our regression models as well as how we can think about using regression to test more complex relationships among variables than we have examined so far.</p>
+<section id="sec-regression-assumptions" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-regression-assumptions"><span class="header-section-number">11.1</span> Regression Assumptions</h2>
+<p>There are many different articulations of the assumptions that underlie our typical linear regression models, with some authors providing longer lists than others. Here, we will focus on the list provided by Gelman, Hill, and Vehtari (2021), which has the benefit of being arranged in decreasing order of importance. The authors caution, though, that this list of assumptions is for <em>predictive</em> inferences; drawing <em>causal</em> conclusions requires additional considerations, as implied by the discussion of causality in <a href="causality.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
+<section id="validity" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="validity">1. Validity</h3>
+<p>Just as our list of Three Questions to Always Ask about Data prods us to start by asking “what is being measured?”, the first regression assumption highlights the importance of valid measurement of variables (see discussion of validity in <a href="measurement.html" class="quarto-xref"><span>Chapter 10</span></a>). With any statistical analysis (whether using regression or not), the data in the sample must validly measure whatever you are trying to understand, or else the results will be of no use. In their concept of validity, Gelman and colleagues also indicate the need to “include all relevant” independent variables and to have observations that fall within the realm of the phenomena of interest (e.g., a study of employee attitudes should use a sample that consists of employees). Deciding on which independent variables to include in a regression will be discussed in more detail in <a href="#sec-multiple-regression" class="quarto-xref"><span>Section 11.2</span></a>.</p>
+</section>
+<section id="representativeness" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="representativeness">2. Representativeness</h3>
+<p>The data should be appropriate for generalizing to the broader phenomena of interest (external validity). As a simple example, a representative sample from a population (as would be found in expectation under random sampling) meets this assumption. It is not always necessary to have a perfectly representative sample to draw valid conclusions about associations, so long as the associations among variables are the same in the sample as in the population. For example, a sample that overrepresents young people could potentially yield accurate estimates of the association between exercise and happiness in the general population, so long as the exercise-happiness relationship plays out similarly among older and younger people. It is also the case that we are not always studying a well defined population. Thus, we sometimes need to interpret this assumption as indicating that the observations in the sample are representative instances of whatever it is we care to learn about (even if that phenomena of interest is not easily defined as a population).</p>
+</section>
+<section id="additivity-and-linearity" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="additivity-and-linearity">3. Additivity and linearity</h3>
+<p>We use the term “linear regression” to refer to the standard regression model because of its linear form: the value of each independent variable is multiplied by a constant, and then these products are added up to form the predicted value of the dependent variable (together with the intercept). We will see this written out as an equation in <a href="#sec-multiple-regression" class="quarto-xref"><span>Section 11.2</span></a>. Predictions from a linear regression model will always follow this pattern of additivity and linearity. If we wish to create predictions that cannot be represented through a linear combination of independent variables, a linear regression is the wrong tool to use. Note, however, that sometimes relationships that are not strictly linear can still be approximated through a linear function. Linear relationships offer a simplicity that is not always apparent in other functional forms, so sometimes we may prefer the straightforward interpretability of linear regression results at the cost of the flexibility we might be able to achieve with other types of models. For example, if our primary concern is whether two variables generally exhibit a positive (versus negative) association and what the general strength of that association is, we may prefer a linear model of that association since it can provide a single number (a slope coefficient) that indicates direction and magnitude of association, even if this number oversimplifies a bit (as when there is some curvature in the true line describing their association).</p>
+<p>Another important consideration to mention here (that we will explore in more detail later on in this chapter, and in the next) is that certain non-linear relationships can be modeled through linear regression, so long as they can be expressed by manipulating variables to create a linear function that represents these non-linearities. For example, the relationship between two variables need not follow a straight line if we transform the independent variable by squaring it, allowing for a prediction line to follow the shape of a parabola (for the original, untransformed variable).</p>
+<p>If an independent variable is binary, the assumption of linearity is not practically restrictive. Since binary variables can only take on two different values (typically coded as 0 and 1), the coefficient associated with a binary variable will simply indicate how much to shift the prediction when going from one value to the other. The shape of the “line” connecting the two points is immaterial. Thus, linear regression can generally be considered “non-parametric” (meaning minimal assumptions are imposed) when studying only binary independent variables. In such cases, we can think of regression as simply using an equation to compare means across groups, as discussed in <a href="qual-associations.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="h-tests.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+</section>
+<section id="independence-of-errors" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="independence-of-errors">4. Independence of errors</h3>
+<p>The “errors” referred to in this list of assumptions come from the error term in a regression model, as introduced in <a href="prob-models.html#sec-models-and-uncertainty" class="quarto-xref"><span>Section 7.2</span></a>. This fourth assumption implies that each observation in the sample represents a truly unique datapoint compared to all the others, at least when it comes to the value of the error term. Because the social world is full of interconnections, we often see violations of this assumption. Suppose, for example, that customer attitudes are measured using a survey of 1000 customers collected at 20 different restaurants. Though there is a sample size of 1000, each of the 20 restaurants may have its own peculiaries that shape customer attitudes in particular ways. Thus, the errors of prediction for the individuals may be interrelated (rather than fully independent) within each restaurant.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Fortunately, there are several techniques that can help us adjust our regression models to accommodate non-independence of errors, so long as we can accurately identify the structure(s) by which observations’ errors are interrelated.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The simplest structure is when we can group observations into mutually exclusive “clusters,” as in the case of the restaurant example above. There are multiple techniques that can adjust our regression estimates for such clustering, with the simplest being to make adjustments to our standard error estimates using one of several techniques known as “cluster robust standard errors.” Most statistical software packages will easily allow you to implement estimation of such standard errors. More advanced (and flexible) approaches to dealing with clustered observations can be found using tools from multi-level modeling.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Another setting where we often adjust for violations of this assumption is when we are analyzing panel (or time series) data. Since the same units (e.g., individuals or organizations) are being observed multiple times within a dataset, observations are not expected to be fully independent of one another (e.g., an individual with above-average satisfaction in one time period will likely continue to be fairly satisfied in the following period). A variety of techniques have been developed to address concerns associated with the non-independence of errors when working with panel (or time series) data, and effectively working with such data will typically require serious study of such techniques.</p>
+</section>
+<section id="equal-variance-of-errorsregression-4" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="equal-variance-of-errorsregression-4">5. Equal variance of errors<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></h3>
+<p>This assumption, known as <strong>homoskedasticity</strong>, indicates that the variance around the regression line is the same for all values of the independent variable(s). A clear violation of this assumption is shown in <a href="#fig-homoscedasticity" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>. Notice that the predictions for students with high high-school GPAs are very good, whereas the predictions for students with low high-school GPAs are not very good. In other words, the points for students with high high-school GPAs are close to the regression line, whereas the points for low high-school GPA students are not.</p>
+<div id="fig-homoscedasticity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-homoscedasticity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/correlations/unihighschoolgpa.jpg" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-homoscedasticity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: University GPA as a function of High School GPA.
+</figcaption>
+</figure>
+</div>
+<p>When errors have unequal variance, we call this <strong>heteroskedasticity</strong>. A common solution (easily implemented in most statistical software) is to calculate standard errors that are robust to heteroskedasticity. Some analysts will default to always using heteroskedastic-robust standard errors, although such corrections do not always work well in small samples.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+<section id="normality-of-errors" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="normality-of-errors">6. Normality of errors</h3>
+<p>This assumption is considered to the be least important. Still, regression results can sometimes become unreliable or imprecise when the distribution of errors has excessive outliers that are associated with certain non-normal distributions. This is particularly true when working with small samples. Thus, it can be useful to check variables for outliers, as well as examining the distribution of the residuals (estimated values of the error term in a regression model), which can easily be obtained in statistical software. Robust versions of regression are readily available in most statistical software and should be less vulnerable to problems created by violations of the normality assumption.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+</section>
+</section>
+<section id="sec-multiple-regression" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-multiple-regression"><span class="header-section-number">11.2</span> Multiple Regression<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></h2>
+<p>In simple linear regression, a dependent variable is predicted from one independent variable. In multiple regression, the dependent variable is predicted by two or more variables. For example, in the SAT case study we’ve used several times already to illustrate regression, you might want to predict a student’s university grade point average on the basis of their High-School GPA (HSGPA) and their total SAT score (verbal + math). The basic idea is to find a linear combination<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> of HSGPA and SAT that best predicts University GPA (UGPA). That is, the problem is to find the values of <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> in the equation shown below that give the best predictions of UGPA. As in the case of simple linear regression, we define the best predictions as the predictions that minimize the squared errors of prediction (the “least squares” criterion).</p>
+<p><span class="math display">\[\widehat{UGPA}_i = \alpha + \beta_1HSGPA_i + \beta_2SAT_i\]</span></p>
+<p>where <span class="math inline">\(\widehat{UGPA}\)</span> is the predicted value of University GPA and <span class="math inline">\(\alpha\)</span> is the intercept (note that many authors instead use <span class="math inline">\(\beta_0\)</span> to denote the intercept). For these data, the best prediction equation is shown below:</p>
+<p><span id="eq-multi-reg-sat"><span class="math display">\[\widehat{UGPA}_i = 0.540 + 0.541 \times HSGPA_i + 0.008 \times SAT_i \tag{11.1}\]</span></span></p>
+<p>In other words, to compute the prediction of a student’s University GPA, you add up (a) 0.540, (b) their High-School GPA multiplied by 0.541, and (c) their SAT multiplied by 0.008.</p>
+<p>For comparison purposes, here is the regression equation from the simple regression discussed in <a href="correlation.html#sec-introduction-to-linear-regression" class="quarto-xref"><span>Section 3.4</span></a>.</p>
+<p><span id="eq-simple-reg-sat"><span class="math display">\[
+\widehat{UGPA}_i = 1.097 + 0.675 \times HSGPA_i
+\tag{11.2}\]</span></span></p>
+<p><a href="#tbl-multipleregression" class="quarto-xref">Table&nbsp;<span>11.1</span></a> shows the data and predictions for the first five students in the dataset based on the multiple regression (<a href="#eq-multi-reg-sat" class="quarto-xref">Equation&nbsp;<span>11.1</span></a>).</p>
+<div id="tbl-multipleregression" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-multipleregression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: Data and Predictions
+</figcaption>
+<div aria-describedby="tbl-multipleregression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(HSGPA\)</span></th>
+<th></th>
+<th><span class="math inline">\(SAT\)</span></th>
+<th></th>
+<th><span class="math inline">\(\widehat{UGPA}\)</span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>3.45</td>
+<td></td>
+<td>1232</td>
+<td></td>
+<td>3.38</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2.78</td>
+<td></td>
+<td>1070</td>
+<td></td>
+<td>2.89</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>2.52</td>
+<td></td>
+<td>1086</td>
+<td></td>
+<td>2.76</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>3.67</td>
+<td></td>
+<td>1287</td>
+<td></td>
+<td>3.55</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>3.24</td>
+<td></td>
+<td>1130</td>
+<td></td>
+<td>3.19</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The values of <span class="math inline">\(\beta\)</span> (<span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>) are called “regression slope coefficients.”</p>
+<p>The multiple correlation (R) is equal to the correlation between the predicted scores and the actual scores. In this example, it is the correlation between <span class="math inline">\(\widehat{UGPA}\)</span> and <span class="math inline">\(UGPA\)</span>, which turns out to be 0.79. That is, R = 0.79. Note that R will never be negative since if there are negative correlations between the predictor variables and the criterion, the regression coefficients will be negative so that the correlation between the predicted and actual scores will be positive. By squaring the value of R, we obtain the commonly reported R-squared statistic (also written r^2 or <span class="math inline">\(R^2\)</span>). R-squared indicates the proportion of variation in the dependent variable that can be explained by the independent variables in the model (or put differently, the proportion of variance in the dependent variable accounted for by the predicted scores).</p>
+<section id="interpretation-of-regression-coefficients" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="interpretation-of-regression-coefficients">Interpretation of Regression Coefficients</h3>
+<p>A regression coefficient in multiple regression is the slope of the linear relationship between the criterion variable and the part of a predictor variable that is independent of all other predictor variables. There are multiple ways to explain this computation, with additional descriptions provided in the appendix. As one approach, the regression coefficient for HSGPA can be computed by first predicting HSGPA from SAT and saving the errors of prediction (the differences between <span class="math inline">\(HSGPA\)</span> and <span class="math inline">\(\widehat{HSGPA}\)</span>). These errors of prediction are called “residuals” since they are what is left over in HSGPA after the predictions from SAT are subtracted, and represent the part of HSGPA that is independent of SAT. These residuals are referred to as HSGPA.SAT, which means they are the residuals in HSGPA after having been predicted by SAT. The correlation between HSGPA.SAT and SAT is necessarily 0.</p>
+<p>The final step in computing the regression coefficient is to find the slope of the relationship between these residuals and UGPA. This slope is the regression coefficient for HSGPA. The following equation is used to predict HSGPA from SAT:</p>
+<p><span class="math display">\[\widehat{HSGPA}_i = -1.314 + 0.0036 \times SAT_i\]</span></p>
+<p>The residuals are then computed as:</p>
+<p><span class="math display">\[HSGPA.SAT_i = HSGPA_i - \widehat{HSGPA}_i\]</span></p>
+<p>The linear regression equation for the prediction of UGPA by the residuals is</p>
+<p><span class="math display">\[\widehat{UGPA}_i = 3.173 + 0.541 \times HSGPA.SAT_i\]</span></p>
+<p>Notice that the slope (0.541) is the same value given previously for the estimate of <span class="math inline">\(\beta_1\)</span> in the multiple regression equation.</p>
+<p>This means that the regression coefficient for HSGPA is the slope of the relationship between the dependent variable and the part of HSGPA that is independent of (uncorrelated with) the other independent variables. It represents the change in the prediction for the dependent variable associated with a change of one in the independent variable when all other independent variables are held constant. Since the regression coefficient for HSGPA is 0.54, this means that, holding SAT constant, a change of one in HSGPA is associated with a change of 0.54 in <span class="math inline">\(\widehat{UGPA}\)</span>. If two students had the same SAT and differed in HSGPA by 2, then you would predict they would differ in UGPA by (2)(0.54) = 1.08. Similarly, if they differed by 0.5, then you would predict they would differ by (0.50)(0.54) = 0.27.</p>
+<p>The slope of the relationship between the dependent variable and the part of an independent variable that is unique from (independent of) other independent variables is its partial slope. Thus, the regression coefficient of 0.541 for HSGPA and the regression coefficient of 0.008 for SAT are partial slopes. Each partial slope represents the relationship between the independent variable and the dependent variable holding constant all of the other independent variables.</p>
+<p>It is difficult to compare the coefficients for different variables directly because they are measured on different scales. A difference of 1 in HSGPA is a fairly large difference, whereas a difference of 1 on the SAT is negligible. Therefore, it can be advantageous to transform the variables so that they are on the same scale. The most straightforward approach is to standardize the variables (see <a href="describing-one-variable.html#sec-standardization" class="quarto-xref"><span>Section 2.6.1</span></a>) so that they each have a standard deviation of 1. A regression coefficient for standardized variables is called a “standardized coefficient” or “beta coefficient.” For these data, the standardized coefficients are 0.625 and 0.198. These values represent the change in the prediction for the dependent variable (in standard deviations) associated with a change of one standard deviation on an independent variable (holding constant the value(s) on the other independent variable(s)). Clearly, a change of one standard deviation on HSGPA is associated with a larger difference than a change of one standard deviation of SAT. In practical terms, this means that if you know a student’s HSGPA, knowing the student’s SAT does not aid the prediction of UGPA much. However, if you do not know the student’s HSGPA, his or her SAT can aid in the prediction since the standardized coefficient in the simple regression predicting UGPA from SAT is 0.68. For comparison purposes, the standardized coefficient in the simple regression predicting UGPA from HSGPA is 0.78. As is typically the case, the partial slopes are smaller than the slopes in simple regression.</p>
+</section>
+<section id="sec-deciding-which-independent-variables-to-include" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="sec-deciding-which-independent-variables-to-include"><span class="header-section-number">11.2.1</span> Deciding Which Independent Variables to Include<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h3>
+<p>It is a bit hard to generalize regarding the criteria for deciding which varaibles to include as independent variables, because it depends on the research question posed and whether the goal is to describe general patterns of association, to identify a predictive relationship, or to identify a causal or possibly causal relationship.</p>
+<p>To help guide our discussion of variable selection, we will distinguish between <em>key independent variables of interest</em> (those that the analyst is particularly interested in learning about) and <strong>control variables</strong>. We will represent the former using X and the latter as Z. When we add an independent variable Z to a regression not because we are particularly interested in estimating the association of Z with the dependent variable Y but instead because we think including Z in the regression will yield better estimates for how X is associated with Y, we often refer to Z as a control variable. Control variables are not different from independent variables, as far as the statistical estimation is concerned. They are merely different labels that signal a difference in the researcher’s substantive interest in the slope coefficients for these variables (e.g., control variables are probably not the subjects of any hypotheses).</p>
+<p>Obviously, any variable X of substantive interest should be included in a regression, although it is sometimes beneficial to include various X variables one at a time if one is not interested in describing how each one relates to to Y independent of the other X variables.</p>
+<p>Where the interest lies (at least to some extent) in considering causal relationships among variables, you should generally include potential confounders to the X-Y relationship as control variables (additional independent variables) in a regression.</p>
+<p>You might also consider including as a control variable any factor that you believe will be a strong cause of the dependent variable, so long as this factor is not itself caused by X. Adding such variables will generally improve the precision of our estimates (making standard errors smaller).</p>
+<p>When there is an interest in causal relationships, it is generally best to avoid adding as control variables anything that may be caused by X. One reason is that when X causes Z and Z causes Y, Z is a mediator, and therefore Z is one route (or mechanism) through which X may affect Y. Thus, by controlling for (or pulling out) one route through which X may affect Y, we are distorting our ability to observe the total effect of X on Y.</p>
+<p>For estimations of causal effects, a more complete assessment of which variables should and should not be included in a regression can be facilitated through the use of Directed Acyclic Graphs (DAGs), an increasingly popular tool for applied researchers that is beyond the scope of what can be covered in this text.</p>
+<section id="more-on-mediating-relationships" class="level4" data-number="11.2.1.1">
+<h4 data-number="11.2.1.1" class="anchored" data-anchor-id="more-on-mediating-relationships"><span class="header-section-number">11.2.1.1</span> More on Mediating Relationships</h4>
+<p>When a variable is a mediator, it is one pathway by which an original independent variable affects the dependent variable. Mediators provide an interesting case that can highlight how there are sometimes multiple valid ways to select a list of independent variables, with different selections yielding different insights.</p>
+<p>Let us consider the case of gender and wages. In studies of the gender wage gap, one might use a sample of people in the workforce to test for differences in wages between men and women. The question of whether to control for various employee characteristics—such as professional background, expertise, and industry—turns out to be a highly controversial one. One the one hand, gender was determined at birth (at least for most of the population), and employee characteristics tend to result from either processes that occur after birth (and may be affected by gender) or things like family background that shouldn’t be correlated with gender (since we can assume in most contexts that sex is randomly determined). Thus, employee characteristics that are associated with gender can be viewed as potential mediators of the gender-pay relationship. If we are trying to understand the net-total effect of gender on pay, we should probably estimate the gender-pay association without controlling for employee characteristics. But the net-total effect is not necessarily the only thing we care about. For example, if we are trying to learn something about potential gender discrimination by employers, we might want to control for factors that we believe were determined prior to an employee’s interaction with the firm. In other words, we are now interested in a particular subset of pathways by which gender may be associated with pay, while ignoring other pathways that are not related to firm discrimination. This example illustrates how direct associations and partial associations can both add value to our understanding. In fact, a common way to empirically study relationships in which mediation is believed to exist is to run more than one regressions—one that does not control for the mediator (to estimate a total effect of the independent variable) and one that does include the mediator as a control (in part to estimate the “direct” effect of the independent variable, independent of its indirect effect through the mediator). To better describe the mediated path, one can also run a regression with the mediator as the dependent variable, in order to discern the link between the independent variable and the mediator.</p>
+<p>While we often find phenomena in the world that we believe can be described through a mediating relationship, it is very difficult to comprehensively test the causal claims implied by a mediating relationship. As such, most mediating relationships cannot be firmly established empirically with a single study.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> Thus, while mediation is important to consider when mapping out possible relationships, we should be somewhat modest in terms of our expectations for being able to easily test mediating relationships. If we are willing to <em>assume</em> that a mediating relationship exists, there are regression we can run (such as those described in the prior paragraph) to describe the nature of the linkages in this relationship, but it is much more difficult to evaluate quantitatively whether we have correctly identified the causal ordering in a mediating relationship.</p>
+</section>
+</section>
+</section>
+<section id="modeling-non-linear-relationships" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="modeling-non-linear-relationships"><span class="header-section-number">11.3</span> Modeling Non-linear Relationships</h2>
+<p>One way to model a non-linear relationship is to square the values of an independent variable, and then include both the original (non-squared) version of the variable as well as the squared variable in the regression. Doing so with the SAT variable, we find our estimates generate the following equation (with university GPA as the dependent variable):</p>
+<p><span class="math display">\[
+\widehat{UGPA}_i = -11.331 + 0.021 \times SAT_i - 0.0000074 \times SAT^2_i
+\]</span></p>
+<p>This results in the curved line shown in <a href="#fig-polynomial-reg" class="quarto-xref">Figure&nbsp;<span>11.2</span></a>, which better tracks the data in the scatterplot than a straight line would. Adding a squared line allows for the shape of the line to follow the shape of a parabola. If we want to allow for a second bend in the line (of a certain sort), we could add a cubed term. Higher-level polynomials can also be added.</p>
+<div id="fig-polynomial-reg" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polynomial-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/regression/polynomial_reg.png" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polynomial-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: Adding a squared term to a regression allows the regression line to curve
+</figcaption>
+</figure>
+</div>
+<p>Now, let’s consider a <strong>moderating</strong> relationship, meaning that two independent variable interact such that they each alter the association of the other with the dependent variable. Especially when looking at data that is well-suited for drawing causal conclusions, we might also describe tools for modeling moderation as checking for <strong>heterogeneous effects</strong>. One of the simplest ways to look for potential moderation is to divide a sample into subsamples according to the value of a moderating variable; we can then estimate the association of the independent and dependent variable in each subsample and see whether results differ notably across subsamples.</p>
+<p>Let’s check whether the SAT-UGPA relationship appears to differ depending on the value of high school GPA. We split the sample into two subsamples, with one subsample (the “low HSGPA” subsample) containing all students with a high school GPA at or below the full sample’s median. The other subsample (“high HSGPA”) contains students with a value of high school GPA above the median. Note that there are many different ways we might split the sample, such as using the mean instead of the median, or creating three subsamples (low, medium, high).</p>
+<p>Estimating a regression line among our low HSGPA subsample yields a slope of 0.0029:</p>
+<p><span class="math display">\[ \widehat{UGPA}_i = -0.448 + 0.0029 \times SAT_i \]</span></p>
+<p>Estimated among students in the high HSGPA subsample, the slope shrinks to just 0.00062:</p>
+<p><span class="math display">\[ \widehat{UGPA}_i = 2.663 + 0.00062 \times SAT_i \]</span></p>
+<p><a href="#fig-sample-split-reg" class="quarto-xref">Figure&nbsp;<span>11.3</span></a> shows these two distinct lines, along with the underlying subsamples from which they are estimated.</p>
+<div id="fig-sample-split-reg" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sample-split-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/regression/sample_split_reg.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sample-split-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.3: Estimating two regressions separately by subsample
+</figcaption>
+</figure>
+</div>
+<p>It appears that SAT scores have a stronger association with university GPA (a steeper slope) when high school GPA is low.</p>
+<p>We can also model moderation with a single regression for the whole sample using an <strong>interaction term</strong>. We create an interaction term by multiplying two independent variables together. In this example, we should multiply SAT by high school GPA. We can then run a regression where we have three independent variables: the original SAT variable, the original HSGPA variable, and the interaction term. The regression line is estimated to be:</p>
+<p><span class="math display">\[\widehat{UGPA}_i = -3.516 + 1.780 \times HSGPA_i + 0.0043 \times SAT_i - 0.0011 \times HSGPA_i \times SAT_i \]</span></p>
+<p>When we have nonlinear relationships, graphical depictions are typically helpful for demonstrating our results. Using statistical software, we can create a graph that shows us how the predicted value of UGPA changes depending on SAT and certain HSGPA values that we pick out for illustrative purposes. In this case, I chose values of 3.7 (approximately the 90th percentile), 2.3 (approximately the 10th percentile, and 3.0 (half way between the 10th and 90th percentiles).</p>
+<div id="fig-interaction-reg" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-interaction-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/regression/interaction_reg.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-interaction-reg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.4: Visualization of a moderating relationship, estimated with an interaction term
+</figcaption>
+</figure>
+</div>
+<p>From <a href="#fig-interaction-reg" class="quarto-xref">Figure&nbsp;<span>11.4</span></a>, we again see evidence that for higher levels of HSGPA, the relationship of SAT with university GPA gets weaker. However, an important caveat to this finding is that the coefficient for the interaction term is not statistically significant at the traditional .05 alpha level (p=0.069), so there is not strong statistical evidence that the slope does in fact vary depending on HSGPA. In other words, the changes we see in the slope in <a href="#fig-interaction-reg" class="quarto-xref">Figure&nbsp;<span>11.4</span></a> could easily be a coincidence, given the imprecision of our estimate. A larger sample could help us better assess whether the moderating relationship that we seem to observe is more than a statistical anomaly.</p>
+<p>More generally, it typically requires a large sample size to generate precise estimates of non-linear relationships.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p>While the approaches described in this section are widely employed in the social sciences, caution is warranted whenever modeling non-linearities with quantitative independent variables (interaction effects involving one or more binary independent variables are more straightforward to work with). Adding interaction or polynomial terms to linear regression equations is a somewhat inflexible way of dealing with potential non-linearities; we can easily go wrong if there are relatively small deviations from the functional form we assume in the regression equation we choose to use for our model. Put differently, it is hard to be confidence we are not violating regression assumptions 1 and 3 in a consequential way when relying on these simplistic methods to describe the details of a non-linear relationship. Fortunately, it is not too difficult to find more flexible approaches that can help validate findings of non-linearities in which we are interested, although doing so may require learning tools (e.g., nonparametric regression) beyond the scope of what is covered in this text.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+</section>
+<section id="exercises" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">11.4</span> Exercises</h2>
+<ol type="1">
+<li>Suppose I want to predict country crime rates based on income inequality, gun ownership rates, and ethnoracial heterogeneity. Write out a linear regression equation that allows for this type of prediction.</li>
+<li>If I want to control for Z (another variable) in my estimation of the effect of X on Y, how do I set up my regression?</li>
+<li>Suppose you want to understand how a prison education program affects prisoners. You argue that those who participate in the program are likely to experience increased self-efficacy (a sense of confidence that they can achieve their goals). And you think that those with higher self-efficacy will be less likely to recidivate (commit another crime after being released from prison). In sum, you expect participation in the education program to reduce recidivism by increasing self-efficacy. What are your independent, dependent, and mediating variables?</li>
+<li>Based on the argument outlined in the prior question, write 3 hypotheses describing your expectations for how the three variables are related to one another. Each hypothesis should describe what sort of correlation (positive or negative) you expect there to be between two variables (e.g., A is positively related to B).</li>
+</ol>
+</section>
+<section id="sec-regression-appendix-more-explanation-of-partial-slopesassociations" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-regression-appendix-more-explanation-of-partial-slopesassociations"><a href="#sec-regression" class="quarto-xref"><span>Chapter 11</span></a> Appendix: More Explanation of Partial Slopes/Associations</h2>
+<p>The simple linear regression equation can be written as:</p>
+<p><span id="eq-simple-reg"><span class="math display">\[
+\hat{y_i} = \alpha + \beta x_i
+\tag{11.3}\]</span></span></p>
+<p>We estimate the value of the slope coefficient (using least squares) as:</p>
+<p><span id="eq-beta-simple-reg"><span class="math display">\[
+\hat{\beta} = \frac{Cov(x,y)}{Var(x)}
+\tag{11.4}\]</span></span></p>
+<p>When we have two independent variables (x and z), the corresponding equations are:</p>
+<p><span id="eq-multi-reg"><span class="math display">\[
+\hat{y_i} = \alpha + \beta_1 x_i + \beta_2 z_i
+\tag{11.5}\]</span></span></p>
+<p><span id="eq-beta-multi-reg"><span class="math display">\[
+\hat{\beta_1} =
+\frac{ Cov(x,y) Var(z) - Cov(z,y) Cov(x,z) }
+{Var(x) Var(z) - Cov(x,z)^2 }
+\tag{11.6}\]</span></span></p>
+<p>Notice that in the numerator of <a href="#eq-beta-multi-reg" class="quarto-xref">Equation&nbsp;<span>11.6</span></a>, we begin with the covariance between x and y (which we also scale by multiplying by the variance of z). Then, to avoid a spurious relationship between x and y that might stem from z affecting both x and y, we subtract out the covariance of z and y times the covariance of z and x. Conceptually, we throw out the joint variation among all three variables—the portion of the overlap between x and y that also reflects overlap between z and y and between z and x.</p>
+<p>One way to think about the partial associations obtained through multiple regression is to use a Venn diagram to illustrate how covariance among three (or more) variables is handled.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> This is not a perfectly precise representation of how multiple regression works, but it can serve as a helpful tool for understanding the basic intuition. Think of overlap in circles as representing common variation or covariation.</p>
+<div id="fig-ballantine-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="350">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ballantine-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/regression/ballantine1.png" id="fig-ballantine-1" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ballantine-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.5
+</figcaption>
+</figure>
+</div>
+<p>When estimating partial slopes (multiple regression), the coefficient estimate for x is based on area 1. The coefficient estimate for z is based on area 2. Shared variation among all variables can’t be easily attributed to x or z, so area 3 isn’t be used to estimate either coefficient in multiple regression. If we estimate the coefficient of x using simple linear regression (without including z in the regression model), we might get a misleading estimate of the relationship between x and y since we’ll be using areas 1 and 3 to estimate the coefficient for x. If z is a confounding variable, then including area 3 when estimating a slope for x may be undesirable since this portion of the covariation between x and y is due to a common cause (z) rather than a direct link between x and y.</p>
+<p>But what about when the two independent variables x and z are uncorrelated? If the covariance between them is zero, then their variation is already independent (at least linearly independent). And therefore, finding the independent association of each one with y is equivalent to just finding the association with y. Using the Ballantine visual, there is no overlapping part 3 to subtract out, as seen in <a href="#fig-ballantine-2" class="quarto-xref">Figure&nbsp;<span>11.6</span></a>.</p>
+<div id="fig-ballantine-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="350">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ballantine-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/regression/ballantine2.png" id="fig-ballantine-2" class="img-fluid figure-img" width="350">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ballantine-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.6
+</figcaption>
+</figure>
+</div>
+<p>Looking to <a href="#eq-beta-multi-reg" class="quarto-xref">Equation&nbsp;<span>11.6</span></a>, we can try subbing in the value 0 for <span class="math inline">\(Cov(x,z)\)</span>:</p>
+<p><span class="math display">\[
+\hat{\beta_1} =
+\frac{ Cov(x,y) Var(z) - Cov(z,y) (0) }
+{Var(x) Var(z) - (0)^2 }
+\]</span><span class="math display">\[
+=
+\frac{ Cov(x,y) Var(z)  }
+{Var(x) Var(z)  }
+=
+\frac{ Cov(x,y)  }
+{Var(x)  }\]</span></p>
+<p>This yields the same result as <a href="#eq-beta-simple-reg" class="quarto-xref">Equation&nbsp;<span>11.4</span></a>, indicating that we obtain the same slope coefficient estimate for x regardless of whether we use simple regression or control for z in the case where x and z are perfectly uncorrelated. Note that this result only applies to the slope’s point estimate; its standard error and confidence interval will likely differ.</p>
+<p>We can also use the language of conditional expected values to demonstrate the difference between the bivariate (zero-order) associations described by simple regression and the partial associations found in multiple regression. Regression can be conceptualized as a model of a conditional expected value (conditional mean), where the predicted value (for the dependent variable) is an expected value and we are conditioning on the independent variables in the regression.</p>
+<p>Returning to the example from <a href="#sec-multiple-regression" class="quarto-xref"><span>Section 11.2</span></a>, we can indicate the difference in expected university GPA between two students where the only thing we know about them is that one (student A) has a high school GPA of 3.5 and the other (student B) has a high school GPA of 2.5. If high school GPA is the only piece of information we have access to, we should use the simple linear regression <a href="#eq-simple-reg-sat" class="quarto-xref">Equation&nbsp;<span>11.2</span></a> to determine this expected difference:</p>
+<p><span class="math display">\[
+\mathbb{E}[UGPA|HSGPA=3.5]-\mathbb{E}[UGPA|HSGPA=2.5]
+\]</span><span class="math display">\[
+= [1.097 + 0.675 \times (3.5)] - [1.097 + 0.675 \times (2.5)] = 0.675
+\]</span></p>
+<p>Now, suppose that we also know the two students’ SAT scores. If they are both 1100, that changes the predictive effect of a 1-point difference in high school GPA because would would have guessed that student A (with the 3.5 high school GPA) had a higher SAT score than student B (with a 2.5 high school GPA) since these two variables are positively correlated. But with partial slopes, we are considering how changing the value of one variable alters our prediction <em>while holding all other variables constant</em>. The partial slope for <span class="math inline">\(HSGPA\)</span> in <a href="#eq-multi-reg-sat" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> indicates the difference in the expected value of university GPA when the <span class="math inline">\(HSGPA\)</span> differ by one but the SAT scores are equal:</p>
+<p><span class="math display">\[\mathbb{E}[UGPA|HSGPA=3.5, SAT=1100]-\mathbb{E}[UGPA|HSGPA=2.5, SAT=1100]
+\]</span><span class="math display">\[
+=[0.540 + 0.541 \times (3.5) + 0.008 \times (1100)] - [0.540 + 0.541 \times (2.5) + 0.008 \times (1100)]
+\]</span><span class="math display">\[
+= 0.541\]</span></p>
+<p>The key point to emphasize here is that the difference in the expected value of university GPA associated with a 1-point difference in high school GPA changes depending on whether we are conditioning on solely high school GPA (yielding a difference of 0.675) or if we are also conditioning on SAT (yielding a difference of 0.541). That is because holding SAT constant is not what we would normally expect when observing a difference in high school GPA, since high school GPA and SAT are (positively) correlated.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>One way to conceptualize potential consequences of violating of this assumption is that you are effectively overstating the sample size: since observations are not truly independent, each observation adds less than a full unit (of new information) to the degrees of freedom.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Some additional techniques beyond those mentioned in the main text are spatial regression models, time series and panel regression techniques, and fixed effects models.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Take, for example, a study of whether employee job satisfaction is associated with changes in the size of an organization’s budget. Suppose a survey is conducted with employees of several dozen organizations, yielding thousands of individual-level survey responses. This seems to provide a very large sample, but the independent variable—size of the organization’s budget—is measured at the level of the organization, not at the level of the individual. And only a few dozen organizations were included in the sample. This is a classic example of multi-level data (since job satisfaction is measured at the individual level while budget size is measured at the organizational level). With multi-level data, it is difficult to define the sample size because the sample size differs depending on the variable: individual-level variables will have many more distinct observations than organizational-level variables. If we run a regression at the individual level, we risk dramatically overstating the precision of our estimates due to acting as though our sample size is much larger than it really is (for the independent variable).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The first paragraph of this subsection is adapted from David M. Lane. “Inferential Statistics for b and r.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/inferential.html">https://onlinestatbook.com/2/regression/inferent</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Rajh-Weber, H., Huber, S.E. &amp; Arendasy, M. A practice-oriented guide to statistical inference in linear modeling for non-normal or heteroskedastic error distributions. <em>Behav Res</em> <strong>57</strong>, 338 (2025). <a href="https://doi.org/10.3758/s13428-025-02801-4" class="uri">https://doi.org/10.3758/s13428-025-02801-4</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Field, A. P., &amp; Wilcox, R. R. (2017). Robust statistical methods: A primer for clinical psychology and experimental psychopathology researchers.&nbsp;<em>Behaviour research and therapy</em>,&nbsp;<em>98</em>, 19-38. <a href="https://doi.org/10.1016/j.brat.2017.05.013" class="uri">https://doi.org/10.1016/j.brat.2017.05.013</a></p>
+<p>Baissa, D. K., &amp; Rainey, C. (2020). When BLUE is not best: non-normal errors and the linear model.&nbsp;<em>Political Science Research and Methods</em>,&nbsp;<em>8</em>(1), 136-148. <a href="https://doi.org/10.1017/psrm.2018.34" class="uri">https://doi.org/10.1017/psrm.2018.34</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The initial material in this section (up until <a href="#sec-deciding-which-independent-variables-to-include" class="quarto-xref"><span>Section 11.2.1</span></a>) is adapted from Rudy Guerra and David M. Lane. “Introduction to Multiple Regression.” <em>Online Statistics Education: A Multimedia Course of Study</em>. <a href="https://onlinestatbook.com/2/regression/multiple_regression.html" class="uri">https://onlinestatbook.com/2/regression/multiple_regression.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>A linear combination of variables is a way of creating a new variable by combining other variables. A linear combination is one in which each variable is multiplied by a coefficient and the products are summed. For example, if<br>
+<span class="math display">\[y_i = 3x_{1i} + 2x_{2i} + .5x_{3i}\]</span><br>
+then <span class="math inline">\(y\)</span> is a linear combination of the variables <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, and <span class="math inline">\(x_3\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>The remainder of the chapter was written by Nathan Favero.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Green, D. P., Ha, S. E., &amp; Bullock, J. G. (2010). Enough already about “black box” experiments: Studying mediation is more difficult than most scholars suppose. <em>The Annals of the American Academy of Political and Social Science</em>,&nbsp;<em>628</em>(1), 200-208.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>It is difficult to say precisesly how large, but see the following resources for more concrete guidance:</p>
+<p>Gelman, A. (2018). You need 16 times the sample size to estimate an interaction than to estimate a main effect [blog post]. <a href="https://statmodeling.stat.columbia.edu/2018/03/15/need16/" class="uri">https://statmodeling.stat.columbia.edu/2018/03/15/need16/</a></p>
+<p>Sommet, N., et al.&nbsp;(2023). How many participants do I need to test an interaction? Conducting an appropriate power analysis and achieving sufficient power to detect an interaction. Advances in Methods and Practices in Psychological Science, 6(3), 25152459231178728.</p>
+<p>Baranger, D. A., et al.&nbsp;(2023). Tutorial: Power analyses for interaction effects in cross-sectional regressions. Advances in Methods and Practices in Psychological Science, 6(3), 25152459231187531.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Simonsohn U. Interacting With Curves: How to Validly Test and Probe Interactions in the Real (Nonlinear) World. <em>Advances in Methods and Practices in Psychological Science</em>. 2024;7(1). doi:<a href="https://doi.org/10.1177/25152459231207787">10.1177/25152459231207787</a></p>
+<p>Hainmueller, J., Mummolo, J., &amp; Xu, Y. (2019). How much should we trust estimates from multiplicative interaction models? Simple tools to improve empirical practice.&nbsp;<em>Political Analysis</em>,&nbsp;<em>27</em>(2), 163-192. <a href="https://doi.org/10.1017/pan.2018.46" class="uri">https://doi.org/10.1017/pan.2018.46</a></p>
+<p>Simonsohn U. Two Lines: A Valid Alternative to the Invalid Testing of U-Shaped Relationships With Quadratic Regressions. <em>Advances in Methods and Practices in Psychological Science</em>. 2018;1(4):538-555. doi:<a href="https://doi.org/10.1177/2515245918805755">10.1177/2515245918805755</a><a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Kennedy (2002) and Cohen and Cohen (1975) have been instrumental in developing this Ballentine diagram approach to explaining multiple regression.</p>
+<p>Kennedy, P. (2008). <em>A guide to econometrics</em>. Malden, MA: Blackwell Publishing.</p>
+<p>Cohen, J., &amp; Cohen, P. (1975). <em>Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences</em>. Hillsdale, NJ: Lawrence Erlbaum Associates.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./measurement.html" class="pagination-link" aria-label="Measurement">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./teaching-resources.html" class="pagination-link" aria-label="Teaching Resources">
+        <span class="nav-page-text">Teaching Resources</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

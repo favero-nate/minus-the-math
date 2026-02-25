@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Getting Started with Data – Statistics Minus the Math (2e)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./describing-one-variable.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-18279696052386181f2d5e2642aac360.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started.html">Data Essentials</a></li><li class="breadcrumb-item"><a href="./getting-started.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Statistics Minus the Math (2e)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Essentials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./describing-one-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relationships Between Two Quantitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qual-associations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Relationships with Qualitative Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stat-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistical Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./h-tests.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hypothesis Testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Going Deeper with Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prob-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Probabilistic Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sampling-distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Sampling Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./causality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Research Designs and Causality</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./measurement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Measurement</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teaching-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./change-log.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Change Log</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#three-questions-to-always-ask-about-data" id="toc-three-questions-to-always-ask-about-data" class="nav-link active" data-scroll-target="#three-questions-to-always-ask-about-data"><span class="header-section-number">1.1</span> Three Questions to Always Ask about Data</a></li>
+  <li><a href="#how-datasets-are-structured" id="toc-how-datasets-are-structured" class="nav-link" data-scroll-target="#how-datasets-are-structured"><span class="header-section-number">1.2</span> How Datasets are Structured</a>
+  <ul class="collapse">
+  <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables"><span class="header-section-number">1.2.1</span> Types of variables</a></li>
+  <li><a href="#types-of-datasets" id="toc-types-of-datasets" class="nav-link" data-scroll-target="#types-of-datasets"><span class="header-section-number">1.2.2</span> Types of datasets</a></li>
+  <li><a href="#varying-terminology" id="toc-varying-terminology" class="nav-link" data-scroll-target="#varying-terminology"><span class="header-section-number">1.2.3</span> Varying terminology</a></li>
+  </ul></li>
+  <li><a href="#visualization-basics" id="toc-visualization-basics" class="nav-link" data-scroll-target="#visualization-basics"><span class="header-section-number">1.3</span> Visualization Basics</a>
+  <ul class="collapse">
+  <li><a href="#qualitative-and-ordinal-variables" id="toc-qualitative-and-ordinal-variables" class="nav-link" data-scroll-target="#qualitative-and-ordinal-variables"><span class="header-section-number">1.3.1</span> Qualitative and ordinal variables</a></li>
+  <li><a href="#sec-quantitative-variables" id="toc-sec-quantitative-variables" class="nav-link" data-scroll-target="#sec-quantitative-variables"><span class="header-section-number">1.3.2</span> Quantitative variables</a></li>
+  <li><a href="#best-practices-for-simple-graphs" id="toc-best-practices-for-simple-graphs" class="nav-link" data-scroll-target="#best-practices-for-simple-graphs"><span class="header-section-number">1.3.3</span> Best practices for simple graphs</a></li>
+  </ul></li>
+  <li><a href="#sec-critically-evaluating-graphs" id="toc-sec-critically-evaluating-graphs" class="nav-link" data-scroll-target="#sec-critically-evaluating-graphs"><span class="header-section-number">1.4</span> Critically Evaluating Graphs</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.5</span> Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started.html">Data Essentials</a></li><li class="breadcrumb-item"><a href="./getting-started.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-getting-started" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Data is everywhere. Yet many of us find numbers intimidating. It can be tempting to assume that someone sophisticated enough to fluently cite numerical information must know what they’re talking about. At the same time, there is a kind of backlash to using numbers to describe the world. The title of the popular book <em>How to Lie with Statistics</em> captures a cynicism many people feel: since statistics can easily trick you, you shouldn’t believe them at all. Such extreme reactions reflect people’s lack of self-confidence in evaluating quantitative information. Because we don’t trust ourselves, we reflexively either dismiss or accept numerical claims—perhaps depending on whether the claim is one we already agree with or the source is one we trust.</p>
+<p>Fortunately, statistics is a topic that most anyone can learn. Even if you think you are not a “numbers person,” I am confident you can learn fundamentals that will allow you to critically assess statistical claims. I say this as someone who has spent much of my academic life surrounded by people who lacked confidence in their numerical abilities and yet decided to study social science topics—sometimes not realizing the extent to which they were signing up to work with numbers along the way. Many peers during my time studying for a PhD thought their abilities in math were not strong, but by the time they completed their degrees, they were all exceptionally competent in statistics. It is true that some people learn numerical material more quickly than others. For most people, lots of repetition is required before many statistical concepts are grasped. But I have yet to encounter a student who is unable to learn statistics. If you set your mind to it, you will learn it.</p>
+<p>In my opinion, the most important skill for dealing with statistics is critical thinking. While statistics is certainly quantitative, doing statistical analysis does not require you to perform complex math because software will handle the number crunching. Thus, being comfortable with statistics is mostly about developing familiarity with statistical concepts, mastering a few technical details, and thinking carefully about how to best apply statistical tools to real-world data. “Subject-matter expertise,” by which I mean familiarity with the topics (e.g., policy or program area) described by the data, is almost always required for good interpretation of statistical results. Sometimes, a bit of math will help with explaining how a statistic works or gaming out the implications of a statistical result. But even then, most of the math we need for an introductory course is relatively simple arithmetic.</p>
+<section id="three-questions-to-always-ask-about-data" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="three-questions-to-always-ask-about-data"><span class="header-section-number">1.1</span> Three Questions to Always Ask about Data</h2>
+<p>To help focus your attention on thinking critically, I encourage you to ask the following three questions whenever you encounter statistical information:</p>
+<ol type="1">
+<li><p>What is being measured?</p></li>
+<li><p>Who (or what) is in the dataset?</p></li>
+<li><p>How big are the differences?</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Long-Term Trends in U.S. Education
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Many have argued that despite huge investments in public schooling, the U.S. has little to show in terms of learning gains.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In <a href="#fig-edu-trends" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>, the solid line indicates a clear upward trend in spending on education over the decades, although there is a slight dip at the very end of the series (following the 2008 financial crisis).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The trajectory for math scores (the dashed line) is much less clear: an initial drop is followed by steep gains for a little while. Looking to the beginning and end points, we see the average score in 2012 is a bit higher than in 1973 (306 vs.&nbsp;304), but this gain is tiny compared to the fluctuations seen across years.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div id="fig-edu-trends" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-edu-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/naep.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-edu-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Trends in U.S. education spending and average math proficiency (17-year-olds)
+</figcaption>
+</figure>
+</div>
+<p>Notice that there are two y-axes on this graph: one on the left edge showing the units for expenditures and one on the right edge displaying units that are described as NAEP scores. That is because the trend in Math proficiency (measured using NAEP scores) is superimposed over the trend in spending levels, despite the fact that these two variables are measured in entirely different units. In my experience, the use of two y-axes often leads to confusion, and it is usually better to “keep it simple” by separating the data into two separate graphs.</p>
+<p>In analyzing this example, I will mostly ignore the spending trend in favor of evaluating the math trend, for sake of brevity. Still, I will note that increased spending is largely driven by (1) increasing labor costs across the (high-skilled) economy and (2) greater investments in special education. The latter investments likely improve equity and fairness in society but may do little to improve test scores.</p>
+<p>Regarding the math trend, let us consider our three Questions to Always Ask about Data:</p>
+<ol type="1">
+<li><p><strong>What is being measured?</strong></p>
+<p>If you were encountering this data for the first time on your own, I would recommend doing a quick online search for NAEP scores, perhaps focusing on descriptions from familiar sources like Wikipedia or government websites. You would find that NAEP scores come from standardized tests conducted by the Department of Education. If you wanted to go even deeper, you might do a Google Scholar search to see how researchers seem to be discussing/using NAEP scores. They are generally considered to be high-quality measures of student learning. You might also discover that there are actually two different kinds of NAEP scores: the long-term trend scores, shown here, as well as another set of scores based on a test that has only been administered since the 1990s.</p></li>
+<li><p><strong>Who (or what) is in the dataset?</strong></p>
+<p>Typically, we ask this question because we wonder who (or what) might be <em>missing</em> from the data. Perhaps the first thing you notice is that the data stops in 2012. Why aren’t students after 2012 included? It turns out that 2012 is the most recent year available for this trendline because the Department of Education has canceled data collection multiple times for the long-term trend NAEP among 17-year-olds, citing limited funding and COVID-19 pandemic disruptions. This reflects a frequent but unfortunate problem we face when analyzing data in the real world: data collectors often discontinue their work and leave us with an incomplete picture. Nonetheless, we can still use this data to say something meaningful about learning trends from prior decades.</p>
+<p>If you did some basic reading about the NAEP as suggested for the prior question, you would probably find that NAEP scores are available for various ages. Specifically, the long-term trend scores are available for kids aged 9, 13, and 17. Yet the graph only depicts the data for 17-year olds. On the one hand, it might seem that the oldest age is the most important since it indicates how students are doing near the end of their secondary education. On the other hand, it might be useful to see what the other trends look like. A quick online search for “naep scores over time” will likely return a government website showing NAEP scores for younger students, such as those shown below.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Among 9 and 13-year-olds, there is clear improvement in math between the ’70s and 2012. Then more recently, there is a large drop associated with the disruptions of COVID-19.</p>
+<div id="fig-naep-9yr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-naep-9yr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/9yo_naep.png" class="img-fluid figure-img" width="550">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-naep-9yr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Trend in 9-year-old math proficiency. Source: <a href="https://www.nationsreportcard.gov/ltt">NCES</a> (public domain).
+</figcaption>
+</figure>
+</div>
+<div id="fig-naep-13yr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-naep-13yr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/13yo_naep.png" class="img-fluid figure-img" width="550">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-naep-13yr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: Trend in 13-year-old math proficiency. Source: <a href="https://www.nationsreportcard.gov/ltt">NCES</a> (public domain).
+</figcaption>
+</figure>
+</div>
+<p>Given these results, you might conclude that there was some possible cherry picking in presenting the initial graph, since the trend among 17-year-olds shows much less improvement from the 1970s to the early 2000s than the trends for younger students. That is an important conclusion to reach and helps put the original graph in context.</p>
+<p>If you have some expertise in U.S. education, you can go even further with your evaluation of this data. One potentially important difference between 13 and 17-year-olds in the U.S. is that school attendance is typically compulsory at age 13 but not at 17. An online search (e.g., for “change in school dropout rate over time”) will likely reveal government reports showing that the dropout rate has generally declined over previous decades. Thus, one potential explanation for the mostly-flat trendline in 17-year-old NAEP scores is that in prior decades the 17-year-old scores were artificially inflated due to lower-performing students dropping out of high school and thus not taking the exams. In more recent years, more of these lower-performing students remain in school (a positive policy outcome), and even if they are learning more than in the past, their continued presence in schools brings the NAEP score average down, all else equal. To be precise, the overall picture is muddy because of limited data, and it is not clear exactly how much the improving dropout rate has distorted the 17-year-old trendline. But there is probably at least some distortion, and it is thus difficult to make definitive statements about the trends in learning among 17-year-olds.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>One final note about what is (not) included in the data we’ve been discussing: in addition to math, there are reading scores available for NAEP. While I focus on a single subject here for simplicity, an important caveat to our story about 9 and 13-year-olds is that their reading scores improved less than their math scores between the 1970s and 2012.</p></li>
+<li><p><strong>How big are the differences?</strong></p>
+<p>The 9-year-olds’ 2012 scores are 25 points higher than in 1973 (244-219=25). Gains for 13-year-olds over the same period are a bit smaller: 19 points of improvement (285-266=19). How big is a 25-point increase? It’s a bit hard to say because NAEP scores are measured in units that are not familiar to most of us. When working with unfamiliar units of measurement, sometimes the best we can do is to make relative comparisons. For example, we see that in 1973, 13-year-olds scored 47 points higher than 9-year-olds (266-219=47). Thus, a 25-point gain is over half the difference between 9 and 13-year-olds in terms of math proficiency on the 1973 exam. We could further contextualize these numbers by making the simplistic assumption that 11-year-olds—who don’t take the NAEP—land exactly halfway between 9 and 13-year-olds. If so, 1973’s 11-year-olds should have scored a 242.5. Thus, over the course of four decades, 9-year-olds seem to have improved to roughly the level of 11-year-olds in 1973. This is a substantial improvement!</p>
+<p>The term “back-of-the-envelope” calculations refers to the use of simple math to make approximations based on convenient assumptions, as we have just done. Such calculations yield only rough approximations, but they can sometimes help us better interpret numerical results.</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="how-datasets-are-structured" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="how-datasets-are-structured"><span class="header-section-number">1.2</span> How Datasets are Structured</h2>
+<p>We often display data in the form of a spreadsheet. <a href="#tbl-country-preview" class="quarto-xref">Table&nbsp;<span>1.1</span></a> shows part of a dataset describing countries. Each row represents one country, and we call the rows <strong>observations</strong>. Each column represents one characteristic of the countries. We call the columns <strong>variables</strong>. Variables allow us to describe whatever it is we care about—concepts like size of the public sector, the share of workers who are female in the public (or private) sector, and whether a country is a former British colony. We can easily imagine adding other variables like country wealth, average education level, or government spending on social programs. We call the columns <u>vari</u>ables because each column displays values of a characteristic that <u>varies</u> depending on which observation we are talking about: in Guatemala, the public sector size is 0.064, while in Hungary it is 0.261. What do these numbers mean? Here, public sector size is measured as the proportion of employment that is in the public sector. We can convert a proportion to a percentage by shifting the decimal point two places to the right. Thus, in Guatemala, 6.4% of jobs are found in the public sector, whereas in Hungary the figure is 26.1%. The public sector is much larger in Hungary than in any other country shown in this table.</p>
+<div id="tbl-country-preview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-country-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Preview of a dataset of countries and their characteristics<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>
+</figcaption>
+<div aria-describedby="tbl-country-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>country_name</th>
+<th>publ_sector_size</th>
+<th>females_publ</th>
+<th>females_priv</th>
+<th>former_british_colony</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guatemala</td>
+<td>0.0642733</td>
+<td>0.437011</td>
+<td>0.2751051</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Guinea-Bissau</td>
+<td>0.0535029</td>
+<td>0.2742133</td>
+<td>0.3592181</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Honduras</td>
+<td>0.0602268</td>
+<td>0.5613141</td>
+<td>0.3063367</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Hungary</td>
+<td>0.2614872</td>
+<td>0.694158</td>
+<td>0.3943521</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>India</td>
+<td>0.0851988</td>
+<td>0.3021879</td>
+<td>0.1555202</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Indonesia</td>
+<td>0.097229</td>
+<td>0.4430795</td>
+<td>0.3249187</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><a href="#tbl-fevs-preview" class="quarto-xref">Table&nbsp;<span>1.2</span></a> previews a dataset where each observation (row) is a different individual who responded to a survey. We use the term <strong>unit of analysis</strong> to describe what constitutes one observation in a dataset: in the prior table the unit of analysis was the country, whereas here it is the individual. Other common units of analysis include the organization, the work unit, and the subnational unit (e.g., city or region).</p>
+<div id="tbl-fevs-preview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fevs-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.2: Preview of data from a 2024 survey of U.S. government employees<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>
+</figcaption>
+<div aria-describedby="tbl-fevs-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>random_id</th>
+<th>race</th>
+<th>hispanic</th>
+<th>sex</th>
+<th>q1</th>
+<th>q2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>194868625278</td>
+<td>White&nbsp;</td>
+<td>No&nbsp;</td>
+<td>Male&nbsp;</td>
+<td>Neither Agree nor Disagree</td>
+<td>Neither Agree nor Disagree</td>
+</tr>
+<tr class="even">
+<td>152966380283</td>
+<td>White&nbsp;</td>
+<td>No&nbsp;</td>
+<td>Male&nbsp;</td>
+<td>Disagree</td>
+<td>Strongly Disagree</td>
+</tr>
+<tr class="odd">
+<td>146904434378</td>
+<td>Other</td>
+<td>No&nbsp;</td>
+<td>Female&nbsp;</td>
+<td>Agree</td>
+<td>Agree</td>
+</tr>
+<tr class="even">
+<td>161966059804</td>
+<td>White&nbsp;</td>
+<td>Yes&nbsp;</td>
+<td></td>
+<td>Strongly Agree</td>
+<td>Strongly Agree</td>
+</tr>
+<tr class="odd">
+<td>133516090099</td>
+<td>Black or African American&nbsp;</td>
+<td>No&nbsp;</td>
+<td>Male&nbsp;</td>
+<td>Agree</td>
+<td>Agree</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="types-of-variables" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="types-of-variables"><span class="header-section-number">1.2.1</span> Types of variables</h3>
+<p>We also distinguish among different kinds of variables, which will often require different types of analysis.</p>
+<p><strong>Quantitative variables</strong> are expressed in numbers. The public sector size variable we examined above is quantitative.</p>
+<p>For <strong>qualitative variables</strong>, it typically makes more sense to use text than numbers to describe the values. For example, race is a qualitative variable, as shown in the example survey data above. While you may sometimes encounter datasets that record the values of a qualitative variable using numbers (for ease of processing), the assignment of numbers to values will be arbitrary. This is because qualitative variables take on values that are unordered categories (cannot be arranged from least to most). Hispanic and sex are also qualitative variables in the example survey data.</p>
+<p>A qualitative variable that takes on only two values is called a <strong>binary variable</strong>. The variables hispanic and sex are binary. For the sex variable, there is also one blank cell, indicating a missing value. Binary variables often appear in spreadsheets with values shown as 1s and 0s. In some cases, a 1 indicates “yes” while a 0 indicates “no.” For example, in the country data shown above, the variable “former_british_colony” is coded as a 1 if “yes, this country is a former British colony” and 0 if it is not.</p>
+<p>There is also a third type of variable called an <strong>ordinal variable</strong>, where values can be arranged in order but cannot be easily quantified. This type exists in a somewhat grey zone between quantitative and qualitative. Many surveys utilize Likert scales, which allow respondents to choose from a range of options along a continuum (e.g., strongly disagree, disagree, agree, strongly agree). Variables q1 and q2 in the survey data example use this kind of scale. For q1, people are responding to the statement “I am given a real opportunity to improve my skills in my organization.” Q2 asks them to indicate whether they agree that “I feel encouraged to come up with new and better ways of doing things.” Likert scales result in ordinal variables: while we can arrange response options from most agreement to least agreement, it is not clear how to assign precise numbers because we don’t know if the distances between response options are equal. If “strongly disagree” is a 1 and “disagree” is a 2, should “neither agree nor disagree” be a 3? Or a 4? Maybe 3.5? It is difficult to say what numbering scheme would most accurately represent respondents’ attitudes because this is an ordinal variable.</p>
+</section>
+<section id="types-of-datasets" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="types-of-datasets"><span class="header-section-number">1.2.2</span> Types of datasets</h3>
+<p>So far, the datasets we have seen are what we call <strong>cross sections</strong>. Each observation is a different unit. There are also <strong>time series</strong> datasets, where each observation is a different point in time. We saw an example of time series data on U.S. education being depicted graphically at the beginning of the chapter. <a href="#tbl-edu-spending" class="quarto-xref">Table&nbsp;<span>1.3</span></a> shows some of this same data displayed as a spreadsheet. With time series data, the unit of analysis could be the year (as in this example), the quarter, the month, the week, the day, etc.</p>
+<div id="tbl-edu-spending" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-edu-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.3: Time series data (U.S. education spending)
+</figcaption>
+<div aria-describedby="tbl-edu-spending-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>year</th>
+<th>spending_per_pupil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1973</td>
+<td>7817</td>
+</tr>
+<tr class="even">
+<td>1974</td>
+<td>7994</td>
+</tr>
+<tr class="odd">
+<td>1975</td>
+<td>8235</td>
+</tr>
+<tr class="even">
+<td>1976</td>
+<td>8445</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>You may also sometimes encounter more complicated data structures that combine the attributes of cross-sectional and time series data. A <strong>panel</strong> dataset tracks multiple units over multiple time periods. For example, a dataset might track several countries over several years (each row describing one country in one year). A <strong>repeated cross section</strong> is similar, except that different units are observed in each time period. A survey that is conducted annually but where the respondents are different each year is a repeated cross section.</p>
+</section>
+<section id="varying-terminology" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="varying-terminology"><span class="header-section-number">1.2.3</span> Varying terminology</h3>
+<p>Unfortunately, there are many cases where statistical terminology is inconsistent from one source to the next. Since you will probably encounter research reports or articles that use different terminology than I use here, it is important to be familiar with these alternative terms:</p>
+<ul>
+<li><p>Qualitative variables can also be called <strong>categorical variables</strong> or <strong>nominal variables</strong>.</p></li>
+<li><p>Binary variables are often called <strong>dummy variables</strong>.</p></li>
+<li><p>Time series data is sometimes called <strong>longitudinal data</strong>.</p></li>
+</ul>
+<p>Sources also disagree on whether ordinal variables should be considered a subcategory of quantitative or qualitative variables. For this text, I consider ordinal variables to be a distinct third category, but different authors classify them differently.</p>
+</section>
+</section>
+<section id="visualization-basics" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="visualization-basics"><span class="header-section-number">1.3</span> Visualization Basics</h2>
+<p>Creating simple graphs is often a great first step for getting familiar with a dataset. In this chapter, we will focus mainly on graphing just one variable at a time.</p>
+<section id="qualitative-and-ordinal-variables" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="qualitative-and-ordinal-variables"><span class="header-section-number">1.3.1</span> Qualitative and ordinal variables</h3>
+<p>For qualitative and ordinal variables, we often use bar charts to depict the frequencies of different values. (We can also sometimes use bar charts to depict quantitative variables if all values are whole numbers, as we will see next chapter in <a href="describing-one-variable.html#fig-quiz-1" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>.)</p>
+<div id="fig-bar-race" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bar-race-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/bar.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-race-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: Bar chart of race variable from 2024 survey of U.S. government employees
+</figcaption>
+</figure>
+</div>
+<p>One can quickly see from <a href="#fig-bar-race" class="quarto-xref">Figure&nbsp;<span>1.4</span></a> that the most common value for the race variable is White, meaning that most U.S. government employees responding to the survey are White. We also see that the values of Asian and Other are fairly rare (each occurring in fewer than 10% of observations). Black or African American occurs a bit more frequently (around 15% of observations).</p>
+<p>Another type of graph you can create with qualitative data is a pie chart, using the frequency of each value to create the size of the pie slice. Pie charts visually suggest a zero-sum approach to thinking about the sizes of the different categories: you can’t make one slice bigger without making at least one other slice smaller. This makes pie charts particularly effective for depicting something like a budget allocation where a scarce resource is being distributed across categories. However, a zero-sum allocation is not always what we wish to emphasize when summarizing a qualitative variable. Pie charts can also be hard to read with certain configurations of data (i.e., when there are too many categories or the slices get too small). Thus, it should come as no surprise that research scientists tend to rely on bar charts more than pie charts for depicting qualitative variables.</p>
+<div id="fig-pie-race" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pie-race-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/pie.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pie-race-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.5: Pie chart of race variable from 2024 survey of U.S. government employees
+</figcaption>
+</figure>
+</div>
+<p>Note that bar charts and pie charts can be used to represent things other than the frequency with which different values of a variable occur, even though that is the main way we use them while studying statistics. When you encounter a graph, it is always important to carefully read the titles and labels to make sure you understand exactly what is depicted. A bar graph might, for example, indicate the size of the change (positive or negative) in the budget from 2024 to 2025 for various categories of spending. Or as noted above, you might see the levels for budget categories themselves depicted in a pie chart—highlighting how some categories make up much larger shares of the budget than others. In such cases, the charts would not be telling you how many observations (rows of data) record different values of a variable, as in the example graphs shown here.</p>
+</section>
+<section id="sec-quantitative-variables" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-quantitative-variables"><span class="header-section-number">1.3.2</span> Quantitative variables</h3>
+<p>Perhaps the most popular type of graph for visualizing a single quantitative variable is a histogram. An example is shown below, using the publ_sector_size variable we discussed above. In a histogram, each bar represents a range of values, known as a “bin.” The x-axis (along the bottom of the graph) shows us the range of values for the publ_sector_size variable being described by each bar. The height of each bar represents how many data points fall within the corresponding bin. In this particular histogram, the y-axis (along the left side of the graph) shows how different heights indicate different numbers of observations. For example, the first bar on the left has a height indicating seven observations. The approximate range shown on the x-axis for this bar is .02 to .07. Therefore, seven countries have a public sector size between approximately .02 and .07, meaning that 2-7% of employment in those countries is within the public sector. The right-most bar indicates that 5 countries—those with the largest public sectors—have approximately 30-35% of all workers employed by the public sector. Most countries in this dataset lie between the two extremes depicted by the left-most and right-most bars. There are more observations in the middle three bins (indicated by the taller bars) than there are in the two left-most or the two right-most bins.</p>
+<div id="fig-hist-publ_sector" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hist-publ_sector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/hist1.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-publ_sector-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.6: Histogram of public_sector_size variable from a dataset of countries and their characteristics
+</figcaption>
+</figure>
+</div>
+<p>Now, let’s examine a histogram for the variable females_publ, which indicates the proportion of public sector employees who are female. In this graph, we can notice a certain asymmetry: the bars on the right half of the graph tend to be taller than those on the left. The short bars indicate that relatively few countries have proportions in the approximate range of .1 to .45; in other words, for a small number of countries, we see that 10-45% of the public workforce is female. Most countries have a public workforce that is more like 45-75% female (the tall bars on the right side of the graph). Thus, it seems that in a majority of the 44 countries included in this dataset, the public sector employs more females than males.</p>
+<div id="fig-hist-females_publ" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hist-females_publ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/hist2.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-females_publ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: Histogram of females_publ variable from a dataset of countries and their characteristics
+</figcaption>
+</figure>
+</div>
+<p>There are several alternatives to histograms. You can see in <a href="#fig-various-females_publ" class="quarto-xref">Figure&nbsp;<span>1.8</span></a> several different types of graphs being used to depict the same data for the females_publ variable. Each one indicates the relative density of observations across the range of possible values. Much like a histogram, a kernel density (k-density) plot uses height to indicate the frequency with which values occur, but rather than dividing values up into discrete ranges (bins), an algorithm is used to create a smooth, continuous line that is drawn across the values. A violin plot (which can be oriented horizontally or vertically) is somewhat similar but uses thickness rather than height to indicate density of observations across the range of values. A strip plot uses one dot per observation but usually adds some random noise called “jitter” to the data. Without this jitter, dots often stack on top of one another such that the actual density of observations is obscured. Finally, a box plot uses a box to indicate the range of values containing the middle 50% of observations, with other lines indicating other important quantities like the full range of values. Given the importance and complexity of box plots, we will examine them in more detail in the next chapter.</p>
+<div id="fig-various-females_publ" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-various-females_publ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/compare.png" class="img-fluid figure-img" width="550">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-various-females_publ-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.8: Various plots of public_sector_size variable from a dataset of countries and their characteristics
+</figcaption>
+</figure>
+</div>
+<p>Regardless of which type of plot we use, we see the same asymmetry apparent in the original histogram for females_publ: most of the data lies in the range of .4-.8, with a few observations also occurring in the range of .1-.4.</p>
+</section>
+<section id="best-practices-for-simple-graphs" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="best-practices-for-simple-graphs"><span class="header-section-number">1.3.3</span> Best practices for simple graphs</h3>
+<p>As useful as graphs are, it is also easy to go wrong with data visualization. Here are three guidelines to keep in mind when getting started with graphs.</p>
+<p>First, the simple graphs we examined for quantitative variables are typically a good starting point for learning about a variable, but there may be important details that are not apparent from the first graph we look at. For example, while histograms usually provide a nice overview of a variable, the overall shape depicted by the bars in a histogram can sometimes change in surprising ways if we alter the boundaries of the bins.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Estimates of Small Donations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A survey of nonprofits asked each respondent to estimate the percentage of individual donations to their organization in 2019 that were smaller than $250.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> Look at how different the right-most bars of the histogram look, depending on whether we use 10 bins or 11 bins (a setting we can change in the software creating the histogram):</p>
+<div id="fig-bin-settings" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bin-settings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/donations_hist1.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bin-settings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.9: Histograms with different bin settings (depicting donations estimate variable)
+</figcaption>
+</figure>
+</div>
+<p>Why the dramatic change? If we plot bins with a width of 1, we get a better sense of what is unusual about the underlying data:</p>
+<div id="fig-bin-width-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bin-width-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/donations_hist2.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bin-width-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.10: Histogram with a bin width of 1 (depicting donations estimate variable)
+</figcaption>
+</figure>
+</div>
+<p>From this more fine-grained depiction of the data, we see that respondents appear to typically answer with numbers divisible by 5. Remember, survey respondents were asked to provide an estimate—not look up the exact number from their records. People are more likely to offer estimates that are “round” numbers like 90 or 95, as opposed to something like 92.</p>
+<p>In the initial histogram with 10 bins, the right-most bin included the value 90—the most popular answer. When we switched to using 11 bins, the right-most bin was redrawn to exclude 90, so the number of observations in the bin (represented by its height) dropped dramatically. Because of the spikes in frequency at round numbers (divisible by 10 or 5), changes in bin settings can cause relatively large changes to the visual pattern of the histogram.</p>
+</div>
+</div>
+<p>Second, be careful about using line graphs. When working with time series data, we often depict quantitative variables using a line graph. As we already saw in our example on trends in U.S. education, line graphs allow one to visually observe trends over time. While line graphs are appropriate for depicting time series data, their use in other contexts is often misleading, since the lines suggest connections between points that may not be connected at all in reality.</p>
+<p>Third, “keep it simple” is a great mantra to remember for data visualization (and much of data analysis). It is no accident that the graphs we have just reviewed are visually quite simple—maybe even boring. Some software programs will point you toward features like 3-dimensional graphs or using images instead of bars to depict information. While such graphs may look impressive on the surface, the flourishes usually distract from the main point of the graph (and can sometimes even actively mislead the reader).<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Focus on simplicity and clarity in data visualization, not trying to stand out.</p>
+</section>
+</section>
+<section id="sec-critically-evaluating-graphs" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-critically-evaluating-graphs"><span class="header-section-number">1.4</span> Critically Evaluating Graphs</h2>
+<p>Graphs are often poorly constructed in ways that can mislead, so it’s always important to think critically and exercise caution when interpreting data visualizations.</p>
+<p>Let’s look at some examples and see if any of the Three Questions to Always Ask about Data can help us identify misleading graphs.</p>
+<div class="unnumbered callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Differences in employee attitudes by sex
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Q2 from the survey of federal employees asks whether there is a workplace environment supportive of innovation. As already noted, this variable is ordinal, meaning it is not obvious what numbers would be most appropriate to attach to the variable values. Nonetheless, we adopt here the common practice of starting from 1 and counting up by whole numbers for the different response option:</p>
+<ul>
+<li><p>Strong Disagree = 1</p></li>
+<li><p>Disagree = 2</p></li>
+<li><p>Neither Agree nor Disagree = 3</p></li>
+<li><p>Agree = 4</p></li>
+<li><p>Strongly Agree = 5</p></li>
+</ul>
+<p>We’re not sure if these numbers are really the ideal ones to assign, but they are a reasonable approximation of how attitudes might be mapped to numbers. And by assigning precise numbers to the response options, we enable treating this variable as quantitative. This is beneficial because quantitative variables are often easier to work with than qualitative variables. For example, we can calculate the average of a quantitative variable. The overall average of the q2 variable is 3.79, which is a bit less than the value we assigned to Agree. We can also compute averages for different subsets of survey respondents. For example, we can compute separate averages by sex (separating out males and females) and display these averages in a simple graph. Here is one possibility for what that graph could look like:</p>
+<div id="fig-gender-compare-zoomed-in" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gender-compare-zoomed-in-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/zoomedin.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gender-compare-zoomed-in-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.11: A tiny difference that looks large: Comparing average male and female responses to survey item “I feel encouraged to come up with new and better ways of doing things.”
+</figcaption>
+</figure>
+</div>
+<p>A quick glance at this graph suggests that males feel much more supported in pursuing innovation than than females. But our third Question to Always Ask about Data indicates we should consider “How big is the difference?” Look closely at the y-axis here. The average response for females appears to be around 3.787, while the average response for males is approximately 3.798. That is a tiny difference—just .011 on a 1-5 scale. In reality, male and female respondents report very similar average levels of support for pursing innovation. It is just that the figure is depicting a very narrow portion of the range for this variable, which makes a mole hill look like a mountain.</p>
+<p>Let’s look at what happens when we redraw the y-axis:</p>
+<div id="fig-gender-compare-zoomed-out" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gender-compare-zoomed-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/zoomedout.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gender-compare-zoomed-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.12: A tiny difference that looks tiny: Comparing average male and female responses to survey item “I feel encouraged to come up with new and better ways of doing things.”
+</figcaption>
+</figure>
+</div>
+<p>Now, the difference in averages between females and males is difficult to visually detect because the dot for Male is barely higher up than the dot for Female. Notice the values on the y-axis: the range begins at 3 (Neither Agree nor Disagree) and ends at 4 (Agree). We have “zoomed out” on the difference we saw in <a href="#fig-gender-compare-zoomed-in" class="quarto-xref">Figure&nbsp;<span>1.11</span></a>.</p>
+</div>
+</div>
+<p>Generally speaking, any difference can be made to visually look very large or very small depending on how the axes are drawn. It is all about how “zoomed in” or “zoomed out” you are relative to the range of possible values for the variable.</p>
+<p>It is sometimes tempting to create simplistic rules to try to avoid misleading graphs like the one from the prior example. Such rules are generally a bad substitute for carefully thinking through how to best describe the data in front of us. As an example, it is sometimes advised to always including 0 in the y axis in order to avoid “zooming in” on the y axis so much that we make small differences appear larger than they really are. Let’s consider this rule in the context of some data on trends in childhood vaccination.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example: Childhood Vaccination Rates
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Public health officials advise that at least 95% of the community should be vaccinated against measles in order to maintain herd immunity.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> <a href="#fig-vaccines-zoomed-out" class="quarto-xref">Figure&nbsp;<span>1.13</span></a> shows estimates for the rate of measles-mumps-rubella (MMR) vaccination in the U.S. among children starting primary school (solid line).<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> The y-axis is drawn to start at 0, and the target rate of 95% is depicted as a dashed line. The solid line looks almost flat and is always close to the dashed line. It is hard to say much more based on this graph, except that the actual vaccination rate appears to fall a bit shy of the 95% target in recent years.</p>
+<div id="fig-vaccines-zoomed-out" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vaccines-zoomed-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/vaccination2.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vaccines-zoomed-out-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.13: A depiction of the trend in MMR vaccination among children starting primary school (kindergarten), compared to 95% target
+</figcaption>
+</figure>
+</div>
+<p>Now look at the following alternative. While the exact same data is being depicted in <a href="#fig-vaccines-zoomed-in" class="quarto-xref">Figure&nbsp;<span>1.14</span></a>, the redrawn y axis makes the solid line look like it is moving a lot (suggesting big year-to-year differences). Prior to 2020, rates were pretty consistently within the 94-95% range. But more recent years show rates two or three percentage points below the 95% target. Given the potential public health implications of falling just one or two percentage points below the target of 95% vaccine coverage, it does not seem like a smart choice to include 0 on the y axis for this data (as in <a href="#fig-vaccines-zoomed-out" class="quarto-xref">Figure&nbsp;<span>1.13</span></a>), since doing so makes it quite difficult to precisely discern changes of one or two percentage points.</p>
+<div id="fig-vaccines-zoomed-in" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vaccines-zoomed-in-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Images/getting-started/vaccination1.png" class="img-fluid figure-img" width="400">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vaccines-zoomed-in-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.14: Another depiction of the trend in MMR vaccination among children starting primary school (kindergarten), compared to 95% target
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>For good visualization, we want differences that are meaningful in reality to be visually noticeable in our graphs. How do we define a “meaningful” difference? There is no universal rule. Typically, subject-matter expertise and careful judgment will be our best guides.</p>
+<p>Whenever you see a difference in a graph that “looks big” or “looks small,” take a moment to pause. Look carefully at the numbers on the axes, and think about how to evaluate the third Question to Always Ask about Data: “Based on what I know about this topic and how the variables are measured, <em>how big is this difference</em>? Does my understanding of the numbers match what my eyes see?”</p>
+</section>
+<section id="exercises" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.5</span> Exercises</h2>
+<ol type="1">
+<li><p>What are the three Questions to Always Ask about Data?</p></li>
+<li><p>What types of variables are <code>voter_registration</code>, <code>follows_news</code>, and <code>years_living_in_state</code> in the table below?</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 27%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>voter_registration&nbsp;</th>
+<th>follows_news</th>
+<th>years_living_in_state</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>registered</td>
+<td>somewhat agree</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>ineligible</td>
+<td>strongly disagree</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>unregistered</td>
+<td>strongly agree</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>registered</td>
+<td>somewhat agree</td>
+<td>34</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>registered</td>
+<td>somewhat disagree</td>
+<td>44</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>unregistered</td>
+<td>strongly agree</td>
+<td>11</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>What is the unit of analysis in the table from question 2?</p></li>
+<li><p>If I have a dataset where the unit of observation is the week, what type of dataset do I have?</p></li>
+<li><p>What is another name for a qualitative variable?</p></li>
+<li><p>Are pie charts or bar charts more popular among scientists for depicting a qualitative variable?</p></li>
+<li><p>What are three best practices for creating graphs (as described in this chapter)?</p></li>
+<li><p>Why is it important to carefully read the labels on a graph’s axes?</p></li>
+</ol>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>See <a href="https://www.hamiltonproject.org/wp-content/uploads/2023/01/092011_education_greenstone_looney_shevlin.pdf" class="uri">https://www.hamiltonproject.org/wp-content/uploads/2023/01/092011_education_greenstone_looney_shevlin.pdf</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Expenditure per pupil in fall enrollment from Table 236.55 of the <em>2023 Digest of Education Statistics,</em> National Center for Education Statistics. <a href="https://nces.ed.gov/programs/digest/d23/tables/dt23_236.55.asp" class="uri">https://nces.ed.gov/programs/digest/d23/tables/dt23_236.55.asp</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>National Center for Education Statistics (2013).&nbsp;<em>The Nation’s Report Card: Trends in Academic Progress 2012</em> &nbsp;(NCES 2013–456). National Center for Education Statistics, Institute of Education Sciences, U.S. Department of Education, Washington, D.C.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>U.S. Department of Education, Institute of Education Sciences, National Center for Education Statistics, National Assessment of Educational Progress (NAEP), various years, 1971–2023 Long-Term Trend Reading and Mathematics Assessments. <a href="https://www.nationsreportcard.gov/ltt" class="uri">https://www.nationsreportcard.gov/ltt</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>See <a href="https://www.chalkbeat.org/2022/3/31/23005371/high-school-test-scores-underestimate-naep-dropout-nces/" class="uri">https://www.chalkbeat.org/2022/3/31/23005371/high-school-test-scores-underestimate-naep-dropout-nces/</a> and <a href="https://www.edweek.org/teaching-learning/are-rising-grad-rates-pulling-down-naep-scores/2016/05" class="uri">https://www.edweek.org/teaching-learning/are-rising-grad-rates-pulling-down-naep-scores/2016/05</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Data sources are the <a href="https://datacatalog.worldbank.org/search/dataset/0038132/worldwide-bureaucracy-indicators">Worldwide Bureaucracy Indicators</a> (<a href="https://datacatalog.worldbank.org/public-licenses?fragment=cc">CC-BY 4.0</a>) and the <a href="https://doi.org/10.7910/DVN/T9SDEW">Colonial Dates Dataset</a> (public domain).<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>2024 U.S. Federal Employee Viewpoint Survey (public domain)<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Year 1 of the Nonprofit Trends Longitudinal Survey Public Use Data Files. <a href="https://doi.org/10.7910/DVN/T4OT1J" class="uri">https://doi.org/10.7910/DVN/T4OT1J</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>See, for example, violations of the “principle of proportional ink”: <a href="https://callingbullshit.org/tools/tools_proportional_ink.html" class="uri">https://callingbullshit.org/tools/tools_proportional_ink.html</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Pandey, A., &amp; Galvani, A. P. (2023). Exacerbation of measles mortality by vaccine hesitancy worldwide.&nbsp;<em>The Lancet Global Health</em>,&nbsp;<em>11</em>(4), e478-e479. <a href="https://doi.org/10.1016/S2214-109X(23)00063-3" class="uri">https://doi.org/10.1016/S2214-109X(23)00063-3</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><a href="https://data.cdc.gov/Vaccinations/Vaccination-Coverage-and-Exemptions-among-Kinderga/ijqb-a7ye">Data</a> from the U.S. Centers for Disease Control and Prevention.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./describing-one-variable.html" class="pagination-link" aria-label="Describing One Variable at a Time">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Describing One Variable at a Time</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
